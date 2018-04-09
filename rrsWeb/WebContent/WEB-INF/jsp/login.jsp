@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
@@ -59,7 +64,7 @@
                         </div>
 
                         <div id="register" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                            <form  id="User_register" action=""> 
                                 <h1> Sign up </h1> 
                                 <p> 
                                     <label for="usernamesignup" class="uname" data-icon="u">Your phone number</label>
@@ -78,14 +83,20 @@
                                     <label for="passwordsignup" class="youpasswd" data-icon="p">Your new password </label>
                                     <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
+                                <p id="message1" style="display:none;">
+                        		<label style="color:red;">The password must contain letters, Numbers, special characters, 8-25 characters!</label>
+                       			 </p>
                                 <p> 
                                     <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                    <input id="passwordsignup_confirm"  name="pas" required="required" type="password" placeholder="eg. X8df!90EO" />
                                 </p>
+                                <p id="message" style="display:none;">
+                        		<label style="color:red;">Password input is inconsistent!</label>
+                       			 </p>
                                 <p class="signin button"> 
-									<input type="submit" value="Sign up"/> 
+									<input id="signin" type="button" value="Sign up" onclick="Register_user()"/> 
 								</p>
-                                <p class="change_link">  
+                                <p class="change_link" >  
 									Already a member ?
 									<a href="#tologin" class="to_register"> Go and log in </a>
 								</p>
@@ -99,7 +110,35 @@
                 </div>  
             </section>
         </div>
-        
+<script type="text/javascript">   
+function Register_user() {
+        //表单序列号，不用一个个的获取表单数据了
+        var reg = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,30}');
+        var passwordsignup = document.getElementById("passwordsignup");
+        var passwordsignup_confirm = document.getElementById("passwordsignup_confirm");
+        var phonec=document.getElementById("message");
+        var phonec1=document.getElementById("message1");
+
+   	   if(passwordsignup.value==passwordsignup_confirm.value && reg.test(passwordsignup.value)==true){
+      		phonec1.style.display="none";
+      		phonec.style.display="none";
+      		$.post("<%=basePath%>/register", $("#User_register").serialize(), function (data) {
+                window.location.reload();
+            });	
+       }else if(!passwordsignup.value==passwordsignup_confirm.value) 
+     	  {
+     	      phonec1.style.display="block";
+     	      edit_phone.value = "";
+     	  }else{
+	      phonec.style.display="block";
+	      edit_phone.value = "";
+	  }
+       
+}
+</script>
+ 	<!-- 全局js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>   
         
     </body>
 </html>
