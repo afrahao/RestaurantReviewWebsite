@@ -20,47 +20,16 @@
             	<div>
                 	<a href="index"><span id="back2index" > << Go Back To Index</span></a>
                 </div>
-                
                 <h1>Restaurant Recommend System <span></span></h1>
 				
             </header>
             <section>				
                 <div id="container_demo" >
-                    <a class="hiddenanchor" id="toregister"></a>
-                    <a class="hiddenanchor" id="tologin"></a>
-                    <div id="wrapper">
-                        <div id="login" class="animate form">
+                
+                    <div id="wrapper">   
+                       <div id="forgetpassword" >
                             <form  action="mysuperscript.php" autocomplete="on"> 
-                                <h1>Log in</h1> 
-                                <p> 
-                                    <label for="username" class="uname" data-icon="u" > Your Phone Number </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="my phone number.  eg.12345678910"/>
-                                </p>
-                                <p> 
-                                    <label for="password" class="youpasswd" data-icon="p"> Your password </label>
-                                    <input id="password" name="password" required="required" type="password" placeholder="my password.  eg. X8df!90EO" /> 
-                                </p>
-                                <p class="keeplogin"> 
-									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
-									<label for="loginkeeping">Keep me logged in</label>
-								</p>
-								<p> 
-									<a id="forget-password" href="forgetPassword">Forgot password?</a>
-								</p>
-								
-                                <p class="login button"> 
-                                    <input type="submit" value="Login" /> 
-								</p>
-                                <p class="change_link">
-									Not a member yet ?
-									<a href="#toregister" class="to_register">Join us</a>
-								</p>
-                            </form>
-                        </div>
-
-                        <div id="register" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
-                                <h1> Sign up </h1> 
+                                <h1> Forget Password </h1> 
                                 <p> 
                                     <label for="usernamesignup" class="uname" data-icon="u">Your phone number</label>
                                     <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="my phone number. eg.12345678910" />
@@ -82,12 +51,12 @@
                                     <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
                                     <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
-                                <p class="signin button"> 
-									<input type="submit" value="Sign up"/> 
+                                <p class="ok button"> 
+									<input type="submit" value="OK"/> 
 								</p>
                                 <p class="change_link">  
-									Already a member ?
-									<a href="#tologin" class="to_register"> Go and log in </a>
+									Remembered the password ?
+									<a href="login" class="to_register"> Go and log in </a>
 								</p>
                             </form>
                             

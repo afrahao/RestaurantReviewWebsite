@@ -18,6 +18,11 @@ public class HomeController {
 	    return "login";  
 	}  
 	
+	@RequestMapping("/forgetPassword")  
+	public String toForgetPassword(HttpServletRequest request, HttpServletResponse response){  
+	    return "forget_password";  
+	}  
+	
 	@RequestMapping("/search")  
 	public String search(HttpServletRequest request, HttpServletResponse response){  
 	    return "restaurant_search";  
