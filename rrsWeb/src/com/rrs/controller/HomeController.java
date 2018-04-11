@@ -88,19 +88,16 @@ public class HomeController {
 			try {
 				sysUserService.processActivate(email, validateCode);
 				System.out.println("yanz"+email);
-				mav.setViewName("activate_success");
+				mav.setViewName("register_activate_success");
 			} catch (ServiceException e) {
 				request.setAttribute("message", e.getMessage());
-				mav.setViewName("activate_failure");
+				mav.setViewName("register_activate_failure");
 			}
 
 		}
 		return mav;
 	}
 	
-	@RequestMapping("/addFavor")  
-	public String addFavor(HttpServletRequest request, HttpServletResponse response){  
-	    return "user_add_favor";  
-	}
+	
 	
 }
