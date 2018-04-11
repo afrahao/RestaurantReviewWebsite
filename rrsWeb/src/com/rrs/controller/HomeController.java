@@ -24,11 +24,20 @@ public class HomeController {
 	@Autowired
 	private SysUserService sysUserService;
 
-	
-
 	@RequestMapping("/index")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
 		return "index";
+	}
+
+	@RequestMapping("/forgetPassword")  
+	public String toForgetPassword(HttpServletRequest request, HttpServletResponse response){  
+	    return "forget_password";  
+	}  
+	
+	@RequestMapping("/search")  
+	public String search(HttpServletRequest request, HttpServletResponse response){  
+	    return "restaurant_search";  
+
 	}
 
 	@RequestMapping("/login")
@@ -36,10 +45,6 @@ public class HomeController {
 		return "login";
 	}
 
-	@RequestMapping("/search")
-	public String search(HttpServletRequest request, HttpServletResponse response) {
-		return "restaurant_search";
-	}
 
 	@RequestMapping("/info")
 	public String restaurantInfo(HttpServletRequest request, HttpServletResponse response) {

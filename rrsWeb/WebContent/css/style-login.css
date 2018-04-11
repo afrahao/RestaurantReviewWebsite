@@ -12,10 +12,13 @@
 }
 
 #back2index {
-	margin-bottom:30px;
+	margin:0px 5px;
 	color: rgb(219,112,147);
 	height: 100px;
-	
+}
+
+#forget-password{
+	color: rgb(245,245,245);
 }
 
 /** fonts used for the icons **/ 
@@ -156,6 +159,10 @@ input {
 	        box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.9) inset;
 } 
 
+#wrapper verification-code-input{
+	width:50%;
+}
+
 /** the magic icon trick ! **/
 [data-icon]:after {
     content: attr(data-icon);
@@ -209,12 +216,47 @@ input {
 	   -moz-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
 	        box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.2) inset;
 }
+
+p.ok.button,
 p.login.button,
 p.signin.button{
 	text-align: right;
 	margin: 5px 0;
 }
 
+#verification{
+	width: 50%;
+	cursor: pointer;	
+	background: rgb(219, 112, 147);
+	padding: 5px 1px;
+	font-family: 'BebasNeueRegular','Arial Narrow',Arial,sans-serif;
+	color: #fff;
+	font-size: 18px;	
+	border: 1px solid rgb(199, 21, 133);	
+	margin-bottom: 10px;	
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+	        border-radius: 3px;	
+	-webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	   -moz-box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	        box-shadow:0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset,
+	        0px 0px 0px 3px rgb(254, 254, 254),
+	        0px 5px 3px 3px rgb(210, 210, 210);
+	-webkit-transition: all 0.2s linear;
+	   -moz-transition: all 0.2s linear;
+	     -o-transition: all 0.2s linear;
+	        transition: all 0.2s linear;
+}
+
+#verification-info{
+	margin-left: 10px;	
+	color: rgb(105,105,105);
+}
 
 /* styling the checkbox "keep me logged in"*/
 .keeplogin{
@@ -307,6 +349,7 @@ p.change_link{
 	top: 1px;
 }
 /** Styling both forms **/
+#forgetpassword,
 #register, 
 #login{
 	position: absolute;
@@ -323,6 +366,7 @@ p.change_link{
 	-moz-border-radius: 5px;
 		 border-radius: 5px;
 }
+
 #register{	
 	z-index: 21;
 	opacity: 0;
@@ -330,6 +374,11 @@ p.change_link{
 #login{
 	z-index: 22;
 }
+#forgetpassword{
+	z-index: 21;
+}
+
+
 #toregister:target ~ #wrapper #register,
 #tologin:target ~ #wrapper #login{
 	z-index: 22;
@@ -344,6 +393,7 @@ p.change_link{
 	-ms-animation-delay: .1s;
 	animation-delay: .1s;
 }
+
 #toregister:target ~ #wrapper #login,
 #tologin:target ~ #wrapper #register{
 	-webkit-animation-name: fadeOutLeft;
