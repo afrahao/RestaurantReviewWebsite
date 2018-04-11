@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/forget_password.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/index.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/login.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/restaurant_info.jsp=UTF-8

@@ -31,12 +31,12 @@
                             <form  action="mysuperscript.php" autocomplete="on"> 
                                 <h1> Forget Password </h1> 
                                 <p> 
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your phone number</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="my phone number. eg.12345678910" />
+                                    <label for="usernamesignup" class="uname" data-icon="u">Your Email Address</label>
+                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="my email address. eg.email@email.com" />
                                 </p>
                                 <p >
                                 	<button id="verification">Verification Code</button> 
-                                	<lable id="verification-info">* error phonenumber</lable>
+                                	<lable id="verification-info">* error email address</lable>
                                 </p>
                                 <p> 
                                     <label for="emailsignup" class="youmail" data-icon="e" > Your verification code</label>
@@ -68,6 +68,12 @@
                 </div>  
             </section>
         </div>
+        
+        
+        
+    <!-- 全局js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>  
         
         
     </body>
