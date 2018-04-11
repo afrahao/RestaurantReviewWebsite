@@ -47,4 +47,10 @@ public class HomeController {
 		 sysUserService.regist(user);
 	        return "success";  
 	}
+	
+	@RequestMapping("/addFavor")  
+	public String addFavor(HttpServletRequest request, HttpServletResponse response){  
+	    return "user_add_favor";  
+	}
+	
 }
