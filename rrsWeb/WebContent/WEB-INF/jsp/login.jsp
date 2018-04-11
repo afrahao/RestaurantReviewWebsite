@@ -61,32 +61,35 @@
                         </div>
 
                         <div id="register" class="animate form">
-                            <form  id="User_register" action=""> 
+                            <form  id="User_register" action="register?action=register" method="post"> 
                                 <h1> Sign up </h1> 
                                 <p> 
                                     <label for="usernamesignup" class="uname" data-icon="u">Your username</label>
-                                    <input id="usernamesignup" name="name" required="required" type="text" placeholder="mysuperusername690" />
+                                    <input id="usernamesignup" name="name" required="required" type="text" placeholder="mysuperusername690" onblur="testname()" />
                                 </p>
+                                <p id="message2" style="display:none;">
+                        		<label style="color:red;">4 to 16 bits (letters, Numbers, underscores, minus signs)!</label>
+                       			 </p>
                                 <p> 
                                     <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
-                                    <input id="emailsignup" name="email" required="required" type="email" placeholder="mysupermail@mail.com"/> 
+                                    <input id="emailsignup" name="email" required="required" type="email" placeholder="mysupermail@mail.com" onblur="testemail()"/> 
                                 </p>
                                 <p> 
                                     <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
-                                    <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                    <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO" onblur="Complex()"/>
                                 </p>
                                 <p id="message1" style="display:none;">
                         		<label style="color:red;">The password must contain letters, Numbers, special characters, 8-25 characters!</label>
                        			 </p>
                                 <p> 
                                     <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
-                                    <input id="passwordsignup_confirm"  name="pas" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                    <input id="passwordsignup_confirm"  name="pas" required="required" type="password" placeholder="eg. X8df!90EO" onblur="testpwd()"/>
                                 </p>
                                 <p id="message" style="display:none;">
                         		<label style="color:red;">Password input is inconsistent!</label>
                        			 </p>
                                 <p class="signin button"> 
-									<input id="signin" type="button" value="Sign up" onclick="Register_user()"/> 
+									<input id="signin" type="submit" value="Sign up"/> 
 								</p>
                                 <p class="change_link" >  
 									Already a member ?
@@ -101,31 +104,58 @@
                 </div>  
             </section>
         </div>
-<script type="text/javascript">   
-function Register_user() {
-        //表单序列号，不用一个个的获取表单数据了
-        var reg = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,30}');
-        var passwordsignup = document.getElementById("passwordsignup");
-        var passwordsignup_confirm = document.getElementById("passwordsignup_confirm");
-        var phonec=document.getElementById("message");
-        var phonec1=document.getElementById("message1");
-
-   	   if(passwordsignup.value==passwordsignup_confirm.value && reg.test(passwordsignup.value)==true){
-      		phonec1.style.display="none";
-      		phonec.style.display="none";
-      		$.post("<%=basePath%>/register", $("#User_register").serialize(), function (data) {
-                window.location.reload();
-            });	
-       }else if(!passwordsignup.value==passwordsignup_confirm.value) 
-     	  {
-     	      phonec1.style.display="block";
-     	      edit_phone.value = "";
-     	  }else{
-	      phonec.style.display="block";
-	      edit_phone.value = "";
-	  }
-       
+<script type="text/javascript"> 
+function Complex(){
+	
+	var reg = new RegExp('(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,30}');
+    var passwordsignup = document.getElementById("passwordsignup");
+    var phonec1=document.getElementById("message1");
+    if(reg.test(passwordsignup.value)==true){
+  		phonec1.style.display="none";
+    }else{
+      phonec1.style.display="block";
+      passwordsignup.value = "";
+  }
 }
+function testname(){
+	
+	var reg = /^[a-zA-Z0-9_-]{4,16}$/;
+    var passwordsignup = document.getElementById("usernamesignup");
+    var phonec1=document.getElementById("message2");
+    if(reg.test(passwordsignup.value)==true){
+  		phonec1.style.display="none";
+    }else{
+      phonec1.style.display="block";
+      passwordsignup.value = "";
+  }
+}
+function testpwd(){
+	var passwordsignup = document.getElementById("passwordsignup");
+    var passwordsignup_confirm = document.getElementById("passwordsignup_confirm");
+    var phonec=document.getElementById("message");
+    if(passwordsignup.value==passwordsignup_confirm.value){
+  		phonec.style.display="none";
+    }else{
+      phonec.style.display="block";
+      passwordsignup_confirm.value = "";
+  }
+    
+}
+function testemail(){
+	var email = document.getElementById("emailsignup");
+	var code = "wrong";
+	$.ajax({
+        type: "get",
+        url: "testEmail",
+        data: {"email": email.value},
+        success: function (data) {
+        	if(data==code)
+        		alert("The mailbox has been registered.");
+        }
+    });
+}
+       
+
 </script>
  	<!-- 全局js -->
     <script src="js/jquery.min.js"></script>

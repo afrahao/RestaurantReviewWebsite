@@ -7,8 +7,24 @@
 	<!-- 注册系统用户 -->
 	<insert id="regesterUser" parameterType="SysUser">
 		INSERT INTO user
-		(name,email,password)
-		VALUES(#{name},#{email},#{password})
+		(id,name,email,password,ValidateCode)
+		VALUES("00",#{0},#{1},#{2},#{3})
 	</insert>
+	
+	<!-- 根据邮箱判断用户是否已经注册 -->
+    <select id="TestUserByEmail" parameterType="String" resultType="SysUser">
+        select * from  user
+        <where>
+            email = #{0}
+        </where>
+    </select>
+    
+    <!-- 邮箱验证修改状态 -->
+	<update id="updateUserStatus" parameterType="String">
+		UPDATE user SET status = 1
+		<where>
+            email = #{0}
+        </where>
+	</update>
 
 </mapper>
