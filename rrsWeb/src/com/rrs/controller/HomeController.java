@@ -51,6 +51,7 @@ public class HomeController {
 		return "restaurant_info";
 	}
 
+	//≤‚ ‘” œ‰Œ®“ª
 	@RequestMapping(value = "/testEmail")
     public void TestEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String email = request.getParameter("email");
