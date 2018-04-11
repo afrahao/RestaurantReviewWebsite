@@ -7,8 +7,8 @@
 	<!-- 注册系统用户 -->
 	<insert id="regesterUser" parameterType="SysUser">
 		INSERT INTO user
-		(id,name,email,password,ValidateCode)
-		VALUES("00",#{0},#{1},#{2},#{3})
+		(name,email,password,ValidateCode)
+		VALUES(#{0},#{1},#{2},#{3})
 	</insert>
 	
 	<!-- 根据邮箱判断用户是否已经注册 -->

@@ -25,28 +25,20 @@ public class SendEmail {
     public static final String HOST = "smtp.163.com";  
     public static final String PROTOCOL = "smtp";     
     public static final int PORT = 25;  
-    public static final String FROM = "m18902119287_1@163.com";//发件人的email  
-    public static final String PWD = "rrs12345678";//发件人密�?  
+    public static final String FROM = "m18902119287_1@163.com"; 
+    public static final String PWD = "rrs12345678"; 
       
-    /** 
-     * 获取Session 
+    /**  
      * @return 
      */  
     private static Session getSession() {  
         Properties props = new Properties();  
-        props.put("mail.smtp.host", HOST);//设置服务器地�?  
-        props.put("mail.transport.protocol" , PROTOCOL);//设置协议  
-        //props.put("mail.smtp.port", PORT);//设置端口  
+        props.put("mail.smtp.host", HOST); 
+        props.put("mail.transport.protocol" , PROTOCOL);  
+ 
         props.put("mail.smtp.auth" , true);  
         props.setProperty("mail.debug", "true");
-//        Authenticator authenticator = new Authenticator() {  
-//  
-//            @Override  
-//            protected PasswordAuthentication getPasswordAuthentication() {  
-//                return new PasswordAuthentication(FROM, PWD);  
-//            }  
-//              
-//        };  
+  
         Session session = Session.getInstance(props);  
           
         return session;  

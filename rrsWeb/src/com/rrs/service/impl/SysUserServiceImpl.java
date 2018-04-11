@@ -55,23 +55,20 @@ public class SysUserServiceImpl implements SysUserService{
           
     }  
       
-    /** 
-     * 处理�?�? 
-     * @throws ParseException  
-     */  
+    
     public void processActivate(String email , String validateCode)throws ServiceException, ParseException{    
            
     	SysUser user=sysUserDao.TestUserByEmail(email);  
        
         if(user!=null) {    
-            //验证用户�?活状�?    
+             
             if(user.getStatus()==0) {   
-                ///没激�?  
-                Date currentTime = new Date();//获取当前时间    
-                //验证链接是否过期   
+               
+                Date currentTime = new Date();
+           
                 currentTime.before(user.getRegisterTime());  
                 if(currentTime.before(user.getLastActivateTime())) {    
-                    //验证�?活码是否正确    
+                      
                     if(validateCode.equals(user.getValidateCode())) {    
                         sysUserDao.updateUserStatus(email);  
                     } else {    
