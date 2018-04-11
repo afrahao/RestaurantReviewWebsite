@@ -31,24 +31,24 @@
                             <form  action="mysuperscript.php" autocomplete="on"> 
                                 <h1> Forget Password </h1> 
                                 <p> 
-                                    <label for="usernamesignup" class="uname" data-icon="u">Your phone number</label>
+                                    <label for="usernamesignup" class="uname" data-icon="u">Your Email Address</label>
                                     <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="my phone number. eg.12345678910" />
                                 </p>
                                 <p >
                                 	<button id="verification">Verification Code</button> 
-                                	<lable id="verification-info">* error phonenumber</lable>
+                                	<lable id="verification-info">* error email address</lable>
                                 </p>
                                 <p> 
-                                    <label for="emailsignup" class="youmail" data-icon="e" > Your verification code</label>
+                                    <label for="emailsignup" class="youmail" data-icon="e" > Your Verification Code</label>
                                     <input class="verification-code-input" id="emailsignup" name="emailsignup" required="required" type="text" placeholder="received 6-number code.  eg.123456"/> 
                                     
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your new password </label>
+                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your New password </label>
                                     <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
                                 <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
+                                    <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please Confirm Your Password </label>
                                     <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
                                 <p class="ok button"> 

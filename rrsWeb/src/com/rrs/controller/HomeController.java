@@ -97,4 +97,10 @@ public class HomeController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("/addFavor")  
+	public String addFavor(HttpServletRequest request, HttpServletResponse response){  
+	    return "user_add_favor";  
+	}
+	
 }
