@@ -124,7 +124,8 @@ em{font-style:normal;}
 	color:#fff;
 }
 
-#btn{
+#btn-choose,
+#btn-save{
 	outline:none;
 	display:block;
 	width:100px;
@@ -749,7 +750,8 @@ em{font-style:normal;}
 				        </div>         -->
 			    	</div>
 			    	
-	    			<button type="button" id="btn">SAVE</button>
+	    			<button type="button" id="btn-choose">CHOOSE</button>
+	    			<button type="button" id="btn-save">SAVE TO STORE</button>
 				</div>
 				<script src="js/jquery-1.10.2.min.js"></script>
 				<script src="js/effect.js"></script>
