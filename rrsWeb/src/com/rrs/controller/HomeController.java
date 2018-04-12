@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -12,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rrs.pojo.SysUser;
+import com.rrs.service.PreferenceService;
 import com.rrs.service.SysUserService;
 import com.rrs.util.CookieUtils;
 import com.rrs.util.ServiceException;
@@ -26,6 +30,8 @@ import com.rrs.util.ServiceException;
 public class HomeController {
 	@Autowired
 	private SysUserService sysUserService;
+	@Autowired
+	private PreferenceService preferenceService;
 
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
@@ -188,6 +194,25 @@ public class HomeController {
 		return mav;
 	}
 	
+	@RequestMapping("/favor")  
+	public @ResponseBody
+	ModelAndView InitialFavor(Integer userId){ 
+		System.out.println("-----r----" + userId);
+		ModelAndView mav = new ModelAndView();
+		
+		List<Integer> categoryIdList = preferenceService.selectPreference(userId);
+	    mav.addObject("categoryIdList", categoryIdList);
+	    return mav;
+	}
 	
+	@RequestMapping("/addFavor")  
+	public @ResponseBody void userAddFavor(Integer userId,int[] categoryList){ 
+		System.out.println("-----r----" + categoryList);
+		
+		for(int i=0;i<categoryList.length;i++){
+			preferenceService.insertPreference(userId,categoryList[i]);
+		}
+		
+	}
 	
 }
