@@ -10,4 +10,6 @@ public interface SysUserService {
      void updateUserStatus(String email);
      public void processregister(String name,String email,String password);
      public void processActivate(String email , String validateCode)throws ServiceException, ParseException;
+     public int loginCheck(String email,String password);
+     public int waitTime(String email);
 }

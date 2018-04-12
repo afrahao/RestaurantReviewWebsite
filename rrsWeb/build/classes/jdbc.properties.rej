@@ -1,0 +1,7 @@
+diff a/rrsWeb/build/classes/jdbc.properties b/rrsWeb/build/classes/jdbc.properties	(rejected hunks)
+@@ -2,2 +2,3 @@
+ jdbc.url=jdbc:mysql://127.0.0.1:3306/rrs_db
+ jdbc.username=root
+\ No newline at end of file
++jdbc.password=15301043
+\ No newline at end of file

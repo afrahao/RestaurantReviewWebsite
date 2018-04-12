@@ -169,8 +169,8 @@
       <li><a title="My Account" href="#">My Account</a> </li>
       <li><a title="Wishlist" href="#">Wishlist</a> </li>
       <li><a title="Checkout" href="#">Checkout</a> </li>
-      <li><a title="Blog" href="#"><span>Blog</span></a> </li>
-      <li class="last"><a title="Login" href="#"><span>Login</span></a> </li>
+      <li><a title="Blog" href="checkOut"><span>Blog</span></a> </li>
+      <li class="last"><a title="tologin" href="#"><span>Login</span></a> </li>
     </ul>
   </div>
 </div>
@@ -187,7 +187,7 @@
           <div class="row"> 
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
-              <div class="welcome-msg hidden-xs">Welcome to Petunia! </div>
+              <div class="welcome-msg hidden-xs">Welcome ${loginuser}! </div>
               <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
                   <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
@@ -218,7 +218,7 @@
                   <ul>
                     <li> <a title="My Account" href="#"><span class="hidden-xs">My Account</span></a> </li>
                     <li> <a title="Wishlist" href="#">Wishlist</a> </li>
-                    <li> <a title="Checkout" href="#"><span class="hidden-xs">Checkout</span></a> </li>
+                    <li> <a title="Checkout" href="checkOut"><span class="hidden-xs">Checkout</span></a> </li>
                     <li>
                       <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> More <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -231,7 +231,7 @@
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="login"><span class="hidden-xs">Log In</span></a> </li>
+                    <li> <a href="tologin"><span class="hidden-xs">Log In</span></a> </li>
                   </ul>
                 </div>
               </div>
@@ -280,7 +280,7 @@
                     
                     <!--actions-->
                     <div class="actions">
-                      <button class="btn-checkout" title="Checkout" type="button" onClick="#"><span>Checkout</span> </button>
+                      <a href="checkOut"><span>Checkout</span></a>
                       <a href="#" class="view-cart"><span>View Cart</span></a> </div>
                   </div>
                 </div>
@@ -2284,4 +2284,6 @@ CountBack_slider(gsecs1, "countbox_1", 1);
 
             </body>
 </html>
+
+
 
