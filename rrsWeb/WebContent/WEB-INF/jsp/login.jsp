@@ -36,29 +36,30 @@
                     <a class="hiddenanchor" id="tologin"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                            <form  id="User_login" action="login" method="post">
                                 <h1>Log in</h1> 
                                 <p> 
-                                    <label for="username" class="uname" data-icon="u" > Your email or username </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+                                    <label for="email" class="uname" data-icon="u" > Your email </label>
+                                    <input id="email" name="email" required="required" type="text" placeholder="mymail@mail.com" value="${keepemail}" />
                                 </p>
                                 <p> 
                                     <label for="password" class="youpasswd" data-icon="p"> Your password </label>
                                     <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
                                 </p>
                                 <p class="keeplogin"> 
-									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
+									<input type="checkbox" name="loginkeeping" id="loginkeeping"  checked="checked"/> 
 									<label for="loginkeeping">Keep me logged in</label>
+				
 								</p>
                                 <p class="login button"> 
-                                    <input type="submit" value="Login" /> 
+                                    <input id="buttonlogin" type="submit" value="buttonlogin"/> 
 								</p>
-                                <p class="change_link">
-									Not a member yet ?
-									<a href="#toregister" class="to_register">Join us</a>
-								</p>
+                              
+								<p>${mind}</p>
+							
                             </form>
                         </div>
+                        
 
                         <div id="register" class="animate form">
                             <form  id="User_register" action="register?action=register" method="post"> 
@@ -154,7 +155,6 @@ function testemail(){
         }
     });
 }
-       
 
 </script>
  	<!-- 全局js -->

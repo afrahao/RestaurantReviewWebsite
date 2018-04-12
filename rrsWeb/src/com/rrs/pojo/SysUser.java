@@ -9,9 +9,9 @@ public class SysUser {
 	private String name;
 	private String password;
 	private String email;
-	private int status;//¼¤»î×´Ì¬ 
-    private String validateCode;//¼¤»îÂë 
-    private Date  registerTime;//×¢²áÊ±¼ä 
+	private int status;//ï¿½ï¿½ï¿½ï¿½×´Ì¬ 
+    private String validateCode;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+    private Date  registerTime;//×¢ï¿½ï¿½Ê±ï¿½ï¿½ 
 	private int review_count;
 	private Date yelping_since;
 	private int useful;
@@ -30,6 +30,7 @@ public class SysUser {
 	private int compliment_funny;
 	private int compliment_writer;
 	private int compliment_photos;
+	private int times;
 	
 
 	public String getId() {
@@ -194,5 +195,11 @@ public class SysUser {
           
         return cl.getTime();  
     }  
+	public int getTimes() {
+		return times;
+	}
+	public void setTimes(int times) {
+		this.times = times;
+	}
       
 }
