@@ -39,6 +39,7 @@ $().ready( function() {
 	function setUserFavor(){
 		
 		var userFavor = [1,2,3];
+		
 		var hasCon_html = "";
 		
 		console.log(userFavor[0]);
@@ -148,7 +149,8 @@ function conConfirm() {
     /*将选中的标签添加到面板上*/
 
     //确认点击后触发
-    $("#btn").click(function () {
+    $("#btn-choose").click(function () {
+    	console.log("aaa");
 
         conAdded.remove();//删除已添加的
 
