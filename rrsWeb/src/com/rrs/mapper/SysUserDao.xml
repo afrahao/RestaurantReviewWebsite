@@ -7,8 +7,80 @@
 	<!-- 注册系统用户 -->
 	<insert id="regesterUser" parameterType="SysUser">
 		INSERT INTO user
-		(name,email,password)
-		VALUES(#{name},#{email},#{password})
+		(name,email,password,ValidateCode)
+		VALUES(#{0},#{1},#{2},#{3})
 	</insert>
-
+	
+	<!-- 根据邮箱判断用户是否已经注册 -->
+    <select id="TestUserByEmail" parameterType="String" resultType="SysUser">
+        select * from  user
+        <where>
+            email = #{0}
+        </where>
+    </select>
+    
+    <!-- 邮箱验证修改状态 -->
+	<update id="updateUserStatus" parameterType="String">
+		UPDATE user SET status = 1
+		<where>
+            email = #{0}
+        </where>
+	</update>
+	
+	<!-- 判断用户是否已经注册-->
+    <select id="checkEmail" parameterType="String" resultType="SysUser">
+        select * from  user
+        <where>
+            email = #{0}
+        </where>
+    </select>
+    
+    <!-- 判断用户用户名和密码是否匹配-->
+    <select id="checkPassword" parameterType="String" resultType="SysUser">
+        select * from  user
+        <where>
+            email = #{0} and password= #{1}
+        </where>
+    </select>
+    
+    <!-- 判断用户登录时时间差-->
+    <select id="checkLoginTime" parameterType="String" resultType="int">
+        select (UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(log_datetime)) from user
+        <where>
+            email = #{0}
+        </where>
+    </select>
+    
+    <!-- 增加登陆错误次数 -->
+	<update id="updateTimes" parameterType="String">
+		UPDATE user SET fail_log_times = (1 + fail_log_times)
+		<where>
+            email = #{0}
+        </where>
+	</update>
+	
+	<!-- 重置登陆错误次数 -->
+	<update id="resetTimes" parameterType="String">
+		UPDATE user SET fail_log_times = 0
+		<where>
+            email = #{0}
+        </where>
+	</update>
+	
+	<!-- 修改登陆时间 -->
+	<update id="updateTime" parameterType="String">
+		UPDATE user SET log_datetime = now()
+		<where>
+            email = #{0}
+        </where>
+	</update>
+	
+	<!-- 获取登陆错误次数 -->
+	<select id="getTimes" parameterType="String" resultType="int">
+        select fail_log_times from user
+        <where>
+            email = #{0}
+        </where>
+    </select>
+   
 </mapper>
