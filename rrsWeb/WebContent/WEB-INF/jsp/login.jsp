@@ -49,13 +49,21 @@
                                 <p class="keeplogin"> 
 									<input type="checkbox" name="loginkeeping" id="loginkeeping"  checked="checked"/> 
 									<label for="loginkeeping">Keep me logged in</label>
+									<p>${mind}</p>
 				
 								</p>
                                 <p class="login button"> 
                                     <input id="buttonlogin" type="submit" value="buttonlogin"/> 
 								</p>
-                              
-								<p>${mind}</p>
+                               	<p class="change_link">
+
+									Not a member yet ?
+
+									<a href="#toregister" class="to_register">Join us</a>
+
+								</p>
+								
+								
 							
                             </form>
                         </div>
