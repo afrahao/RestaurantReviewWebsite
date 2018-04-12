@@ -82,28 +82,28 @@ public class HomeController {
 		String loginkeeping = request.getParameter("loginkeeping");
 		int validation = sysUserService.loginCheck(email, password);
 		
-		//用户未注册
+		//ç”¨æˆ·æœªæ³¨å†Œ
 		if(validation == 0)
 		{
 			mav.addObject("mind", "no register");
 			mav.addObject("keepemail", email);
 			mav.setViewName("login");
 		}
-		//用户输错密码
+		//ç”¨æˆ·è¾“é”™å¯†ç 
 		else if(validation == 1)
 		{
 			mav.addObject("keepemail", email);
 			mav.addObject("mind", "wrong password");
 			mav.setViewName("login");
 		}
-		//用户输错密码超过5次
+		//ç”¨æˆ·è¾“é”™å¯†ç è¶…è¿‡5æ¬¡
 		else if(validation == 3)
 		{
 			mav.addObject("keepemail", email);
 			mav.addObject("mind", "wrong password over 5 times,please wait for 60 mins.");
 			mav.setViewName("login");
 		}
-		//等待时间不足
+		//ç­‰å¾…æ—¶é—´ä¸è¶³
 		else if(validation == 4)
 		{
 			int wait = sysUserService.waitTime(email);
@@ -111,10 +111,10 @@ public class HomeController {
 			mav.addObject("mind", "wait for "+Integer.toString(wait)+" seconds.");
 			mav.setViewName("login");
 		}
-		//登陆成功
+		//ç™»é™†æˆåŠŸ
 		else
 		{
-			//判断用户是否需要保持登陆状态
+			//åˆ¤æ–­ç”¨æˆ·æ˜¯å¦éœ€è¦ä¿æŒç™»é™†çŠ¶æ€
 			if(loginkeeping.equals("on"))
 			{
 				response.setHeader("Access-Control-Allow-Origin","*");
@@ -123,9 +123,9 @@ public class HomeController {
 				response.setContentType("text/html;charset=utf-8");
 				response.setCharacterEncoding("utf-8");
 				Cookie cookie = new Cookie("loginuser", email);
-				// 有效期,秒为单位 
+				//Â æœ‰æ•ˆæœŸ,ç§’ä¸ºå•ä½Â 
 				cookie.setMaxAge(3600);
-				// 设置cookie  
+				//Â è®¾ç½®cookieÂ Â 
 				response.addCookie(cookie);
 			}
 			
@@ -141,17 +141,17 @@ public class HomeController {
 		return "restaurant_info";
 	}
 
-	//��������Ψһ
+	//²âÊÔÓÊÏäÎ¨Ò»
 	@RequestMapping(value = "/testEmail")
     public void TestEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String email = request.getParameter("email");
 		SysUser user = sysUserService.TestUserByEmail(email);
 		if(user!=null){
-			PrintWriter out = response.getWriter();    //�趨���α���
-			out.print("wrong");      //�������ǰ��
+			PrintWriter out = response.getWriter();    //ï¿½è¶¨ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½
+			out.print("wrong");      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
 		}
 		else{
-			PrintWriter out = response.getWriter();    //�趨���α���
+			PrintWriter out = response.getWriter();    //ï¿½è¶¨ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½
 			out.print("success");
 		}
 		
@@ -168,7 +168,7 @@ public class HomeController {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");	
 			sysUserService.processregister(name, email, password);
-			mav.addObject("text", "ע��ɹ���");
+			mav.addObject("text", "×¢ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
 			mav.setViewName("register_success");
 			
 		} else if ("activate".equals(action)) {
@@ -178,19 +178,16 @@ public class HomeController {
 			try {
 				sysUserService.processActivate(email, validateCode);
 				System.out.println("yanz"+email);
-				mav.setViewName("activate_success");
+				mav.setViewName("register_activate_success");
 			} catch (ServiceException e) {
 				request.setAttribute("message", e.getMessage());
-				mav.setViewName("activate_failure");
+				mav.setViewName("register_activate_failure");
 			}
 
 		}
 		return mav;
 	}
 	
-	@RequestMapping("/addFavor")  
-	public String addFavor(HttpServletRequest request, HttpServletResponse response){  
-	    return "user_add_favor";  
-	}
+	
 	
 }
