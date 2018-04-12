@@ -141,6 +141,7 @@ public class HomeController {
 		return "restaurant_info";
 	}
 
+	//≤‚ ‘” œ‰Œ®“ª
 	@RequestMapping(value = "/testEmail")
     public void TestEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String email = request.getParameter("email");
@@ -186,4 +187,10 @@ public class HomeController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("/addFavor")  
+	public String addFavor(HttpServletRequest request, HttpServletResponse response){  
+	    return "user_add_favor";  
+	}
+	
 }

@@ -38,6 +38,9 @@
 		18m Block: Recently Viewed
 		18n. Block: Reorder 
 		18m. Block: Banner
+		
+		----------custom-----------
+		18.1. 边栏圆形头像
 	
 	19. custom-slider
 	21. Product View
@@ -56,6 +59,10 @@
 	34. Delivery page
 	35. Data Table
 	36. Footer
+	
+	=============自定义添加的css================
+	z1.边栏圆形头像
+	z2.添加爱好标签系列
 
 
 ################################################################# */ 
@@ -2856,6 +2863,7 @@ ul.level1 {
 	font-size: 24px;
 	letter-spacing: 1px;
 	margin: 0px;
+	margin-top:5px;
 	padding: 0px 0px 5px;
 	position: relative;
 	font-family: 'Raleway', sans-serif;
@@ -4932,6 +4940,12 @@ ol#compare-items li.last {
 .jtv-add-banner img {
 	max-width: 100%;
 }
+
+
+
+
+
+
 /*19.  custom-slider  */
 .custom-slider {
 	margin-bottom: 35px;
@@ -8547,3 +8561,103 @@ button.subscribe:before {
 	border-collapse: separate;
 	width: 80%;
 }
+
+/* ===================自定义的css样式=================== */
+
+/* z1.侧边圆形头像 */
+.avatar-round{
+	/* box-shadow: 2px 2px 2px rgba(0,0,0,0.7); */
+	border: 5ps solid rgba(0,0,0,0.4);
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	background-image: url('../images/bg.jpg');
+	background-clip: padding-box;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: block;
+	border-radius: 50%;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+}
+
+/* z2.添加爱好标签的 */
+/* .favoradding{
+	width:796px;
+	margin:50px auto;
+	font-size:14px;
+}
+
+.favoradding h2{
+	text-align:center;
+	line-height:60px;
+	color:#555;
+}
+
+.favoradding-label-box{
+	width:732px;
+	min-height:30px;
+	padding:20px;
+	border:1px solid #99CCFF;
+	border-top:2px solid #99CCFF;
+	overflow:hidden;
+	border-radius:3px;
+}
+
+.favoradding-label-box span{
+	display:inline-block;
+	background:#99CCFF;
+	padding:6px 14px;
+	color:#fff;
+	border-radius:3px;
+	margin:0 3px;
+}
+
+.favoradding-select-box{
+	margin-top:50px;
+	overflow:hidden;
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	box-flex:1;
+	flex-direction: column;
+}
+.favoradding-select-list{
+	float:left;
+	padding:20px;
+	margin-right:20px;
+	border:1px solid #FFCC99;
+	border-top:2px solid #FFCC99;
+	border-radius:3px;
+	flex-wrap: wrap;
+}
+.favoradding-select-list span{
+	display:inline-block;
+	padding:6px 14px;
+	font-size:14px;
+	background:#eee;
+	color:#aaa;
+	text-align:center;
+	border-radius:3px;
+	margin:0 3px;
+	cursor:pointer;
+}
+.favoradding-select-list .cur{
+	background:#FFCC99;
+	color:#fff;
+}
+
+#favoradding-btn{
+	outline:none;
+	display:block;
+	width:100px;
+	text-align:center;
+	padding:6px 0;
+	margin:20px auto;
+	border:1px solid #FF9966;
+	background:#FF9966;
+	color:#fff;
+	font-size:14px;
+	border-radius:3px;
+	cursor:pointer;
+} */
+
