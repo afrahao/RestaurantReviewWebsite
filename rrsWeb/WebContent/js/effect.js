@@ -22,7 +22,7 @@ var favorContent = ["Western Dish",
 
 var initUserFavor = new Array();
 var curUserFavor = new Array();
-var userId = 3;
+var userId = 0;
 
 $(function(){
    
@@ -141,9 +141,6 @@ function conConfirm() {
     //确认点击后触发
     $("#btn-choose").click(function () {
     	
-    	
-    	
-
         conAdded.remove();//删除已添加的
 
         //重新计算快捷按钮选中数量

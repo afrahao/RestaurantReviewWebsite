@@ -1,6 +1,5 @@
 package com.rrs.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,15 +8,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.rrs.service.PreferenceService;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 	
-	
+	@Autowired
+	private PreferenceService preferenceService;
 	//-------------------------------------个人信息 Info-----------------------------------------
 	
 	//1.打开个人信息页面
@@ -47,31 +47,21 @@ public class UserController {
 	//2.加载用户的喜好标签到页面上显示
 	@RequestMapping("/initFavor")  
 	public @ResponseBody
-	List InitialFavor(Integer userId){ 
+	List<Integer> InitialFavor(Integer userId){ 
 		
 		System.out.println("-----r----" + userId);
-		
-		
-		List<Integer> categoryIdList = new ArrayList<Integer>();
-		categoryIdList.add(3);
-		categoryIdList.add(4);
-		categoryIdList.add(10);
-		
+		List<Integer> categoryIdList = preferenceService.selectPreference(userId);
 	    return categoryIdList;
 	}
 	
 	//3.更新用户的喜好标签到后台数据库
 	@RequestMapping("/updateFavor")  
-	public void updateFavor(HttpServletRequest request,@RequestParam("curUserFavor") Integer[] categoryList){ 
-		System.out.println("进了update");
-		for(int i = 0 ; i < categoryList.length ; i++){
-			System.out.println("-----r----" + categoryList[i]);
-		}
-		//System.out.println("-----r----" + categoryList);
+	public @ResponseBody void updateFavor(Integer userId,int[] curUserFavor){ 
 		
-//		for(int i=0;i<categoryList.length;i++){
-//			preferenceService.insertPreference(userId,categoryList[i]);
-//		}
+     preferenceService.deletePreference(userId);
+		for(int i=0;i<curUserFavor.length;i++){
+			preferenceService.insertPreference(userId,curUserFavor[i]);
+		}
 		
 	}
 	
