@@ -25,8 +25,36 @@ public class UserController {
 	public String userProfile(HttpServletRequest request, HttpServletResponse response){  
 	    return "user_profile";  
 	}
+	
+	
+	//2.加载用户的信息页面上显示
+	@RequestMapping("/initProfile")  
+	public String userSecurity(Integer userId){  
+		//现在返回的是一个字符串
+		//这里可能需要返回一个User类？（但是现在还没有user类）
+		
+		
+	    return "user";  
+	}
+	
+	//3.更新用户的信息后台数据库
+	@RequestMapping("/updateProfile")  
+	public @ResponseBody void updateProfile(Integer userId,String user){ 
+		
+		
+	}
 		
 	
+	//-------------------------------------个人安全 Security-----------------------------------------
+	
+	
+	//1.打开个人安全页面
+	@RequestMapping("/security")  
+	public String userSecurity(HttpServletRequest request, HttpServletResponse response){  
+	    return "user_security";  
+	}
+		
+		
 	//-------------------------------------个人喜好 Favor-----------------------------------------
 	
 	//1.打开喜好标签页面

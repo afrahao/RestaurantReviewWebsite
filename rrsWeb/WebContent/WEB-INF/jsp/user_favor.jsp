@@ -754,7 +754,7 @@ em{font-style:normal;}
 	    			<button type="button" id="btn-save">SAVE TO STORE</button>
 				</div>
 				<script src="../js/jquery-1.10.2.min.js"></script>
-				<script src="../js/effect.js"></script>
+				<script src="../js/user-favor.js"></script>
 
           </article>
           <!--	///*///======    End article  ========= //*/// --> 
@@ -777,6 +777,7 @@ em{font-style:normal;}
                   <dd class="odd">
                     <ol>
                       <li> <a href="profile"><span class="choose-tag">Basic Profile</span> </a></li>
+                      <li> <a href="security"><span class="choose-tag">Security</span> </a></li>
                       <li> <a href="favor"><span class="choose-tag">Individual Favor</span></a></li>
                     </ol>
                   </dd>
