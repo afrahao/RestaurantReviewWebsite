@@ -32,7 +32,20 @@
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
  <!-- CSS Style -->
-<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag-normalize.css" />
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag.css" />
+
+
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag-tabs.css" />
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag-tabstyles.css" />
+
+
+
+<script src="../js/modernizr.custom.js"></script>
+
 <style>
 em{font-style:normal;}
 
@@ -124,7 +137,8 @@ em{font-style:normal;}
 	color:#fff;
 }
 
-#btn{
+#btn-choose,
+#btn-save{
 	outline:none;
 	display:block;
 	width:100px;
@@ -294,14 +308,14 @@ em{font-style:normal;}
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
               <div class="welcome-msg hidden-xs">Welcome to Petunia! </div>
-              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
+              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
+                  <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
                 </ul>
               </div>
               <!-- End Header Language --> 
@@ -310,8 +324,8 @@ em{font-style:normal;}
               <div class="dropdown jtv-currency-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#"> USD <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#"> $ - Dollar </a> </li>
-                  <li><a href="#"> £ - Pound </a> </li>
-                  <li><a href="#"> € - Euro </a> </li>
+                  <li><a href="#"> Â£ - Pound </a> </li>
+                  <li><a href="#"> â¬ - Euro </a> </li>
                 </ul>
               </div>
               <!-- End Header Currency --> 
@@ -359,7 +373,7 @@ em{font-style:normal;}
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
                       <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img01.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -367,7 +381,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img02.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img02.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -375,7 +389,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img04.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img04.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -395,7 +409,7 @@ em{font-style:normal;}
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
@@ -481,7 +495,7 @@ em{font-style:normal;}
                     </ul>
                   </div>
                   <div class="col-2">
-                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
+                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="../images/menu-img1.jpg"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -544,13 +558,13 @@ em{font-style:normal;}
                 </div>
                 <div class="jtv-nav-banner">
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img2.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img3.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box jtv-banner-box_last">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img4.jpg" alt="Handbag"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -653,7 +667,7 @@ em{font-style:normal;}
                     </li>
                   </ul>
                 </div>
-                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
+                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="../images/menu-img5.jpg" alt="menu img"> </div>
               </div>
             </div>
           </li>
@@ -694,66 +708,42 @@ em{font-style:normal;}
          
           <article class="col-main">
           
-          <!-- 添加favor -->
-            <h2 class="page-heading"> <span class="page-heading-title">Modify My Favor</span> </h2>
-	          	<div class="main"> 
-	    			<label1>Current Favors:</label1> 
-				    <div class="label-box"></div>
-				    <div >
-				    	<label2>All Favors:</label2> 
-				    </div>
-				    
-				    <div class="select-box">
-				    
-				        <div class="select-list con1">
-				        	<h3 >Region Cuisine</h3>
-				            <span id="tag_0"><em  class="con1-1">Western Dish</em></span>
-				            <span id="tag_1"><em  class="con1-2">Chinese Dish</em></span>
-				            <span id="tag_2"><em  class="con1-3">Southeast Asia Dish</em></span>
-				            <span id="tag_3"><em  class="con1-4">Japanese Dish</em></span>
-				            <span id="tag_4"><em  class="con1-5">Korean Dish</em></span>
-				            <span id="tag_5"><em  class="con1-6">Franch Dish</em></span>
-				            <span id="tag_6"><em  class="con1-7">Indian Dish</em></span>
-				            <span id="tag_7"><em  class="con1-8">Mexican Dish</em></span>
-				            <span id="tag_8"><em  class="con1-9">Italy Dish</em></span>
-				            <span id="tag_9"><em  class="con1-10">Muslim Dish</em></span>
-				            <span id="tag_10"><em  class="con1-11">Other Cuisine</em></span>
-				            
-				            
-				        </div>
-				        <div class="select-list con2">
-				        	<h3 >Special Feature</h3>
-				            <span id="tag_11"><em class="con2-1">Hot Pot</em></span>
-				            <span id="tag_12"><em class="con2-2">BBQ</em></span>
-				            <span id="tag_13"><em class="con2-3">Seafood</em></span>
-				            <span id="tag_14"><em class="con2-4">Buffet</em></span>
-				            <span id="tag_15"><em class="con2-5">Noodles</em></span>
-				            <span id="tag_16"><em class="con2-6">Fast Food</em></span>
-				            <span id="tag_17"><em class="con2-7">Cafe</em></span>
-				            <span id="tag_18"><em class="con2-8">Dessert & Bakery</em></span>
-				            <span id="tag_19"><em class="con2-9">Breakfast</em></span>
-				            <span id="tag_20"><em class="con2-10">Vegetarian</em></span>
-				           
-				           
-				        </div>
-				        <!-- <div class="select-list con3">
-				        	<h3 >Individual Flavor</h3>
-				            <span><em class="con3-1">Beijing Cuisine</em></span>
-				            <span><em class="con3-2">Guangdong Cuisine</em></span>
-				            <span><em class="con3-3">Shandong Cuisine</em></span>
-				            <span><em class="con3-4">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-5">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-6">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-7">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-8">Zhejiang & Jiangsu Cuisine</em></span>
-				        </div>         -->
-			    	</div>
-			    	
-	    			<button type="button" id="btn">SAVE</button>
-				</div>
-				<script src="js/jquery-1.10.2.min.js"></script>
-				<script src="js/effect.js"></script>
-
+	          <section>
+				<div class="tabs tabs-style-linemove">
+					<nav>
+						<ul>
+							<li><a href="#section-linemove-1" class="icon icon-home"><span>Basic</span></a></li>
+							<li><a href="#section-linemove-2" class="icon icon-box"><span>Security</span></a></li>
+							<li><a href="#section-linemove-3" class="icon icon-home"><span>Address</span></a></li>
+							<li><a href="#section-linemove-4" class="icon icon-upload"><span>Upload</span></a></li>
+							<li><a href="#section-linemove-5" class="icon icon-tools"><span>Settings</span></a></li>
+						</ul>
+					</nav>
+					<div class="content-wrap">
+						<section id="section-linemove-1"><p>
+						
+						<!-- 测试 -->
+						
+											
+						</p></section>
+						<section id="section-linemove-2"><p>2</p></section>
+						<section id="section-linemove-3"><p>3</p></section>
+						<section id="section-linemove-4"><p>4</p></section>
+						<section id="section-linemove-5"><p>5</p></section>
+					</div><!-- /content -->
+				</div><!-- /tabs -->
+			  </section>
+			  <script type="text/javascript" src="../js/cbpFWTabs.js"></script>
+				<script type="text/javascript">
+					(function() {
+					
+						[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+							new CBPFWTabs( el );
+						});
+					
+					})();
+				</script>
+	          
           </article>
           <!--	///*///======    End article  ========= //*/// --> 
         </div>
@@ -762,25 +752,29 @@ em{font-style:normal;}
             <div class="block block-layered-nav">
               <div class="block-title">Personal Info</div>
               <div class="block-content">
+              	<!-- -----------------ç¨æ·ä¿¡æ¯-----------------  -->
+              	<!-- å¤´å -->
+              	<div id="div-center">
+              		<div class="avatar-round"></div>
+              	</div>
               	
-              	<div class="avatar-round"></div>
               	
-                <p class="block-subtitle">Shopping Options</p>
+                <user-name-p id="user-title">Kevin</user-name-p>
                 <dl id="narrow-by-list">
-                  <dt class="odd">Price</dt>
+                  <dt class="odd">Individual</dt>
                   <dd class="odd">
                     <ol>
-                      <li> <a href="#"><span class="price">$0.00</span> - <span class="price">$99.99</span></a> (6) </li>
-                      <li> <a href="#"><span class="price">$100.00</span> and above</a> (6) </li>
+                      <li> <a href="profile"><span class="choose-tag">Basic Profile</span> </a></li>
+                      <li> <a href="addFavor"><span class="choose-tag">Individual Favor</span></a></li>
                     </ol>
                   </dd>
-                  <dt class="even">Manufacturer</dt>
+                  <dt class="even">Routine</dt>
                   <dd class="even">
                     <ol>
-                      <li> <a href="#">Colorido</a> (20) </li>
-                      <li> <a href="#">Adidas</a> (25) </li>
-                      <li> <a href="#">Barisa Epic</a> (8) </li>
-                      <li> <a href="#">Esbeda</a> (5) </li>
+                      <li> <a class="choose-tag" href="#">"Like" Restaurant</a></li>
+                      <li> <a class="choose-tag" href="#">My Comments</a></li>
+                      <li> <a class="choose-tag" href="#">My Coupons</a></li>
+                      <li> <a href="#">Esbeda</a></li>
                     </ol>
                   </dd>
                   <dt class="odd">Handbag Material</dt>

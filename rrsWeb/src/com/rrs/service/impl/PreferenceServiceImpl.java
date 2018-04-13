@@ -26,4 +26,10 @@ public class PreferenceServiceImpl implements PreferenceService{
 		preferenceDao.insertcategory(userId,categoryId);
 	}
 
+	@Override
+	public void deletePreference(int userId) {
+		// TODO Auto-generated method stub
+		preferenceDao.deletecategory(userId);
+	}
+
 }

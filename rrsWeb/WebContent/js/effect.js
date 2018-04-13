@@ -20,8 +20,8 @@ var favorContent = ["Western Dish",
                     "Breakfast",
                     "Vegetarian"];
 
-var initUserFavor = [];
-var curUserFavor = [];
+var initUserFavor = new Array();
+var curUserFavor = new Array();
 var userId = 0;
 
 $(function(){
@@ -29,64 +29,67 @@ $(function(){
     conConfirm();//确认事件
     
     conChoice();//选择内容
-    
-    modifyFavors();//传到后端
-    
-    isFavorChanged(); //喜好标签是否被更改
-    
-    contentToIndex(content); //根据标签找标签ID
+//    
+//    modifyFavors();//传到后端
+//    
+//    isFavorChanged(); //喜好标签是否被更改
+//    
+//    contentToIndex(); //根据标签找标签ID
+//    
+//    getList();
     
 });
 
 $().ready( function() {
 	
 	$.ajax({
-		url: "favor",
+		url: "../user/initFavor",
 		type: "POST",
 		data: {
 			"userId": userId
 		},  
-		dataType: "JSON",
+		
 		success: function(res) {
 			//发送USERID成功
+			//并接收了用户的favorList
+			console.log("bbb");
 			console.log(res);
-			
-			//这里接收后端给的东西
-			initUserFavor = ${categoryIdList};
-			//
+			initUserFavor = res;
 			function setUserFavor(){
-				
-				
+
+
 				//curUserFavor = initUserFavor;
 				
 				var hasCon_html = "";
 				
-				
-				
 				for(var i =0; i<initUserFavor.length; i++){
-		
-			        var hasObj = favorContent[(initUserFavor[i])];
-			        hasCon_html += "<span>";
-			        hasCon_html += "<em>"+hasObj+"</em>";
-			        hasCon_html += "</span>";
-			        
-			        
-			        $("#tag_"+initUserFavor[i].toString()).attr("class","cur");
-			        
-		
-			    };
-			    return hasCon_html;
+				
+				    var hasObj = favorContent[(initUserFavor[i])];
+				    hasCon_html += "<span>";
+				    hasCon_html += "<em>"+hasObj+"</em>";
+				    hasCon_html += "</span>";
+				    
+				    
+				    $("#tag_"+initUserFavor[i].toString()).attr("class","cur");
+				    
+				
+				};
+				return hasCon_html;
 			}
-		
+
 			$(".label-box").append(setUserFavor());
+			
 		},
-		fail: function(err){
+		error: function(err){
+			
 			console.error(err);
 		}
 	});
-
 	
+	console.log("aaa");
+		
 } ); 
+
 
 
 //选择内容
@@ -105,17 +108,16 @@ function conChoice() {
 };
 
 
-//传回后台更新喜好标签
+////传回后台更新喜好标签
 function modifyFavors() {
 	
 	$.ajax({
-		url: "addFavor",
+		url: "../user/updateFavor",
 		type: "POST",
 		data: {
 			"userId": userId,
 			"curUserFavor": curUserFavor.join()
 		},  
-		dataType: "JSON",
 		success: function(res) {
 			console.log(res);
 		},
@@ -139,13 +141,12 @@ function conConfirm() {
     //确认点击后触发
     $("#btn-choose").click(function () {
     	
-    	curUserFavor = [];
-    	
-
         conAdded.remove();//删除已添加的
 
         //重新计算快捷按钮选中数量
         function init_html() {
+        	
+            curUserFavor = [];
             
             var select_iClass_data = [];//选中的内容的em标签的class
             
@@ -210,19 +211,20 @@ function conConfirm() {
         if(isFavorChanged() == 1){
         	//传给后端
             modifyFavors();
+            initUserFavor = curUserFavor;
         }
-        
-
+       
     });
     
 }
-
+//
 //获得标签id
 function contentToIndex(content){
 	
 	for(var i = 0 ; i < favorContent.length; i++){
 		if(favorContent[i]==content){
 			console.log(i);
+			
 			return i;
 		}
 			
@@ -232,14 +234,17 @@ function contentToIndex(content){
 //判断用户喜好是否更改过
 function isFavorChanged(){
 	if(curUserFavor.length != initUserFavor.length){
+		console.log("no1");
+		console.log(curUserFavor.length);
+		console.log(initUserFavor.length);
 		return 1;
 	} else {
 		for(var i = 0 ; i < initUserFavor.length ; i++){
 			if(curUserFavor[i] != initUserFavor[i]){
+				console.log("no2");
 				return 1;
-			}else {
-				return 0;
 			}
 		}
+		return 0;
 	}
 }

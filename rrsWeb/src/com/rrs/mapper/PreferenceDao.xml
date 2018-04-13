@@ -11,11 +11,20 @@
             user_id = #{0}
         </where>
     </select>
-    
-    <!-- 注册系统用户 -->
+   
+	
+	<!-- 注册系统用户 -->
 	<insert id="insertcategory" parameterType="int">
 		INSERT INTO user_cate
 		(user_id,category_id)
 		VALUES(#{0},#{1})
 	</insert>
+	
+	<!-- 根据ID删除客户信息 -->
+	<delete id="deletecategory" parameterType="int">
+        DELETE FROM user_cate
+        <where>
+            user_id = #{0}
+        </where>
+    </delete>
 </mapper>
