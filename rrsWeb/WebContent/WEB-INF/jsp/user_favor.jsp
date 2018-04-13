@@ -754,7 +754,7 @@ em{font-style:normal;}
 	    			<button type="button" id="btn-save">SAVE TO STORE</button>
 				</div>
 				<script src="../js/jquery-1.10.2.min.js"></script>
-				<script src="../js/effect.js"></script>
+				<script src="../js/user-favor.js"></script>
 
           </article>
           <!--	///*///======    End article  ========= //*/// --> 

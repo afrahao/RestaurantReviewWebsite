@@ -717,8 +717,8 @@ em{font-style:normal;}
                             <form  action="mysuperscript.php" autocomplete="on"> 
                                 <span id="page-header"> Modify Password </span> 
                                 <p> 
-                                    <label for="usernamesignup" class="uname" >Your Email Address</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="my phone number. eg.12345678910" />
+                                    <label for="useremail" class="uname" >Your Email Address</label>
+                                    <input id="useremail" required="required" type="text"  disabled = "disabled"/>
                                 </p>
                                 <p >
                                 	<button id="verification-btn">Verification Code</button> 
