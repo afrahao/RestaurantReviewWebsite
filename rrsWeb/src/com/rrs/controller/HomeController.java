@@ -27,6 +27,8 @@ public class HomeController {
 	@Autowired
 	private SysUserService sysUserService;
 
+	
+	
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

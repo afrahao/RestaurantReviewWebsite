@@ -20,52 +20,81 @@ var favorContent = ["Western Dish",
                     "Breakfast",
                     "Vegetarian"];
 
+var initUserFavor = new Array();
+var curUserFavor = new Array();
+var userId = 3;
 
 $(function(){
    
     conConfirm();//确认事件
     
     conChoice();//选择内容
-    
-    addFavors();//传到后端
+//    
+//    modifyFavors();//传到后端
+//    
+//    isFavorChanged(); //喜好标签是否被更改
+//    
+//    contentToIndex(); //根据标签找标签ID
+//    
+//    getList();
     
 });
 
 $().ready( function() {
-
-	//这里接收后端给的东西
 	
-	//
-	function setUserFavor(){
+	$.ajax({
+		url: "../user/initFavor",
+		type: "POST",
+		data: {
+			"userId": userId
+		},  
 		
-		var userFavor = [1,2,3];
-		
-		var hasCon_html = "";
-		
-		console.log(userFavor[0]);
-		
-		for(var i =0; i<userFavor.length; i++){
+		success: function(res) {
+			//发送USERID成功
+			//并接收了用户的favorList
+			console.log("bbb");
+			console.log(res);
+			initUserFavor = res;
+			function setUserFavor(){
 
-	        var hasObj = favorContent[(userFavor[i])];
-	        hasCon_html += "<span>";
-	        hasCon_html += "<em>"+hasObj+"</em>";
-	        hasCon_html += "</span>";
-	        console.log("a");
-	        
-	        $("#tag_"+userFavor[i].toString()).attr("class","cur");
-	        
 
-	    };
-	    return hasCon_html;
-	}
+				//curUserFavor = initUserFavor;
+				
+				var hasCon_html = "";
+				
+				for(var i =0; i<initUserFavor.length; i++){
+				
+				    var hasObj = favorContent[(initUserFavor[i])];
+				    hasCon_html += "<span>";
+				    hasCon_html += "<em>"+hasObj+"</em>";
+				    hasCon_html += "</span>";
+				    
+				    
+				    $("#tag_"+initUserFavor[i].toString()).attr("class","cur");
+				    
+				
+				};
+				return hasCon_html;
+			}
 
-	$(".label-box").append(setUserFavor());
+			$(".label-box").append(setUserFavor());
+			
+		},
+		error: function(err){
+			
+			console.error(err);
+		}
+	});
+	
+	console.log("aaa");
+		
 } ); 
 
 
-//选择内容
 
-function conChoice() {//选择中内容的当前样式
+//选择内容
+//选择中内容的当前样式
+function conChoice() {
 
     $(".select-list span").click(function () {
 
@@ -79,18 +108,16 @@ function conChoice() {//选择中内容的当前样式
 };
 
 
-
-function addFavors(favors) {
-	
-	// 数据传到后台
+////传回后台更新喜好标签
+function modifyFavors() {
 	
 	$.ajax({
-		url: "",
+		url: "../user/updateFavor",
 		type: "POST",
 		data: {
-			favors: favors
-		},  // ["xxx", "xxx"]  接收： String[] favors
-		dataType: "JSON",
+			"userId": userId,
+			"curUserFavor": curUserFavor.join()
+		},  
 		success: function(res) {
 			console.log(res);
 		},
@@ -102,43 +129,6 @@ function addFavors(favors) {
 	
 }
 
-/*//得到所有tags
-function getAllTags() {
-	
-	// 数据传到后台
-	
-	$.ajax({
-		url: "",
-		type: "GET",
-		data: {
-			favors: favors
-		},  // ["xxx", "xxx"]  接收： String[] favors
-		dataType: "JSON",
-		success: function(res) {
-			console.log(res);
-		},
-		fail: function(err){
-			console.error(err);
-		}
-	});
-	
-	var allTagsContentHtml = "";
-	var allTagsContent = [];
-	
-	for(var j =0; j<allTagsContent.length; j++){
-
-        var hasObj = allTagsContent[j];
-        allTagsContentHtml += "<span>";
-        allTagsContentHtml += "<em>"+allTagsContent.conText+"</em>";
-        allTagsContentHtml += "</span>";
-    };
-    
-    acticveSelect = $(".select-list").find(".cur");
-    
-    return allTagsContentHtml;
-	
-	
-}*/
 
 //确认事件
 
@@ -147,15 +137,19 @@ function conConfirm() {
     var conAdded = $(".label-box span");//已添加的内容
     
     /*将选中的标签添加到面板上*/
-
+    
     //确认点击后触发
     $("#btn-choose").click(function () {
-    	console.log("aaa");
+    	
+    	
+    	
 
         conAdded.remove();//删除已添加的
 
         //重新计算快捷按钮选中数量
         function init_html() {
+        	
+            curUserFavor = [];
             
             var select_iClass_data = [];//选中的内容的em标签的class
             
@@ -200,6 +194,8 @@ function conConfirm() {
                 var select_i_con = test(has_data,select_conText_data)[i];
                 var select_attr ={"iClass":select_i_class, "conText":select_i_con};
                 selected_data.push(select_attr);
+                curUserFavor.push(contentToIndex(selected_data[i].conText));
+
             };
 
             for(var j =0; j<selected_data.length; j++){
@@ -214,6 +210,44 @@ function conConfirm() {
         
         $(".label-box span").remove();
         $(".label-box").append(init_html());
-
+        
+        if(isFavorChanged() == 1){
+        	//传给后端
+            modifyFavors();
+            initUserFavor = curUserFavor;
+        }
+       
     });
+    
+}
+//
+//获得标签id
+function contentToIndex(content){
+	
+	for(var i = 0 ; i < favorContent.length; i++){
+		if(favorContent[i]==content){
+			console.log(i);
+			
+			return i;
+		}
+			
+	}
+}
+
+//判断用户喜好是否更改过
+function isFavorChanged(){
+	if(curUserFavor.length != initUserFavor.length){
+		console.log("no1");
+		console.log(curUserFavor.length);
+		console.log(initUserFavor.length);
+		return 1;
+	} else {
+		for(var i = 0 ; i < initUserFavor.length ; i++){
+			if(curUserFavor[i] != initUserFavor[i]){
+				console.log("no2");
+				return 1;
+			}
+		}
+		return 0;
+	}
 }

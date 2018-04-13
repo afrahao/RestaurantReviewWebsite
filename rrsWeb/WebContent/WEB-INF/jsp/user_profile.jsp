@@ -32,7 +32,20 @@
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
  <!-- CSS Style -->
+
 <link rel="stylesheet" href="../style.css">
+
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag-normalize.css" />
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag.css" />
+
+
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag-tabs.css" />
+<link rel="stylesheet" type="text/css" href="../css/user-info-tag-tabstyles.css" />
+
+
+
+<script src="../js/modernizr.custom.js"></script>
+
 <style>
 em{font-style:normal;}
 
@@ -311,8 +324,8 @@ em{font-style:normal;}
               <div class="dropdown jtv-currency-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#"> USD <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#"> $ - Dollar </a> </li>
-                  <li><a href="#"> £ - Pound </a> </li>
-                  <li><a href="#"> € - Euro </a> </li>
+                  <li><a href="#"> Â£ - Pound </a> </li>
+                  <li><a href="#"> â¬ - Euro </a> </li>
                 </ul>
               </div>
               <!-- End Header Currency --> 
@@ -695,67 +708,42 @@ em{font-style:normal;}
          
           <article class="col-main">
           
-          <!-- 添加favor -->
-            <h2 class="page-heading"> <span class="page-heading-title">Modify My Favor</span> </h2>
-	          	<div class="main"> 
-	    			<label1>Current Favors:</label1> 
-				    <div class="label-box"></div>
-				    <div >
-				    	<label2>All Favors:</label2> 
-				    </div>
-				    
-				    <div class="select-box">
-				    
-				        <div class="select-list con1">
-				        	<h3 >Region Cuisine</h3>
-				            <span id="tag_0"><em  class="con1-1">Western Dish</em></span>
-				            <span id="tag_1"><em  class="con1-2">Chinese Dish</em></span>
-				            <span id="tag_2"><em  class="con1-3">Southeast Asia Dish</em></span>
-				            <span id="tag_3"><em  class="con1-4">Japanese Dish</em></span>
-				            <span id="tag_4"><em  class="con1-5">Korean Dish</em></span>
-				            <span id="tag_5"><em  class="con1-6">Franch Dish</em></span>
-				            <span id="tag_6"><em  class="con1-7">Indian Dish</em></span>
-				            <span id="tag_7"><em  class="con1-8">Mexican Dish</em></span>
-				            <span id="tag_8"><em  class="con1-9">Italy Dish</em></span>
-				            <span id="tag_9"><em  class="con1-10">Muslim Dish</em></span>
-				            <span id="tag_10"><em  class="con1-11">Other Cuisine</em></span>
-				            
-				            
-				        </div>
-				        <div class="select-list con2">
-				        	<h3 >Special Feature</h3>
-				            <span id="tag_11"><em class="con2-1">Hot Pot</em></span>
-				            <span id="tag_12"><em class="con2-2">BBQ</em></span>
-				            <span id="tag_13"><em class="con2-3">Seafood</em></span>
-				            <span id="tag_14"><em class="con2-4">Buffet</em></span>
-				            <span id="tag_15"><em class="con2-5">Noodles</em></span>
-				            <span id="tag_16"><em class="con2-6">Fast Food</em></span>
-				            <span id="tag_17"><em class="con2-7">Cafe</em></span>
-				            <span id="tag_18"><em class="con2-8">Dessert & Bakery</em></span>
-				            <span id="tag_19"><em class="con2-9">Breakfast</em></span>
-				            <span id="tag_20"><em class="con2-10">Vegetarian</em></span>
-				           
-				           
-				        </div>
-				        <!-- <div class="select-list con3">
-				        	<h3 >Individual Flavor</h3>
-				            <span><em class="con3-1">Beijing Cuisine</em></span>
-				            <span><em class="con3-2">Guangdong Cuisine</em></span>
-				            <span><em class="con3-3">Shandong Cuisine</em></span>
-				            <span><em class="con3-4">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-5">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-6">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-7">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-8">Zhejiang & Jiangsu Cuisine</em></span>
-				        </div>         -->
-			    	</div>
-			    	
-	    			<button type="button" id="btn-choose">CHOOSE</button>
-	    			<button type="button" id="btn-save">SAVE TO STORE</button>
-				</div>
-				<script src="../js/jquery-1.10.2.min.js"></script>
-				<script src="../js/effect.js"></script>
-
+	          <section>
+				<div class="tabs tabs-style-linemove">
+					<nav>
+						<ul>
+							<li><a href="#section-linemove-1" class="icon icon-home"><span>Basic</span></a></li>
+							<li><a href="#section-linemove-2" class="icon icon-box"><span>Security</span></a></li>
+							<li><a href="#section-linemove-3" class="icon icon-home"><span>Address</span></a></li>
+							<li><a href="#section-linemove-4" class="icon icon-upload"><span>Upload</span></a></li>
+							<li><a href="#section-linemove-5" class="icon icon-tools"><span>Settings</span></a></li>
+						</ul>
+					</nav>
+					<div class="content-wrap">
+						<section id="section-linemove-1"><p>
+						
+						<!-- 测试 -->
+						
+											
+						</p></section>
+						<section id="section-linemove-2"><p>2</p></section>
+						<section id="section-linemove-3"><p>3</p></section>
+						<section id="section-linemove-4"><p>4</p></section>
+						<section id="section-linemove-5"><p>5</p></section>
+					</div><!-- /content -->
+				</div><!-- /tabs -->
+			  </section>
+			  <script type="text/javascript" src="../js/cbpFWTabs.js"></script>
+				<script type="text/javascript">
+					(function() {
+					
+						[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+							new CBPFWTabs( el );
+						});
+					
+					})();
+				</script>
+	          
           </article>
           <!--	///*///======    End article  ========= //*/// --> 
         </div>
@@ -764,14 +752,14 @@ em{font-style:normal;}
             <div class="block block-layered-nav">
               <div class="block-title">Personal Info</div>
               <div class="block-content">
-              	<!-- -----------------用户信息-----------------  -->
-              	<!-- 头像 -->
+              	<!-- -----------------ç¨æ·ä¿¡æ¯-----------------  -->
+              	<!-- å¤´å -->
               	<div id="div-center">
               		<div class="avatar-round"></div>
               	</div>
               	
               	
-                <p id="user-title">Kevin</p>
+                <user-name-p id="user-title">Kevin</user-name-p>
                 <dl id="narrow-by-list">
                   <dt class="odd">Individual</dt>
                   <dd class="odd">
