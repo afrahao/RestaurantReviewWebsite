@@ -1,8 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html> -->
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
 <!-- Basic page needs -->
 <meta charset="utf-8">
+
 <!--[if IE]>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <![endif]-->
@@ -18,8 +32,133 @@
 <!-- Favicon  -->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-<!-- CSS Style -->
-<link rel="stylesheet" href="style.css">
+ <!-- CSS Style -->
+<link rel="stylesheet" type="text/css" href="../css/user-info.css" />
+<link rel="stylesheet" href="../style.css">
+
+
+
+
+<!-- dynamic table -->
+
+
+<style>
+em{font-style:normal;}
+
+.main{
+	width:796px;
+	margin:10px auto;
+	font-size:14px;
+}
+
+.main label1{
+	color: rgb(219,112,147);
+	font-size:18px;
+}
+
+.main label2{
+	color: rgb(128,128,128);
+	font-size:18px;
+	
+}
+
+.main h3{
+	color: rgb(128,128,128);
+	font-size:18px;
+	margin-top:0px;
+}
+
+.main h2{
+	text-align:center;
+	line-height:50px;
+	margin-top:20px;
+	color:#555;
+}
+
+.label-box{
+	width:732px;
+	min-height:200px;
+	padding:10px;
+	border:2px solid #DB7093;
+	overflow:hidden;
+	border-radius:3px;
+	margin-bottom:20px;
+	width:95%;
+}
+
+.label-box span{
+	display:inline-block;
+	background:#DB7093;
+	padding:6px 14px;
+	color:#fff;
+	border-radius:3px;
+	margin:0 3px;
+	margin-top:10px;
+}
+
+.select-box{
+
+	overflow:hidden;
+	-webkit-box-flex:1;
+	-moz-box-flex:1;
+	box-flex:1;
+	flex-direction: column;
+	
+}
+.select-list{
+	float:left;
+	padding:20px;
+	margin-top:20px;
+	border:1px solid rgb(220,220,220);
+	border-radius:3px;
+	flex-wrap: wrap;
+	clear:both;
+	margin-top:10px;
+	width:95%;
+}
+.select-list span{
+	display:inline-block;
+	padding:6px 14px;
+	font-size:14px;
+	background:#eee;
+	color:#696969;
+	text-align:center;
+	border-radius:3px;
+	margin:0 3px;
+	cursor:pointer;
+	margin-top:10px;
+}
+.select-list .cur{
+	background:#696969;
+	color:#fff;
+}
+
+#btn-choose,
+#btn-save{
+	outline:none;
+	display:block;
+	width:100px;
+	text-align:center;
+	padding:6px 0;
+	margin:20px auto;
+	border:1px solid #FF9966;
+	background:#FF9966;
+	color:#fff;
+	font-size:14px;
+	border-radius:3px;
+	cursor:pointer;
+} 
+
+.box{
+	width: 20px;
+	height: 20px;
+	padding: 2px;
+	border:1px solid #ccc;
+	border-radius: 2px;
+}
+</style>
+
+
 </head>
 
 <body class="single-product-page">
@@ -174,14 +313,14 @@
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
               <div class="welcome-msg hidden-xs">Welcome to Petunia! </div>
-              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
+              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
+                  <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
                 </ul>
               </div>
               <!-- End Header Language --> 
@@ -190,8 +329,8 @@
               <div class="dropdown jtv-currency-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#"> USD <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#"> $ - Dollar </a> </li>
-                  <li><a href="#"> £ - Pound </a> </li>
-                  <li><a href="#"> € - Euro </a> </li>
+                  <li><a href="#"> Â£ - Pound </a> </li>
+                  <li><a href="#"> â¬ - Euro </a> </li>
                 </ul>
               </div>
               <!-- End Header Currency --> 
@@ -239,7 +378,7 @@
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
                       <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img01.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -247,7 +386,7 @@
                         </div>
                       </li>
                       <li class="item">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img02.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img02.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -255,7 +394,7 @@
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img04.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img04.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -275,7 +414,7 @@
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
@@ -361,7 +500,7 @@
                     </ul>
                   </div>
                   <div class="col-2">
-                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
+                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="../images/menu-img1.jpg"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -424,13 +563,13 @@
                 </div>
                 <div class="jtv-nav-banner">
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img2.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img3.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box jtv-banner-box_last">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img4.jpg" alt="Handbag"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -533,7 +672,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
+                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="../images/menu-img5.jpg" alt="menu img"> </div>
               </div>
             </div>
           </li>
@@ -571,61 +710,46 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-9 col-xs-12 col-sm-push-3">
-          <div class="category-description std">
-            <div class="slider-items-products">
-              <div id="category-desc-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col1 owl-carousel owl-theme"> 
-                  
-                  <!-- Item -->
-                  <div class="item"> <a href="#"><img alt="" src="images/category-img1.jpg"></a>
-                    <div class="cat-img-title cat-bg cat-box">
-                      <div class="small-tag">Flowers 2018</div>
-                      <h2 class="cat-heading">New special collection</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                  </div>
-                  <!-- End Item --> 
-                  
-                  <!-- Item -->
-                  <div class="item"> <a href="#"><img alt="" src="images/category-img2.jpg"></a>
-                    <div class="cat-img-title cat-bg cat-box">
-                      <div class="small-tag">Big Sale</div>
-                      <h2 class="cat-heading">Birthday Flowers</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                    <!-- End Item --> 
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         
           <article class="col-main">
-            <h2 class="page-heading"> <span class="page-heading-title">Add Favor</span> </h2>
-          
-	          	<div class="favoradding"> 
-	    			<h2>Choose individual favor tags</h2>  
-				    <div class="favoradding-label-box"></div>
-				    <div class="favoradding-select-box">
-				        <div class="favoradding-select-list con1">
-				            <span><em class="con1-1">一文字1</em></span>
-				            <span><em class="con1-2">一文字2</em></span>
-				        </div>
-				        <div class="favoradding-select-list con2">
-				            <span><em class="con2-1">二文字1</em></span>
-				        </div>
-				        <div class="favoradding-select-list con3">
-				            <span><em class="con3-1">三文字1</em></span>
-				            <span><em class="con3-2">三文字2</em></span>
-				            <span><em class="con3-3">三文字3</em></span>
-				            <span><em class="con3-4">三文字4</em></span>
-				        </div>        
-			    	</div>
-	    			<button type="button" id="favoradding-btn">确认</button>
-				</div>
-				<script src="js/jquery-1.10.2.min.js"></script>
-				<script src="js/effect.js"></script>
-
+          	<div id="wrapper">   
+                       <div id="user-security-info" >
+                            <form  action="mysuperscript.php" autocomplete="on"> 
+                                <span id="page-header"> Modify Password </span> 
+                                <p> 
+                                    <label for="usernamesignup" class="uname" >Your Email Address</label>
+                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="my phone number. eg.12345678910" />
+                                </p>
+                                <p >
+                                	<button id="verification-btn">Verification Code</button> 
+                                	<lable id="verification-info">* error email address</lable>
+                                </p>
+                                <p> 
+                                    <label for="emailsignup" class="youmail"  > Your Verification Code</label>
+                                    <input class="verification-code-input" id="emailsignup" name="emailsignup" required="required" type="text" placeholder="received 6-number code.  eg.123456"/> 
+                                    
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup" class="youpasswd" >Your New password </label>
+                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup_confirm" class="youpasswd" >Please Confirm Your Password </label>
+                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                                </p>
+                                <p >
+                         			<button id="confirm">OK</button> 
+                       
+                         		</p>
+                                
+                            </form>
+                            
+                        </div>
+						
+						
+                    </div>
+	          
+	          
           </article>
           <!--	///*///======    End article  ========= //*/// --> 
         </div>
@@ -634,25 +758,30 @@
             <div class="block block-layered-nav">
               <div class="block-title">Personal Info</div>
               <div class="block-content">
+              	<!-- -----------------ç¨æ·ä¿¡æ¯-----------------  -->
+              	<!-- å¤´å -->
+              	<div id="div-center">
+              		<div class="avatar-round"></div>
+              	</div>
               	
-              	<div class="avatar-round"></div>
               	
-                <p class="block-subtitle">Shopping Options</p>
+                <user-name-p id="user-title">Kevin</user-name-p>
                 <dl id="narrow-by-list">
-                  <dt class="odd">Price</dt>
+                  <dt class="odd">Individual</dt>
                   <dd class="odd">
                     <ol>
-                      <li> <a href="#"><span class="price">$0.00</span> - <span class="price">$99.99</span></a> (6) </li>
-                      <li> <a href="#"><span class="price">$100.00</span> and above</a> (6) </li>
+                      <li> <a href="profile"><span class="choose-tag">Basic Profile</span> </a></li>
+                      <li> <a href="security"><span class="choose-tag">Security</span> </a></li>
+                      <li> <a href="favor"><span class="choose-tag">Individual Favor</span></a></li>
                     </ol>
                   </dd>
-                  <dt class="even">Manufacturer</dt>
+                  <dt class="even">Routine</dt>
                   <dd class="even">
                     <ol>
-                      <li> <a href="#">Colorido</a> (20) </li>
-                      <li> <a href="#">Adidas</a> (25) </li>
-                      <li> <a href="#">Barisa Epic</a> (8) </li>
-                      <li> <a href="#">Esbeda</a> (5) </li>
+                      <li> <a class="choose-tag" href="#">"Like" Restaurant</a></li>
+                      <li> <a class="choose-tag" href="#">My Comments</a></li>
+                      <li> <a class="choose-tag" href="#">My Coupons</a></li>
+                      <li> <a href="#">Esbeda</a></li>
                     </ol>
                   </dd>
                   <dt class="odd">Handbag Material</dt>
@@ -689,178 +818,7 @@
                 </dl>
               </div>
             </div>
-            <div class="block product-price-range ">
-              <div class="block-title">Price</div>
-              <div class="block-content">
-                <div class="slider-range">
-                  <div data-label-reasult="Range:" data-min="0" data-max="500" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="50" data-value-max="350">
-                    <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 10%; width: 60%;"></div>
-                    <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 10%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 70%;"></span></div>
-                  <div class="amount-range-price">Range: $10 - $550</div>
-                  <ul class="check-box-list">
-                    <li>
-                      <input type="checkbox" id="p1" name="cc">
-                      <label for="p1"> <span class="button"></span> $20 - $50<span class="count">(5)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="p2" name="cc">
-                      <label for="p2"> <span class="button"></span> $50 - $100<span class="count">(10)</span> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="p3" name="cc">
-                      <label for="p3"> <span class="button"></span> $100 - $250<span class="count">(12)</span> </label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="block block-cart">
-              <div class="block-title ">My Cart</div>
-              <div class="block-content">
-                <div class="summary">
-                  <p class="amount">There are <a href="#">3 items</a> in your cart.</p>
-                  <p class="subtotal"> <span class="label">Cart Subtotal:</span> <span class="price">$227.99</span> </p>
-                </div>
-                <div class="ajax-checkout">
-                  <button class="button button-checkout" title="Submit" type="submit"><span>Checkout</span></button>
-                </div>
-                <p class="block-subtitle">Recently added item(s) </p>
-                <ul>
-                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="images/products/img10.jpg" alt="Product Title Here"></a>
-                    <div class="product-details">
-                      <div class="access"> <a href="#" title="Remove This Item" class="jtv-btn-remove"> <span class="icon"></span> Remove </a> </div>
-                      <strong>1</strong> x <span class="price">$99.99</span>
-                      <p class="product-name"> <a href="#">Product Title Here</a> </p>
-                    </div>
-                  </li>
-                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="images/products/img01.jpg" alt="Product Title Here"></a>
-                    <div class="product-details">
-                      <div class="access"> <a href="#" title="Remove This Item" class="jtv-btn-remove"> <span class="icon"></span> Remove </a> </div>
-                      <strong>1</strong> x <span class="price">$88.00</span>
-                      <p class="product-name"> <a href="#">Product Title Here</a> </p>
-                      
-                      <!--access clearfix--> 
-                    </div>
-                  </li>
-                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="images/products/img05.jpg" alt="Product Title Here"></a>
-                    <div class="product-details">
-                      <div class="access"> <a href="#" title="Remove This Item" class="jtv-btn-remove"> <span class="icon"></span> Remove </a> </div>
-                      <strong>1</strong> x <span class="price">$98.00</span>
-                      <p class="product-name"> <a href="#">Product Title Here</a> </p>
-                      
-                      <!--access clearfix--> 
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="block block-compare">
-              <div class="block-title ">Compare Products (2)</div>
-              <div class="block-content">
-                <ol id="compare-items">
-                  <li class="item">
-                    <input type="hidden" value="2173" class="compare-item-id">
-                    <a class="jtv-btn-remove" title="Remove This Item" href="#"></a> <a href="#" class="product-name"><i class="fa fa-angle-right"></i>Product Title Here</a> </li>
-                  <li class="item">
-                    <input type="hidden" value="2174" class="compare-item-id">
-                    <a class="jtv-btn-remove" title="Remove This Item" href="#"></a> <a href="#" class="product-name"><i class="fa fa-angle-right"></i>Product Title Here</a> </li>
-                  <li class="item">
-                    <input type="hidden" value="2174" class="compare-item-id">
-                    <a class="jtv-btn-remove" title="Remove This Item" href="#"></a> <a href="#" class="product-name"><i class="fa fa-angle-right"></i>Product Title Here</a> </li>
-                </ol>
-                <div class="ajax-checkout">
-                  <button type="submit" title="Submit" class="button button-compare"><span>Compare</span></button>
-                  <button type="submit" title="Submit" class="button button-clear"><span>Clear</span></button>
-                </div>
-              </div>
-            </div>
-            <div class="custom-slider">
-              <div>
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                  </ol>
-                  <div class="carousel-inner">
-                    <div class="item active"><img src="images/slide3.jpg" alt="slide3">
-                      <div class="carousel-caption">
-                        <h3><a title=" Sample Product" href="#">Big sale</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a class="link" href="#">Shop Now</a></div>
-                    </div>
-                    <div class="item"><img src="images/slide1.jpg" alt="slide1">
-                      <div class="carousel-caption">
-                        <h3><a title=" Sample Product" href="#">Bag collection</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </div>
-                    </div>
-                    <div class="item"><img src="images/slide2.jpg" alt="slide2">
-                      <div class="carousel-caption">
-                        <h3><a title=" Sample Product" href="#">New special</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <a class="left carousel-control" href="#" data-slide="prev"> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#" data-slide="next"> <span class="sr-only">Next</span> </a></div>
-              </div>
-            </div>
-            <div class="block block-list block-viewed">
-              <div class="block-title"> Recently Viewed </div>
-              <div class="block-content">
-                <ol id="recently-viewed-items">
-                  <li class="item odd">
-                    <p class="product-name"><a href="#"><i class="fa fa-angle-right"></i>Product Title Here</a></p>
-                  </li>
-                  <li class="item even">
-                    <p class="product-name"><a href="#"><i class="fa fa-angle-right"></i>Product Title Here</a></p>
-                  </li>
-                  <li class="item last odd">
-                    <p class="product-name"><a href="#"><i class="fa fa-angle-right"></i>Product Title Here</a></p>
-                  </li>
-                </ol>
-              </div>
-            </div>
-            <div class="block block-poll">
-              <div class="block-title">Community Poll </div>
-              <form id="pollForm" action="#" method="post" onSubmit="return validatePollAnswerIsSelected();">
-                <div class="block-content">
-                  <p class="block-subtitle">What is your favorite color</p>
-                  <ul id="poll-answers">
-                    <li class="odd">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_1" value="1">
-                      <span class="label">
-                      <label for="vote_1">Green</label>
-                      </span> </li>
-                    <li class="even">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_2" value="2">
-                      <span class="label">
-                      <label for="vote_2">Red</label>
-                      </span> </li>
-                    <li class="odd">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_3" value="3">
-                      <span class="label">
-                      <label for="vote_3">Black</label>
-                      </span> </li>
-                    <li class="last even">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_4" value="4">
-                      <span class="label">
-                      <label for="vote_4">Pink</label>
-                      </span> </li>
-                  </ul>
-                  <div class="actions">
-                    <button type="submit" title="Vote" class="button button-vote"><span>Vote</span></button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="block block-tags">
-              <div class="block-title"> Popular Tags</div>
-              <div class="block-content">
-                <div class="tags-list"> <a href="#">Clutches</a> <a href="#">Bag</a> <a href="#">Laptop bags</a> <a href="#">Luggage</a> <a href="#">Backpacks</a> <a href="#">Piper Bag</a> </div>
-                <div class="actions"> <a href="#" class="view-all">View All Tags</a> </div>
-              </div>
-            </div>
+
           </aside>
         </div>
       </div>

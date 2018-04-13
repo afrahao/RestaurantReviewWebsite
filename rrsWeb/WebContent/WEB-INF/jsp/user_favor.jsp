@@ -777,6 +777,7 @@ em{font-style:normal;}
                   <dd class="odd">
                     <ol>
                       <li> <a href="profile"><span class="choose-tag">Basic Profile</span> </a></li>
+                      <li> <a href="security"><span class="choose-tag">Security</span> </a></li>
                       <li> <a href="favor"><span class="choose-tag">Individual Favor</span></a></li>
                     </ol>
                   </dd>

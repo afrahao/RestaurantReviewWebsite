@@ -16,6 +16,7 @@
 <head>
 <!-- Basic page needs -->
 <meta charset="utf-8">
+
 <!--[if IE]>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <![endif]-->
@@ -35,16 +36,11 @@
 
 <link rel="stylesheet" href="../style.css">
 
-<link rel="stylesheet" type="text/css" href="../css/user-info-tag-normalize.css" />
-<link rel="stylesheet" type="text/css" href="../css/user-info-tag.css" />
 
+<link rel="stylesheet" type="text/css" href="../css/user-info.css" />
 
-<link rel="stylesheet" type="text/css" href="../css/user-info-tag-tabs.css" />
-<link rel="stylesheet" type="text/css" href="../css/user-info-tag-tabstyles.css" />
+<!-- dynamic table -->
 
-
-
-<script src="../js/modernizr.custom.js"></script>
 
 <style>
 em{font-style:normal;}
@@ -152,7 +148,16 @@ em{font-style:normal;}
 	border-radius:3px;
 	cursor:pointer;
 } 
+
+.box{
+	width: 20px;
+	height: 20px;
+	padding: 2px;
+	border:1px solid #ccc;
+	border-radius: 2px;
+}
 </style>
+
 
 </head>
 
@@ -707,42 +712,73 @@ em{font-style:normal;}
         <div class="col-sm-9 col-xs-12 col-sm-push-3">
          
           <article class="col-main">
-          
-	          <section>
-				<div class="tabs tabs-style-linemove">
-					<nav>
-						<ul>
-							<li><a href="#section-linemove-1" class="icon icon-home"><span>Basic</span></a></li>
-							<li><a href="#section-linemove-2" class="icon icon-box"><span>Security</span></a></li>
-							<li><a href="#section-linemove-3" class="icon icon-home"><span>Address</span></a></li>
-							<li><a href="#section-linemove-4" class="icon icon-upload"><span>Upload</span></a></li>
-							<li><a href="#section-linemove-5" class="icon icon-tools"><span>Settings</span></a></li>
-						</ul>
-					</nav>
-					<div class="content-wrap">
-						<section id="section-linemove-1"><p>
-						
-						<!-- 测试 -->
-						
-											
-						</p></section>
-						<section id="section-linemove-2"><p>2</p></section>
-						<section id="section-linemove-3"><p>3</p></section>
-						<section id="section-linemove-4"><p>4</p></section>
-						<section id="section-linemove-5"><p>5</p></section>
-					</div><!-- /content -->
-				</div><!-- /tabs -->
-			  </section>
-			  <script type="text/javascript" src="../js/cbpFWTabs.js"></script>
-				<script type="text/javascript">
-					(function() {
-					
-						[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
-							new CBPFWTabs( el );
-						});
-					
-					})();
-				</script>
+          	<div id="wrapper">
+          		<div id="user-basic-info" >
+                     <form  action="mysuperscript.php" autocomplete="on"> 
+                         <span id="page-header"> Modify Profile Info </span> 
+                         <p> 
+                             <label for="emailsignup" class="profileimg">Avatar</label>
+                         </p>
+                      
+                         <p>
+                             <img class="fl avator-img" id="useravatar" src="http://img.mukewang.com/58492fe600012e8e01800180-200-200.jpg" data-portrait="58492fe600012e8e01800180" width="180" height="180">
+                             
+                         </p>
+                         <p>
+                         	<button id="upload-avatar">upload</button> 
+                         </p>
+                         
+                         <p> 
+                             <label for="input-nickname" class="usernickname" >Nickname</label>
+                             <input id="input-nickname" required="required" type="text" placeholder="my phone number. eg.12345678910" />
+                         </p>
+                         
+                         
+                         <p> 
+                             <label for="emailsignup" class="youmail"> Gender</label>
+                         	  
+							<form>
+								<select id="genderbox" name="gender">
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									
+								</select>
+							</form>
+                         </p>    
+                         
+                         
+                         <p> 
+                             <label for="emailsignup" class="youmail"  >Receiving Address</label>
+                             
+                             <!--======================== Receiving Address ================================-->
+                             <input id="input-address" required="required" type="text" placeholder="" />
+                            
+                            <!-- End Receiving Address -->
+                            
+                            
+                         </p>
+                         <p> 
+                             <label for="passwordsignup" class="youpasswd" >Your New password </label>
+                             <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                         </p>
+                         <p> 
+                             <label for="passwordsignup_confirm" class="youpasswd" >Please Confirm Your Password </label>
+                             <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
+                         </p>
+                        
+	
+	                     <p >
+                         	<button id="confirm">OK</button> 
+                       
+                         </p>
+                         
+                     </form>
+                            
+               </div>
+          	
+          	
+          	</div>
+	          
 	          
           </article>
           <!--	///*///======    End article  ========= //*/// --> 
@@ -765,7 +801,8 @@ em{font-style:normal;}
                   <dd class="odd">
                     <ol>
                       <li> <a href="profile"><span class="choose-tag">Basic Profile</span> </a></li>
-                      <li> <a href="addFavor"><span class="choose-tag">Individual Favor</span></a></li>
+                      <li> <a href="security"><span class="choose-tag">Security</span> </a></li>
+                      <li> <a href="favor"><span class="choose-tag">Individual Favor</span></a></li>
                     </ol>
                   </dd>
                   <dt class="even">Routine</dt>

@@ -29,6 +29,15 @@ public class UserController {
 	
 	//-------------------------------------个人喜好 Favor-----------------------------------------
 	
+	//1.打开账户安全页面
+		@RequestMapping("/security")  
+		public String userSecurity(HttpServletRequest request, HttpServletResponse response){  
+		    return "user_security";  
+		}
+		
+		
+	//-------------------------------------个人喜好 Favor-----------------------------------------
+	
 	//1.打开喜好标签页面
 	@RequestMapping("/favor")  
 	public String toFavor(HttpServletRequest request, HttpServletResponse response){  
@@ -54,7 +63,7 @@ public class UserController {
 	//3.更新用户的喜好标签到后台数据库
 	@RequestMapping("/updateFavor")  
 	public void updateFavor(HttpServletRequest request,@RequestParam("curUserFavor") Integer[] categoryList){ 
-		
+		System.out.println("进了update");
 		for(int i = 0 ; i < categoryList.length ; i++){
 			System.out.println("-----r----" + categoryList[i]);
 		}
