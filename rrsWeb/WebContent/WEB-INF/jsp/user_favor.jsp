@@ -29,7 +29,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Favicon  -->
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
 
  <!-- CSS Style -->
 <link rel="stylesheet" href="../style.css">
@@ -777,7 +777,7 @@ em{font-style:normal;}
                   <dd class="odd">
                     <ol>
                       <li> <a href="profile"><span class="choose-tag">Basic Profile</span> </a></li>
-                      <li> <a href="addFavor"><span class="choose-tag">Individual Favor</span></a></li>
+                      <li> <a href="favor"><span class="choose-tag">Individual Favor</span></a></li>
                     </ol>
                   </dd>
                   <dt class="even">Routine</dt>

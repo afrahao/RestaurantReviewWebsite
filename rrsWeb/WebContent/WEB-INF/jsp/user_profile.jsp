@@ -324,8 +324,8 @@ em{font-style:normal;}
               <div class="dropdown jtv-currency-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#"> USD <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#"> $ - Dollar </a> </li>
-                  <li><a href="#"> £ - Pound </a> </li>
-                  <li><a href="#"> € - Euro </a> </li>
+                  <li><a href="#"> Â£ - Pound </a> </li>
+                  <li><a href="#"> â¬ - Euro </a> </li>
                 </ul>
               </div>
               <!-- End Header Currency --> 
@@ -720,7 +720,12 @@ em{font-style:normal;}
 						</ul>
 					</nav>
 					<div class="content-wrap">
-						<section id="section-linemove-1"><p>1</p></section>
+						<section id="section-linemove-1"><p>
+						
+						<!-- 测试 -->
+						
+											
+						</p></section>
 						<section id="section-linemove-2"><p>2</p></section>
 						<section id="section-linemove-3"><p>3</p></section>
 						<section id="section-linemove-4"><p>4</p></section>
@@ -747,8 +752,8 @@ em{font-style:normal;}
             <div class="block block-layered-nav">
               <div class="block-title">Personal Info</div>
               <div class="block-content">
-              	<!-- -----------------用户信息-----------------  -->
-              	<!-- 头像 -->
+              	<!-- -----------------ç¨æ·ä¿¡æ¯-----------------  -->
+              	<!-- å¤´å -->
               	<div id="div-center">
               		<div class="avatar-round"></div>
               	</div>
