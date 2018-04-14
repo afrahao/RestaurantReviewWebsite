@@ -12,4 +12,8 @@ public interface SysUserService {
      public void processActivate(String email , String validateCode)throws ServiceException, ParseException;
      public int loginCheck(String email,String password);
      public int waitTime(String email);
+     
+   //forget password
+     public int forgetpwUser(String email, String password, String validateCode);
+     public void sendValidate(String email , String validateCode);
 }

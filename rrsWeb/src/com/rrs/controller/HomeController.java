@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.Random;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,28 +81,28 @@ public class HomeController {
 		String loginkeeping = request.getParameter("loginkeeping");
 		int validation = sysUserService.loginCheck(email, password);
 		
-		//ç”¨æˆ·æœªæ³¨å†Œ
+		//莽鈥澛λ喡访ε撀β陈モ�犈�
 		if(validation == 0)
 		{
 			mav.addObject("mind", "no register");
 			mav.addObject("keepemail", email);
 			mav.setViewName("login");
 		}
-		//ç”¨æˆ·è¾“é”™å¯†ç 
+		//莽鈥澛λ喡访锯�溍┾�濃劉氓炉鈥犆犅�
 		else if(validation == 1)
 		{
 			mav.addObject("keepemail", email);
 			mav.addObject("mind", "wrong password");
 			mav.setViewName("login");
 		}
-		//ç”¨æˆ·è¾“é”™å¯†ç è¶…è¿‡5æ¬¡
+		//莽鈥澛λ喡访锯�溍┾�濃劉氓炉鈥犆犅伱垛�γ库��5忙卢隆
 		else if(validation == 3)
 		{
 			mav.addObject("keepemail", email);
 			mav.addObject("mind", "wrong password over 5 times,please wait for 60 mins.");
 			mav.setViewName("login");
 		}
-		//ç­‰å¾…æ—¶é—´ä¸è¶³
+		//莽颅鈥懊ヂ锯�γ︹�斅睹┾�斅疵ぢ嘎嵜堵�
 		else if(validation == 4)
 		{
 			int wait = sysUserService.waitTime(email);
@@ -108,10 +110,10 @@ public class HomeController {
 			mav.addObject("mind", "wait for "+Integer.toString(wait)+" seconds.");
 			mav.setViewName("login");
 		}
-		//ç™»é™†æˆåŠŸ
+		//莽鈩⒙幻┾劉鈥犆λ喡惷ヅ犈�
 		else
 		{
-			//åˆ¤æ–­ç”¨æˆ·æ˜¯å¦éœ€è¦ä¿æŒç™»é™†çŠ¶æ€
+			//氓藛陇忙鈥撀р�澛λ喡访λ溌ヂ惵γ┡撯偓猫娄聛盲驴聺忙艗聛莽鈩⒙幻┾劉鈥犆犅睹︹偓聛
 			if(loginkeeping.equals("on"))
 			{
 				response.setHeader("Access-Control-Allow-Origin","*");
@@ -120,9 +122,9 @@ public class HomeController {
 				response.setContentType("text/html;charset=utf-8");
 				response.setCharacterEncoding("utf-8");
 				Cookie cookie = new Cookie("loginuser", email);
-				//Â æœ‰æ•ˆæœŸ,ç§’ä¸ºå•ä½Â 
+				//脗聽忙艙鈥懊︹�⑺喢ε撆�,莽搂鈥櫭ぢ嘎好ヂ嶁�⒚ぢ铰嵜偮�
 				cookie.setMaxAge(3600);
-				//Â è®¾ç½®cookieÂ Â 
+				//脗聽猫庐戮莽陆庐cookie脗聽脗聽
 				response.addCookie(cookie);
 			}
 			
@@ -138,17 +140,17 @@ public class HomeController {
 		return "restaurant_info";
 	}
 
-	//²âÊÔÓÊÏäÎ¨Ò»
+	//虏芒脢脭脫脢脧盲脦篓脪禄
 	@RequestMapping(value = "/testEmail")
     public void TestEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String email = request.getParameter("email");
 		SysUser user = sysUserService.TestUserByEmail(email);
 		if(user!=null){
-			PrintWriter out = response.getWriter();    //ï¿½è¶¨ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½
-			out.print("wrong");      //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½
+			PrintWriter out = response.getWriter();    //茂驴陆猫露篓茂驴陆茂驴陆茂驴陆脦卤茂驴陆茂驴陆茂驴陆
+			out.print("wrong");      //茂驴陆茂驴陆茂驴陆茂驴陆茂驴陆茂驴陆茂驴陆脟掳茂驴陆茂驴陆
 		}
 		else{
-			PrintWriter out = response.getWriter();    //ï¿½è¶¨ï¿½ï¿½ï¿½Î±ï¿½ï¿½ï¿½
+			PrintWriter out = response.getWriter();    //茂驴陆猫露篓茂驴陆茂驴陆茂驴陆脦卤茂驴陆茂驴陆茂驴陆
 			out.print("success");
 		}
 		
@@ -165,7 +167,7 @@ public class HomeController {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");	
 			sysUserService.processregister(name, email, password);
-			mav.addObject("text", "×¢ï¿½ï¿½É¹ï¿½ï¿½ï¿½");
+			mav.addObject("text", "脳垄茂驴陆茂驴陆脡鹿茂驴陆茂驴陆茂驴陆");
 			mav.setViewName("register_success");
 			
 		} else if ("activate".equals(action)) {
@@ -184,4 +186,46 @@ public class HomeController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("/sendValidateCode")
+	public void sendValidate(HttpServletRequest request, HttpServletResponse response){
+		
+		String email = request.getParameter("email");
+		String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
+		System.out.println("验证码已经生成，为:"+verifyCode);
+		
+		System.out.println("尝试去发送验证码了。");
+		sysUserService.sendValidate(email,verifyCode);
+		
+	}
+	
+	//找回密码修改密码
+	@RequestMapping(value = "/fgpwUpdatepw")
+	public void fgpwUpdatepw(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+		String validateCode = request.getParameter("validateCode");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");	
+		System.out.println("email:"+email);
+		System.out.println("password:"+password);
+		System.out.println("validateCode:"+validateCode);
+		
+		int msg = sysUserService.forgetpwUser(email, password, validateCode);
+				
+		if (msg == 0){
+			
+			PrintWriter out = response.getWriter();    //设定传参变量
+			out.print("wrong");      //结果传到前端
+		}else if (msg == 2){
+			PrintWriter out = response.getWriter();    //设定传参变量
+			out.print("expired");     //结果传到前端
+			
+		}else if (msg == 1){
+			PrintWriter out = response.getWriter();    //设定传参变量
+			out.print("success");      			//结果传到前端
+		}
+		
+	}
+	
+	
 }

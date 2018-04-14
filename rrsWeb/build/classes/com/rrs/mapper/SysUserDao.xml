@@ -82,5 +82,29 @@
             email = #{0}
         </where>
     </select>
+    
+    <!-- 用户忘记密码 -->
+	<update id="forgetpwUser" parameterType="String">
+		UPDATE user SET password = #{1}
+		<where>
+            email = #{0}
+        </where>
+	</update>
+	
+	<!-- 忘记密码时首先储存发送给用户邮箱的验证码 -->
+	<update id="updateValidateCode" parameterType="String">
+		UPDATE user SET ValidateCode = #{1}
+		<where>
+            email = #{0}
+        </where>
+	</update>
+
+	<!-- 给用户发送邮箱验证码时储存发送时间 -->
+	<update id="updateValidateTime" >
+		UPDATE user SET valiTime = #{valiTime}
+		<where>
+            email = #{email}
+        </where>
+	</update>
    
 </mapper>
