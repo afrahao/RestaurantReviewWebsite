@@ -1,5 +1,7 @@
 package com.rrs.pojo;
 
+import java.beans.Transient;
+import java.util.Calendar;
 import java.util.Date;
 
 public class SysUser {
@@ -7,6 +9,9 @@ public class SysUser {
 	private String name;
 	private String password;
 	private String email;
+	private int status;//����״̬ 
+    private String validateCode;//������ 
+    private Date  registerTime;//ע��ʱ�� 
 	private int review_count;
 	private Date yelping_since;
 	private int useful;
@@ -25,8 +30,10 @@ public class SysUser {
 	private int compliment_funny;
 	private int compliment_writer;
 	private int compliment_photos;
-	
+	private int times;
+	private Date valiTime;
 
+	
 	public String getId() {
 		return id;
 	}
@@ -53,6 +60,25 @@ public class SysUser {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public String getValidateCode() {
+		return validateCode;
+	}
+	public void setValidateCode(String validateCode) {
+		this.validateCode = validateCode;
+	}
+	public Date getRegisterTime() {
+		return registerTime;
+	}
+	public void setRegisterTime(Date registerTime) {
+		this.registerTime = registerTime;
 	}
 	public int getReview_count() {
 		return review_count;
@@ -162,5 +188,26 @@ public class SysUser {
 	public void setCompliment_photos(int compliment_photos) {
 		this.compliment_photos = compliment_photos;
 	}
+	@Transient  
+    public Date getLastActivateTime() {  
+        Calendar cl = Calendar.getInstance();  
+        cl.setTime(registerTime);  
+        cl.add(Calendar.DATE , 2);  
+          
+        return cl.getTime();  
+    }  
+	public int getTimes() {
+		return times;
+	}
+	public void setTimes(int times) {
+		this.times = times;
+	}
 	
+	public Date getValiTime() {
+		return valiTime;
+	}
+	public void setValiTime(Date valiTime) {
+		this.valiTime = valiTime;
+	}
+      
 }

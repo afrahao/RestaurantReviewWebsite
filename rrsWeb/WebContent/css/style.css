@@ -38,6 +38,9 @@
 		18m Block: Recently Viewed
 		18n. Block: Reorder 
 		18m. Block: Banner
+		
+		----------custom-----------
+		18.1. 边栏圆形头像
 	
 	19. custom-slider
 	21. Product View
@@ -56,6 +59,10 @@
 	34. Delivery page
 	35. Data Table
 	36. Footer
+	
+	=============自定义添加的css================
+	z1.边栏圆形头像
+	z2.添加爱好标签系列
 
 
 ################################################################# */ 
@@ -2856,6 +2863,7 @@ ul.level1 {
 	font-size: 24px;
 	letter-spacing: 1px;
 	margin: 0px;
+	margin-top:5px;
 	padding: 0px 0px 5px;
 	position: relative;
 	font-family: 'Raleway', sans-serif;
@@ -4103,7 +4111,7 @@ figure.effect p {
 	padding: 0;
 }
 .sidebar .block dt {
-	font-size: 12px;
+	font-size: 16px;
 	font-weight: 600;
 	color: #333;
 	padding: 10px 0;
@@ -4136,7 +4144,7 @@ figure.effect p {
 .block-layered-nav .block-subtitle, .block-layered-nav dt {
 	color: #333;
 	font-weight: 600;
-	font-size: 12px;
+	font-size: 14px;
 }
 .block-layered-nav .currently ol {
 	border: 1px solid #ececec;
@@ -4253,7 +4261,7 @@ figure.effect p {
 .block-layered-nav dd ol li:before {
 	content: '\f105';
 	font-family: FontAwesome;
-	font-size: 14px;
+	font-size: 20px;
 	padding-right: 6px;
 	color: #444;
 }
@@ -4932,6 +4940,12 @@ ol#compare-items li.last {
 .jtv-add-banner img {
 	max-width: 100%;
 }
+
+
+
+
+
+
 /*19.  custom-slider  */
 .custom-slider {
 	margin-bottom: 35px;
@@ -8547,3 +8561,44 @@ button.subscribe:before {
 	border-collapse: separate;
 	width: 80%;
 }
+
+/* ===================自定义的css样式=================== */
+
+/* z1.侧边圆形头像 */
+.avatar-round{
+	/* box-shadow: 2px 2px 2px rgba(0,0,0,0.7); */
+	border: 5ps solid rgba(0,0,0,0.4);
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	padding: 10px;
+	background-image: url('../images/bg.jpg');
+	background-clip: padding-box;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: block;
+	border-radius: 50%;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+}
+
+/* z2.侧边用户名 */
+#user-title{
+	font-size:20px;
+	margin-top: 10px;
+	font-weight:bold;
+	margin-bottom:20px;
+}
+
+/* z3.居中div */
+#div-center{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* z4.用户侧边栏选项 */
+.block .block-content .choose-tag {
+	font-size: 14px;
+	color: #000;
+}
+
