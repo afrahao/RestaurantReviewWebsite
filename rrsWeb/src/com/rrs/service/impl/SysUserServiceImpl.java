@@ -175,10 +175,10 @@ public class SysUserServiceImpl implements SysUserService{
     	
     	System.out.println("时长是？：" + minutes); 
     	
-    	if(minutes <= 5 ){
+    	if(minutes <= 10 ){
     		//此时可以修改密码
     		if(user.getValidateCode().equals(validateCode)){	
-    			sysUserDao.forgetpwUser(email, password, validateCode);
+    			sysUserDao.forgetpwUser(email, MD5Util.encode2hex(password), validateCode);
         		msg = 1;
     		}else{
     			msg = 0;
