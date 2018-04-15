@@ -166,7 +166,7 @@
   </ul>
   <div class="jtv-top-link-mob">
     <ul class="links">
-      <li><a title="My Account" href="#">My Account</a> </li>
+      <li><a title="My Account" href="modifyUserInfo">My Account</a> </li>
       <li><a title="Wishlist" href="#">Wishlist</a> </li>
       <li><a title="Checkout" href="#">Checkout</a> </li>
       <li><a title="Blog" href="checkOut"><span>Blog</span></a> </li>
@@ -216,8 +216,8 @@
               <div class="jtv-top-links">
                 <div class="links">
                   <ul>
-                    <li> <a title="My Account" href="#"><span class="hidden-xs">My Account</span></a> </li>
-                    <li> <a title="Wishlist" href="#">Wishlist</a> </li>
+                    <li> <a title="My Account" href="security"><span class="hidden-xs">My Account</span></a> </li>
+                    <li> <a title="Change Password" href="security">Change Password</a> </li>
                     <li> <a title="Checkout" href="checkOut"><span class="hidden-xs">Checkout</span></a> </li>
                     <li>
                       <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> More <span class="caret"></span></a>

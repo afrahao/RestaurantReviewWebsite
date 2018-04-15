@@ -188,8 +188,45 @@ public class SysUserServiceImpl implements SysUserService{
     		msg = 2;
     	}
     	
-    	return msg;
+    	return msg;   	
+    }
+    
+  //modify user password
+    public int modifypassword(String email,String verification_code,String passwordsignup,String passwordsignup_confirm){
+    	SysUser user=sysUserDao.TestUserByEmail(email); //获取当前用户
+    	Date currentTime = new Date();
+    	long intervals = currentTime.getTime()-user.getValiTime().getTime();
+    	long minutes = intervals/60000;
+    	int msg = 1;
     	
+    	System.out.println("时长是？：" + minutes); 
+    	
+    	if(minutes <= 10 ){
+    		//此时可以修改密码
+    		System.out.println("hi there");
+    		System.out.println(user.getValidateCode());
+    		if(user.getValidateCode().equals(verification_code)){	
+    			    System.out.println("hi there again");
+    				sysUserDao.modifypassword(email, MD5Util.encode2hex(passwordsignup));
+            		msg = 1;		   			
+    		}else{
+    			msg = 0;
+    		}
+    	}else {
+    		//此时验证码应过期，需要提醒验证码过期。
+    		msg = 2;
+    	}
+    	
+    	return msg; 
+    }
+    
+    
+    
+    
+    //modify user profile
+    public void modifyuserprofile(String nickname,String id){
+	
+    	sysUserDao.modifyuserprofile(nickname, id);
     }
     
 }

@@ -81,6 +81,12 @@ public class HomeController {
 		String loginkeeping = request.getParameter("loginkeeping");
 		int validation = sysUserService.loginCheck(email, password);
 		
+		/***
+		 * session 添加
+		 */
+		SysUser user = sysUserService.TestUserByEmail(email);
+		request.getSession().setAttribute("currentuser", user);
+		/****/
 		//莽鈥澛λ喡访ε撀β陈モ�犈�
 		if(validation == 0)
 		{
@@ -190,6 +196,7 @@ public class HomeController {
 	@RequestMapping("/sendValidateCode")
 	public void sendValidate(HttpServletRequest request, HttpServletResponse response){
 		
+		System.out.println("sendValidateCode");
 		String email = request.getParameter("email");
 		String verifyCode = String.valueOf(new Random().nextInt(899999) + 100000);
 		System.out.println("验证码已经生成，为:"+verifyCode);
@@ -223,9 +230,66 @@ public class HomeController {
 		}else if (msg == 1){
 			PrintWriter out = response.getWriter();    //设定传参变量
 			out.print("success");      			//结果传到前端
-		}
-		
+		}			
 	}
+	
+	@RequestMapping(value = "/profile",method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView User_profile(HttpServletRequest request, HttpServletResponse response){
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("current_user", user);
+		mav.setViewName("user_profile");		
+		return mav;
+	}
+	
+	//修改个人信息
+	@RequestMapping(value = "/modifyprofile")
+	public void modify_profile(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		String nickname = request.getParameter("nickname");
+		System.out.print(nickname);
+		String id = user.getId();
+			
+		sysUserService.modifyuserprofile(nickname, id);
+		PrintWriter out = response.getWriter();    //设定传参变量
+		out.print("success");      //结果传到前端
+	}
+	
+	@RequestMapping(value = "/security",method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView User_security(HttpServletRequest request, HttpServletResponse response){
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("current_user", user);
+		mav.setViewName("user_security");		
+		return mav;
+	}
+	
+	//修改密码
+		@RequestMapping(value = "/modifypassword")
+		public void modifypassword(HttpServletRequest request, HttpServletResponse response) throws IOException{
+
+			String email = request.getParameter("email");
+			String verification_code = request.getParameter("verification_code");
+			String passwordsignup = request.getParameter("passwordsignup");
+			String passwordsignup_confirm = request.getParameter("passwordsignup_confirm");	
+			
+			
+			int msg = sysUserService.modifypassword(email,verification_code,passwordsignup, passwordsignup_confirm);
+					
+			if (msg == 0){				
+				PrintWriter out = response.getWriter();    //设定传参变量
+				out.print("error");      //结果传到前端
+			}else if (msg == 2){
+				PrintWriter out = response.getWriter();    //设定传参变量
+				out.print("outdated");     //结果传到前端
+				
+			}else if (msg == 1){
+				PrintWriter out = response.getWriter();    //设定传参变量
+				out.print("success");      			//结果传到前端
+			}
+		}
+	
+	
 	
 	
 }

@@ -23,4 +23,9 @@ public interface SysUserDao {
 	void forgetpwUser(String email, String newpassword, String validateCode);
 	void updateValidateCode(String email, String validateCode);
 	void updateValidateTime(@Param("email")String email, @Param("valiTime")Date valiTime );
+	
+	//modify user profile
+	void modifyuserprofile(String nickname,String id);
+	//modify user password
+	void modifypassword(String email,String passwordsignup);
 }
