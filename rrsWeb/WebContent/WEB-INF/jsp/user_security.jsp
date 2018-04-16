@@ -33,8 +33,8 @@
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
  <!-- CSS Style -->
-<link rel="stylesheet" type="text/css" href="../css/user-info.css" />
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" type="text/css" href="css/user-info.css" />
+<link rel="stylesheet" href="style.css">
 
 
 
@@ -312,15 +312,15 @@ em{font-style:normal;}
           <div class="row"> 
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
-              <div class="welcome-msg hidden-xs">Welcome to Petunia! </div>
-              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
+              <div class="welcome-msg hidden-xs">Welcome ${current_user.name}! </div>
+              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
+                  <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
                 </ul>
               </div>
               <!-- End Header Language --> 
@@ -329,8 +329,8 @@ em{font-style:normal;}
               <div class="dropdown jtv-currency-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-currency dropdown-toggle" href="#"> USD <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#"> $ - Dollar </a> </li>
-                  <li><a href="#"> Â£ - Pound </a> </li>
-                  <li><a href="#"> â¬ - Euro </a> </li>
+                  <li><a href="#"> ÃÂ£ - Pound </a> </li>
+                  <li><a href="#"> Ã¢ÂÂ¬ - Euro </a> </li>
                 </ul>
               </div>
               <!-- End Header Currency --> 
@@ -356,7 +356,7 @@ em{font-style:normal;}
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="#"><span class="hidden-xs">Log In</span></a> </li>
+                    <li> <a href="tologin"><span class="hidden-xs">Log In</span></a> </li>
                   </ul>
                 </div>
               </div>
@@ -378,7 +378,7 @@ em{font-style:normal;}
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
                       <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -386,7 +386,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img02.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img02.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -394,7 +394,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img04.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img04.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -405,7 +405,7 @@ em{font-style:normal;}
                     
                     <!--actions-->
                     <div class="actions">
-                      <button class="btn-checkout" title="Checkout" type="button" onClick="#"><span>Checkout</span> </button>
+                      <button class="btn-checkout" title="Checkout" type="button" onClick=""><span>Checkout</span> </button>
                       <a href="#" class="view-cart"><span>View Cart</span></a> </div>
                   </div>
                 </div>
@@ -414,7 +414,7 @@ em{font-style:normal;}
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
@@ -500,7 +500,7 @@ em{font-style:normal;}
                     </ul>
                   </div>
                   <div class="col-2">
-                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="../images/menu-img1.jpg"> </a> </div>
+                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -563,13 +563,13 @@ em{font-style:normal;}
                 </div>
                 <div class="jtv-nav-banner">
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box jtv-banner-box_last">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -672,7 +672,7 @@ em{font-style:normal;}
                     </li>
                   </ul>
                 </div>
-                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="../images/menu-img5.jpg" alt="menu img"> </div>
+                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
               </div>
             </div>
           </li>
@@ -714,19 +714,20 @@ em{font-style:normal;}
           <article class="col-main">
           	<div id="wrapper">   
                        <div id="user-security-info" >
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                            <form> 
                                 <span id="page-header"> Modify Password </span> 
                                 <p> 
                                     <label for="useremail" class="uname" >Your Email Address</label>
-                                    <input id="useremail" required="required" type="text"  disabled = "disabled"/>
+                                    <input id="useremail" required="required" type="text" value= "${current_user.email}" disabled = "disabled"/>
                                 </p>
                                 <p >
-                                	<button id="verification-btn">Verification Code</button> 
-                                	<lable id="verification-info">* error email address</lable>
+                                	
+                                	<button id="verification" onclick="validateCode()">Verification Code</button>
+                                	
                                 </p>
                                 <p> 
-                                    <label for="emailsignup" class="youmail"  > Your Verification Code</label>
-                                    <input class="verification-code-input" id="emailsignup" name="emailsignup" required="required" type="text" placeholder="received 6-number code.  eg.123456"/> 
+                                    <label for="verification_code" class="youmail"  > Your Verification Code</label>
+                                    <input class="verification-code-input" id="verification_code" name="verification_code" required="required" type="text" placeholder="received 6-number code.  eg.123456"/> 
                                     
                                 </p>
                                 <p> 
@@ -737,9 +738,8 @@ em{font-style:normal;}
                                     <label for="passwordsignup_confirm" class="youpasswd" >Please Confirm Your Password </label>
                                     <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
                                 </p>
-                                <p >
-                         			<button id="confirm">OK</button> 
-                       
+                                <p>                         			
+                                    <input type="button" value="OK" onclick="modifypassword()"/> 
                          		</p>
                                 
                             </form>
@@ -758,8 +758,8 @@ em{font-style:normal;}
             <div class="block block-layered-nav">
               <div class="block-title">Personal Info</div>
               <div class="block-content">
-              	<!-- -----------------ç¨æ·ä¿¡æ¯-----------------  -->
-              	<!-- å¤´å -->
+              	<!-- -----------------Ã§ÂÂ¨Ã¦ÂÂ·Ã¤Â¿Â¡Ã¦ÂÂ¯-----------------  -->
+              	<!-- Ã¥Â¤Â´Ã¥ÂÂ -->
               	<div id="div-center">
               		<div class="avatar-round"></div>
               	</div>
@@ -827,6 +827,66 @@ em{font-style:normal;}
   <!-- Main Container End --> 
   
   </div>
+  
+  <script>
+//发送验证码
+function validateCode(){
+	var email = document.getElementById("useremail");
+	alert(email.value);
+	$.ajax({
+        type: "get",
+        url: "sendValidateCode",
+        data: {"email": email.value},
+        success: function (data) {
+        	alert("Validate code has already been sent to your email.");
+        }
+    });
+}
+  
+function modifypassword(){
+	var email = document.getElementById("useremail");
+	var verification_code = document.getElementById("verification_code");
+	var passwordsignup = document.getElementById("passwordsignup");
+	var passwordsignup_confirm = document.getElementById("passwordsignup_confirm");
+	alert(passwordsignup.value);
+	if(passwordsignup.value != passwordsignup_confirm.value)
+		alert("Two passwords are not matched!");
+	else{
+		$.ajax({
+	        type: "get",
+	        url: "modifypassword",
+	        data: {
+	        	"email": email.value,
+	        	"verification_code":verification_code.value,
+	        	"passwordsignup":passwordsignup.value,
+	        	"passwordsignup_confirm":passwordsignup_confirm.value
+	        	   },
+	        success: function (data) {
+	        	if(data == "error")
+	        	    alert("Something wrong happened!");
+	        	else if(data =="success")
+	        		alert("The password has been modified succesfully!");
+	        	else if(data == "outdated")
+	        		alert("The verification code has been out dated");
+	        }
+	    });
+	}	
+}
+  
+  
+  
+  
+  </script>
+   <script src="js/jquery.min.js"></script>
+   <script src="js/bootstrap.min.js"></script> 
+        
+        
+    <!-- 全局js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
+  
+  
+  
   </body>
   
   

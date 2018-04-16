@@ -31,8 +31,9 @@ public class SysUser {
 	private int compliment_writer;
 	private int compliment_photos;
 	private int times;
-	
+	private Date valiTime;
 
+	
 	public String getId() {
 		return id;
 	}
@@ -200,6 +201,13 @@ public class SysUser {
 	}
 	public void setTimes(int times) {
 		this.times = times;
+	}
+	
+	public Date getValiTime() {
+		return valiTime;
+	}
+	public void setValiTime(Date valiTime) {
+		this.valiTime = valiTime;
 	}
       
 }

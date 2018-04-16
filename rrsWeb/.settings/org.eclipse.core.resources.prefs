@@ -1,9 +1,13 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/jsp/forget_password.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/index.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/login.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/restaurant_info.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/restaurant_search.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/user_favor.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/user_profile.jsp=UTF-8
+encoding//WebContent/WEB-INF/jsp/user_security.jsp=UTF-8
 encoding//WebContent/css/style.css=UTF-8
+encoding//src/com/rrs/controller/HomeController.java=UTF-8
+encoding//src/com/rrs/service/impl/SysUserServiceImpl.java=UTF-8
 encoding/<project>=UTF-8

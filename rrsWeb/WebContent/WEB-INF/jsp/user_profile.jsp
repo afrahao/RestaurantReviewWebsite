@@ -34,10 +34,10 @@
 
  <!-- CSS Style -->
 
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="style.css">
 
 
-<link rel="stylesheet" type="text/css" href="../css/user-info.css" />
+<link rel="stylesheet" type="text/css" href="css/user-info.css" />
 
 <!-- dynamic table -->
 
@@ -294,8 +294,8 @@ em{font-style:normal;}
       <li><a title="My Account" href="#">My Account</a> </li>
       <li><a title="Wishlist" href="#">Wishlist</a> </li>
       <li><a title="Checkout" href="#">Checkout</a> </li>
-      <li><a title="Blog" href="#"><span>Blog</span></a> </li>
-      <li class="last"><a title="Login" href="#"><span>Login</span></a> </li>
+      <li><a title="Blog" href="checkOut"><span>Blog</span></a> </li>
+      <li class="last"><a title="Login" href="tologin"><span>Login</span></a> </li>
     </ul>
   </div>
 </div>
@@ -312,15 +312,15 @@ em{font-style:normal;}
           <div class="row"> 
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
-              <div class="welcome-msg hidden-xs">Welcome to Petunia! </div>
-              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
+              <div class="welcome-msg hidden-xs">Welcome ${current_user.name}! </div>
+              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
-                  <li> <a href="#"> <img src="../images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
+                  <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
+                  <li> <a href="#"> <img src="images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
                 </ul>
               </div>
               <!-- End Header Language --> 
@@ -356,7 +356,7 @@ em{font-style:normal;}
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="#"><span class="hidden-xs">Log In</span></a> </li>
+                    <li> <a href="tologin"><span class="hidden-xs">Log In</span></a> </li>
                   </ul>
                 </div>
               </div>
@@ -378,7 +378,7 @@ em{font-style:normal;}
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
                       <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -386,7 +386,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img02.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img02.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -394,7 +394,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img04.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img04.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -414,7 +414,7 @@ em{font-style:normal;}
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
@@ -435,7 +435,8 @@ em{font-style:normal;}
   <nav>
     <div class="container">
       <div class="mm-toggle-wrap">
-        <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">Menu</span> </div>
+        <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">
+</span> </div>
       </div>
       <div class="nav-inner"> 
         <!-- BEGIN NAV -->
@@ -500,7 +501,7 @@ em{font-style:normal;}
                     </ul>
                   </div>
                   <div class="col-2">
-                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="../images/menu-img1.jpg"> </a> </div>
+                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -563,13 +564,13 @@ em{font-style:normal;}
                 </div>
                 <div class="jtv-nav-banner">
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box jtv-banner-box_last">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -672,7 +673,7 @@ em{font-style:normal;}
                     </li>
                   </ul>
                 </div>
-                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="../images/menu-img5.jpg" alt="menu img"> </div>
+                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
               </div>
             </div>
           </li>
@@ -714,7 +715,7 @@ em{font-style:normal;}
           <article class="col-main">
           	<div id="wrapper">
           		<div id="user-basic-info" >
-                     <form  action="mysuperscript.php" autocomplete="on"> 
+                     <form  id="user_profile"> 
                          <span id="page-header"> Modify Profile Info </span> 
                          <p> 
                              <label for="emailsignup" class="profileimg">Avatar</label>
@@ -730,20 +731,18 @@ em{font-style:normal;}
                          
                          <p> 
                              <label for="input-nickname" class="usernickname" >Nickname</label>
-                             <input id="input-nickname" required="required" type="text" placeholder="my phone number. eg.12345678910" />
+                             <input id="input-nickname" required="required" type="text" value=${current_user.name} placeholder="my nickname. eg.12345678910" />
                          </p>
                          
                          
                          <p> 
-                             <label for="emailsignup" class="youmail"> Gender</label>
-                         	  
-							<form>
+                             <label for="gender" class="gender"> Gender</label>							
 								<select id="genderbox" name="gender">
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 									
 								</select>
-							</form>
+							
                          </p>    
                          
                          
@@ -767,10 +766,11 @@ em{font-style:normal;}
                          </p>
                         
 	
-	                     <p >
-                         	<button id="confirm">OK</button> 
-                       
-                         </p>
+	                    
+                         <p> 
+							 <input type="button" value="OK" onclick="modifyuserprofile()"/> 
+					     </p>
+                        
                          
                      </form>
                             
@@ -857,8 +857,42 @@ em{font-style:normal;}
   <!-- Main Container End --> 
   
   </div>
+  <script>
+  function modifyuserprofile(){
+	  var nickname = document.getElementById("input-nickname");
+	  alert(nickname.value)
+	  $.ajax({
+	        type: "get",
+	        url: "modifyprofile",
+	        data: {"nickname": nickname.value},
+	        success: function (data) {
+	        	        	
+	        	if (data == "success"){
+	        		window.location.href = 'index';
+	        		alert("Your profile is modified successfully.");
+	        	}
+	        	else if (data == "error"){
+	        		window.location.href = 'forgetPassword';
+	        		alert("Something wrong happened");
+	        	}	        	
+	        		
+	        }
+	    });
+  
+  }
+  </script>
+  
+  
+  
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
+        
+        
+    <!-- 全局js -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
+  
+  
   </body>
-  
-  
-  
+
   </html>

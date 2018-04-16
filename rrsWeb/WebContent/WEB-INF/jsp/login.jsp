@@ -52,6 +52,9 @@
 									<p>${mind}</p>
 				
 								</p>
+								<p>
+									<a id="forget-password" href="forgetPassword">Forget password?</a>
+								</p>
                                 <p class="login button"> 
                                     <input id="buttonlogin" type="submit" value="buttonlogin"/> 
 								</p>
