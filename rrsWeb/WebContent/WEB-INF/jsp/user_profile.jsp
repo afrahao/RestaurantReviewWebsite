@@ -30,14 +30,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Favicon  -->
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="shortcut icon" type="../images/x-icon" href="../favicon.ico">
 
  <!-- CSS Style -->
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 
 
-<link rel="stylesheet" type="text/css" href="css/user-info.css" />
+<link rel="stylesheet" type="text/css" href="../css/user-info.css" />
 
 <!-- dynamic table -->
 
@@ -291,7 +291,7 @@ em{font-style:normal;}
   </ul>
   <div class="jtv-top-link-mob">
     <ul class="links">
-      <li><a title="My Account" href="#">My Account</a> </li>
+      <li><a title="My Account" href="profile">${current_user.name}</a> </li>
       <li><a title="Wishlist" href="#">Wishlist</a> </li>
       <li><a title="Checkout" href="#">Checkout</a> </li>
       <li><a title="Blog" href="checkOut"><span>Blog</span></a> </li>
@@ -312,15 +312,15 @@ em{font-style:normal;}
           <div class="row"> 
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
-              <div class="welcome-msg hidden-xs">Welcome ${current_user.name}! </div>
-              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
+              <div class="welcome-msg hidden-xs">Welcome ${current_user.name} ! </div>
+              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
+                  <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
                 </ul>
               </div>
               <!-- End Header Language --> 
@@ -341,7 +341,7 @@ em{font-style:normal;}
               <div class="jtv-top-links">
                 <div class="links">
                   <ul>
-                    <li> <a title="My Account" href="#"><span class="hidden-xs">My Account</span></a> </li>
+                    <li> <a title="My Account" href="profile"><span class="hidden-xs">${current_user.name}</span></a> </li>
                     <li> <a title="Wishlist" href="#">Wishlist</a> </li>
                     <li> <a title="Checkout" href="#"><span class="hidden-xs">Checkout</span></a> </li>
                     <li>
@@ -356,7 +356,7 @@ em{font-style:normal;}
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="tologin"><span class="hidden-xs">Log In</span></a> </li>
+                    <%-- <li> <a href="tologin"><span class="hidden-xs">${current_user.name}</span></a> </li> --%>
                   </ul>
                 </div>
               </div>
@@ -378,7 +378,7 @@ em{font-style:normal;}
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
                       <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img01.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -386,7 +386,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img02.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img02.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -394,7 +394,7 @@ em{font-style:normal;}
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img04.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img04.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -414,7 +414,7 @@ em{font-style:normal;}
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
@@ -501,7 +501,7 @@ em{font-style:normal;}
                     </ul>
                   </div>
                   <div class="col-2">
-                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
+                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="../images/menu-img1.jpg"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -564,19 +564,19 @@ em{font-style:normal;}
                 </div>
                 <div class="jtv-nav-banner">
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img2.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img3.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box jtv-banner-box_last">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img4.jpg" alt="Handbag"> </a> </div>
                   </div>
                 </div>
               </div>
             </div>
           </li>
-          <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Flowers</span></a>
+          <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Dishes</span></a>
             <div class="jtv-menu-block-wrapper">
               <div class="jtv-menu-block-wrapper2">
                 <div class="nav-block jtv-nav-block-center">
@@ -673,7 +673,7 @@ em{font-style:normal;}
                     </li>
                   </ul>
                 </div>
-                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
+                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="../images/menu-img5.jpg" alt="menu img"> </div>
               </div>
             </div>
           </li>
@@ -716,7 +716,7 @@ em{font-style:normal;}
           	<div id="wrapper">
           		<div id="user-basic-info" >
                      <form  id="user_profile"> 
-                         <span id="page-header"> Modify Profile Info </span> 
+                         <!-- <span id="page-header"> Modify Profile Info </span> 
                          <p> 
                              <label for="emailsignup" class="profileimg">Avatar</label>
                          </p>
@@ -727,7 +727,7 @@ em{font-style:normal;}
                          </p>
                          <p>
                          	<button id="upload-avatar">upload</button> 
-                         </p>
+                         </p> -->
                          
                          <p> 
                              <label for="input-nickname" class="usernickname" >Nickname</label>
@@ -791,11 +791,12 @@ em{font-style:normal;}
               	<!-- -----------------ç¨æ·ä¿¡æ¯-----------------  -->
               	<!-- å¤´å -->
               	<div id="div-center">
-              		<div class="avatar-round"></div>
+              	<!-- avatar -->
+              		<!-- <div class="avatar-round"></div> -->
               	</div>
               	
               	
-                <user-name-p id="user-title">Kevin</user-name-p>
+                <user-name-p id="user-title">${current_user.name}</user-name-p>
                 <dl id="narrow-by-list">
                   <dt class="odd">Individual</dt>
                   <dd class="odd">
@@ -811,40 +812,10 @@ em{font-style:normal;}
                       <li> <a class="choose-tag" href="#">"Like" Restaurant</a></li>
                       <li> <a class="choose-tag" href="#">My Comments</a></li>
                       <li> <a class="choose-tag" href="#">My Coupons</a></li>
-                      <li> <a href="#">Esbeda</a></li>
+                      
                     </ol>
                   </dd>
-                  <dt class="odd">Handbag Material</dt>
-                  <dd class="odd">
-                    <ol class="bag-material">
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Beaded</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Canvas</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Velvet</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Rubber</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Leather</a></li>
-                    </ol>
-                  </dd>
-                  <dt class="odd">Color</dt>
-                  <dd class="odd">
-                    <ol>
-                      <li> <a href="#">Green</a> (1) </li>
-                      <li> <a href="#">White</a> (5) </li>
-                      <li> <a href="#">Black</a> (5) </li>
-                      <li> <a href="#">Gray</a> (4) </li>
-                      <li> <a href="#">Dark Gray</a> (3) </li>
-                      <li> <a href="#">Blue</a> (1) </li>
-                    </ol>
-                  </dd>
+                  
                 </dl>
               </div>
             </div>
@@ -884,13 +855,13 @@ em{font-style:normal;}
   
   
   
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script> 
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script> 
         
         
     <!-- 全局js -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script> 
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script> 
   
   
   </body>

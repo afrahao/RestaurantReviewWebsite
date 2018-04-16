@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-    账号激活成功，点击这里去登录！<!-- 加一个我们登录界面的链接 -->
+    <a href="login">Activating Succeed! Click Here To Login!</a><!-- 加一个我们登录界面的链接 -->
   </body>
 </html>

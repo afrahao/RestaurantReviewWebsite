@@ -21,6 +21,7 @@ import com.rrs.service.SysUserService;
 import com.rrs.util.CookieUtils;
 import com.rrs.util.ServiceException;
 
+
 @Controller
 public class HomeController {
 	@Autowired
@@ -135,7 +136,8 @@ public class HomeController {
 			}
 			
 			mav.addObject("loginuser", email);
-			mav.setViewName("index");
+			//改了跳转到个人信息页面
+			mav.setViewName("redirect:/user/profile");
 		}
 		return mav;
 	}

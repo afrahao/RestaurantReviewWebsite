@@ -56,7 +56,7 @@
 									<a id="forget-password" href="forgetPassword">Forget password?</a>
 								</p>
                                 <p class="login button"> 
-                                    <input id="buttonlogin" type="submit" value="buttonlogin"/> 
+                                    <input id="buttonlogin" type="submit" value="Login"/> 
 								</p>
                                	<p class="change_link">
 
