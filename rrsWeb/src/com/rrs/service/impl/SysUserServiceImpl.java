@@ -37,7 +37,7 @@ public class SysUserServiceImpl implements SysUserService{
        sysUserDao.regesterUser(name,email,MD5Util.encode2hex(password),validateCode);  
        
       ///锟绞硷拷锟斤拷锟斤拷锟斤拷  
-        StringBuffer sb=new StringBuffer("锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷蛹锟斤拷锟斤拷撕牛锟�48小时锟斤拷效锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷注锟斤拷锟剿号ｏ拷锟斤拷锟斤拷只锟斤拷使锟斤拷一锟轿ｏ拷锟诫尽锟届激锟筋！</br>");  
+        StringBuffer sb=new StringBuffer("点击下面链接激活账号，48小时生效，否则重新注册账号，链接只能使用一次，请尽快激活！</br>");  
         sb.append("<a href=\"http://localhost:8013/rrsWeb/register?action=activate&email=");  
         sb.append(email);   
         sb.append("&validateCode=");
@@ -50,7 +50,7 @@ public class SysUserServiceImpl implements SysUserService{
           
      
         SendEmail.send(email, sb.toString());  
-        System.out.println("锟斤拷锟斤拷锟绞硷拷锟斤拷");  
+        System.out.println("发送邮件");  
           
     }  
       
@@ -71,15 +71,15 @@ public class SysUserServiceImpl implements SysUserService{
                     if(validateCode.equals(user.getValidateCode())) {    
                         sysUserDao.updateUserStatus(email);  
                     } else {    
-                        throw new ServiceException("锟斤拷锟斤拷锟诫不锟斤拷确");    
+                        throw new ServiceException("激活码不正确");    
                      }    
-                 } else { throw new ServiceException("锟斤拷锟斤拷锟斤拷锟窖癸拷锟节ｏ拷");    
+                 } else { throw new ServiceException("激活码已过期");    
                  }    
              } else {  
-                throw new ServiceException("锟斤拷锟斤拷锟窖硷拷锟筋，锟斤拷锟铰硷拷锟�");    
+                throw new ServiceException("邮箱已激活，请登录！");    
              }    
          } else {  
-             throw new ServiceException("锟斤拷锟斤拷锟斤拷未注锟结（锟斤拷锟斤拷锟街凤拷锟斤拷锟斤拷冢锟斤拷锟�");    
+             throw new ServiceException("该邮箱未注册（邮箱地址不存在）！");    
          }  
             
     }

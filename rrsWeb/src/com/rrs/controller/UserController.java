@@ -57,8 +57,11 @@ public class UserController {
 	@RequestMapping(value = "/profile",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView User_profile(HttpServletRequest request, HttpServletResponse response){
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		SysUser currentuser = sysUserService.TestUserByEmail(user.getEmail());
+		request.getSession().setAttribute("currentuser", currentuser);		
+		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("current_user", user);
+		mav.addObject("current_user", currentuser);
 		mav.setViewName("user_profile");		
 		return mav;
 	}
@@ -67,6 +70,7 @@ public class UserController {
 	@RequestMapping(value = "/modifyprofile")
 	public void modify_profile(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+					
 		String nickname = request.getParameter("nickname");
 		System.out.print(nickname);
 		String id = user.getId();
