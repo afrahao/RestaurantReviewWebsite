@@ -45,7 +45,7 @@ public class HomeController {
 			email = cookie.getValue();
 		}
 		mav.addObject("loginuser", email);
-		mav.setViewName("index");
+		mav.setViewName("map");
 		return mav;
 	}
 	

@@ -8,7 +8,7 @@ import com.rrs.pojo.SysUser;
 
 public interface SysUserDao {
 
-	void regesterUser(String name, String email, String password,String ValidateCode);
+	void regesterUser(String id,String name, String email, String password,String ValidateCode);
 	SysUser TestUserByEmail(String email);
 	void updateUserStatus(String email);
 	SysUser checkEmail(String email);
