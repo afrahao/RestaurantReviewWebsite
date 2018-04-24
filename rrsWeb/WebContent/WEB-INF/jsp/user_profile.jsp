@@ -831,7 +831,7 @@ em{font-style:normal;}
   <script>
   function modifyuserprofile(){
 	  var nickname = document.getElementById("input-nickname");
-	  alert(nickname.value)
+	  
 	  $.ajax({
 	        type: "get",
 	        url: "modifyprofile",
@@ -839,7 +839,8 @@ em{font-style:normal;}
 	        success: function (data) {
 	        	        	
 	        	if (data == "success"){
-	        		window.location.href = 'index';
+	        		window.location.href = 'profile';
+	        		//window.location.reload();
 	        		alert("Your profile is modified successfully.");
 	        	}
 	        	else if (data == "error"){

@@ -12,11 +12,17 @@ public interface SysUserDao {
 	SysUser TestUserByEmail(String email);
 	void updateUserStatus(String email);
 	SysUser checkEmail(String email);
+	
+	//核对密码
 	SysUser checkPassword(String email, String password);
 	int checkLoginTime(String email);
+	//增加输入密码错误次数
 	void updateTimes(String email);
+	//更新登陆时间
 	void updateTime(String email);
+	//重置输入密码错误次数
 	void resetTimes(String email);
+	//获取密码输入错误次数
 	int getTimes(String email);
 	
 	//forget password
