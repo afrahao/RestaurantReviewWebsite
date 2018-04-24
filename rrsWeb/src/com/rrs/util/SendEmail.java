@@ -54,7 +54,7 @@ public class SendEmail {
             //Set message attributes  
             msg.setFrom(new InternetAddress(FROM));  
             InternetAddress[] address = {new InternetAddress(toEmail)};   
-            msg.setSubject("²ÍÌüÍÆ¼öÏµÍ³×¢²áÓÊÏä");  
+            msg.setSubject("rrsæ³¨å†Œ");  
             msg.setSentDate(new Date());  
             //msg.addRecipient(Message.RecipientType.CC, new InternetAddress(FROM));
             msg.setContent(content , "text/html;charset=utf-8");  
