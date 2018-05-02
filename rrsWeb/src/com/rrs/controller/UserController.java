@@ -33,24 +33,24 @@ public class UserController {
 	
 	//-------------------------------------个人信息 Info-----------------------------------------
 	
-	//1.打开个人信息页面
-	@RequestMapping("/profile")  
-	public String userProfile(HttpServletRequest request, HttpServletResponse response){  
-
-	    return "user_profile";  
-	}
-	
-	
-	//2.加载用户的信息页面上显示
-	@RequestMapping("/initProfile")  
-	public String userSecurity(Integer userId){  
-		//现在返回的是一个字符串
-		//这里可能需要返回一个User类？（但是现在还没有user类）
-		
-		
-	    return "user";  
-	}
-	
+//	//1.打开个人信息页面
+//	@RequestMapping("/profile")  
+//	public String userProfile(HttpServletRequest request, HttpServletResponse response){  
+//
+//	    return "user_profile";  
+//	}
+//	
+//	
+//	//2.加载用户的信息页面上显示
+//	@RequestMapping("/initProfile")  
+//	public String userSecurity(Integer userId){  
+//		//现在返回的是一个字符串
+//		//这里可能需要返回一个User类？（但是现在还没有user类）
+//		
+//		
+//	    return "user";  
+//	}
+//	
 
 	
 
