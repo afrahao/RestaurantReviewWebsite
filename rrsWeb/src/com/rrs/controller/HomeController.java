@@ -290,17 +290,5 @@ public class HomeController {
 				out.print("success");      			//结果传到前端
 			}
 		}
-	
 		
-		@RequestMapping(value = "/security",method = { RequestMethod.GET, RequestMethod.POST })
-		public ModelAndView User_security(HttpServletRequest request, HttpServletResponse response){
-			SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
-			ModelAndView mav = new ModelAndView();
-			mav.addObject("current_user", user);
-			mav.setViewName("user_security");		
-			return mav;
-		}
-	
-	
-	
 }

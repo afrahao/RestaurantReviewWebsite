@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -17,10 +18,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Favicon  -->
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="shortcut icon" type="../image/x-icon" href="../favicon.ico">
 
 <!-- CSS Style -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 </head>
 <body class="category-page">
 <!-- mobile menu -->
@@ -173,15 +174,15 @@
           <div class="row"> 
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
-              <div class="welcome-msg hidden-xs">Welcome to Petunia! </div>
-              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
+              <div class="welcome-msg hidden-xs">Welcome! </div>
+              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
+                  <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
                 </ul>
               </div>
               <!-- End Header Language --> 
@@ -217,7 +218,7 @@
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="#"><span class="hidden-xs">Log In</span></a> </li>
+                    <li> <a href="#"><span class="hidden-xs">${current_user.name}</span></a> </li>
                   </ul>
                 </div>
               </div>
@@ -239,7 +240,7 @@
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
                       <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img01.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -247,7 +248,7 @@
                         </div>
                       </li>
                       <li class="item">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img02.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img02.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -255,7 +256,7 @@
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img04.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img04.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -275,14 +276,14 @@
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
             <div class="search-box">
               <form action="cat" method="POST" id="search_mini_form" name="Categories">
                 <input type="text" placeholder="Search here..." maxlength="70" name="search" id="search">
-                <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+                <button type="button" class="search-btn-bg" onclick="searchShop()"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
               </form>
             </div>
           </div>
@@ -362,7 +363,7 @@
                     </ul>
                   </div>
                   <div class="col-2">
-                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
+                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="../images/menu-img1.jpg"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -425,13 +426,13 @@
                 </div>
                 <div class="jtv-nav-banner">
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img2.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img3.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box jtv-banner-box_last">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img4.jpg" alt="Handbag"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -534,7 +535,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
+                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="../images/menu-img5.jpg" alt="menu img"> </div>
               </div>
             </div>
           </li>
@@ -574,9 +575,9 @@
         <div class="col-xs-12">
           <ul>
             <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
-            <li> <a href="shop_grid.html" title="">Occasion</a> <span>/ </span> </li>
-            <li> <a href="shop_grid.html" title="">Corporate</a> <span>/</span> </li>
-            <li> <strong>Annual plants</strong> </li>
+            <!-- <li> <a href="shop_grid.html" title="">Occasion</a> <span>/ </span> </li>
+            <li> <a href="shop_grid.html" title="">Corporate</a> <span>/</span> </li> -->
+            <li> <strong>Search</strong> </li>
           </ul>
         </div>
       </div>
@@ -589,45 +590,46 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-9 col-xs-12 col-sm-push-3">
-          <div class="category-description std">
+        <!-- 此处注释的是轮播图 -->
+          <!-- <div class="category-description std">
             <div class="slider-items-products">
               <div id="category-desc-slider" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col1 owl-carousel owl-theme"> 
                   
-                  <!-- Item -->
-                  <div class="item"> <a href="#"><img alt="" src="images/category-img1.jpg"></a>
+                  Item
+                  <div class="item"> <a href="#"><img alt="" src="../images/category-img1.jpg"></a>
                     <div class="cat-img-title cat-bg cat-box">
                       <div class="small-tag">Flowers 2018</div>
                       <h2 class="cat-heading">New special collection</h2>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                     </div>
                   </div>
-                  <!-- End Item --> 
+                  End Item 
                   
-                  <!-- Item -->
-                  <div class="item"> <a href="#"><img alt="" src="images/category-img2.jpg"></a>
+                  Item
+                  <div class="item"> <a href="#"><img alt="" src="../images/category-img2.jpg"></a>
                     <div class="cat-img-title cat-bg cat-box">
                       <div class="small-tag">Big Sale</div>
                       <h2 class="cat-heading">Birthday Flowers</h2>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                     </div>
-                    <!-- End Item --> 
+                    End Item 
                     
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
           <article class="col-main">
-            <h2 class="page-heading"> <span class="page-heading-title">Love & Romance</span> </h2>
+            <h2 class="page-heading"> <span class="page-heading-title">Restaurants</span> </h2>
             <div class="toolbar">
               <div class="row">
                 <div class="col-md-4 col-sm-5">
                   <div class="btn-group">
                     <div id="grid-view" class="btn btn-default active" data-toggle="tooltip" title="Grid"><a href="shop_grid.html"><i class="fa fa-th"></i></a></div>
-                    <div id="list-view" class="btn btn-default" data-toggle="tooltip" title="List"><a href="shop_list.html"><i class="fa fa-th-list"></i></a></div>
+                    
                   </div>
-                  <a href="#" id="compare-total">Product Compare (3)</a> </div>
+                  </div>
                 <div class="col-sm-2 text-right sort-by">
                   <label class="control-label" for="input-sort">Sort By:</label>
                 </div>
@@ -660,470 +662,27 @@
             </div>
             <div class="category-products">
               <ul class="products-grid">
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img21.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$155.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img20.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img19.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img18.jpg"> </a>
-                        <div class="new-label new-top-left">new</div>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img17.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img16.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img15.jpg"> </a>
-                        <div class="new-label new-top-left">new</div>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img14.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img13.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img12.jpg"> </a>
-                        <div class="new-label new-top-left">new</div>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img11.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img10.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img06.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img09.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img08.jpg"> </a>
-                        <div class="new-label new-top-left">new</div>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+     
+                <!-- Fill with shop grid -->
+               
               </ul>
             </div>
             <div class="toolbar">
               <div class="row">
-                <div class="col-sm-6 text-left">
+                <div class=" text-left">
                   <ul class="pagination">
-                    <li class="active"><span>1</span></li>
-                    <li><a href="#">2</a></li>
+                  	<%-- <li class="active"><span>1</span></li>
+                  	<c:forEach var="j" begin="2" end="${pageNum}">
+                  		<li><a href="#">${j}</a></li>
+                  	
+                  	</c:forEach>
+                    <!-- <li class="active"><span>1</span></li>
+                    <li><a href="#">2</a></li> -->
                     <li><a href="#">&gt;</a></li>
-                    <li><a href="#">&gt;|</a></li>
+                    <li><a href="#">&gt;|</a></li> --%>
                   </ul>
                 </div>
-                <div class="col-sm-6 text-right">Showing 1 to 15 of 25 (2 Pages)</div>
+                
               </div>
             </div>
           </article>
@@ -1132,59 +691,38 @@
         <div class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
           <aside class="sidebar">
             <div class="block block-layered-nav">
-              <div class="block-title">Shop By</div>
-              <div class="block-content">
-                <p class="block-subtitle">Shopping Options</p>
+              <%--<div class="block-title">Personal Info</div>
+               <div class="block-content">
+              	<!-- -----------------用户信息-----------------  -->
+              	<!-- 头像 -->
+              	<div id="div-center">
+              		<!-- <div class="avatar-round"></div> -->
+              	</div>
+              	
+              	
+                <p id="user-title">${current_user.name}</p>
                 <dl id="narrow-by-list">
-                  <dt class="odd">Price</dt>
+                  <dt class="odd">Individual</dt>
                   <dd class="odd">
                     <ol>
-                      <li> <a href="#"><span class="price">$0.00</span> - <span class="price">$99.99</span></a> (6) </li>
-                      <li> <a href="#"><span class="price">$100.00</span> and above</a> (6) </li>
+                      <li> <a href="profile"><span class="choose-tag">Basic Profile</span> </a></li>
+                      <li> <a href="security"><span class="choose-tag">Security</span> </a></li>
+                      <li> <a href="favor"><span class="choose-tag">Individual Favor</span></a></li>
                     </ol>
                   </dd>
-                  <dt class="even">Manufacturer</dt>
+                  <dt class="even">Routine</dt>
                   <dd class="even">
                     <ol>
-                      <li> <a href="#">Colorido</a> (20) </li>
-                      <li> <a href="#">Adidas</a> (25) </li>
-                      <li> <a href="#">Barisa Epic</a> (8) </li>
-                      <li> <a href="#">Esbeda</a> (5) </li>
+                      <li> <a class="choose-tag" href="#">"Like" Restaurant</a></li>
+                      <li> <a class="choose-tag" href="#">My Comments</a></li>
+                      <li> <a class="choose-tag" href="#">My Coupons</a></li>
                     </ol>
                   </dd>
-                  <dt class="odd">Handbag Material</dt>
-                  <dd class="odd">
-                    <ol class="bag-material">
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Beaded</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Canvas</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Velvet</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Rubber</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Leather</a></li>
-                    </ol>
-                  </dd>
-                  <dt class="odd">Color</dt>
-                  <dd class="odd">
-                    <ol>
-                      <li> <a href="#">Green</a> (1) </li>
-                      <li> <a href="#">White</a> (5) </li>
-                      <li> <a href="#">Black</a> (5) </li>
-                      <li> <a href="#">Gray</a> (4) </li>
-                      <li> <a href="#">Dark Gray</a> (3) </li>
-                      <li> <a href="#">Blue</a> (1) </li>
-                    </ol>
-                  </dd>
+                  
                 </dl>
-              </div>
+              </div> --%>
+              
+              
             </div>
             <div class="block product-price-range ">
               <div class="block-title">Price</div>
@@ -1223,14 +761,14 @@
                 </div>
                 <p class="block-subtitle">Recently added item(s) </p>
                 <ul>
-                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="images/products/img10.jpg" alt="Product Title Here"></a>
+                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="../images/products/img10.jpg" alt="Product Title Here"></a>
                     <div class="product-details">
                       <div class="access"> <a href="#" title="Remove This Item" class="jtv-btn-remove"> <span class="icon"></span> Remove </a> </div>
                       <strong>1</strong> x <span class="price">$99.99</span>
                       <p class="product-name"> <a href="#">Product Title Here</a> </p>
                     </div>
                   </li>
-                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="images/products/img01.jpg" alt="Product Title Here"></a>
+                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="../images/products/img01.jpg" alt="Product Title Here"></a>
                     <div class="product-details">
                       <div class="access"> <a href="#" title="Remove This Item" class="jtv-btn-remove"> <span class="icon"></span> Remove </a> </div>
                       <strong>1</strong> x <span class="price">$88.00</span>
@@ -1239,7 +777,7 @@
                       <!--access clearfix--> 
                     </div>
                   </li>
-                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="images/products/img05.jpg" alt="Product Title Here"></a>
+                  <li class="item"> <a href="#" title="Product Title Here" class="product-image"><img src="../images/products/img05.jpg" alt="Product Title Here"></a>
                     <div class="product-details">
                       <div class="access"> <a href="#" title="Remove This Item" class="jtv-btn-remove"> <span class="icon"></span> Remove </a> </div>
                       <strong>1</strong> x <span class="price">$98.00</span>
@@ -1251,106 +789,7 @@
                 </ul>
               </div>
             </div>
-            <div class="block block-compare">
-              <div class="block-title ">Compare Products (2)</div>
-              <div class="block-content">
-                <ol id="compare-items">
-                  <li class="item">
-                    <input type="hidden" value="2173" class="compare-item-id">
-                    <a class="jtv-btn-remove" title="Remove This Item" href="#"></a> <a href="#" class="product-name"><i class="fa fa-angle-right"></i>Product Title Here</a> </li>
-                  <li class="item">
-                    <input type="hidden" value="2174" class="compare-item-id">
-                    <a class="jtv-btn-remove" title="Remove This Item" href="#"></a> <a href="#" class="product-name"><i class="fa fa-angle-right"></i>Product Title Here</a> </li>
-                  <li class="item">
-                    <input type="hidden" value="2174" class="compare-item-id">
-                    <a class="jtv-btn-remove" title="Remove This Item" href="#"></a> <a href="#" class="product-name"><i class="fa fa-angle-right"></i>Product Title Here</a> </li>
-                </ol>
-                <div class="ajax-checkout">
-                  <button type="submit" title="Submit" class="button button-compare"><span>Compare</span></button>
-                  <button type="submit" title="Submit" class="button button-clear"><span>Clear</span></button>
-                </div>
-              </div>
-            </div>
-            <div class="custom-slider">
-              <div>
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                  </ol>
-                  <div class="carousel-inner">
-                    <div class="item active"><img src="images/slide3.jpg" alt="slide3">
-                      <div class="carousel-caption">
-                        <h3><a title=" Sample Product" href="#">Big sale</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <a class="link" href="#">Shop Now</a></div>
-                    </div>
-                    <div class="item"><img src="images/slide1.jpg" alt="slide1">
-                      <div class="carousel-caption">
-                        <h3><a title=" Sample Product" href="#">Bag collection</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </div>
-                    </div>
-                    <div class="item"><img src="images/slide2.jpg" alt="slide2">
-                      <div class="carousel-caption">
-                        <h3><a title=" Sample Product" href="#">New special</a></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <a class="left carousel-control" href="#" data-slide="prev"> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#" data-slide="next"> <span class="sr-only">Next</span> </a></div>
-              </div>
-            </div>
-            <div class="block block-list block-viewed">
-              <div class="block-title"> Recently Viewed </div>
-              <div class="block-content">
-                <ol id="recently-viewed-items">
-                  <li class="item odd">
-                    <p class="product-name"><a href="#"><i class="fa fa-angle-right"></i>Product Title Here</a></p>
-                  </li>
-                  <li class="item even">
-                    <p class="product-name"><a href="#"><i class="fa fa-angle-right"></i>Product Title Here</a></p>
-                  </li>
-                  <li class="item last odd">
-                    <p class="product-name"><a href="#"><i class="fa fa-angle-right"></i>Product Title Here</a></p>
-                  </li>
-                </ol>
-              </div>
-            </div>
-            <div class="block block-poll">
-              <div class="block-title">Community Poll </div>
-              <form id="pollForm" action="#" method="post" onSubmit="return validatePollAnswerIsSelected();">
-                <div class="block-content">
-                  <p class="block-subtitle">What is your favorite color</p>
-                  <ul id="poll-answers">
-                    <li class="odd">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_1" value="1">
-                      <span class="label">
-                      <label for="vote_1">Green</label>
-                      </span> </li>
-                    <li class="even">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_2" value="2">
-                      <span class="label">
-                      <label for="vote_2">Red</label>
-                      </span> </li>
-                    <li class="odd">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_3" value="3">
-                      <span class="label">
-                      <label for="vote_3">Black</label>
-                      </span> </li>
-                    <li class="last even">
-                      <input type="radio" name="vote" class="radio poll_vote" id="vote_4" value="4">
-                      <span class="label">
-                      <label for="vote_4">Pink</label>
-                      </span> </li>
-                  </ul>
-                  <div class="actions">
-                    <button type="submit" title="Vote" class="button button-vote"><span>Vote</span></button>
-                  </div>
-                </div>
-              </form>
-            </div>
+
             <div class="block block-tags">
               <div class="block-title"> Popular Tags</div>
               <div class="block-content">
@@ -1373,43 +812,43 @@
           <div class="slider-items slider-width-col6"> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand1.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand1.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand2.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand2.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand3.png" alt="Image"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand3.png" alt="Image"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand4.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand4.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand5.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand5.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand6.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand6.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand7.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand7.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand8.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand8.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand9.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand9.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand10.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand10.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
           </div>
@@ -1528,7 +967,7 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-          <div style="text-align:center"> <a href="index.html"><img src="images/footer-logo.png" alt="logo"> </a> </div>
+          <div style="text-align:center"> <a href="index.html"><img src="../images/footer-logo.png" alt="logo"> </a> </div>
           <address>
           <p> <i class="fa fa-map-marker"></i>Company, 12/34 - West 21st Street, New York, USA </p>
           <p><i class="fa fa-mobile"></i><span>+ (800) 0123 456 789</span> </p>
@@ -1543,10 +982,10 @@
           <div class="col-sm-5 col-xs-12 coppyright">Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="http://www.17sucai.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></div>
           <div class="col-sm-7 col-xs-12 payment-accept">
             <ul>
-              <li> <a href="#"><img src="images/payment-1.png" alt="Payment Card"></a> </li>
-              <li> <a href="#"><img src="images/payment-2.png" alt="Payment Card"></a> </li>
-              <li> <a href="#"><img src="images/payment-3.png" alt="Payment Card"></a> </li>
-              <li> <a href="#"><img src="images/payment-4.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-1.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-2.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-3.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-4.png" alt="Payment Card"></a> </li>
             </ul>
           </div>
         </div>
@@ -1557,25 +996,151 @@
 
 <!-- End Footer --> 
 
+
+
+
 <!-- jquery js --> 
-<script src="js/jquery.min.js"></script> 
+<script src="../js/jquery.min.js"></script> 
 
 <!-- bootstrap js --> 
-<script src="js/bootstrap.min.js"></script> 
+<script src="../js/bootstrap.min.js"></script> 
 
 <!-- jquery-ui js --> 
-<script src="js/jquery-ui.js"></script> 
+<script src="../js/jquery-ui.js"></script> 
 <!-- owl.carousel.min js --> 
-<script src="js/owl.carousel.min.js"></script> 
+<script src="../js/owl.carousel.min.js"></script> 
 
 <!-- jtv-jtv-mobile-menu js --> 
-<script src="js/jtv-mobile-menu.js"></script> 
+<script src="../js/jtv-mobile-menu.js"></script> 
 
 <!-- countdown js --> 
-<script src="js/countdown.js"></script> 
+<script src="../js/countdown.js"></script> 
 
 <!-- main js --> 
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
+
+<script>
+
+var curGrid;
+var curGridNum = 0;
+
+
+$().ready( function() {
+	
+ 	$.ajax({
+	url: "../shop/showGrid",
+	type: "POST",
+	data: {
+		"page":1,
+		"num":15,
+	},  
+	success: function(res){
+		curGrid = JSON.parse(res);
+		
+		showGrid(curGrid);
+
+		console.log(curGrid[1].stars);
+	},
+	error: function(err){
+		console.error(err);
+		console.log("bbb");
+	}
+	}); 	
+} ); 
+
+
+function showGrid(curGrid){
+	
+	$(".products-grid li").remove();
+	$(".pagination li").remove();
+	
+	var htmlStr = "";
+	var pageStr = "";
+	
+	for(var i = 0 ; i<curGrid.length/15 ; i++){
+		if(i == 0){
+	    	pageStr += "<li class=\"active\" href=\"#\"><span>1</span></li>"
+	    } else {
+	    	pageStr += "<li herf=\"#\"><span>"+(i+1)+"</span></li>"
+	    }
+	}
+	
+	
+	for(var i =0; i<curGrid.length; i++){
+		
+	    var obj = curGrid[i];
+
+	    htmlStr += "<li class=\"item col-lg-4 col-md-4 col-sm-4 col-xs-6\">";
+	    htmlStr += "<div class=\"item-inner\">"
+	    htmlStr += "<div class=\"item-img\">";
+	    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\"  href=\"single_product.html\">";
+	    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\"" +obj.img+".jpg\">";
+	    htmlStr += "</a>";
+	    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
+	    htmlStr += "</div>";
+	    htmlStr += "<div>";
+	    htmlStr += " <div class=\"item-info\">";
+	    htmlStr += "<div class=\"info-inner\">";
+	    htmlStr += "<div class=\"item-title\"> <a  href=\"single_product.html\" title=\""+obj.name + "\">" + obj.name +"</a> </div>";
+	    htmlStr += "<div class=\"item-content\">";
+	    htmlStr += "<div class=\"rating\">";
+	    
+	    var s = Math.floor(obj.stars);
+	    for(var j = 0 ; j < s ; j++){
+	    	htmlStr += "<i class=\"fa fa-star\"></i>";
+	    }
+	    for(var j = s ; j < 5 ; j++){
+	    	htmlStr += "<i class=\"fa fa-star-o\"></i>";
+	    }    
+	    htmlStr += "</div>";
+	    htmlStr += "<div class=\"item-price\">";
+	    htmlStr += "<div class=\"price-box\"> <span class=\"regular-price\"> <span class=\"price\" >"+ obj.review_count +" reviews </span> </span> </div>";
+	    htmlStr += "</div>";
+	    htmlStr += "</div>";
+	    htmlStr += "</div>";
+	    htmlStr += "</div>";
+	    htmlStr += "</div>";
+	    htmlStr += "</li>";
+	    
+	    
+	    //$("#tag_"+initUserFavor[i].toString()).attr("class","cur");
+	    
+	
+	};
+	
+	
+	pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
+	
+	$(".products-grid").append(htmlStr); 
+	$(".pagination").append(pageStr); 
+	
+	
+}
+
+function searchShop(){
+	var key=document.getElementById("search").value;
+	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		type: "POST",
+		data: {
+			
+		},  
+		success: function(res){
+			curGrid = JSON.parse(res);
+			
+			showGrid(curGrid);
+
+			console.log(curGrid[1].stars);
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 
+}
+
+</script>
+
 </body>
 </html>
 
