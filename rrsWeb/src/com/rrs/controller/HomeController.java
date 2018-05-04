@@ -290,8 +290,5 @@ public class HomeController {
 				out.print("success");      			//结果传到前端
 			}
 		}
-	
-	
-	
-	
+		
 }
