@@ -12,4 +12,8 @@ public interface ShopService {
 	
 	int getRestaurantSearchNum(String key);
 	
+	//排序
+	List<Restaurant> getSortByReview(List<Restaurant> shopList);
+	List<Restaurant> getSortByStars(List<Restaurant> shopList);
+	
 }

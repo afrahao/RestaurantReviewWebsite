@@ -635,15 +635,9 @@
                 </div>
                 <div class="col-md-3 col-sm-2 text-right">
                   <select id="input-sort" class="form-control col-sm-3">
-                    <option value="" selected="selected">Default</option>
-                    <option value="">Name (A - Z)</option>
-                    <option value="">Name (Z - A)</option>
-                    <option value="">Price (Low &gt; High)</option>
-                    <option value="">Price (High &gt; Low)</option>
-                    <option value="">Rating (Highest)</option>
-                    <option value="">Rating (Lowest)</option>
-                    <option value="">Model (A - Z)</option>
-                    <option value="">Model (Z - A)</option>
+                    <option value="default" selected="selected">Default</option>
+                    <option value="review">Review (Highest)</option>
+                    <option value="stars">Stars (Highest)</option>
                   </select>
                 </div>
                 <div class="col-sm-1 text-right show-limit">
@@ -671,15 +665,14 @@
               <div class="row">
                 <div class=" text-left">
                   <ul class="pagination">
-                  	<%-- <li class="active"><span>1</span></li>
+                  	<li class="active"><span>1</span></li>
                   	<c:forEach var="j" begin="2" end="${pageNum}">
-                  		<li><a href="#">${j}</a></li>
-                  	
+                  		<li><a href="#" onclick="pageControl(${j})">${j}</a></li>
                   	</c:forEach>
                     <!-- <li class="active"><span>1</span></li>
                     <li><a href="#">2</a></li> -->
                     <li><a href="#">&gt;</a></li>
-                    <li><a href="#">&gt;|</a></li> --%>
+                    <li><a href="#">&gt;|</a></li>
                   </ul>
                 </div>
                 
@@ -1024,22 +1017,21 @@
 var curGrid;
 var curGridNum = 0;
 
-
+//初始化页面
 $().ready( function() {
-	
+	var page = 1;
  	$.ajax({
-	url: "../shop/showGrid",
+	url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
 	type: "POST",
 	data: {
-		"page":1,
 		"num":15,
 	},  
 	success: function(res){
 		curGrid = JSON.parse(res);
 		
 		showGrid(curGrid);
-
-		console.log(curGrid[1].stars);
+		console.log("一共有");
+		console.log(curGrid.length);
 	},
 	error: function(err){
 		console.error(err);
@@ -1048,23 +1040,22 @@ $().ready( function() {
 	}); 	
 } ); 
 
-
+//展示商店
 function showGrid(curGrid){
 	
 	$(".products-grid li").remove();
-	$(".pagination li").remove();
+	//$(".pagination li").remove();
 	
 	var htmlStr = "";
 	var pageStr = "";
 	
-	for(var i = 0 ; i<curGrid.length/15 ; i++){
+	/* for(var i = 0 ; i<curGrid.length/15 ; i++){
 		if(i == 0){
 	    	pageStr += "<li class=\"active\" href=\"#\"><span>1</span></li>"
 	    } else {
 	    	pageStr += "<li herf=\"#\"><span>"+(i+1)+"</span></li>"
 	    }
-	}
-	
+	} */
 	
 	for(var i =0; i<curGrid.length; i++){
 		
@@ -1101,22 +1092,19 @@ function showGrid(curGrid){
 	    htmlStr += "</div>";
 	    htmlStr += "</div>";
 	    htmlStr += "</li>";
-	    
-	    
-	    //$("#tag_"+initUserFavor[i].toString()).attr("class","cur");
-	    
-	
+	  
 	};
 	
 	
 	pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
 	
 	$(".products-grid").append(htmlStr); 
-	$(".pagination").append(pageStr); 
+	//$(".pagination").append(pageStr); 
 	
 	
 }
 
+//搜索商店
 function searchShop(){
 	var key=document.getElementById("search").value;
 	$.ajax({
@@ -1138,6 +1126,67 @@ function searchShop(){
 		}
 	}); 
 }
+
+//排序框的响应事件
+$("#input-sort").on("change",function(){
+	
+	var sort=$("option:selected",this).val();
+	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
+		type: "POST",
+		data: {
+		},  
+		success: function(res){
+			curGrid = JSON.parse(res);
+			
+			showGrid(curGrid);
+
+			console.log(curGrid[1].stars);
+		},
+		error: function(err){
+			console.error(err);
+		}
+	}); 
+	
+});
+
+//翻页
+function pageControl(num){
+
+	var page=num;
+	
+ 	$.ajax({
+	url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+	type: "POST",
+	data: {
+		"num":15,
+	},  
+	success: function(res){
+		curGrid = JSON.parse(res);
+		
+		showGrid(curGrid);
+		console.log("一共有");
+		console.log(curGrid.length);
+	},
+	error: function(err){
+		console.error(err);
+		console.log("bbb");
+	}
+	}); 
+ 	
+ 	//页码显示颜色
+ 	$(".pagination li").click(function () {
+
+        if($(this).hasClass("active")){
+           
+        }else {
+            $(this).addClass("active").siblings().removeClass("active");
+        }
+    })
+    
+    
+}
+
 
 </script>
 
