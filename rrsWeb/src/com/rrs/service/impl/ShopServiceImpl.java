@@ -1,5 +1,6 @@
 package com.rrs.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,20 @@ public class ShopServiceImpl implements ShopService{
 	public List<Restaurant> getRestaurantSearch(String key) {
 		
 		return shopDao.getRestaurantSearch(key);
+	}
+
+	@Override
+	public List<Restaurant> getSortByReview(List<Restaurant> shopList) {
+		List<Restaurant> list = new ArrayList<Restaurant>();
+		
+		return list;
+	}
+
+	@Override
+	public List<Restaurant> getSortByStars(List<Restaurant> shopList) {
+		List<Restaurant> list = new ArrayList<Restaurant>();
+		
+		return list;
 	}
 	
 }
