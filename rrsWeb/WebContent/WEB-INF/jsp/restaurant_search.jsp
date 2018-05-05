@@ -635,9 +635,9 @@
                 </div>
                 <div class="col-md-3 col-sm-2 text-right">
                   <select id="input-sort" class="form-control col-sm-3">
-                    <option value="default" selected="selected">Default</option>
-                    <option value="review">Review (Highest)</option>
-                    <option value="stars">Stars (Highest)</option>
+                    <option value="0" selected="selected">Default</option>
+                    <option value="1">Review (Highest)</option>
+                    <option value="2">Stars (Highest)</option>
                   </select>
                 </div>
                 <div class="col-sm-1 text-right show-limit">
@@ -665,7 +665,7 @@
               <div class="row">
                 <div class=" text-left">
                   <ul class="pagination">
-                  	<li class="active"><span>1</span></li>
+                  	<li class="active"><a href="#" onclick="pageControl(1)">1</a></li>
                   	<c:forEach var="j" begin="2" end="${pageNum}">
                   		<li><a href="#" onclick="pageControl(${j})">${j}</a></li>
                   	</c:forEach>
@@ -1040,6 +1040,9 @@ $().ready( function() {
 	}); 	
 } ); 
 
+
+
+
 //展示商店
 function showGrid(curGrid){
 	
@@ -1099,55 +1102,101 @@ function showGrid(curGrid){
 	pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
 	
 	$(".products-grid").append(htmlStr); 
-	//$(".pagination").append(pageStr); 
-	
-	
+
 }
 
-//搜索商店
-function searchShop(){
-	var key=document.getElementById("search").value;
+//重新画页码栏
+function reloadPageNum(pageNum){
+ 		
+	$(".pagination li").remove();
+	var pageStr = "";
+		
+	for(var i = 0 ; i<pageNum ; i++){
+		if(i == 0){
+			
+	    	
+	    	pageStr += "<li  class=\"active\"><a href=\"#\" onclick=\"pageControl("+(i+1)+")\">"+(i+1)+"</a></li>";
+	    } else {
+	    	pageStr += "<li> <a href=\"#\" onclick=\"pageControl("+(i+1)+")\">"+(i+1)+"</a></li>";
+	    }
+	} 
+	$(".pagination").append(pageStr); 
+}
+    
+
+
+//用于搜索或排序后重载grid
+function reloadGrid(){
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
 		type: "POST",
 		data: {
-			
+			"num":15,
 		},  
 		success: function(res){
 			curGrid = JSON.parse(res);
 			
 			showGrid(curGrid);
+			console.log("一共有");
+			console.log(curGrid.length);
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+		}); 
+}
 
-			console.log(curGrid[1].stars);
+//搜索商店
+function searchShop(){
+	var key=document.getElementById("search").value;
+	var pageNum = 0;
+	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		async: false,
+		type: "POST",
+		data: {
+			
+		},  
+		success: function(res){
+			pageNum = res;
+			 
+			reloadPageNum(pageNum);
+			
 		},
 		error: function(err){
 			console.error(err);
 			console.log("bbb");
 		}
 	}); 
+	
+	reloadGrid();
 }
 
 //排序框的响应事件
 $("#input-sort").on("change",function(){
 	
 	var sort=$("option:selected",this).val();
+	var pageNum = 0;
 	$.ajax({
 		url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
 		type: "POST",
 		data: {
 		},  
 		success: function(res){
-			curGrid = JSON.parse(res);
+			console.log("dddd");
+			pageNum = res;
+			reloadPageNum(pageNum);
 			
-			showGrid(curGrid);
-
-			console.log(curGrid[1].stars);
+			console.log(pageNum);
 		},
 		error: function(err){
 			console.error(err);
 		}
 	}); 
 	
+	reloadGrid();
+
 });
 
 //翻页
@@ -1165,8 +1214,7 @@ function pageControl(num){
 		curGrid = JSON.parse(res);
 		
 		showGrid(curGrid);
-		console.log("一共有");
-		console.log(curGrid.length);
+		
 	},
 	error: function(err){
 		console.error(err);
@@ -1182,10 +1230,10 @@ function pageControl(num){
         }else {
             $(this).addClass("active").siblings().removeClass("active");
         }
-    })
-    
-    
+    });
 }
+    
+
 
 
 </script>
