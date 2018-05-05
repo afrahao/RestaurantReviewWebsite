@@ -84,10 +84,12 @@ public class ShopController {
 		if(sort.equals("1")){
 			//调用按评论数排序
 			shopList = shopService.getSortByReview(shopList);
+			
 		
 		} else if (sort.equals("2")){
 			//调用按星级排序
-			shopList = shopService.getSortByStars(shopList);		
+			//shopList = shopService.getSortByStars(shopList);
+			
 			
 		} else if (sort.equals("0")){
 			//什么都不做
