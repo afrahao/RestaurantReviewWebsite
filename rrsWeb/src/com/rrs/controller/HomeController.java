@@ -48,7 +48,7 @@ public class HomeController {
 		}
 		//保存登陆状态的邮箱
 		mav.addObject("loginuser", email);
-		mav.setViewName("map");
+		mav.setViewName("index");
 		return mav;
 	}
 	
