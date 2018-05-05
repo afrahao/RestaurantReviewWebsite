@@ -26,6 +26,7 @@ import com.rrs.util.ServiceException;
 public class HomeController {
 	@Autowired
 	private SysUserService sysUserService;
+	
 
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
@@ -36,6 +37,7 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//获取cookie
 		Cookie[] cookies = (Cookie[])request.getCookies();
 		Cookie cookie = null;
 		String email = null;
@@ -44,14 +46,17 @@ public class HomeController {
 		{
 			email = cookie.getValue();
 		}
+		//保存登陆状态的邮箱
 		mav.addObject("loginuser", email);
 		mav.setViewName("map");
 		return mav;
 	}
 	
+	//退出
 	@RequestMapping(value = "/checkOut", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView checkOut(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
+		//删除cookie
 		CookieUtils.removeCookieByName("loginuser", request, response);
 		mav.addObject("loginuser", null);
 		mav.setViewName("index");
@@ -88,28 +93,28 @@ public class HomeController {
 		SysUser user = sysUserService.TestUserByEmail(email);
 		request.getSession().setAttribute("currentuser", user);
 		/****/
-		//莽鈥澛λ喡访ε撀β陈モ�犈�
+		//没有注册
 		if(validation == 0)
 		{
 			mav.addObject("mind", "no register");
 			mav.addObject("keepemail", email);
 			mav.setViewName("login");
 		}
-		//莽鈥澛λ喡访锯�溍┾�濃劉氓炉鈥犆犅�
+		//密码错误
 		else if(validation == 1)
 		{
 			mav.addObject("keepemail", email);
 			mav.addObject("mind", "wrong password");
 			mav.setViewName("login");
 		}
-		//莽鈥澛λ喡访锯�溍┾�濃劉氓炉鈥犆犅伱垛�γ库��5忙卢隆
+		//密码错误次数过多
 		else if(validation == 3)
 		{
 			mav.addObject("keepemail", email);
 			mav.addObject("mind", "wrong password over 5 times,please wait for 60 mins.");
 			mav.setViewName("login");
 		}
-		//莽颅鈥懊ヂ锯�γ︹�斅睹┾�斅疵ぢ嘎嵜堵�
+		//等待时间倒计时
 		else if(validation == 4)
 		{
 			int wait = sysUserService.waitTime(email);
@@ -117,10 +122,10 @@ public class HomeController {
 			mav.addObject("mind", "wait for "+Integer.toString(wait)+" seconds.");
 			mav.setViewName("login");
 		}
-		//莽鈩⒙幻┾劉鈥犆λ喡惷ヅ犈�
+		//登陆成功
 		else
 		{
-			//氓藛陇忙鈥撀р�澛λ喡访λ溌ヂ惵γ┡撯偓猫娄聛盲驴聺忙艗聛莽鈩⒙幻┾劉鈥犆犅睹︹偓聛
+			//用户选择了保存登陆状态
 			if(loginkeeping.equals("on"))
 			{
 				response.setHeader("Access-Control-Allow-Origin","*");
@@ -129,9 +134,8 @@ public class HomeController {
 				response.setContentType("text/html;charset=utf-8");
 				response.setCharacterEncoding("utf-8");
 				Cookie cookie = new Cookie("loginuser", email);
-				//脗聽忙艙鈥懊︹�⑺喢ε撆�,莽搂鈥櫭ぢ嘎好ヂ嶁�⒚ぢ铰嵜偮�
 				cookie.setMaxAge(3600);
-				//脗聽猫庐戮莽陆庐cookie脗聽脗聽
+				//添加cookie
 				response.addCookie(cookie);
 			}
 			

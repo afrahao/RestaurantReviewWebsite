@@ -12,7 +12,9 @@ public interface SysUserService {
      void updateUserStatus(String email);
      public void processregister(String name,String email,String password);
      public void processActivate(String email , String validateCode)throws ServiceException, ParseException;
+     //登陆
      public int loginCheck(String email,String password);
+     //获取等待时间倒计时
      public int waitTime(String email);
      
    //forget password

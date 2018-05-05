@@ -51,7 +51,7 @@
         marker.setPosition(e.lnglat);
         alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图！');
     })
-    marker.setTitle('我是marker的title');
+    
     var markers = [], positions = [[116.405467, 39.907761], [116.415467, 39.907761], [116.415467, 39.917761], [116.425467, 39.907761], [116.385467, 39.907761]];
     for (var i = 0, marker; i < positions.length; i++) {
         marker = new AMap.Marker({
@@ -59,6 +59,7 @@
             position: positions[i]
         });
         markers.push(marker);
+        marker.setTitle('我是marker的title');
     }
     //解析定位结果
     function onComplete(data) {
