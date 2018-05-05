@@ -267,7 +267,7 @@
                     
                     <!--actions-->
                     <div class="actions">
-                      <button class="btn-checkout" title="Checkout" type="button" onClick="#"><span>Checkout</span> </button>
+                      <button class="btn-checkout" title="Checkout" type="button" onClick=""><span>Checkout</span> </button>
                       <a href="#" class="view-cart"><span>View Cart</span></a> </div>
                   </div>
                 </div>
