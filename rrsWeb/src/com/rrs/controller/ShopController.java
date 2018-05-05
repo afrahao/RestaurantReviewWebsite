@@ -34,7 +34,7 @@ public class ShopController {
 	@RequestMapping(value = "/grid",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView shopGrid(HttpServletRequest request, HttpServletResponse response){
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
-		ModelAndView mav = new ModelAndView();		
+		ModelAndView mav = new ModelAndView();	
 		shopList = shopService.getRestaurant(1, 60);
 		mav.addObject("pageNum",calPageNum(shopList,15));
 		mav.addObject("current_user", user);
@@ -74,7 +74,7 @@ public class ShopController {
 	//4.按评论排序商家
 	@RequestMapping(value = "/sortShop",method = { RequestMethod.POST })
 	public @ResponseBody
-	int sortShop(@RequestParam(value="sort") String sort,HttpServletRequest request, HttpServletResponse response){ 
+	int sortShop(@RequestParam(value="sort")String sort, double lat,double lng,HttpServletRequest request, HttpServletResponse response){ 
 		
 		//特殊排序过的list
 		List<Restaurant> shopListSort = new ArrayList<Restaurant>();
@@ -91,11 +91,24 @@ public class ShopController {
 			//shopList = shopService.getSortByStars(shopList);
 			
 			
+		} else if (sort.equals("3")){
+			//距离小于等于3km
+			shopList = shopService.getRestaurantByDistance1(lat, lng, 3000);
+			System.out.println("----------------------------"+shopList.size());
+		} else if (sort.equals("4")){
+			//3-10km
+			shopList = shopService.getRestaurantByDistance2(lat, lng, 3000,5000);
+			System.out.println("----------------------------"+shopList.size());
+			
+		} else if (sort.equals("5")){
+			//10km以上
+			shopList = shopService.getRestaurantByDistance3(lat, lng, 5000);
+			System.out.println("----------------------------"+shopList.size());
 		} else if (sort.equals("0")){
 			//什么都不做
 			
 		}
-
+		
 		return calPageNum(shopList,15);
 	}
 	
@@ -121,6 +134,9 @@ public class ShopController {
 
 		return (int)Math.ceil((double)list.size()/(double)size);
 	}
+	
+	
+	
 	
 	
 }

@@ -1,23 +1,18 @@
 package com.rrs.pojo;
 
-import java.util.List;
-
-public class Restaurant {
-
-	String id;
-	String name;
-	String neighborhood;
-	String address;
-	String city;
-	String state;
-	float latitude;
-	float longitude;
-	float stars;
-	int review_count;
-	int is_open;
-	String hours;
+public class Business {
+	private String id;
+	private String name;
+	private String neighborhood;
+	private String address;
+	private String city;
+	private String state;
+	private float latitude;
+	private float longitude;
+	private float stars;
+	private int review_count;
+	private int is_open;
 	
-	String img = "http://47.95.10.11/FilteredPhoto/";
 	public String getId() {
 		return id;
 	}
@@ -83,18 +78,6 @@ public class Restaurant {
 	}
 	public void setIs_open(int is_open) {
 		this.is_open = is_open;
-	}
-	public String getHours() {
-		return hours;
-	}
-	public void setHours(String hours) {
-		this.hours = hours;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = this.img + img;
 	}
 
 }

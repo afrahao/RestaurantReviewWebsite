@@ -1,0 +1,9 @@
+diff a/rrsWeb/build/classes/jdbc.properties b/rrsWeb/build/classes/jdbc.properties	(rejected hunks)
+@@ -1,5 +1,4 @@
+ jdbc.driver=com.mysql.jdbc.Driver
+ jdbc.url=jdbc:mysql://127.0.0.1:3306/rrs_db
+ jdbc.username=root
+-jdbc.password=19961105
+\ No newline at end of file
+ jdbc.password=tiger
+\ No newline at end of file

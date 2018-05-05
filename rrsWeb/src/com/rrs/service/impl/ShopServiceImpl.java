@@ -53,4 +53,25 @@ public class ShopServiceImpl implements ShopService{
 		return list;
 	}
 	
+	//筛选距离定位点指定距离的饭店
+	@Override
+	public List<Restaurant> getRestaurantByDistance1(double lat,double lon,int distance) {
+		
+		return shopDao.getRestaurantByDistance1(lat,lon,distance);
+	}
+	
+	//筛选距离定位点指定距离的饭店
+	@Override
+	public List<Restaurant> getRestaurantByDistance2(double lat,double lon,int distance1,int distance2) {
+		
+		return shopDao.getRestaurantByDistance2(lat,lon,distance1,distance2);
+	}
+	
+	//筛选距离定位点指定距离的饭店
+	@Override
+	public List<Restaurant> getRestaurantByDistance3(double lat,double lon,int distance) {
+		
+		return shopDao.getRestaurantByDistance3(lat,lon,distance);
+	}
+	
 }
