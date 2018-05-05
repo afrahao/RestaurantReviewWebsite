@@ -36,7 +36,7 @@ public class ShopController {
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
 		ModelAndView mav = new ModelAndView();		
 		shopList = shopService.getRestaurant(1, 60);
-		mav.addObject("pageNum",shopList.size()/15);
+		mav.addObject("pageNum",calPageNum(shopList,15));
 		mav.addObject("current_user", user);
 		mav.setViewName("restaurant_search");		
 		return mav;
@@ -63,41 +63,40 @@ public class ShopController {
 	//3.搜索商家
 	@RequestMapping(value = "/searchGrid",method = { RequestMethod.POST })
 	public @ResponseBody
-	String searchShop(@RequestParam(value="key") String key,HttpServletRequest request, HttpServletResponse response){ 
+	int searchShop(@RequestParam(value="key") String key,HttpServletRequest request, HttpServletResponse response){ 
 		
-		//List<Restaurant> shopList = new ArrayList<Restaurant>();
-		
-		
-		shopList = shopService.getRestaurant(16,31);
+		//把当前list改成搜索到的list
+		shopList = shopService.getRestaurant(50,100);
 
-		String str = JsonUtils.ObjectToJson(shopList);
-		
-	    return str;
+	    return calPageNum(shopList,15);
 	}
 	
 	//4.按评论排序商家
 	@RequestMapping(value = "/sortShop",method = { RequestMethod.POST })
 	public @ResponseBody
-	String sortShop(@RequestParam(value="sort") String sort,HttpServletRequest request, HttpServletResponse response){ 
+	int sortShop(@RequestParam(value="sort") String sort,HttpServletRequest request, HttpServletResponse response){ 
 		
 		//特殊排序过的list
 		List<Restaurant> shopListSort = new ArrayList<Restaurant>();
 		String str="";
+		System.out.println("============"+sort);
 		
-		if(sort=="review"){
+		if(sort.equals("1")){
 			//调用按评论数排序
-			shopListSort = shopService.getSortByReview(shopList);
-			str = JsonUtils.ObjectToJson(shopListSort);
-		} else if (sort=="stars"){
+			shopList = shopService.getSortByReview(shopList);
+			
+		
+		} else if (sort.equals("2")){
 			//调用按星级排序
-			shopListSort = shopService.getSortByStars(shopList);
-			str = JsonUtils.ObjectToJson(shopListSort);
-		} else if (sort=="default"){
-			//直接返回原来的list
-			str = JsonUtils.ObjectToJson(shopList);
+			//shopList = shopService.getSortByStars(shopList);
+			
+			
+		} else if (sort.equals("0")){
+			//什么都不做
+			
 		}
 
-	    return str;
+		return calPageNum(shopList,15);
 	}
 	
 	//5.翻页
@@ -115,6 +114,12 @@ public class ShopController {
 		}
 
 		return partList;
+	}
+	
+	//6.计算页码
+	public int calPageNum(List<Restaurant> list,int size){
+
+		return (int)Math.ceil((double)list.size()/(double)size);
 	}
 	
 	
