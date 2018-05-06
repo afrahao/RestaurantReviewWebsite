@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rrs.mapper.ShopDao">
+
+
+	<!-- 返回restaurant数量 -->
+    <select id="getRestaurantNum" resultType="Integer">
+        select count(*) from business
+    </select>
+    
+	<!-- 返回一些restaurant -->
+    <select id="getRestaurant" parameterType="Integer" resultType="com.rrs.pojo.Restaurant">
+        select *,photo.id as img from business,photo where business.id=photo.business_id LIMIT #{0},#{1}
+    </select>
+    
+    
+    <!-- 获取当前类别的餐馆 -->
+    <select id="selectBusinessByCate" parameterType="int" resultType="com.rrs.pojo.Restaurant">
+        select * from  business
+        <where>
+            id in select business_id from business_cate
+            <where>
+            	category_id = #{0}
+            </where>
+        </where>
+    </select>
+    
+    
+    
+    
+    
+
+</mapper>
