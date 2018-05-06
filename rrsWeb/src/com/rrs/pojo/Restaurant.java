@@ -1,8 +1,9 @@
 package com.rrs.pojo;
 
+import java.util.Comparator;
 import java.util.List;
 
-public class Restaurant {
+public class Restaurant implements Cloneable,Comparable<Restaurant>{
 
 	String id;
 	String name;
@@ -95,6 +96,42 @@ public class Restaurant {
 	}
 	public void setImg(String img) {
 		this.img = this.img + img;
+		this.img = this.img + ".jpg";
 	}
+	
+	@Override  
+    public boolean equals(Object obj) {  
+        if (obj instanceof Restaurant) {  
+            if (this.getId().equals(((Restaurant) obj).getId())) {  
+                return true;  
+            }  
+            else {  
+                return false;  
+            }  
+        }  
+        return false;  
+    }  
 
+	@Override
+	public Restaurant clone(){    
+		Restaurant o=null;    
+		try    
+		{    
+			o=(Restaurant)super.clone();//Object 中的clone()识别出你要复制的是哪一个对象。    
+		} catch(CloneNotSupportedException e){    
+			System.out.println(e.toString());    
+		}    
+		return o;    
+    }
+	
+	@Override
+	public int compareTo(Restaurant arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}    
+	
+	
+	
 }
+
+

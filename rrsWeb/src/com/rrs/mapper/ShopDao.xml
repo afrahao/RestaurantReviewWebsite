@@ -53,6 +53,7 @@
 		distance &lt;= #{2}
 	ORDER BY
 	    distance ASC
+	LIMIT 1,150
     </select> 
     <!-- 返回距离指定地点指定范围的restaurant -->
     <select id="getRestaurantByDistance2" resultType="com.rrs.pojo.Restaurant">
@@ -87,6 +88,7 @@
 		#{2} &gt;= distance &lt;= #{3}
 	ORDER BY
 	    distance ASC
+	LIMIT 1,150
     </select> 
     <!-- 返回距离指定地点指定范围的restaurant -->
     <select id="getRestaurantByDistance3" resultType="com.rrs.pojo.Restaurant">
@@ -121,6 +123,7 @@
 		distance &gt;= #{2}
 	ORDER BY
 	    distance ASC
+	LIMIT 1,150
     </select> 
     
     

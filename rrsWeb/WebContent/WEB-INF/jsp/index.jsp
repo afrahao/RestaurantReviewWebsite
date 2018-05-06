@@ -53,7 +53,7 @@
       </div>
     </li>
     <li><a href="index.html">Home</a></li>
-    <li><a href="shop_grid.html">Shop Grid</a></li>
+    <li><a href="shop/grid">Shop Grid</a></li>
     <li> <a href="single_product.html">Single Product</a> </li>
     <li><a href="#">Love & Romance</a>
       <ul>
@@ -187,7 +187,7 @@
           <div class="row"> 
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
-              <div class="welcome-msg hidden-xs">Welcome ${loginuser}! </div>
+              <div class="welcome-msg hidden-xs">Welcome! </div>
               <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
                   <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
@@ -216,7 +216,7 @@
               <div class="jtv-top-links">
                 <div class="links">
                   <ul>
-                    <li> <a title="My Account" href="security"><span class="hidden-xs">My Account</span></a> </li>
+                    
                     <li> <a title="Change Password" href="security">Change Password</a> </li>
                     <li> <a title="Checkout" href="checkOut"><span class="hidden-xs">Checkout</span></a> </li>
                     <li>
@@ -231,7 +231,8 @@
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="tologin"><span class="hidden-xs">Log In</span></a> </li>
+                    <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>
+                    
                   </ul>
                 </div>
               </div>
@@ -317,7 +318,7 @@
         <!-- BEGIN NAV -->
         <ul id="nav" class="hidden-xs">
           <li class="drop-menu"><a href="index.html" class="level-top active"><span>Home</span></a></li>
-          <li class="drop-menu"><a href="shop_grid.html"><span>Shop Grid</span></a></li>
+          <li class="drop-menu"><a href="shop/grid"><span>Shop Grid</span></a></li>
 		  <li class="drop-menu"><a href="single_product.html"><span>Single Product</span></a></li>
           <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Love & Romance</span></a>
             <div class="jtv-menu-block-wrapper">

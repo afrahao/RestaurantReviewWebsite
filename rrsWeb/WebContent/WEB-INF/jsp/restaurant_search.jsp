@@ -22,6 +22,18 @@
 
 <!-- CSS Style -->
 <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/loader.css">
+
+<!-- 页面加载 -->
+   
+
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-back"></div>
+<!--     <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div> -->
+    <div class="load_title">Loading...<br><span>111</span></div>
+</div>
 
 <!-- 高德地图 -->
 <link rel="stylesheet"
@@ -36,7 +48,7 @@
 
 <style type="text/css">
 #Container {
-	width: 1000px;
+	
 	height: 300px;
 }
 </style>
@@ -257,8 +269,6 @@
 								<div class="jtv-top-links">
 									<div class="links">
 										<ul>
-											<li><a title="My Account" href="#"><span
-													class="hidden-xs">My Account</span></a></li>
 											<li><a title="Wishlist" href="#">Wishlist</a></li>
 											<li><a title="Checkout" href="#"><span
 													class="hidden-xs">Checkout</span></a></li>
@@ -277,7 +287,7 @@
 													</ul>
 												</div>
 											</li>
-											<li><a href="#"><span class="hidden-xs">${current_user.name}</span></a>
+											<li><a href="../user/profile"><span class="hidden-xs">${current_user.name}</span></a>
 											</li>
 										</ul>
 									</div>
@@ -983,7 +993,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="block block-cart">
+							<!-- <div class="block block-cart">
 								<div class="block-title ">My Cart</div>
 								<div class="block-content">
 									<div class="summary">
@@ -1030,7 +1040,7 @@
 													<a href="#">Product Title Here</a>
 												</p>
 
-												<!--access clearfix-->
+												access clearfix
 											</div></li>
 										<li class="item"><a href="#" title="Product Title Here"
 											class="product-image"><img
@@ -1046,11 +1056,11 @@
 													<a href="#">Product Title Here</a>
 												</p>
 
-												<!--access clearfix-->
+												access clearfix
 											</div></li>
 									</ul>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="block block-tags">
 								<div class="block-title">Popular Tags</div>
@@ -1333,10 +1343,6 @@
 		</footer>
 	</div>
 
-	<!-- End Footer -->
-
-
-
 
 	<!-- jquery js -->
 	<script src="../js/jquery.min.js"></script>
@@ -1362,92 +1368,210 @@
 	/***************************************
 	由于Chrome、IOS10等已不再支持非安全域的浏览器定位请求，为保证定位成功率和精度，请尽快升级您的站点到HTTPS。
 	***************************************/
-	   var map, geolocation,lat,lng;
-	    //加载地图，调用浏览器定位服务
-	    map = new AMap.Map('Container', {
-	        resizeEnable: true
-	    });
-	    map.plugin('AMap.Geolocation', function() {
-	        geolocation = new AMap.Geolocation({
-	            enableHighAccuracy: true,//是否使用高精度定位，默认:true
-	          showMarker: false,        //定位成功后在定位到的位置显示点标记，默认：true
-	            showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
-	            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
-	            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-	            zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-	            buttonPosition:'RB',
-	            lang:'zh_en',
-	            zoom: 13
+   var map, geolocation,lat,lng;
+    //加载地图，调用浏览器定位服务
+    map = new AMap.Map('Container', {
+        resizeEnable: true
+    });
+    map.plugin('AMap.Geolocation', function() {
+        geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+          showMarker: false,        //定位成功后在定位到的位置显示点标记，默认：true
+            showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+            zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+            buttonPosition:'RB',
+            lang:'zh_en',
+            zoom: 13
+        });
+        map.addControl(geolocation);
+        geolocation.getCurrentPosition();
+        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+    });
+    
+    //定位点
+    var marker = new AMap.Marker({
+        draggable: true,
+        cursor: 'move',
+        raiseOnDrag: false
+    });
+    
+    //测试点击
+    map.on('click',function(e){
+        marker.setPosition(e.lnglat);
+        lng=e.lnglat.getLng();
+        lat=e.lnglat.getLat();
+        alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
+    })
+    
+    
+    //解析定位结果
+    function onComplete(data) {
+        var str=['定位成功'];
+        lat=data.position.getLat();
+        lng=data.position.getLng();
+        str.push('经度：' + lng);
+        str.push('纬度：' + lat);
+        
+        marker.setPosition(new AMap.LngLat(data.position.getLng(),data.position.getLat()))
+        
+        if(data.accuracy){
+             str.push('精度：' + data.accuracy + ' 米');
+        }//如为IP精确定位结果则没有精度信息
+        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+        document.getElementById('tip').innerHTML = str.join('<br>');
+    }
+    //解析定位错误信息
+    function onError(data) {
+        document.getElementById('tip').innerHTML = '定位失败';
+    }
+    marker.setMap(map);
+
+	var curGrid;
+	var curGridNum = 0;
+	var markers = [];
+
+	//在地图上展示搜索出来的餐馆
+	function showShopMarkers(curGrid){
+		
+		map.remove(markers);
+	    for (var i = 0, marker; i < curGrid.length; i++) {
+	    	var obj = curGrid[i];
+	    	
+	        marker = new AMap.Marker({
+	            map: map,
+	            position: [obj.longitude, obj.latitude]
 	        });
-	        map.addControl(geolocation);
-	        geolocation.getCurrentPosition();
-	        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
-	        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
-	    });
-	    
-	    //定位点
-	    var marker = new AMap.Marker({
-	        draggable: true,
-	        cursor: 'move',
-	        raiseOnDrag: false
-	    });
-	    
-	    //测试点击
-	    map.on('click',function(e){
-	        marker.setPosition(e.lnglat);
-	        lng=e.lnglat.getLng();
-	        lat=e.lnglat.getLat();
-	        alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
-	    })
-	    
-	    
-	    //解析定位结果
-	    function onComplete(data) {
-	        var str=['定位成功'];
-	        lat=data.position.getLat();
-	        lng=data.position.getLng();
-	        str.push('经度：' + lng);
-	        str.push('纬度：' + lat);
-	        
-	        marker.setPosition(new AMap.LngLat(data.position.getLng(),data.position.getLat()))
-	        
-	        if(data.accuracy){
-	             str.push('精度：' + data.accuracy + ' 米');
-	        }//如为IP精确定位结果则没有精度信息
-	        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
-	        document.getElementById('tip').innerHTML = str.join('<br>');
+	        markers.push(marker);
+	        marker.setTitle(obj.name);
 	    }
-	    //解析定位错误信息
-	    function onError(data) {
-	        document.getElementById('tip').innerHTML = '定位失败';
-	    }
-	    marker.setMap(map);
+	}
 
-		var curGrid;
-		var curGridNum = 0;
-		var markers = [];
-
-		//在地图上展示搜索出来的餐馆
-		function showShopMarkers(curGrid){
+	//初始化页面
+	$().ready( function() {
+		var page = 1;
+	 	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		type: "POST",
+		data: {
+			"num":15,
+		},  
+		success: function(res){
+			curGrid = JSON.parse(res);
 			
-			map.remove(markers);
-		    for (var i = 0, marker; i < curGrid.length; i++) {
-		    	var obj = curGrid[i];
-		    	
-		        marker = new AMap.Marker({
-		            map: map,
-		            position: [obj.longitude, obj.latitude]
-		        });
-		        markers.push(marker);
-		        marker.setTitle(obj.name);
-		    }
+			showGrid(curGrid);
+			
+			console.log("一共有");
+			console.log(curGrid.length);
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
 		}
+		}); 	
+	} ); 
+	
+	
+	
+	
+	//展示商店
+	function showGrid(curGrid){
+		
+		console.log("1次");
+		
+		$(".products-grid li").remove();
+		//$(".pagination li").remove();
+		
+		var htmlStr = "";
+		var pageStr = "";
+		
+		/* for(var i = 0 ; i<curGrid.length/15 ; i++){
+			if(i == 0){
+		    	pageStr += "<li class=\"active\" href=\"#\"><span>1</span></li>"
+		    } else {
+		    	pageStr += "<li herf=\"#\"><span>"+(i+1)+"</span></li>"
+		    }
+		} */
+		
+		for(var i =0; i<curGrid.length; i++){
+			
+		    var obj = curGrid[i];
+	
+		    htmlStr += "<li class=\"item col-lg-4 col-md-4 col-sm-4 col-xs-6\">";
+		    htmlStr += "<div class=\"item-inner\">"
+		    htmlStr += "<div class=\"item-img\">";
+		    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\" href=\"detail\" \>";
+		    htmlStr += "<img alt=\"Product Title Here\" onclick=\"goToDetail(\'"+obj.id+"\',\'"+obj.name+"\')\" title=\""+obj.name + "\" src=\"" +obj.img+"\">";
+		    htmlStr += "</a>";
+		    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
+		    htmlStr += "</div>";
+		    htmlStr += "<div>";
+		    htmlStr += " <div class=\"item-info\">";
+		    htmlStr += "<div class=\"info-inner\">";
+		    htmlStr += "<div class=\"item-title\"> <a href=\"detail\" onclick=\"goToDetail(\'"+obj.id+"\',\'"+obj.name+"\')\ title=\""+obj.name + "\">" + obj.name +"</a> </div>";
+		    htmlStr += "<div class=\"item-content\">";
+		    htmlStr += "<div class=\"rating\">";
+		    
+		    var s = Math.floor(obj.stars);
+		    for(var j = 0 ; j < s ; j++){
+		    	htmlStr += "<i class=\"fa fa-star\"></i>";
+		    }
+		    for(var j = s ; j < 5 ; j++){
+		    	htmlStr += "<i class=\"fa fa-star-o\"></i>";
+		    }    
+		    htmlStr += "</div>";
+		    htmlStr += "<div class=\"item-price\">";
+		    htmlStr += "<div class=\"price-box\"> <span class=\"regular-price\"> <span class=\"price\" >"+ obj.review_count +" reviews </span> </span> </div>";
+		    htmlStr += "</div>";
+		    htmlStr += "</div>";
+		    htmlStr += "</div>";
+		    htmlStr += "</div>";
+		    htmlStr += "</div>";
+		    htmlStr += "</li>";
+		  
+		};
+		
+		
+		pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
+		
+		$(".products-grid").append(htmlStr); 
 
-		//初始化页面
-		$().ready( function() {
-			var page = 1;
-		 	$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
+		
+		showShopMarkers(curGrid);
+	}
+	
+	//重新画页码栏
+	function reloadPageNum(pageNum){
+	 		
+		$(".pagination li").remove();
+		var pageStr = "";
+			
+		for(var i = 0 ; i<pageNum ; i++){
+			if(i == 0){
+				
+		    	
+		    	pageStr += "<li  class=\"active\"><a href=\"#\" onclick=\"pageControl("+(i+1)+")\">"+(i+1)+"</a></li>";
+		    } else {
+		    	pageStr += "<li> <a href=\"#\" onclick=\"pageControl("+(i+1)+")\">"+(i+1)+"</a></li>";
+		    }
+			
+			
+		} 
+		
+		pageStr += "<li><a href=\"#\">&gt;</a></li> ";
+		pageStr += "<li><a href=\"#\">&gt;|</a></li>";
+		$(".pagination").append(pageStr); 
+	}
+	    
+	
+	
+	//用于搜索或排序后重载grid
+	function reloadGrid(){
+		$.ajax({
+			url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
+			async:false,
 			type: "POST",
 			data: {
 				"num":15,
@@ -1456,25 +1580,87 @@
 				curGrid = JSON.parse(res);
 				
 				showGrid(curGrid);
-				
-				console.log("一共有");
-				console.log(curGrid.length);
+				//console.log("一共有");
+				//console.log(curGrid.length);
+				//console.log(curGrid[0].name);
 			},
 			error: function(err){
 				console.error(err);
 				console.log("bbb");
 			}
-			}); 	
-		} ); 
+			}); 
+	}
+	
+	//搜索商店
+	function searchShop(){
+		var key=document.getElementById("search").value;
+		var pageNum = 0;
+		$.ajax({
+			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+			async:false,
+			type: "POST",
+			data: {
+				
+			},  
+			success: function(res){
+				pageNum = res;
+				 
+				reloadPageNum(pageNum);
+				
+			},
+			error: function(err){
+				console.error(err);
+				console.log("bbb");
+			}
+		}); 
 		
+		reloadGrid();
+	}
+	
+	//排序框的响应事件
+	$("#input-sort").on("change",function(){
 		
+		var sort=$("option:selected",this).val();
+		var pageNum = 0;
+		$.ajax({
+			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
+			async:false,
+			type: "POST",
+			data: {
+				"lat":lat,
+				"lng":lng
+			},  
+			success: function(res){
+				console.log("dddd");
+				pageNum = res;
+				reloadPageNum(pageNum);
+				
+				console.log(pageNum);
+			},
+			error: function(err){
+				console.error(err);
+			}
+		}); 
 		
+		reloadGrid();
+	
+	});
+	
+	//翻页
+	function pageControl(num){
+	
+		var page=num;
 		
-		//展示商店
-		function showGrid(curGrid){
-			
-			$(".products-grid li").remove();
-			//$(".pagination li").remove();
+	 	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		type: "POST",
+		data: {
+			"num":15,
+		},  
+		success: function(res){
+			curGrid = JSON.parse(res);
+			console.log("qqq");
+			showGrid(curGrid);
 			
 			var htmlStr = "";
 			var pageStr = "";
@@ -1531,141 +1717,54 @@
 			$(".products-grid").append(htmlStr); 
 			showShopMarkers(curGrid);
 		}
-		
-		//重新画页码栏
-		function reloadPageNum(pageNum){
-		 		
-			$(".pagination li").remove();
-			var pageStr = "";
-				
-			for(var i = 0 ; i<pageNum ; i++){
-				if(i == 0){
-					
-			    	
-			    	pageStr += "<li  class=\"active\"><a href=\"#\" onclick=\"pageControl("+(i+1)+")\">"+(i+1)+"</a></li>";
-			    } else {
-			    	pageStr += "<li> <a href=\"#\" onclick=\"pageControl("+(i+1)+")\">"+(i+1)+"</a></li>";
-			    }
-			} 
-			$(".pagination").append(pageStr); 
-		}
-		    
-		
-		
-		//用于搜索或排序后重载grid
-		function reloadGrid(){
-			$.ajax({
-				url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+1,
-				type: "POST",
-				data: {
-					"num":15,
-				},  
-				success: function(res){
-					curGrid = JSON.parse(res);
-					
-					showGrid(curGrid);
-					console.log("一共有");
-					console.log(curGrid.length);
-				},
-				error: function(err){
-					console.error(err);
-					console.log("bbb");
-				}
-				}); 
-		}
-		
-		//搜索商店
-		function searchShop(){
-			var key=document.getElementById("search").value;
-			var pageNum = 0;
-			$.ajax({
-				url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key,
-				async: false,
-				type: "POST",
-				data: {
-					
-				},  
-				success: function(res){
-					pageNum = res;
-					 
-					reloadPageNum(pageNum);
-					
-				},
-				error: function(err){
-					console.error(err);
-					console.log("bbb");
-				}
-			}); 
-			
-			reloadGrid();
-		}
-		
-		//排序框的响应事件
-		$("#input-sort").on("change",function(){
-			
-			var sort=$("option:selected",this).val();
-			var pageNum = 0;
-			$.ajax({
-				url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
-				type: "POST",
-				data: {
-					"lat":lat,
-					"lng":lng
-				},  
-				success: function(res){
-					console.log("dddd");
-					pageNum = res;
-					reloadPageNum(pageNum);
-					
-					console.log(pageNum);
-				},
-				error: function(err){
-					console.error(err);
-				}
-			}); 
-			
-			reloadGrid();
-		
-		});
-		
-		//翻页
-		function pageControl(num){
-		
-			var page=num;
-			
-		 	$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
-			type: "POST",
-			data: {
-				"num":15,
-			},  
-			success: function(res){
-				curGrid = JSON.parse(res);
-				
-				showGrid(curGrid);
-				
-			},
-			error: function(err){
-				console.error(err);
-				console.log("bbb");
-			}
-			}); 
-		 	
-		 	//页码显示颜色
-		 	$(".pagination li").click(function () {
-		
-		        if($(this).hasClass("active")){
-		           
-		        }else {
-		            $(this).addClass("active").siblings().removeClass("active");
-		        }
-		    });
-		}
+		}); 
+	 	
+	 	//页码显示颜色
+	 	$(".pagination li").click(function () {
+	
+	        if($(this).hasClass("active")){
+	           
+	        }else {
+	            $(this).addClass("active").siblings().removeClass("active");
+	        }
+	    });
+	}
     
+//跳转到详情页
+function goToDetail(id,name){
+	var business_id = "";
+	business_id = id;
+	console.log(business_id);
+	console.log(name);
+	
+	$.ajax({
+		url: "../shop/detail",
+		type: "POST",
+		data: {
+			"business_id":business_id,
+		},  
+		success: function(res){
+			console.log("ggg");	
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 
+}
 
 
 
 </script>
+
+<!-- 页面加载 -->
+<script type="text/javascript">         
+    // 等待所有加载
+    $(window).load(function(){
+        $('body').addClass('loaded');
+        $('#loader-wrapper .load_title').remove();
+    }); 
+</script> 
 
 </body>
 </html>

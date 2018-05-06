@@ -1,6 +1,7 @@
 package com.rrs.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +30,29 @@ public class ShopController {
 	
 	//全局变量
 	List<Restaurant> shopList = new ArrayList<Restaurant>();
+	List<Restaurant> originShopList;
+
 	
 	//1.打开grid页面
 	@RequestMapping(value = "/grid",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView shopGrid(HttpServletRequest request, HttpServletResponse response){
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
 		ModelAndView mav = new ModelAndView();	
-		shopList = shopService.getRestaurant(1, 60);
+		shopList = shopService.getRestaurant(61, 100);
+		
+		if(shopList.size()%15 != 0){
+			for(int i = 0 ; i < shopList.size()%15 ; i ++){
+				Restaurant r = new Restaurant();
+			shopList.add(r);
+			}
+		}
+		
+		originShopList = new ArrayList<Restaurant>(shopList.size());
+
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			originShopList.add(shopList.get(i).clone()); 
+		}
+		
 		mav.addObject("pageNum",calPageNum(shopList,15));
 		mav.addObject("current_user", user);
 		mav.setViewName("restaurant_search");		
@@ -49,11 +66,12 @@ public class ShopController {
 	public String showGrid(@RequestParam(value="page") int page,int num,HttpServletRequest request, HttpServletResponse response){ 
 		
 		List<Restaurant> partList = new ArrayList<Restaurant>();
-		
+		System.out.println(page);
 		//暂定每页15个
 		num = 15;
 		
-		partList = pageControl(page,num,shopList);
+		
+		partList = pageControl(page,num);
 	
 		String str = JsonUtils.ObjectToJson(partList);
 		
@@ -66,7 +84,21 @@ public class ShopController {
 	int searchShop(@RequestParam(value="key") String key,HttpServletRequest request, HttpServletResponse response){ 
 		
 		//把当前list改成搜索到的list
+		//=========搜索就修改这里就可以了=============
 		shopList = shopService.getRestaurant(50,100);
+		//=========================================
+		
+		if(shopList.size()%15 != 0){
+			for(int i = 0 ; i < shopList.size()%15 ; i ++){
+				Restaurant r = new Restaurant();
+			shopList.add(r);
+			}
+		}
+		originShopList = new ArrayList<Restaurant>(shopList.size());
+		
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			originShopList.add(shopList.get(i).clone()); 
+		}
 
 	    return calPageNum(shopList,15);
 	}
@@ -75,9 +107,8 @@ public class ShopController {
 	@RequestMapping(value = "/sortShop",method = { RequestMethod.POST })
 	public @ResponseBody
 	int sortShop(@RequestParam(value="sort")String sort, double lat,double lng,HttpServletRequest request, HttpServletResponse response){ 
-		
 		//特殊排序过的list
-		List<Restaurant> shopListSort = new ArrayList<Restaurant>();
+		
 		String str="";
 		System.out.println("============"+sort);
 		
@@ -88,7 +119,7 @@ public class ShopController {
 		
 		} else if (sort.equals("2")){
 			//调用按星级排序
-			//shopList = shopService.getSortByStars(shopList);
+			shopList = shopService.getSortByStars(shopList);
 			
 			
 		} else if (sort.equals("3")){
@@ -105,27 +136,33 @@ public class ShopController {
 			shopList = shopService.getRestaurantByDistance3(lat, lng, 5000);
 			System.out.println("----------------------------"+shopList.size());
 		} else if (sort.equals("0")){
-			//什么都不做
-			
+			//用之前的default商店列表
+			shopList = originShopList;
 		}
 		
 		return calPageNum(shopList,15);
 	}
 	
 	//5.翻页
-	public List<Restaurant> pageControl(int page,int num,List<Restaurant> allShop){
+	public List<Restaurant> pageControl(int page,int num){
 		
 		List<Restaurant> partList = new ArrayList<Restaurant>();
 		
 		int start = (page-1)*num;
 		int end = start + num;
 		for(int i = start ; i < end ; i ++){
-			if(allShop.get(i) == null)
+			if(shopList.get(i).getId() == null)
 				break;
 			else
-				partList.add(allShop.get(i));
+				partList.add(shopList.get(i));
+			
 		}
-
+		
+//		Iterator<Restaurant> it = shopList.iterator();
+//		while (it.hasNext()) {
+//			partList.add(it.next());
+//		}
+		
 		return partList;
 	}
 	
@@ -135,14 +172,48 @@ public class ShopController {
 		return (int)Math.ceil((double)list.size()/(double)size);
 	}
 	
+	//=======================================商店详情================================================
+	//1.打开grid页面
+	@RequestMapping(value = "/detail",method = {RequestMethod.GET,RequestMethod.POST })
+	public ModelAndView shopDetail(String business_id, HttpServletRequest request, HttpServletResponse response){
+		
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		ModelAndView mav = new ModelAndView();	
+		
+		Restaurant shop = new Restaurant();
+		
+		for(int i = 0 ; i < shopList.size(); i ++ ){
+			if(shopList.get(i).getId().equals(business_id))
+				shop = shopList.get(i);
+		}
+		
+		request.getSession().setAttribute("curShop", shop);
+		
+		
+		mav.addObject("current_user", user);
+		mav.setViewName("shop_info");
+		return mav;
+		
+	}
 	
-	
-	
-	
+
+	//2.加载shop详细信息
+	@RequestMapping(value = "/initDetail",method = {RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public String initDetail(String business_id, HttpServletRequest request, HttpServletResponse response){
+		
+		
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		
+		
+		Restaurant curShop = (Restaurant)request.getSession().getAttribute("curshop");
+		
+		String str = JsonUtils.ObjectToJson(curShop);
+		System.out.println(str);
+		
+		return str;
+		
+	}
+
 }
 	
-	
-	
-
-
-
