@@ -8612,3 +8612,8 @@ button.subscribe:before {
 	font-size: 12px;
 	color:#DB7093;
 }
+
+#navigation-username{
+	color:#e62263;
+	font-weight:bold;
+}

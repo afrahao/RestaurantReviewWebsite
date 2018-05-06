@@ -1,9 +1,0 @@
-diff a/rrsWeb/src/com/rrs/controller/UserController.java b/rrsWeb/src/com/rrs/controller/UserController.java	(rejected hunks)
-@@ -63,7 +63,6 @@
- 		request.getSession().setAttribute("currentuser", currentuser);		
- 		
- 		ModelAndView mav = new ModelAndView();
--		mav.addObject("current_user", user);
- 		mav.addObject("current_user", currentuser);
- 		mav.setViewName("user_profile");		
- 		return mav;

@@ -27,6 +27,111 @@
         </where>
     </select>
     
+    <!-- 返回距离指定地点指定范围的restaurant -->
+    <select id="getRestaurantByDistance1" resultType="com.rrs.pojo.Restaurant">
+	    SELECT 
+	    *,
+	    photo.id as img,
+	    ROUND(
+	        6378.138 * 2 * ASIN(
+	            SQRT(
+	                POW(
+	                    SIN(
+	                        (
+	                            #{0} * PI() / 180 - latitude * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                ) + COS(#{0} * PI() / 180) * COS(latitude * PI() / 180) * POW(
+	                    SIN(
+	                        (
+	                            #{1} * PI() / 180 - longitude * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                )
+	            )
+	        ) * 1000
+	    ) AS distance
+	FROM
+	    business,photo
+	where business.id=photo.business_id
+	HAVING
+		distance &lt;= #{2}
+	ORDER BY
+	    distance ASC
+	LIMIT 1,150
+    </select> 
+    <!-- 返回距离指定地点指定范围的restaurant -->
+    <select id="getRestaurantByDistance2" resultType="com.rrs.pojo.Restaurant">
+	    SELECT 
+	    *,
+	    photo.id as img,
+	    ROUND(
+	        6378.138 * 2 * ASIN(
+	            SQRT(
+	                POW(
+	                    SIN(
+	                        (
+	                            #{0} * PI() / 180 - latitude * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                ) + COS(#{0} * PI() / 180) * COS(latitude * PI() / 180) * POW(
+	                    SIN(
+	                        (
+	                            #{1} * PI() / 180 - longitude * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                )
+	            )
+	        ) * 1000
+	    ) AS distance
+	FROM
+	    business,photo
+	where business.id=photo.business_id
+	HAVING
+		#{2} &gt;= distance &lt;= #{3}
+	ORDER BY
+	    distance ASC
+	LIMIT 1,150
+    </select> 
+    <!-- 返回距离指定地点指定范围的restaurant -->
+    <select id="getRestaurantByDistance3" resultType="com.rrs.pojo.Restaurant">
+	    SELECT 
+	    *,
+	    photo.id as img,
+	    ROUND(
+	        6378.138 * 2 * ASIN(
+	            SQRT(
+	                POW(
+	                    SIN(
+	                        (
+	                            #{0} * PI() / 180 - latitude * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                ) + COS(#{0} * PI() / 180) * COS(latitude * PI() / 180) * POW(
+	                    SIN(
+	                        (
+	                            #{1} * PI() / 180 - longitude * PI() / 180
+	                        ) / 2
+	                    ),
+	                    2
+	                )
+	            )
+	        ) * 1000
+	    ) AS distance
+	FROM
+	    business,photo
+	where business.id=photo.business_id
+	HAVING
+		distance &gt;= #{2}
+	ORDER BY
+	    distance ASC
+	LIMIT 1,150
+    </select> 
     
     
     

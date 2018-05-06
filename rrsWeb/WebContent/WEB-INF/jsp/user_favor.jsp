@@ -323,8 +323,8 @@ em{font-style:normal;}
               <div class="jtv-top-links">
                 <div class="links">
                   <ul>
-                    <li> <a title="My Account" href="profile"  ><span class="hidden-xs" value=${current_user.name} id="username"></span></a> </li>
-                    <li> <a title="Wishlist" href="#">Wishlist</a> </li>
+<!--                     <li> <a title="My Account" href="profile"  ><span class="hidden-xs" value=${current_user.name} id="username"></span></a> </li>
+ -->                    <li> <a title="Wishlist" href="#">Wishlist</a> </li>
                     <li> <a title="Checkout" href="#"><span class="hidden-xs">Checkout</span></a> </li>
                     <li>
                       <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> More <span class="caret"></span></a>
@@ -338,7 +338,7 @@ em{font-style:normal;}
                         </ul>
                       </div>
                     </li>
-                    <%-- <li> <a href="#"><span class="hidden-xs">${current_user.name}</span></a> </li> --%>
+                    <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li> 
                   </ul>
                 </div>
               </div>
@@ -422,8 +422,8 @@ em{font-style:normal;}
       <div class="nav-inner"> 
         <!-- BEGIN NAV -->
         <ul id="nav" class="hidden-xs">
-          <li class="drop-menu"><a href="index.html" class="level-top active"><span>Home</span></a></li>
-          <li class="drop-menu"><a href="shop_grid.html"><span>Shop Grid</span></a></li>
+          <li class="drop-menu"><a href="../index" class="level-top active"><span>Home</span></a></li>
+          <li class="drop-menu"><a href="../shop/grid"><span>Shop Grid</span></a></li>
 		  <li class="drop-menu"><a href="single_product.html"><span>Single Product</span></a></li>
           <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Love & Romance</span></a>
             <div class="jtv-menu-block-wrapper">
