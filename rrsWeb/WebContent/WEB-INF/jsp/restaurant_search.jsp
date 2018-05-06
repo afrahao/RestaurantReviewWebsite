@@ -266,7 +266,7 @@
                     
                     <!--actions-->
                     <div class="actions">
-                      <button class="btn-checkout" title="Checkout" type="button" onClick="#"><span>Checkout</span> </button>
+                      <button class="btn-checkout" title="Checkout" type="button" onClick=""><span>Checkout</span> </button>
                       <a href="#" class="view-cart"><span>View Cart</span></a> </div>
                   </div>
                 </div>
@@ -660,35 +660,7 @@
             </div>
             <div class="category-products">
               <ul class="products-grid">
-                <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img21.jpg"> </a>
-                        <div class="jtv-box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>
-                            <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>
-                            <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$155.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                
                 <li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
                   <div class="item-inner">
                     <div class="item-img">
@@ -1136,40 +1108,34 @@
               <div class="block-content">
                 <p class="block-subtitle">Shopping Options</p>
                 <dl id="narrow-by-list">
-                  <dt class="odd">Price</dt>
+                  <dt class="odd">Region Cuisine</dt>
                   <dd class="odd">
                     <ol>
-                      <li> <a href="#"><span class="price">$0.00</span> - <span class="price">$99.99</span></a> (6) </li>
-                      <li> <a href="#"><span class="price">$100.00</span> and above</a> (6) </li>
+                    <li> <a href = "javascript:;" onclick = "search(0)"><span>Western Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(1)"><span>Chinese Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(2)"><span>Southeast Asia Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(3)"><span>Japanese Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(4)"><span>Korean Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(5)"><span>French Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(6)"><span>Indian Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(7)"><span>Mexican Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(8)"><span>Italian Dish</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(9)"><span>Muslim Dish</span></a> </li>
                     </ol>
                   </dd>
-                  <dt class="even">Manufacturer</dt>
+                  <dt class="even">Special Feature</dt>
                   <dd class="even">
                     <ol>
-                      <li> <a href="#">Colorido</a> (20) </li>
-                      <li> <a href="#">Adidas</a> (25) </li>
-                      <li> <a href="#">Barisa Epic</a> (8) </li>
-                      <li> <a href="#">Esbeda</a> (5) </li>
-                    </ol>
-                  </dd>
-                  <dt class="odd">Handbag Material</dt>
-                  <dd class="odd">
-                    <ol class="bag-material">
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Beaded</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Canvas</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Velvet</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Rubber</a></li>
-                      <li> 
-                        <input type="checkbox" name="Material" value="Beaded">
-                        <a href="#">Leather</a></li>
+                      <li> <a href = "javascript:;" onclick = "search(10)"><span>Hot Pot</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(11)"><span>BBQ</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(12)"><span>Seafood</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(13)"><span>Buffet</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(14)"><span>Noodles</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(15)"><span>Fast Food</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(16)"><span>Cafe</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(17)"><span>Dessert & Bakery</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(18)"><span>Breakfast</span></a> </li>
+                          <li> <a href = "javascript:;" onclick = "search(19)"><span>Vegetarian</span></a> </li>
                     </ol>
                   </dd>
                   <dt class="odd">Color</dt>
@@ -1576,6 +1542,73 @@
 
 <!-- main js --> 
 <script src="js/main.js"></script>
+
+<script>
+function search(index)
+{
+	$.ajax({
+		url: "../restaurant_search",
+		type: "POST",
+		data: {
+			
+			"index": index
+		}, 
+		
+		success: function(res) {
+			//发送USERID成功
+			//并接收了用户的favorList
+			console.log(res);
+			initUserFavor = res;
+			function setSearchRestaurant(){
+
+
+				//curUserFavor = initUserFavor;
+				
+				var hasCon_html = "";
+				    hasCon_html += '<li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">'
+                  +'<div class="item-inner">'
+                   +' <div class="item-img">'
+                    +'  <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="single_product.html"> <img alt="Product Title Here" src="images/products/img21.jpg"> </a>'
+                      +'  <div class="jtv-box-hover">'
+                       +'   <ul class="add-to-links">'
+                        +'    <li><a class="link-quickview" href="#"><i class="icon-magnifier-add icons"></i><span class="hidden">Quick View</span></a></li>'
+                        +'    <li><a class="link-wishlist" href="#"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a></li>'
+                        +'   <li><a class="link-compare" href="#"><i class="icon-shuffle icons"></i><span class="hidden">Compare</span></a></li>'
+                       +'   </ul>'
+                     +'   </div>'
+                    +'  </div>'
+                   +' </div>'
+                   +' <div class="item-info">'
+                   +'   <div class="info-inner">'
+                   +'     <div class="item-title"> <a title="Product Title Here" href="single_product.html"> Product Title Here </a> </div>'
+                    +'    <div class="item-content">'
+                     +'     <div class="rating"> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>'
+                      +'    <div class="item-price">'
+                       +'     <div class="price-box"> <span class="regular-price"> <span class="price">$155.00</span> </span> </div>'
+                      +'    </div>'
+                      +'    <div class="action">'
+                      +'      <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>'
+                      +'    </div>'
+                    +'    </div>'
+                   +'   </div>'
+                 +'   </div>'
+               +'  </div>'
+              +'  </li>';
+				    
+
+				
+				return hasCon_html;
+			}
+			$(".products-grid").append(setSearchRestaurant());
+			
+		},
+		error: function(err){
+			
+			console.error(err);
+		}
+	});
+}
+</script>
 </body>
 </html>
 
