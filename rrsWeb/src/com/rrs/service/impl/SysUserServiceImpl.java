@@ -2,6 +2,8 @@ package com.rrs.service.impl;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +36,12 @@ public class SysUserServiceImpl implements SysUserService{
 	
 	public void processregister(String name,String email,String password){  
        String validateCode=MD5Util.encode2hex(email);
-       sysUserDao.regesterUser(name,email,MD5Util.encode2hex(password),validateCode);  
+       UUID uuid=UUID.randomUUID();
+       String str = uuid.toString(); 
+       String uuidStr=str.replace("-", "");
+       sysUserDao.regesterUser(uuidStr,name,email,MD5Util.encode2hex(password),validateCode);  
        
-      ///锟绞硷拷锟斤拷锟斤拷锟斤拷  
+      
         StringBuffer sb=new StringBuffer("点击下面链接激活账号，48小时生效，否则重新注册账号，链接只能使用一次，请尽快激活！</br>");  
         sb.append("<a href=\"http://localhost:8013/rrsWeb/register?action=activate&email=");  
         sb.append(email);   
@@ -84,46 +89,46 @@ public class SysUserServiceImpl implements SysUserService{
             
     }
     
-    //鐢ㄦ埛鍚嶄笉瀛樺湪杩斿洖0锛屽瘑鐮佽緭鍏ラ敊璇繑鍥�1锛岀敤鎴峰悕瀵嗙爜鍖归厤杩斿洖2锛岃緭鍏ユ鏁拌繃澶氳繑鍥�3,绛夊緟鏃堕棿涓嶅4
+    
     public int loginCheck(String email,String password)
     {
-    	//鏌ョ湅鏄惁鐢ㄦ埛瀛樺湪
+    	
     	SysUser user=sysUserDao.checkEmail(email);
-    	//鐢ㄦ埛瀛樺湪
+    
         if(user != null)
         {
         	int wait = sysUserDao.getTimes(email);
-        	//杈撻敊瀵嗙爜娆℃暟瓒呰繃浜旀骞朵笖绛夊緟鏃堕棿涓嶈秴杩囦竴鍒嗛挓
+        	
         	if(wait==5 && sysUserDao.checkLoginTime(email) < 60)
         	{
         		return 4;
         	}
-        	//绛夊緟鏃堕棿宸插埌
+        	
         	else if(wait==5 && sysUserDao.checkLoginTime(email) >= 60)
         	{
-        		//閲嶇疆杈撻敊娆℃暟涓�0
+        		
         		sysUserDao.resetTimes(email);
         	}
-        	//鏌ョ湅鐢ㄦ埛瀵嗙爜涓庤处鍙峰尮閰嶆儏鍐�
+        	
         	user=sysUserDao.checkPassword(email,MD5Util.encode2hex(password));
-        	//瀵嗙爜姝ｇ‘
+        	
         	if(user != null)
         	{
         		return 2;
         	}
         	else
         	{
-        		//澧炲姞瀵嗙爜杈撻敊娆℃暟
+        		
         		sysUserDao.updateTimes(email);
-        		//鏌ョ湅绗竴娆¤緭閿欏瘑鐮佹椂闂�
+        	
         		int time=sysUserDao.checkLoginTime(email);
-        		//濡傛灉璇ユ椂闂磋窛绂荤幇鍦ㄤ笉鍒颁袱鍒嗛挓
+        
         		if(time<120)
         		{
-        			//濡傛灉杩欐槸绗簲娆¤緭閿欏瘑鐮�
+        		
         			if(sysUserDao.getTimes(email)==5)
         			{
-        				//鏇存柊杈撻敊瀵嗙爜鏃堕棿
+        		
         				sysUserDao.updateTime(email);
         				return 3;
         			}
@@ -137,7 +142,7 @@ public class SysUserServiceImpl implements SysUserService{
         }
         return 0;
     }
-    //杩斿洖杩橀渶瑕佺瓑寰呯殑鏃堕棿
+
     public int waitTime(String email)
     {
     	return (60-sysUserDao.checkLoginTime(email));

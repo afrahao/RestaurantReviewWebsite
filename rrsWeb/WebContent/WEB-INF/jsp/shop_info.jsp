@@ -18,10 +18,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Favicon  -->
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="shortcut icon" type="../image/x-icon" href="../favicon.ico">
 
 <!-- CSS Style -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
 </head>
 
 <body class="single-product-page">
@@ -176,14 +176,14 @@
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
               <div class="welcome-msg hidden-xs">Welcome to Petunia! </div>
-              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
+              <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
-                  <li> <a class="selected" href="#"> <img src="images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
-                  <li> <a href="#"> <img src="images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
+                  <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-default.jpg" alt="flag"> <span>French</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-german.jpg" alt="flag"> <span>German</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-brazil.jpg" alt="flag"> <span>Brazil</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-chile.jpg" alt="flag"> <span>Chile</span> </a> </li>
+                  <li> <a href="#"> <img src="../images/flag-spain.jpg" alt="flag"> <span>Spain</span> </a> </li>
                 </ul>
               </div>
               <!-- End Header Language --> 
@@ -241,7 +241,7 @@
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
                       <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img01.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -249,7 +249,7 @@
                         </div>
                       </li>
                       <li class="item">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img02.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img02.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -257,7 +257,7 @@
                         </div>
                       </li>
                       <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="images/products/img04.jpg"> </a>
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img04.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">Product Title Here</a> </p>
@@ -277,7 +277,7 @@
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
@@ -305,7 +305,7 @@
         <!-- BEGIN NAV -->
         <ul id="nav" class="hidden-xs">
           <li class="drop-menu"><a href="index.html" class="level-top active"><span>Home</span></a></li>
-          <li class="drop-menu"><a href="shop_grid.html"><span>Shop Grid</span></a></li>
+          <li class="drop-menu"><a href="shop/grid"><span>Shop Grid</span></a></li>
 		  <li class="drop-menu"><a href="single_product.html"><span>Single Product</span></a></li>
           <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Love & Romance</span></a>
             <div class="jtv-menu-block-wrapper">
@@ -364,7 +364,7 @@
                     </ul>
                   </div>
                   <div class="col-2">
-                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
+                    <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="../images/menu-img1.jpg"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -427,13 +427,13 @@
                 </div>
                 <div class="jtv-nav-banner">
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img2.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img3.jpg" alt="Handbag"> </a> </div>
                   </div>
                   <div class="jtv-banner-box jtv-banner-box_last">
-                    <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                    <div class="jtv-nav-banner-img"> <a href="#"><img src="../images/menu-img4.jpg" alt="Handbag"> </a> </div>
                   </div>
                 </div>
               </div>
@@ -536,7 +536,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
+                <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="../images/menu-img5.jpg" alt="menu img"> </div>
               </div>
             </div>
           </li>
@@ -598,16 +598,16 @@
                   <div class="product-img-box col-lg-5 col-sm-6 col-xs-12">
                     <div class="new-label new-top-left"> New </div>
                     <div class="product-image">
-                      <div class="product-full"> <img id="product-zoom" src="images/products/img02.jpg" data-zoom-image="images/products/img02.jpg" alt="product-image"> </div>
+                      <div class="product-full"> <img id="product-zoom" src="../images/products/img02.jpg" data-zoom-image="../images/products/img02.jpg" alt="product-image"> </div>
                       <div class="more-views">
                         <div class="slider-items-products">
                           <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
                             <div class="slider-items slider-width-col4 block-content">
-                              <div class="more-views-items"> <a href="#" data-image="images/products/img02.jpg" data-zoom-image="images/products/img02.jpg"> <img id="product-zoom"  src="images/products/img02.jpg" alt="product-image"> </a></div>
-                              <div class="more-views-items"> <a href="#" data-image="images/products/img03.jpg" data-zoom-image="images/products/img03.jpg"> <img id="product-zoom"  src="images/products/img03.jpg" alt="product-image"> </a></div>
-                              <div class="more-views-items"> <a href="#" data-image="images/products/img04.jpg" data-zoom-image="images/products/img04.jpg"> <img id="product-zoom"  src="images/products/img04.jpg" alt="product-image"> </a></div>
-                              <div class="more-views-items"> <a href="#" data-image="images/products/img05.jpg" data-zoom-image="images/products/img05.jpg"> <img id="product-zoom"  src="images/products/img05.jpg" alt="product-image"> </a> </div>
-                              <div class="more-views-items"> <a href="#" data-image="images/products/img06.jpg" data-zoom-image="images/products/img06.jpg"> <img id="product-zoom"  src="images/products/img06.jpg" alt="product-image" /> </a></div>
+                              <div class="more-views-items"> <a href="#" data-image="../images/products/img02.jpg" data-zoom-image="../images/products/img02.jpg"> <img id="product-zoom"  src="../images/products/img02.jpg" alt="product-image"> </a></div>
+                              <div class="more-views-items"> <a href="#" data-image="../images/products/img03.jpg" data-zoom-image="../images/products/img03.jpg"> <img id="product-zoom"  src="../images/products/img03.jpg" alt="product-image"> </a></div>
+                              <div class="more-views-items"> <a href="#" data-image="../images/products/img04.jpg" data-zoom-image="../images/products/img04.jpg"> <img id="product-zoom"  src="../images/products/img04.jpg" alt="product-image"> </a></div>
+                              <div class="more-views-items"> <a href="#" data-image="../images/products/img05.jpg" data-zoom-image="../images/products/img05.jpg"> <img id="product-zoom"  src="../images/products/img05.jpg" alt="product-image"> </a> </div>
+                              <div class="more-views-items"> <a href="#" data-image="../images/products/img06.jpg" data-zoom-image="../images/products/img06.jpg"> <img id="product-zoom"  src="../images/products/img06.jpg" alt="product-image" /> </a></div>
                             </div>
                           </div>
                         </div>
@@ -955,7 +955,7 @@
   
   <!-- Related Products Slider -->
   
-  <div class="container">
+  <!-- <div class="container">
     <div class="related-section">
       <div class="slider-items-products">
         <div class="related-block">
@@ -1153,11 +1153,11 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Related Products Slider End --> 
   
   <!-- Upsell Product Slider -->
-  <div class="container">
+  <!-- <div class="container">
     <div class="upsell-section">
       <div class="slider-items-products">
         <div class="upsell-block">
@@ -1355,7 +1355,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   
   <!-- Brand Logo -->
   <div class="brand-logo">
@@ -1365,43 +1365,43 @@
           <div class="slider-items slider-width-col6"> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand1.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand1.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand2.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand2.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand3.png" alt="Image"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand3.png" alt="Image"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand4.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand4.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand5.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand5.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand6.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand6.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand7.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand7.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand8.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand8.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand9.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand9.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
             <!-- Item -->
-            <div class="item"> <a href="#"><img src="images/brand10.png" alt="brand logo"> </a> </div>
+            <div class="item"> <a href="#"><img src="../images/brand10.png" alt="brand logo"> </a> </div>
             <!-- End Item --> 
             
           </div>
@@ -1520,7 +1520,7 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-          <div style="text-align:center"> <a href="index.html"><img src="images/footer-logo.png" alt="logo"> </a> </div>
+          <div style="text-align:center"> <a href="index.html"><img src="../images/footer-logo.png" alt="logo"> </a> </div>
           <address>
           <p> <i class="fa fa-map-marker"></i>Company, 12/34 - West 21st Street, New York, USA </p>
           <p><i class="fa fa-mobile"></i><span>+ (800) 0123 456 789</span> </p>
@@ -1535,10 +1535,10 @@
           <div class="col-sm-5 col-xs-12 coppyright">Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="http://www.17sucai.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></div>
           <div class="col-sm-7 col-xs-12 payment-accept">
             <ul>
-              <li> <a href="#"><img src="images/payment-1.png" alt="Payment Card"></a> </li>
-              <li> <a href="#"><img src="images/payment-2.png" alt="Payment Card"></a> </li>
-              <li> <a href="#"><img src="images/payment-3.png" alt="Payment Card"></a> </li>
-              <li> <a href="#"><img src="images/payment-4.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-1.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-2.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-3.png" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img src="../images/payment-4.png" alt="Payment Card"></a> </li>
             </ul>
           </div>
         </div>
@@ -1550,24 +1550,50 @@
 <!-- End Footer --> 
 
 <!-- jquery js --> 
-<script src="js/jquery.min.js"></script> 
+<script src="../js/jquery.min.js"></script> 
 
 <!-- bootstrap js --> 
-<script src="js/bootstrap.min.js"></script> 
+<script src="../js/bootstrap.min.js"></script> 
 
 <!-- owl.carousel.min js --> 
-<script src="js/owl.carousel.min.js"></script> 
+<script src="../js/owl.carousel.min.js"></script> 
 
 <!-- jtv-jtv-mobile-menu js --> 
-<script src="js/jtv-mobile-menu.js"></script> 
+<script src="../js/jtv-mobile-menu.js"></script> 
 
 <!-- countdown js --> 
-<script src="js/countdown.js"></script> 
+<script src="../js/countdown.js"></script> 
 
 <!-- main js --> 
-<script src="js/main.js"></script> 
+<script src="../js/main.js"></script> 
 
 <!-- cloud zoom js --> 
-<script src="js/cloud-zoom.js"></script>
+<script src="../js/cloud-zoom.js"></script>
+
+<script>
+var curShop;
+
+//初始化页面
+$().ready( function() {
+	
+ 	$.ajax({
+	url: "../shop/initDetail",
+	type: "POST",
+	data: {
+	},  
+	success: function(res){
+		curShop = JSON.parse(res);
+
+		console.log(curShop);
+	},
+	error: function(err){
+		console.error(err);
+		console.log("bbb");
+	}
+	}); 	
+} ); 
+
+
+</script>
 </body>
 </html>

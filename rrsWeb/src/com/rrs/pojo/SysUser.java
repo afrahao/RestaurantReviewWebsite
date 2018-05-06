@@ -9,9 +9,9 @@ public class SysUser {
 	private String name;
 	private String password;
 	private String email;
-	private int status;//����״̬ 
-    private String validateCode;//������ 
-    private Date  registerTime;//ע��ʱ�� 
+	private int status;
+    private String validateCode;
+    private Date  registerTime;
 	private int review_count;
 	private Date yelping_since;
 	private int useful;
