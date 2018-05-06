@@ -85,7 +85,7 @@ public class ShopServiceImpl implements ShopService{
 		
 		return shopDao.getRestaurantByDistance3(lat,lon,distance);
 	}
-
+	
 }
 
 //按星级降序

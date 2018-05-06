@@ -1662,10 +1662,60 @@
 			console.log("qqq");
 			showGrid(curGrid);
 			
-		},
-		error: function(err){
-			console.error(err);
-			console.log("bbb");
+			var htmlStr = "";
+			var pageStr = "";
+			
+			/* for(var i = 0 ; i<curGrid.length/15 ; i++){
+				if(i == 0){
+			    	pageStr += "<li class=\"active\" href=\"#\"><span>1</span></li>"
+			    } else {
+			    	pageStr += "<li herf=\"#\"><span>"+(i+1)+"</span></li>"
+			    }
+			} */
+			
+			for(var i =0; i<curGrid.length; i++){
+				
+			    var obj = curGrid[i];
+		
+			    htmlStr += "<li class=\"item col-lg-4 col-md-4 col-sm-4 col-xs-6\">";
+			    htmlStr += "<div class=\"item-inner\">"
+			    htmlStr += "<div class=\"item-img\">";
+			    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\"  href=\"single_product.html\">";
+			    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\"" +obj.img+".jpg\">";
+			    htmlStr += "</a>";
+			    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "<div>";
+			    htmlStr += " <div class=\"item-info\">";
+			    htmlStr += "<div class=\"info-inner\">";
+			    htmlStr += "<div class=\"item-title\"> <a  href=\"single_product.html\" title=\""+obj.name + "\">" + obj.name +"</a> </div>";
+			    htmlStr += "<div class=\"item-content\">";
+			    htmlStr += "<div class=\"rating\">";
+			    
+			    var s = Math.floor(obj.stars);
+			    for(var j = 0 ; j < s ; j++){
+			    	htmlStr += "<i class=\"fa fa-star\"></i>";
+			    }
+			    for(var j = s ; j < 5 ; j++){
+			    	htmlStr += "<i class=\"fa fa-star-o\"></i>";
+			    }    
+			    htmlStr += "</div>";
+			    htmlStr += "<div class=\"item-price\">";
+			    htmlStr += "<div class=\"price-box\"> <span class=\"regular-price\"> <span class=\"price\" >"+ obj.review_count +" reviews </span> </span> </div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</li>";
+			  
+			};
+			
+			
+			pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
+			
+			$(".products-grid").append(htmlStr); 
+			showShopMarkers(curGrid);
 		}
 		}); 
 	 	
