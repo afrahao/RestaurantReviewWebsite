@@ -31,6 +31,7 @@ public class ShopController {
 	//全局变量
 	List<Restaurant> shopList = new ArrayList<Restaurant>();
 	List<Restaurant> originShopList;
+	List<Restaurant> DistanceshopList = new ArrayList<Restaurant>();
 
 	
 	//1.打开grid页面
@@ -40,22 +41,26 @@ public class ShopController {
 		ModelAndView mav = new ModelAndView();	
 		shopList = shopService.getRestaurant(61, 100);
 		
+		System.out.println("一共有"+shopList.size());
+		
 		if(shopList.size()%15 != 0){
 			for(int i = 0 ; i < shopList.size()%15 ; i ++){
 				Restaurant r = new Restaurant();
 			shopList.add(r);
 			}
 		}
-		
 		originShopList = new ArrayList<Restaurant>(shopList.size());
-
+		
 		for(int i = 0 ; i < shopList.size(); i ++){ 
 			originShopList.add(shopList.get(i).clone()); 
 		}
+
 		
 		mav.addObject("pageNum",calPageNum(shopList,15));
 		mav.addObject("current_user", user);
-		mav.setViewName("restaurant_search");		
+		mav.setViewName("restaurant_search");	
+		
+		System.out.println("一共有"+originShopList.size());
 		return mav;
 		
 	}
@@ -85,22 +90,57 @@ public class ShopController {
 		
 		//把当前list改成搜索到的list
 		//=========搜索就修改这里就可以了=============
-		shopList = shopService.getRestaurant(50,100);
-		//=========================================
-		
-		if(shopList.size()%15 != 0){
-			for(int i = 0 ; i < shopList.size()%15 ; i ++){
-				Restaurant r = new Restaurant();
-			shopList.add(r);
+		//shopList = shopService.getRestaurant(50,100);
+		if(key==""){
+			shopList = shopService.getRestaurant(61, 100);
+			
+			System.out.println("一共有"+shopList.size());
+			
+			if(shopList.size()%15 != 0){
+				for(int i = 0 ; i < shopList.size()%15 ; i ++){
+					Restaurant r = new Restaurant();
+				shopList.add(r);
+				}
 			}
-		}
-		originShopList = new ArrayList<Restaurant>(shopList.size());
+			originShopList = new ArrayList<Restaurant>(shopList.size());
+			
+			for(int i = 0 ; i < shopList.size(); i ++){ 
+				originShopList.add(shopList.get(i).clone()); 
+			}
+			
+			return calPageNum(shopList,15);
+			
+		} else {
+			
+			int searchNum = shopService.getRestaurantSearchNum(key);
+			if(searchNum == 0){
+				return 0;
+			} else {
+				
+				shopList = shopService.getRestaurantSearch(key);
+				for(int i=0;i<shopList.size();i++){
+					String shop_id = shopList.get(i).getId();
+					String img = shopService.getRestaurantImg(shop_id);
+					shopList.get(i).setImg(img);
+				}
+				//=========================================
+				
+				if(shopList.size()%15 != 0){
+					for(int i = 0 ; i < shopList.size()%15 ; i ++){
+						Restaurant r = new Restaurant();
+					shopList.add(r);
+					}
+				}
+				originShopList = new ArrayList<Restaurant>(shopList.size());
+				
+				for(int i = 0 ; i < shopList.size(); i ++){ 
+					originShopList.add(shopList.get(i).clone()); 
+				}
 		
-		for(int i = 0 ; i < shopList.size(); i ++){ 
-			originShopList.add(shopList.get(i).clone()); 
+			    return calPageNum(shopList,15);
+							
+			}				
 		}
-
-	    return calPageNum(shopList,15);
 	}
 	
 	//4.按评论排序商家
@@ -112,32 +152,162 @@ public class ShopController {
 		String str="";
 		System.out.println("============"+sort);
 		
+		if(originShopList.size()%15 != 0){
+			for(int i = 0 ; i < originShopList.size()%15 ; i ++){
+				Restaurant r = new Restaurant();
+				originShopList.add(r);
+			}
+		}
+		
 		if(sort.equals("1")){
 			//调用按评论数排序
+
+			if(shopList.size()!=originShopList.size()){
+				shopList = new ArrayList<Restaurant>(originShopList.size()) ;
+			
+				for(int i = 0 ; i < originShopList.size(); i ++){ 
+					shopList.add(originShopList.get(i).clone()); 
+				}
+			}
+			
 			shopList = shopService.getSortByReview(shopList);
 			
 		
 		} else if (sort.equals("2")){
 			//调用按星级排序
+			if(shopList.size()!=originShopList.size()){
+				shopList = new ArrayList<Restaurant>(originShopList.size()) ;
+			
+				for(int i = 0 ; i < originShopList.size(); i ++){ 
+					shopList.add(originShopList.get(i).clone()); 
+				}
+			}
+			
 			shopList = shopService.getSortByStars(shopList);
 			
 			
 		} else if (sort.equals("3")){
 			//距离小于等于3km
-			shopList = shopService.getRestaurantByDistance1(lat, lng, 3000);
-			System.out.println("----------------------------"+shopList.size());
-		} else if (sort.equals("4")){
-			//3-10km
-			shopList = shopService.getRestaurantByDistance2(lat, lng, 3000,5000);
+			//从数据库直接查询
+			//shopList = shopService.getRestaurantByDistanceA1(lat, lng, 3000);
+			
+			/*初始化列表有问题！！没有问题后下面两行可注释*/
+			//originShopList = shopService.getRestaurant(61, 100);
+			//重新计算距离
+			//shopService.GetDistance(lat, lng, originShopList);
+			
+			
+			
+			
+			shopService.GetDistance(lat, lng, originShopList);
+			/*************/
+			
+			DistanceshopList.clear();
+			System.out.println("排序前有o"+originShopList.size());
+			shopList = shopService.getRestaurantByDistanceB(originShopList);
+			System.out.println("排序后有"+shopList.size());
+			
+			
+			for(int i=0;i<shopList.size();i++){
+				System.out.println(shopList.get(i).getDistance());
+				DistanceshopList.add(shopList.get(i));
+				if(shopList.get(i).getDistance()>3000)
+					break;
+			}
+			System.out.println("3000距离有"+DistanceshopList.size());
+			shopList.clear();
+			shopList.addAll(DistanceshopList);
+			
 			System.out.println("----------------------------"+shopList.size());
 			
-		} else if (sort.equals("5")){
-			//10km以上
-			shopList = shopService.getRestaurantByDistance3(lat, lng, 5000);
+			if(shopList.size()%15 != 0){
+				for(int i = 0 ; i < shopList.size()%15 ; i ++){
+					Restaurant r = new Restaurant();
+				shopList.add(r);
+				}
+			}
+			
 			System.out.println("----------------------------"+shopList.size());
+		} else if (sort.equals("4")){
+			//3-5km
+			//从数据库直接查询
+			//shopList = shopService.getRestaurantByDistanceA2(lat, lng, 3000,5000);
+			
+			/*初始化列表有问题！！没有问题后下面两行可注释*/
+//			originShopList = shopService.getRestaurant(61, 100);
+//			//重新计算距离
+			shopService.GetDistance(lat, lng, originShopList);
+//			shopService.GetDistance(lat, lng, shopList);
+			/***********************/
+			
+			DistanceshopList.clear();
+			System.out.println("排序前有o"+originShopList.size());
+			shopList = shopService.getRestaurantByDistanceB(originShopList);
+			System.out.println("排序后有"+shopList.size());
+			
+			
+			System.out.println("----------------------------"+shopList.size());
+			for(int i=0;i<shopList.size();i++){
+				System.out.println(shopList.get(i).getDistance());
+				if(shopList.get(i).getDistance()>=3000 && shopList.get(i).getDistance()<=5000)
+					DistanceshopList.add(shopList.get(i));
+				if(shopList.get(i).getDistance()>=5000)
+					break;
+			}
+			System.out.println("3000-5000距离有"+DistanceshopList.size());
+			shopList.clear();
+			shopList.addAll(DistanceshopList);
+			
+			if(shopList.size()%15 != 0){
+				for(int i = 0 ; i < shopList.size()%15 ; i ++){
+					Restaurant r = new Restaurant();
+				shopList.add(r);
+				}
+			}
+			
+		} else if (sort.equals("5")){
+			//5km以上
+			//从数据库直接查询
+			//shopList = shopService.getRestaurantByDistanceA3(lat, lng, 5000);
+			
+			/*初始化列表有问题！！没有问题后下面两行可注释*/
+//			originShopList = shopService.getRestaurant(61, 100);
+//			//重新计算距离
+			shopService.GetDistance(lat, lng, originShopList);
+//			shopService.GetDistance(lat, lng, shopList);
+			/*************/
+			
+			DistanceshopList.clear();
+			
+			System.out.println("排序前有o"+originShopList.size());
+			shopList = shopService.getRestaurantByDistanceB(originShopList);
+			System.out.println("排序后有"+shopList.size());
+			
+			for(int i=0;i<shopList.size();i++){
+				System.out.println(shopList.get(i).getDistance());
+				if(shopList.get(i).getDistance()>5000)
+					DistanceshopList.add(shopList.get(i));
+			}
+			shopList.clear();
+			shopList.addAll(DistanceshopList);
+			System.out.println("5000距离有"+DistanceshopList.size());
+			System.out.println("----------------------------"+shopList.size());
+			
+			if(shopList.size()%15 != 0){
+				for(int i = 0 ; i < shopList.size()%15 ; i ++){
+					Restaurant r = new Restaurant();
+				shopList.add(r);
+				}
+			}
 		} else if (sort.equals("0")){
 			//用之前的default商店列表
-			shopList = originShopList;
+			shopList = new ArrayList<Restaurant>(originShopList.size()) ;
+			
+			for(int i = 0 ; i < originShopList.size(); i ++){ 
+				shopList.add(originShopList.get(i).clone()); 
+			}
+			
+			//shopList = originShopList;
 		}
 		
 		return calPageNum(shopList,15);
@@ -150,26 +320,34 @@ public class ShopController {
 		
 		int start = (page-1)*num;
 		int end = start + num;
-		for(int i = start ; i < end ; i ++){
-			if(shopList.get(i).getId() == null)
-				break;
-			else
-				partList.add(shopList.get(i));
+		
+		if(shopList.size() != 0){
+			for(int i = start ; i < end ; i ++){
 			
-		}
-		
-//		Iterator<Restaurant> it = shopList.iterator();
-//		while (it.hasNext()) {
-//			partList.add(it.next());
-//		}
-		
+				if(shopList.get(i).getId() == null)
+					break;
+				else
+					partList.add(shopList.get(i));	
+			}	
+		} 
 		return partList;
 	}
+
 	
 	//6.计算页码
 	public int calPageNum(List<Restaurant> list,int size){
 
 		return (int)Math.ceil((double)list.size()/(double)size);
+	}
+	
+	//7.根据定位对饭店进行距离计算
+	@RequestMapping(value = "/distance",method = {RequestMethod.POST })
+	@ResponseBody
+	public String distance(double lat,double lng,HttpServletRequest request, HttpServletResponse response){ 
+		originShopList = shopService.getRestaurant(61, 100);
+		System.out.println("排序前"+originShopList.size());
+		shopService.GetDistance(lat, lng, originShopList);
+	    return "OK";
 	}
 	
 	//=======================================商店详情================================================

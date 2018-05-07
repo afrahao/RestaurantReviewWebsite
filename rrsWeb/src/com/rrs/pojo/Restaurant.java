@@ -17,6 +17,8 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	int review_count;
 	int is_open;
 	String hours;
+	int reviewsRank = 0;
+	double distance;
 	
 	String img = "http://47.95.10.11/FilteredPhoto/";
 	public String getId() {
@@ -98,7 +100,20 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 		this.img = this.img + img;
 		this.img = this.img + ".jpg";
 	}
+	public int getReviewsRank() {
+		return reviewsRank;
+	}
+	public void setReviewsRank(int reviewsRank) {
+		this.reviewsRank = reviewsRank;
+	}
 	
+	
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
 	@Override  
     public boolean equals(Object obj) {  
         if (obj instanceof Restaurant) {  
@@ -129,8 +144,6 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 		// TODO Auto-generated method stub
 		return 0;
 	}    
-	
-	
 	
 }
 

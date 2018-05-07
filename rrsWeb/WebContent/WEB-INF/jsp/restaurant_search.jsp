@@ -1369,6 +1369,7 @@
 	由于Chrome、IOS10等已不再支持非安全域的浏览器定位请求，为保证定位成功率和精度，请尽快升级您的站点到HTTPS。
 	***************************************/
    var map, geolocation,lat,lng;
+	var isNull = 0;
     //加载地图，调用浏览器定位服务
     map = new AMap.Map('Container', {
         resizeEnable: true
@@ -1403,6 +1404,22 @@
         marker.setPosition(e.lnglat);
         lng=e.lnglat.getLng();
         lat=e.lnglat.getLat();
+        $.ajax({
+			url: "http://localhost:8080/rrsWeb/shop/distance",
+			async:false,
+			type: "POST",
+			data: {
+				"lat":lat,
+				"lng":lng
+			},  
+			success: function(res){
+				alert("计算成功");
+			},
+			error: function(err){
+				console.error(err);
+				console.log("bbb");
+			}
+			}); 
         alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
     })
     
@@ -1422,6 +1439,22 @@
         }//如为IP精确定位结果则没有精度信息
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         document.getElementById('tip').innerHTML = str.join('<br>');
+        $.ajax({
+			url: "http://localhost:8080/rrsWeb/shop/distance",
+			async:false,
+			type: "POST",
+			data: {
+				"lat":lat,
+				"lng":lng
+			},  
+			success: function(res){
+				alert("计算成功");
+			},
+			error: function(err){
+				console.error(err);
+				console.log("bbb");
+			}
+			}); 
     }
     //解析定位错误信息
     function onError(data) {
@@ -1556,8 +1589,6 @@
 		    } else {
 		    	pageStr += "<li> <a href=\"#\" onclick=\"pageControl("+(i+1)+")\">"+(i+1)+"</a></li>";
 		    }
-			
-			
 		} 
 		
 		pageStr += "<li><a href=\"#\">&gt;</a></li> ";
@@ -1603,10 +1634,16 @@
 				
 			},  
 			success: function(res){
-				pageNum = res;
-				 
-				reloadPageNum(pageNum);
 				
+				pageNum = res;
+				if(pageNum == 0){
+					alert("Found Noting");
+					isNull = 1;
+				} else {
+					reloadPageNum(pageNum);
+					isNull = 0;
+				}
+
 			},
 			error: function(err){
 				console.error(err);
@@ -1614,7 +1651,12 @@
 			}
 		}); 
 		
-		reloadGrid();
+		if(isNull == 0){
+			reloadGrid();
+			
+		}
+		isNull = 0;
+		
 	}
 	
 	//排序框的响应事件
@@ -1633,7 +1675,17 @@
 			success: function(res){
 				console.log("dddd");
 				pageNum = res;
-				reloadPageNum(pageNum);
+				
+				if(pageNum == 0){
+					alert("Found Noting");
+					//isNull = 1;
+					reloadPageNum(pageNum);
+				} else {
+					reloadPageNum(pageNum);
+					//isNull = 0;
+				}
+				
+				
 				
 				console.log(pageNum);
 			},
@@ -1641,6 +1693,11 @@
 				console.error(err);
 			}
 		}); 
+		
+		/* if(isNull == 0){
+			reloadGrid();
+		}
+		isNull == 0; */
 		
 		reloadGrid();
 	
@@ -1662,7 +1719,7 @@
 			console.log("qqq");
 			showGrid(curGrid);
 			
-			var htmlStr = "";
+			/* var htmlStr = "";
 			var pageStr = "";
 			
 			/* for(var i = 0 ; i<curGrid.length/15 ; i++){
@@ -1673,7 +1730,7 @@
 			    }
 			} */
 			
-			for(var i =0; i<curGrid.length; i++){
+			/*for(var i =0; i<curGrid.length; i++){
 				
 			    var obj = curGrid[i];
 		
@@ -1681,7 +1738,7 @@
 			    htmlStr += "<div class=\"item-inner\">"
 			    htmlStr += "<div class=\"item-img\">";
 			    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\"  href=\"single_product.html\">";
-			    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\"" +obj.img+".jpg\">";
+			    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\"" +obj.img+"\">";
 			    htmlStr += "</a>";
 			    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
 			    htmlStr += "</div>";
@@ -1714,7 +1771,7 @@
 			
 			pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
 			
-			$(".products-grid").append(htmlStr); 
+			$(".products-grid").append(htmlStr);  */
 			showShopMarkers(curGrid);
 		}
 		}); 
@@ -1768,4 +1825,3 @@ function goToDetail(id,name){
 
 </body>
 </html>
-

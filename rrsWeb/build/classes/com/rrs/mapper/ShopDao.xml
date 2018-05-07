@@ -14,10 +14,29 @@
     <select id="getRestaurant" parameterType="Integer" resultType="com.rrs.pojo.Restaurant">
         select *,photo.id as img from business,photo where business.id=photo.business_id LIMIT #{0},#{1}
     </select>
+    <!-- 返回restaurant By key -->
+    <select id="getRestaurantSearch" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
+        select * from business where business.name like CONCAT('%',#{key},'%')      
+    </select>
     
-    <!-- 返回搜索的restaurant个数 -->
-    <select id="getRestaurantSearchNum" parameterType="String" resultType="com.rrs.pojo.Restaurant">
-        
+    <select id="getRestaurantSearchNum" parameterType="String" resultType="Integer" >
+        select count(*) from business where business.name like CONCAT('%',#{key},'%') 
+    </select>
+    
+     <!-- 返回single By name -->
+    <select id="getRestaurantImg" parameterType="String" resultType="String">               
+        select photo.id as img from photo where photo.business_id=#{shop_id} LIMIT 0,1
+    </select>
+   
+    <!-- 获取当前类别的餐馆 -->
+    <select id="selectBusinessByCate" parameterType="int" resultType="com.rrs.pojo.Restaurant">
+        select * from  business
+        <where>
+            id in select business_id from business_cate
+            <where>
+            	category_id = #{0}
+            </where>
+        </where>
     </select>
     
     <!-- 返回距离指定地点指定范围的restaurant -->
@@ -85,7 +104,7 @@
 	    business,photo
 	where business.id=photo.business_id
 	HAVING
-		#{2} &gt;= distance &lt;= #{3}
+		distance &lt;= #{3} and  distance &gt;= #{2}
 	ORDER BY
 	    distance ASC
 	LIMIT 1,150
