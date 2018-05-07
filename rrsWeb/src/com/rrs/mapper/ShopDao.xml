@@ -15,9 +15,16 @@
         select *,photo.id as img from business,photo where business.id=photo.business_id LIMIT #{0},#{1}
     </select>
     
-    <!-- 返回搜索的restaurant个数 -->
-    <select id="getRestaurantSearchNum" parameterType="String" resultType="com.rrs.pojo.Restaurant">
-        
+    
+    <!-- 获取当前类别的餐馆 -->
+    <select id="selectBusinessByCate" parameterType="int" resultType="com.rrs.pojo.Restaurant">
+        select * from  business
+        <where>
+            id in select business_id from business_cate
+            <where>
+            	category_id = #{0}
+            </where>
+        </where>
     </select>
     
     <!-- 返回距离指定地点指定范围的restaurant -->
@@ -53,6 +60,7 @@
 		distance &lt;= #{2}
 	ORDER BY
 	    distance ASC
+	LIMIT 1,150
     </select> 
     <!-- 返回距离指定地点指定范围的restaurant -->
     <select id="getRestaurantByDistance2" resultType="com.rrs.pojo.Restaurant">
@@ -87,6 +95,7 @@
 		#{2} &gt;= distance &lt;= #{3}
 	ORDER BY
 	    distance ASC
+	LIMIT 1,150
     </select> 
     <!-- 返回距离指定地点指定范围的restaurant -->
     <select id="getRestaurantByDistance3" resultType="com.rrs.pojo.Restaurant">
@@ -121,6 +130,7 @@
 		distance &gt;= #{2}
 	ORDER BY
 	    distance ASC
+	LIMIT 1,150
     </select> 
     
     
