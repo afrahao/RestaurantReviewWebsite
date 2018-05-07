@@ -50,7 +50,13 @@ public class ShopServiceImpl implements ShopService{
 		
 		return shopDao.getRestaurantSearch(key);
 	}
-
+	
+	@Override
+	public String getRestaurantImg(String shop_id) {
+		
+		return shopDao.getRestaurantImg(shop_id);
+	}
+	
 	@Override
 	public List<Restaurant> getSortByReview(List<Restaurant> shopList) {
 

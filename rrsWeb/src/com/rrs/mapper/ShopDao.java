@@ -8,6 +8,7 @@ public interface ShopDao {
 
 	public List<Restaurant> getRestaurant(int start,int end);
 	public List<Restaurant> getRestaurantSearch(String key);
+	public String getRestaurantImg(String shop_id);
 	public List<Restaurant> selectBusinessByCate(int category_id);
 	public int getRestaurantNum();
 	public int getRestaurantSearchNum(String key);
