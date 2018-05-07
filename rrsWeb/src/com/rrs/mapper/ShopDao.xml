@@ -14,8 +14,16 @@
     <select id="getRestaurant" parameterType="Integer" resultType="com.rrs.pojo.Restaurant">
         select *,photo.id as img from business,photo where business.id=photo.business_id LIMIT #{0},#{1}
     </select>
+    <!-- 返回restaurant By key -->
+    <select id="getRestaurantSearch" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
+        select * from business where business.name like CONCAT('%',#{key},'%')      
+    </select>
     
-    
+     <!-- 返回single By name -->
+    <select id="getRestaurantImg" parameterType="String" resultType="String">               
+        select photo.id as img from photo where photo.business_id=#{shop_id} LIMIT 0,1
+    </select>
+   
     <!-- 获取当前类别的餐馆 -->
     <select id="selectBusinessByCate" parameterType="int" resultType="com.rrs.pojo.Restaurant">
         select * from  business

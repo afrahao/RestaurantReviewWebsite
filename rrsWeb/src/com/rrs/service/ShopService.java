@@ -7,7 +7,8 @@ public interface ShopService {
 	
 	List<Restaurant> getRestaurant(int start,int end);
 	List<Restaurant> getRestaurantSearch(String key);
-
+    String getRestaurantImg(String shop_id);
+	
 	int getRestaurantNum();
 	
 	int getRestaurantSearchNum(String key);

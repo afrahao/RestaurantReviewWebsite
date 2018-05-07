@@ -85,7 +85,13 @@ public class ShopController {
 		
 		//把当前list改成搜索到的list
 		//=========搜索就修改这里就可以了=============
-		shopList = shopService.getRestaurant(50,100);
+		//shopList = shopService.getRestaurant(50,100);
+		shopList = shopService.getRestaurantSearch(key);
+		for(int i=0;i<shopList.size();i++){
+			String shop_id = shopList.get(i).getId();
+			String img = shopService.getRestaurantImg(shop_id);
+			shopList.get(i).setImg(img);
+		}
 		//=========================================
 		
 		if(shopList.size()%15 != 0){
