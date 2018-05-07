@@ -1403,6 +1403,22 @@
         marker.setPosition(e.lnglat);
         lng=e.lnglat.getLng();
         lat=e.lnglat.getLat();
+        $.ajax({
+			url: "http://localhost:8013/rrsWeb/shop/distance",
+			async:false,
+			type: "POST",
+			data: {
+				"lat":lat,
+				"lng":lng
+			},  
+			success: function(res){
+				alert("计算成功");
+			},
+			error: function(err){
+				console.error(err);
+				console.log("bbb");
+			}
+			}); 
         alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
     })
     
@@ -1422,6 +1438,22 @@
         }//如为IP精确定位结果则没有精度信息
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         document.getElementById('tip').innerHTML = str.join('<br>');
+        $.ajax({
+			url: "http://localhost:8013/rrsWeb/shop/distance",
+			async:false,
+			type: "POST",
+			data: {
+				"lat":lat,
+				"lng":lng
+			},  
+			success: function(res){
+				alert("计算成功");
+			},
+			error: function(err){
+				console.error(err);
+				console.log("bbb");
+			}
+			}); 
     }
     //解析定位错误信息
     function onError(data) {
@@ -1453,7 +1485,7 @@
 	$().ready( function() {
 		var page = 1;
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1568,7 +1600,7 @@
 	//用于搜索或排序后重载grid
 	function reloadGrid(){
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
+			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+1,
 			async:false,
 			type: "POST",
 			data: {
@@ -1594,7 +1626,7 @@
 		var key=document.getElementById("search").value;
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+			url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key,
 			async:false,
 			type: "POST",
 			data: {
@@ -1621,7 +1653,7 @@
 		var sort=$("option:selected",this).val();
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
+			url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
 			async:false,
 			type: "POST",
 			data: {
@@ -1650,7 +1682,7 @@
 		var page=num;
 		
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,

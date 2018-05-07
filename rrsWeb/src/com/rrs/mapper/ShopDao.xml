@@ -92,7 +92,7 @@
 	    business,photo
 	where business.id=photo.business_id
 	HAVING
-		#{2} &gt;= distance &lt;= #{3}
+		distance &lt;= #{3} and  distance &gt;= #{2}
 	ORDER BY
 	    distance ASC
 	LIMIT 1,150

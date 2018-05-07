@@ -15,15 +15,17 @@ import com.rrs.service.ShopService;
 
 @Service
 public class ShopServiceImpl implements ShopService{
-
+	
+	
 	@Autowired
     private ShopDao shopDao;
 	private List<Restaurant> reviewsList = new ArrayList<Restaurant>();
-	
+	private static double EARTH_RADIUS = 6378.137;
 	@Override
 	public List<Restaurant> getRestaurant(int start,int end) {
 		
 		List<Restaurant>list = shopDao.getRestaurant(start,end);
+		System.out.println("数据库取出"+list.size());
 		Collections.sort(list, new DescReviewComparator());
 		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
@@ -63,26 +65,58 @@ public class ShopServiceImpl implements ShopService{
 	
 	//筛选距离定位点指定距离的饭店
 	@Override
-	public List<Restaurant> getRestaurantByDistance1(double lat,double lon,int distance) {
+	public List<Restaurant> getRestaurantByDistanceA1(double lat,double lon,int distance) {
 		
 		return shopDao.getRestaurantByDistance1(lat,lon,distance);
 	}
 	
 	//筛选距离定位点指定距离的饭店
 	@Override
-	public List<Restaurant> getRestaurantByDistance2(double lat,double lon,int distance1,int distance2) {
+	public List<Restaurant> getRestaurantByDistanceA2(double lat,double lon,int distance1,int distance2) {
 		
 		return shopDao.getRestaurantByDistance2(lat,lon,distance1,distance2);
 	}
 	
 	//筛选距离定位点指定距离的饭店
 	@Override
-	public List<Restaurant> getRestaurantByDistance3(double lat,double lon,int distance) {
+	public List<Restaurant> getRestaurantByDistanceA3(double lat,double lon,int distance) {
 		
 		return shopDao.getRestaurantByDistance3(lat,lon,distance);
 	}
+
+	//距离筛选
+	@Override
+	public List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList) {
+		Collections.sort(shopList, new AscDistanceComparator());
+		return shopList;
+	}
+
+	public void GetDistance(double lat, double lon,List<Restaurant> shopList){
+		for(int i=0;i<shopList.size();i++){
+			double distance=distance(lat,lon,shopList.get(i).getLatitude(),shopList.get(i).getLongitude());
+			shopList.get(i).setDistance(distance);
+			System.out.println(distance);
+		}
+		
+	}
+	
+	
+	//计算两个经纬度之间的距离
+	private double distance(double lat1, double lng1, float lat2, float lng2){
+		double radLat1 = lat1 * Math.PI / 180.0;
+        double radLat2 = lat2 * Math.PI / 180.0;
+        double difference = radLat1 - radLat2;
+        double mdifference = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+        double distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(difference / 2), 2)
+                + Math.cos(radLat1) * Math.cos(radLat2)
+                * Math.pow(Math.sin(mdifference / 2), 2)));
+        distance = distance * EARTH_RADIUS;
+        distance = Math.round(distance)*1000;
+        return distance;
+	}
 	
 }
+
 
 //按星级降序
 class DescStarsComparator implements Comparator<Restaurant> {
@@ -129,6 +163,20 @@ class DescReviewComparator implements Comparator<Restaurant> {
 	@Override
 	public int compare(Restaurant r1, Restaurant r2) {
 		return r2.getReview_count() - r1.getReview_count();
+	}
+}
+
+
+//按距离升序
+class AscDistanceComparator implements Comparator<Restaurant> {
+	@Override
+	public int compare(Restaurant r1, Restaurant r2) {
+		if (r1.getDistance()<r2.getDistance())
+			return -1;
+		else if(r1.getDistance()>r2.getDistance())
+			return 1;
+		else
+			return 0;
 	}
 }
 

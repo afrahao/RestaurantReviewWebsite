@@ -18,6 +18,7 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	int is_open;
 	String hours;
 	int reviewsRank = 0;
+	double distance;
 	
 	String img = "http://47.95.10.11/FilteredPhoto/";
 	public String getId() {
@@ -106,6 +107,13 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 		this.reviewsRank = reviewsRank;
 	}
 	
+	
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
 	@Override  
     public boolean equals(Object obj) {  
         if (obj instanceof Restaurant) {  
