@@ -1369,6 +1369,7 @@
 	由于Chrome、IOS10等已不再支持非安全域的浏览器定位请求，为保证定位成功率和精度，请尽快升级您的站点到HTTPS。
 	***************************************/
    var map, geolocation,lat,lng;
+	var isNull = 0;
     //加载地图，调用浏览器定位服务
     map = new AMap.Map('Container', {
         resizeEnable: true
@@ -1404,7 +1405,7 @@
         lng=e.lnglat.getLng();
         lat=e.lnglat.getLat();
         $.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/distance",
+			url: "http://localhost:8080/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1439,7 +1440,7 @@
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         document.getElementById('tip').innerHTML = str.join('<br>');
         $.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/distance",
+			url: "http://localhost:8080/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1485,7 +1486,7 @@
 	$().ready( function() {
 		var page = 1;
 	 	$.ajax({
-		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1600,7 +1601,7 @@
 	//用于搜索或排序后重载grid
 	function reloadGrid(){
 		$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+1,
+			url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
 			async:false,
 			type: "POST",
 			data: {
@@ -1626,17 +1627,23 @@
 		var key=document.getElementById("search").value;
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key,
+			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
 			async:false,
 			type: "POST",
 			data: {
 				
 			},  
 			success: function(res){
-				pageNum = res;
-				 
-				reloadPageNum(pageNum);
 				
+				pageNum = res;
+				if(pageNum == 0){
+					alert("Found Noting");
+					isNull = 1;
+				} else {
+					reloadPageNum(pageNum);
+					isNull = 0;
+				}
+
 			},
 			error: function(err){
 				console.error(err);
@@ -1644,7 +1651,12 @@
 			}
 		}); 
 		
-		reloadGrid();
+		if(isNull == 0){
+			reloadGrid();
+			
+		}
+		isNull = 0;
+		
 	}
 	
 	//排序框的响应事件
@@ -1653,7 +1665,7 @@
 		var sort=$("option:selected",this).val();
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
+			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
 			async:false,
 			type: "POST",
 			data: {
@@ -1663,7 +1675,17 @@
 			success: function(res){
 				console.log("dddd");
 				pageNum = res;
-				reloadPageNum(pageNum);
+				
+				if(pageNum == 0){
+					alert("Found Noting");
+					//isNull = 1;
+					reloadPageNum(pageNum);
+				} else {
+					reloadPageNum(pageNum);
+					//isNull = 0;
+				}
+				
+				
 				
 				console.log(pageNum);
 			},
@@ -1671,6 +1693,11 @@
 				console.error(err);
 			}
 		}); 
+		
+		/* if(isNull == 0){
+			reloadGrid();
+		}
+		isNull == 0; */
 		
 		reloadGrid();
 	
@@ -1682,7 +1709,7 @@
 		var page=num;
 		
 	 	$.ajax({
-		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1692,7 +1719,7 @@
 			console.log("qqq");
 			showGrid(curGrid);
 			
-			var htmlStr = "";
+			/* var htmlStr = "";
 			var pageStr = "";
 			
 			/* for(var i = 0 ; i<curGrid.length/15 ; i++){
@@ -1703,7 +1730,7 @@
 			    }
 			} */
 			
-			for(var i =0; i<curGrid.length; i++){
+			/*for(var i =0; i<curGrid.length; i++){
 				
 			    var obj = curGrid[i];
 		
@@ -1711,7 +1738,7 @@
 			    htmlStr += "<div class=\"item-inner\">"
 			    htmlStr += "<div class=\"item-img\">";
 			    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\"  href=\"single_product.html\">";
-			    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\"" +obj.img+".jpg\">";
+			    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\"" +obj.img+"\">";
 			    htmlStr += "</a>";
 			    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
 			    htmlStr += "</div>";
@@ -1744,7 +1771,7 @@
 			
 			pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
 			
-			$(".products-grid").append(htmlStr); 
+			$(".products-grid").append(htmlStr);  */
 			showShopMarkers(curGrid);
 		}
 		}); 

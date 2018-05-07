@@ -57,16 +57,29 @@ public class ShopServiceImpl implements ShopService{
 		return shopDao.getRestaurantImg(shop_id);
 	}
 	
+	
+	//按评论筛选
 	@Override
 	public List<Restaurant> getSortByReview(List<Restaurant> shopList) {
-
-		return reviewsList;
+		List<Restaurant> sortList = new ArrayList<Restaurant>(shopList.size());
+		
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			sortList.add(shopList.get(i).clone()); 
+		}
+		Collections.sort(sortList, new DescReviewComparator());
+		return sortList;
 	}
 
+	//按星级筛选
 	@Override
 	public List<Restaurant> getSortByStars(List<Restaurant> shopList) {
-		Collections.sort(shopList, new DescStarsComparator());
-		return shopList;
+		List<Restaurant> sortList = new ArrayList<Restaurant>(shopList.size());
+		
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			sortList.add(shopList.get(i).clone()); 
+		}
+		Collections.sort(sortList, new DescStarsComparator());
+		return sortList;
 	}
 	
 	//筛选距离定位点指定距离的饭店
@@ -93,8 +106,14 @@ public class ShopServiceImpl implements ShopService{
 	//距离筛选
 	@Override
 	public List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList) {
-		Collections.sort(shopList, new AscDistanceComparator());
-		return shopList;
+		List<Restaurant> sortList = new ArrayList<Restaurant>(shopList.size());
+		
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			sortList.add(shopList.get(i).clone()); 
+		}
+		
+		Collections.sort(sortList, new AscDistanceComparator());
+		return sortList;
 	}
 
 	public void GetDistance(double lat, double lon,List<Restaurant> shopList){
