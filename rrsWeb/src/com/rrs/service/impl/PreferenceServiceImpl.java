@@ -15,19 +15,19 @@ public class PreferenceServiceImpl implements PreferenceService{
 	private PreferenceDao preferenceDao;
 
 	@Override
-	public List<Integer> selectPreference(int userId) {
+	public List<Integer> selectPreference(String userId) {
 		// TODO Auto-generated method stub
 		 return preferenceDao.selectById(userId);
 	}
 
 	@Override
-	public void insertPreference(int userId,int categoryId) {
+	public void insertPreference(String userId,int categoryId) {
 		// TODO Auto-generated method stub
 		preferenceDao.insertcategory(userId,categoryId);
 	}
 
 	@Override
-	public void deletePreference(int userId) {
+	public void deletePreference(String userId) {
 		// TODO Auto-generated method stub
 		preferenceDao.deletecategory(userId);
 	}
