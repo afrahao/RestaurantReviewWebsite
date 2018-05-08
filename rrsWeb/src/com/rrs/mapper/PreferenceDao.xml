@@ -4,8 +4,8 @@
 
 <mapper namespace="com.rrs.mapper.PreferenceDao">
 
-	<!-- 根据邮箱判断用户是否已经注册 -->
-    <select id="selectById" parameterType="int" resultType="int">
+	<!-- 查询喜好 -->
+    <select id="selectById" parameterType="String" resultType="int">
         select category_id from  user_cate
         <where>
             user_id = #{0}
@@ -13,18 +13,18 @@
     </select>
    
 	
-	<!-- 注册系统用户 -->
-	<insert id="insertcategory" parameterType="int">
+	<!-- 插入喜好 -->
+	<insert id="insertcategory" >
 		INSERT INTO user_cate
 		(user_id,category_id)
-		VALUES(#{0},#{1})
+		VALUES(#{userId},#{categoryId})
 	</insert>
 	
-	<!-- 根据ID删除客户信息 -->
-	<delete id="deletecategory" parameterType="int">
+	<!-- 删除喜好 -->
+	<delete id="deletecategory" >
         DELETE FROM user_cate
         <where>
-            user_id = #{0}
+            user_id = #{userId}
         </where>
     </delete>
 </mapper>

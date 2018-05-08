@@ -2153,6 +2153,8 @@
 <script src='js/snowfall.min.js'></script> 
 <script>
 
+
+
 				jQuery(document).ready(function() {
 				
 					
@@ -2235,9 +2237,11 @@
 					
          snowFall.snow(document.getElementById("slider"), {image : "images/flake.png", minSize: 1, maxSize:12});
                    
+   
 					
 
 				});	//ready
+				
 				
 			</script><!-- Hot Deals Timer 1--> 
 			<script>
@@ -2282,6 +2286,14 @@ CountBack_slider(gsecs1, "countbox_1", 1);
               </div>
 </div>
             <!--End of Newsletter Popup-->
+<script>
+
+
+
+
+</script>            
+            
+
 
             </body>
 </html>

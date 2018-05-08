@@ -706,52 +706,14 @@ em{font-style:normal;}
 				    
 				    <div class="select-box">
 				    
-				        <div class="select-list con1">
-				        	<h3 >Region Cuisine</h3>
-				            <span id="tag_0"><em  class="con1-1">Western Dish</em></span>
-				            <span id="tag_1"><em  class="con1-2">Chinese Dish</em></span>
-				            <span id="tag_2"><em  class="con1-3">Southeast Asia Dish</em></span>
-				            <span id="tag_3"><em  class="con1-4">Japanese Dish</em></span>
-				            <span id="tag_4"><em  class="con1-5">Korean Dish</em></span>
-				            <span id="tag_5"><em  class="con1-6">Franch Dish</em></span>
-				            <span id="tag_6"><em  class="con1-7">Indian Dish</em></span>
-				            <span id="tag_7"><em  class="con1-8">Mexican Dish</em></span>
-				            <span id="tag_8"><em  class="con1-9">Italy Dish</em></span>
-				            <span id="tag_9"><em  class="con1-10">Muslim Dish</em></span>
-				            <span id="tag_10"><em  class="con1-11">Other Cuisine</em></span>
-				            
-				            
+				    	<div class="select-list">
+				        
 				        </div>
-				        <div class="select-list con2">
-				        	<h3 >Special Feature</h3>
-				            <span id="tag_11"><em class="con2-1">Hot Pot</em></span>
-				            <span id="tag_12"><em class="con2-2">BBQ</em></span>
-				            <span id="tag_13"><em class="con2-3">Seafood</em></span>
-				            <span id="tag_14"><em class="con2-4">Buffet</em></span>
-				            <span id="tag_15"><em class="con2-5">Noodles</em></span>
-				            <span id="tag_16"><em class="con2-6">Fast Food</em></span>
-				            <span id="tag_17"><em class="con2-7">Cafe</em></span>
-				            <span id="tag_18"><em class="con2-8">Dessert & Bakery</em></span>
-				            <span id="tag_19"><em class="con2-9">Breakfast</em></span>
-				            <span id="tag_20"><em class="con2-10">Vegetarian</em></span>
-				           
-				           
-				        </div>
-				        <!-- <div class="select-list con3">
-				        	<h3 >Individual Flavor</h3>
-				            <span><em class="con3-1">Beijing Cuisine</em></span>
-				            <span><em class="con3-2">Guangdong Cuisine</em></span>
-				            <span><em class="con3-3">Shandong Cuisine</em></span>
-				            <span><em class="con3-4">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-5">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-6">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-7">Zhejiang & Jiangsu Cuisine</em></span>
-				            <span><em class="con3-8">Zhejiang & Jiangsu Cuisine</em></span>
-				        </div>         -->
+				    
 			    	</div>
 			    	
 	    			<button type="button" id="btn-choose">CHOOSE</button>
-	    			<button type="button" id="btn-save">SAVE TO STORE</button>
+	    			<!-- <button type="button" id="btn-save">SAVE TO STORE</button> -->
 				</div>
 				<script src="../js/jquery-1.10.2.min.js"></script>
 				<!-- <script src="../js/user-favor.js"></script> -->
@@ -827,22 +789,85 @@ em{font-style:normal;}
                       "Breakfast",
                       "Vegetarian"];
 
+  var cateList = [{id:21,name:"Women's Clothing"},
+                  {id:34,name:"Auto Repair"},
+                  {id:103,name:"Nail Salons"},
+                  {id:24,name:"Chinese"},
+                  {id:94,name:"Pets"},
+                  {id:48,name:"Italian"},
+                  {id:40,name:"American (New)"},
+                  {id:69,name:"Burgers"},
+                  {id:72,name:"Home & Garden"},
+                  {id:9,name:"Coffee & Tea"},
+                  {id:20,name:"Real Estate"},
+                  {id:149,name:"Doctors"},
+                  {id:10,name:"American (Traditional)"},
+                  {id:42,name:"Hair Salons"},
+                  {id:144,name:"Mexican"},
+                  {id:31,name:"Arts & Entertainment"},
+                  {id:45,name:"Sandwiches"},
+                  {id:49,name:"Hotels & Travel"},
+                  {id:38,name:"Pizza"},
+                  {id:50,name:"Event Planning & Services"},
+                  {id:0,name:"Active Life"},
+                  {id:68,name:"Fast Food"},
+                  {id:23,name:"Fashion"},
+                  {id:6,name:"Local Services"},
+                  {id:25,name:"Bars"},
+                  {id:2,name:"Automotive"},
+                  {id:17,name:"Nightlife"},
+                  {id:134,name:"Health & Medical"},
+                  {id:19,name:"Home Services"},
+                  {id:44,name:"Beauty & Spas"},
+                  {id:4,name:"Food"},
+                  {id:14,name:"Shopping"},
+                  {id:12,name:"Restaurants"},];
+
   var initUserFavor = new Array();
   var curUserFavor = new Array();
 
- $(function(){
-   
-    conConfirm();//确认事件
-    
-    conChoice();//选择内容
+  function category(id,cateContent)
+  {
+  	this.id=id;
+  	this.content=cateContent;
+  }
 
-    
-});
+function generateCate(){
+	
+	var cateHtml = "<h3 >Shop Tags</h3>";
+	
+  	for(var i = 0 ; i < cateList.length ; i ++){
+  		
+  		var str = "<span id=\"tag_"+i+" \"><em class=\"con1-"+i+"\">"+cateList[i].name+"</em></span>";;
+  		
+  		for(var j = 0 ; j < initUserFavor.length;j++){
+  	  		if(cateList[i].id == initUserFavor[j]){
+  	  			str = "<span id=\"tag_"+i+"\" class=\"cur\"><em  class=\"con1-"+i+"\">"+cateList[i].name+"</em></span>";
+  	  			break;
+  	  		}
+  	  	}
+  		cateHtml += str;
+  	}
+  	
+  	$(".select-list").append(cateHtml); 
+  	
+	
+  	
+  	
+  }
+  
+  
+
+
+
 
 $().ready( function() {
+
+	
 	
 	$.ajax({
 		url: "../user/initFavor",
+		async:false,
 		type: "POST",
 		data: {
 			
@@ -862,21 +887,26 @@ $().ready( function() {
 				var hasCon_html = "";
 				
 				for(var i =0; i<initUserFavor.length; i++){
-				
-				    var hasObj = favorContent[(initUserFavor[i])];
-				    hasCon_html += "<span>";
-				    hasCon_html += "<em>"+hasObj+"</em>";
-				    hasCon_html += "</span>";
-				    
-				    
-				    $("#tag_"+initUserFavor[i].toString()).attr("class","cur");
-				    
-				
+					var id = initUserFavor[i];
+					
+					for(var j = 0 ; j < cateList.length; j ++){
+						if(cateList[j].id == id){
+							var hasObj = cateList[i].name;
+						    hasCon_html += "<span>";
+						    hasCon_html += "<em>"+hasObj+"</em>";
+						    hasCon_html += "</span>";
+						    
+						    
+						    $("#tag_"+initUserFavor[i].toString()).attr("class","cur");	
+						}
+					}
+
 				};
 				return hasCon_html;
 			}
 
 			$(".label-box").append(setUserFavor());
+			generateCate();
 			
 		},
 		error: function(err){
@@ -885,11 +915,20 @@ $().ready( function() {
 		}
 	});
 	
+	//generateCate();
 	console.log("aaa");
 		
 } ); 
 
+$(function(){
+	 
 
+    conConfirm();//确认事件
+    
+    conChoice();//选择内容
+
+    
+});
 
 //选择内容
 //选择中内容的当前样式
@@ -918,7 +957,8 @@ function modifyFavors() {
 			"curUserFavor": curUserFavor.join()
 		}, 
 		success: function(res) {
-			console.log(res);
+			console.log("======"+res);
+			alert("Change Completed!");
 		},
 		fail: function(err){
 			console.error(err);
@@ -990,9 +1030,15 @@ function conConfirm() {
                 var select_i_con = test(has_data,select_conText_data)[i];
                 var select_attr ={"iClass":select_i_class, "conText":select_i_con};
                 selected_data.push(select_attr);
-                curUserFavor.push(contentToIndex(selected_data[i].conText));
+                
+                curUserFavor.push(contentToId(selected_data[i].conText));
 
             };
+            
+            for(var j = 0 ; j <selected_data.length; j ++ ){
+            	console.log(selected_data[j].conText);
+            }
+                
 
             for(var j =0; j<selected_data.length; j++){
 
@@ -1018,13 +1064,13 @@ function conConfirm() {
 }
 //
 //获得标签id
-function contentToIndex(content){
+function contentToId(content){
 	
-	for(var i = 0 ; i < favorContent.length; i++){
-		if(favorContent[i]==content){
-			console.log(i);
+	for(var i = 0 ; i < cateList.length; i++){
+		if(cateList[i].name==content){
+			console.log(cateList[i].id);
 			
-			return i;
+			return cateList[i].id;
 		}
 			
 	}
@@ -1033,7 +1079,7 @@ function contentToIndex(content){
 //判断用户喜好是否更改过
 function isFavorChanged(){
 	if(curUserFavor.length != initUserFavor.length){
-		console.log("no1");
+
 		console.log(curUserFavor.length);
 		console.log(initUserFavor.length);
 		return 1;

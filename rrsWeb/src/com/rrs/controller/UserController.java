@@ -145,7 +145,7 @@ public class UserController {
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
 		
 		System.out.println("-----r----" + user.getId());
-		int id = Integer.parseInt(user.getId());
+		String id = user.getId();
 		List<Integer> categoryIdList = preferenceService.selectPreference(id);
 		
 	    return categoryIdList;
@@ -155,7 +155,7 @@ public class UserController {
 	@RequestMapping("/updateFavor")  
 	public @ResponseBody void updateFavor(Integer[] curUserFavor,HttpServletRequest request, HttpServletResponse response){ 
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
-		int userId = Integer.parseInt(user.getId());
+		String userId = user.getId();
 		preferenceService.deletePreference(userId);
 		
 		//String curUserFavor = request.getParameter("nickname");

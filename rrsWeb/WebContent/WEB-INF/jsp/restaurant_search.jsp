@@ -23,6 +23,7 @@
 <!-- CSS Style -->
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="../css/loader.css">
+<link rel="stylesheet" href="../css/shop-grid.css">
 
 <!-- 页面加载 -->
    
@@ -428,7 +429,7 @@
 				<div class="nav-inner">
 					<!-- BEGIN NAV -->
 					<ul id="nav" class="hidden-xs">
-						<li class="drop-menu"><a href="index.html"
+						<li class="drop-menu"><a href="../index"
 							class="level-top active"><span>Home</span></a></li>
 						<li class="drop-menu"><a href="shop_grid.html"><span>Shop
 									Grid</span></a></li>
@@ -855,9 +856,9 @@
               </div>
             </div>
           </div> -->
-						<article class="col-main">
+						<article class="col-main" id="col-main-grid">
 							<h2 class="page-heading">
-								<span class="page-heading-title">Restaurants</span>
+								<span class="page-heading-title">Shops</span>
 							</h2>
 							<div class="toolbar">
 								<div class="row">
