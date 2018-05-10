@@ -3,6 +3,8 @@ package com.rrs.util;
 import java.io.IOException;
 import java.util.List;
 
+import org.json.JSONArray;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -64,5 +66,17 @@ public class JsonUtils {
         }  
         return null;  
     }  
+    
+//    public static JSONArray getJSONArrayByList(List<?> list){
+//        JSONArray jsonArray = new JSONArray();
+//        if (list==null ||list.isEmpty()) {
+//            return jsonArray;//nerver return null
+//        }
+//
+//        for (Object object : list) {
+//            jsonArray.add(object);
+//        }
+//        return jsonArray;
+//    }
   
 }  

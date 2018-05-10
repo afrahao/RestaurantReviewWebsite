@@ -2834,7 +2834,7 @@ jtv-img-box.last {
 }
 .content-page .category-product {
 	margin-bottom: 15px;
-	margin-top: 0px;
+	margin-top: 50px;
 }
 .jtv-title {
 	padding: 15px 0 0;
@@ -3401,7 +3401,7 @@ button.button.button-clear {
 	padding: 25px 0px 20px;
 }
 .content-page .category-product {
-	margin-top: 0px;
+	margin-top: 50px;
 }
 .jtv-special-block .jtv-block-inner {
 	border-width: 0 !important;

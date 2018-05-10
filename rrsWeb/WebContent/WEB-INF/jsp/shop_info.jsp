@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -22,6 +23,7 @@
 
 <!-- CSS Style -->
 <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/shop-info.css">
 </head>
 
 <body class="single-product-page">
@@ -234,7 +236,7 @@
             <div class="jtv-top-cart-box"> 
               <!-- Top Cart -->
               <div class="mini-cart">
-                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#"> <span class="cart_count">2</span><span class="price">My Bag / $259.00</span> </a> </div>
+                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#" style="display:none;"> <span class="cart_count">2</span><span class="price">My Bag / $259.00</span> </a> </div>
                 <div>
                   <div class="jtv-top-cart-content"> 
                     
@@ -244,7 +246,7 @@
                         <div class="item-inner"> <a class="product-image" title="Product Title Here" href="single_product.html"><img alt="Product Title Here" src="../images/products/img01.jpg"> </a>
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                            <p class="product-name"><a href="#">Product Title Here</a> </p>
+                            <p class="product-name"><a href="#">${shopItem.name}</a> </p>
                             <strong>1</strong> x <span class="price">$79.99</span> </div>
                         </div>
                       </li>
@@ -305,7 +307,7 @@
         <!-- BEGIN NAV -->
         <ul id="nav" class="hidden-xs">
           <li class="drop-menu"><a href="index.html" class="level-top active"><span>Home</span></a></li>
-          <li class="drop-menu"><a href="shop/grid"><span>Shop Grid</span></a></li>
+          <li class="drop-menu"><a href="../grid"><span>Shop Grid</span></a></li>
 		  <li class="drop-menu"><a href="single_product.html"><span>Single Product</span></a></li>
           <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Love & Romance</span></a>
             <div class="jtv-menu-block-wrapper">
@@ -578,7 +580,7 @@
             <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
             <li> <a href="shop_grid.html" title="">Clutches</a> <span>/ </span> </li>
             <li> <a href="shop_grid.html" title="">Bucket Bag</a> <span>/</span> </li>
-            <li> <strong>Lorem ipsum dolor sit amet</strong> </li>
+            <li> <strong>${shopItem.name}</strong> </li>
           </ul>
         </div>
       </div>
@@ -598,13 +600,15 @@
                   <div class="product-img-box col-lg-5 col-sm-6 col-xs-12">
                     <div class="new-label new-top-left"> New </div>
                     <div class="product-image">
-                      <div class="product-full"> <img id="product-zoom" src="../images/products/img02.jpg" data-zoom-image="../images/products/img02.jpg" alt="product-image"> </div>
+<%--                       <div class="product-full"> <img id="product-zoom" src="${shopItem.img}" data-zoom-image="${shopItem.img}" alt="product-image"> </div>
+ --%>                      <div class="product-full"> <img class="product-img" src="${shopItem.img[0]}" data-zoom-image="${shopItem.img[0]}" alt="product-image" > </div>
+                      
                       <div class="more-views">
                         <div class="slider-items-products">
                           <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
                             <div class="slider-items slider-width-col4 block-content">
-                              <div class="more-views-items"> <a href="#" data-image="../images/products/img02.jpg" data-zoom-image="../images/products/img02.jpg"> <img id="product-zoom"  src="../images/products/img02.jpg" alt="product-image"> </a></div>
-                              <div class="more-views-items"> <a href="#" data-image="../images/products/img03.jpg" data-zoom-image="../images/products/img03.jpg"> <img id="product-zoom"  src="../images/products/img03.jpg" alt="product-image"> </a></div>
+                              <div class="more-views-items"> <a class="product-img" href="#" data-image="${shopItem.img[0]}" >  </a></div>
+                              <div class="more-views-items"> <a class="product-img" href="#" data-image="${shopItem.img[0]}" > </a></div>
                               <div class="more-views-items"> <a href="#" data-image="../images/products/img04.jpg" data-zoom-image="../images/products/img04.jpg"> <img id="product-zoom"  src="../images/products/img04.jpg" alt="product-image"> </a></div>
                               <div class="more-views-items"> <a href="#" data-image="../images/products/img05.jpg" data-zoom-image="../images/products/img05.jpg"> <img id="product-zoom"  src="../images/products/img05.jpg" alt="product-image"> </a> </div>
                               <div class="more-views-items"> <a href="#" data-image="../images/products/img06.jpg" data-zoom-image="../images/products/img06.jpg"> <img id="product-zoom"  src="../images/products/img06.jpg" alt="product-image" /> </a></div>
@@ -616,30 +620,113 @@
                     <!-- end: more-images --> 
                   </div>
                   <div class="product-shop col-lg-7 col-sm-6 col-xs-12">
-                    <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div>
+                    <!-- <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div> -->
                     <div class="product-name">
-                      <h1>Lorem ipsum dolor sit amet</h1>
+                      <h1>${shopItem.name}</h1>
                     </div>
-                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i>
-                      <p class="rating-links"> <a href="#">4 Review(s)</a> <span class="separator">|</span> <a href="#"><i class="fa fa-pencil"></i> write a review</a> </p>
+                    <div class="rating"> 
+                    <c:forEach var="i" begin="1" end="${shopItem.stars}">
+					   <i class="fa fa-star"></i> 
+					</c:forEach>
+					
+					<c:forEach var="i" begin="${shopItem.stars}" end="4">
+					   <i class="fa fa-star-o"></i> 
+					</c:forEach>
+                    
+                   
+                      <p class="rating-links"> <a href="#">${shopItem.review_count} Review(s)</a> <span class="separator">|</span> <a href="#"><i class="fa fa-pencil"></i> write a review</a> </p>
                     </div>
                     <div class="price-block">
                       <div class="price-box">
-                        <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> $599.99 </span> </p>
-                        <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $499.99 </span> </p>
+                                         
+                      <p class="special-price"> 
+	                      <span class="price-label">Special Price</span> 
+	                      <c:if test="${shopItem.price_range == 1}">
+	                      	<span id="product-price-48" class="price">Under $10</span> 
+	                      </c:if>
+	                      <c:if test="${shopItem.price_range == 2}">
+	                      	<span id="product-price-48" class="price">$10 ~ $30</span> 
+	                      </c:if>
+	                      <c:if test="${shopItem.price_range == 3}">
+	                      	<span id="product-price-48" class="price">$31 ~ $60</span> 
+	                      </c:if>
+	                      <c:if test="${shopItem.price_range == 4}">
+	                      	<span id="product-price-48" class="price">More Than $60</span> 
+	                      </c:if>
+                      </p>
+
+                        <!-- <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $499.99 </span> </p> -->
                       </div>
                     </div>
                     <div class="info-orther">
-                      <p>Item Code: #12345678</p>
-                      <p>Availability: <span class="in-stock">In stock</span></p>
-                      <p>Condition: New</p>
+                      <p><b style="font-size:16px;color:#e62263;">State :</b> <b>${shopItem.state}</b></p>
+                      
+                      <p><b style="font-size:16px;color:#e62263;">City : </b><b class="in-stock">${shopItem.city}</b></p>
+                      
+                      <p><b style="font-size:16px;color:#e62263;">Address :</b> <b>${shopItem.address}</b></p>
                     </div>
                     <div class="short-description">
-                      <h2>Quick Overview</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. </p>
+                    
+                    <div class="creatures-hours">
+                   
+                      	<div class="running-hours">
+						  
+						  <img src="http://47.95.10.11/FilteredPhoto/clock.jpg" height="30" width="30">
+						  <h style="font-size:15px;color:#; margin-left:15px;">Hours</h>
+						  <table class="hours-table">
+						    <tbody>
+						      <tr>
+						          <th class="hours-date" scope="row">Mon</th> 
+							      <td>
+							        <span>7:00</span> - <span>18:00</span>
+							      </td>
+						      </tr>
+						      <tr>
+						          <th class="hours-date" scope="row">Mon</th> 
+							      <td>
+							        <span>7:00</span> - <span>18:00</span>
+							      </td>
+						      </tr>
+						      <tr>
+						          <th class="hours-date" scope="row">Mon</th> 
+							      <td>
+							        <span>7:00</span> - <span>18:00</span>
+							      </td>
+						      </tr>
+						      <tr>
+						          <th class="hours-date" scope="row">Mon</th> 
+							      <td>
+							        <span>7:00</span> - <span>18:00</span>
+							      </td>
+						      </tr>
+						      <tr>
+						          <th class="hours-date" scope="row">Mon</th> 
+							      <td>
+							        <span>7:00</span> - <span>18:00</span>
+							      </td>
+						      </tr>
+						      <!-- 待解锁哦 -->
+						      <c:forEach items="${shopItem.hours}" var="hourItem">
+						       <tr>
+						          <th scope="row">${hourItem.date}</th> 
+							      <td>
+							        <span>${hourItem.open}</span> - <span>${hourItem.close}</span>
+							      </td>
+						       </tr>
+						      </c:forEach>
+						    </tbody>
+						  </table>
+						</div>
+						
+						<div class="shop-creatures">
+	                    	features
+	                    </div>
+                      
+                      </div>
+                      <div class="clear"></div>
                     </div>
-                    <div class="form-option">
-                      <p class="form-option-title">Available Options:</p>
+                    <!--<div class="form-option">
+                       <p class="form-option-title">Available Options:</p>
                       <div class="attributes">
                         <div class="attribute-label">Color:</div>
                         <div class="attribute-list">
@@ -671,8 +758,9 @@
                             <li><span class="separator">|</span> <a class="link-compare" href="#"><span>Add to Compare</span></a></li>
                           </ul>
                         </div>
-                      </div>
-                    </div>
+                      </div> 
+                    </div>-->
+                    
                     <div class="form-share">
                       <div class="sendtofriend-print"> <a href="javascript:print();"><i class="fa fa-print"></i> Print</a> <a href="#"><i class="fa fa-envelope-o fa-fw"></i> Send to a friend</a> </div>
                     </div>
@@ -684,21 +772,31 @@
           <div class="product-collateral col-lg-12 col-sm-12 col-xs-12">
             <div class="add_info">
               <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
-                <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Product Description </a> </li>
-                <li><a href="#product_tabs_tags" data-toggle="tab">Tags</a></li>
-                <li> <a href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
+                <li class="active"> <a href="#product_tabs_map" data-toggle="tab"> Map </a> </li>
+                <li><a href="#product_tabs_tags" data-toggle="tab"> Tags </a></li>
+                <li> <a href="#product_reviews_tabs" data-toggle="tab">Reviews</a> </li>
                 <li> <a href="#product_tabs_custom" data-toggle="tab">Custom Tab</a> </li>
                 <li> <a href="#product_tabs_custom1" data-toggle="tab">Custom Tab1</a> </li>
               </ul>
               <div id="productTabContent" class="tab-content">
-                <div class="tab-pane fade in active" id="product_tabs_description">
+                <div class="tab-pane fade in active" id="product_tabs_map">
                   <div class="std">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.</p>
                     <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="product_tabs_tags">
-                  <div class="box-collateral box-tags">
+                
+                	<div class="label-box">
+                		<%-- <c:forEach items="${shopItem.category}" var="cateItem"> --%>
+                			<span>
+                				<em>${cateItem}Health & Medical</em>
+                			</span>
+                		<%-- </c:forEach> --%>
+                	
+                	</div>
+                
+                  <!-- <div class="box-collateral box-tags">
                     <div class="tags">
                       <form id="addTagForm" action="#" method="get">
                         <div class="form-add-tags">
@@ -707,22 +805,25 @@
                             <input class="input-text" name="productTagName" id="productTagName" type="text">
                             <button type="button" title="Add Tags" class=" button btn-add" onClick="submitTagForm()"> <span>Add Tags</span> </button>
                           </div>
-                          <!--input-box--> 
+                          input-box 
                         </div>
                       </form>
                     </div>
-                    <!--tags-->
+                    tags
                     <p class="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
-                  </div>
+                  </div> -->
                 </div>
-                <div class="tab-pane fade" id="reviews_tabs">
+                <div class="tab-pane fade" id="product_reviews_tabs">
                   <div class="box-collateral box-reviews" id="customer-reviews">
                     <div class="box-reviews1">
                       <div class="form-add">
                         <form id="review-form" method="post" action="http://www.jtvcommerce.com/review/product/post/id/176/">
-                          <h3>Write Your Own Review</h3>
+                          <h3 style="font-size:18px; font-weight:bold; color:#e62263;">Write Your Own Review</h3>
                           <fieldset>
-                            <h4>How do you rate this product? <em class="required">*</em></h4>
+                            <input type="hidden" value="" class="validate-rating" name="validate_rating">
+                            <div class="review1">
+                            
+                            <h4>How do you rate this shop? <em class="required">*</em></h4>
                             <span id="input-message-box"></span>
                             <table id="product-review-table" class="data-table">
                               <colgroup>
@@ -745,46 +846,30 @@
                               </thead>
                               <tbody>
                                 <tr class="first odd">
-                                  <th>Price</th>
+                                  <th>Stars</th>
                                   <td class="value"><input type="radio" class="radio" value="11" id="Price_1" name="ratings[3]"></td>
                                   <td class="value"><input type="radio" class="radio" value="12" id="Price_2" name="ratings[3]"></td>
                                   <td class="value"><input type="radio" class="radio" value="13" id="Price_3" name="ratings[3]"></td>
                                   <td class="value"><input type="radio" class="radio" value="14" id="Price_4" name="ratings[3]"></td>
                                   <td class="value last"><input type="radio" class="radio" value="15" id="Price_5" name="ratings[3]"></td>
                                 </tr>
-                                <tr class="even">
-                                  <th>Value</th>
-                                  <td class="value"><input type="radio" class="radio" value="6" id="Value_1" name="ratings[2]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="7" id="Value_2" name="ratings[2]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="8" id="Value_3" name="ratings[2]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="9" id="Value_4" name="ratings[2]"></td>
-                                  <td class="value last"><input type="radio" class="radio" value="10" id="Value_5" name="ratings[2]"></td>
-                                </tr>
-                                <tr class="last odd">
-                                  <th>Quality</th>
-                                  <td class="value"><input type="radio" class="radio" value="1" id="Quality_1" name="ratings[1]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="2" id="Quality_2" name="ratings[1]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="3" id="Quality_3" name="ratings[1]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="4" id="Quality_4" name="ratings[1]"></td>
-                                  <td class="value last"><input type="radio" class="radio" value="5" id="Quality_5" name="ratings[1]"></td>
-                                </tr>
+                              
                               </tbody>
                             </table>
-                            <input type="hidden" value="" class="validate-rating" name="validate_rating">
-                            <div class="review1">
+                            
                               <ul class="form-list">
                                 <li>
                                   <label class="required" for="nickname_field">Nickname<em>*</em></label>
                                   <div class="input-box">
-                                    <input type="text" class="input-text" id="nickname_field" name="nickname">
+                                    <input type="text" class="input-text" id="nickname_field" name="nickname" value="${current_user.name}" disabled>
                                   </div>
                                 </li>
-                                <li>
+                                <!-- <li>
                                   <label class="required" for="summary_field">Summary<em>*</em></label>
                                   <div class="input-box">
                                     <input type="text" class="input-text" id="summary_field" name="title">
                                   </div>
-                                </li>
+                                </li> -->
                               </ul>
                             </div>
                             <div class="review2">
@@ -808,6 +893,8 @@
                       <h3>Customer Reviews</h3>
                       <div class="box visible">
                         <ul>
+                        <!-- 动态生成reviewList -->
+                        <%-- <c:forEach items="${shopItem.reviewList}" var="reviewItem"> --%>
                           <li>
                             <table class="ratings-table">
                               <colgroup>
@@ -816,32 +903,47 @@
                               </colgroup>
                               <tbody>
                                 <tr>
-                                  <th>Value</th>
+                                  <th style="margin-right:10px; width:100%;">Stars</th>
+                                </tr>
+                                <tr>
                                   <td><div class="rating-box">
-                                      <div class="rating" style="width:100%;"></div>
+                                      <div class="rating" style="width:100%;">
+                                      	<c:forEach var="i" begin="1" end="${reviewItem.stars}">
+										   <i class="fa fa-star"></i> 
+										</c:forEach>
+										
+										<c:forEach var="i" begin="${reviewItem.stars}" end="4">
+										   <i class="fa fa-star-o"></i> 
+										</c:forEach>
+                                      </div>
                                     </div></td>
                                 </tr>
                                 <tr>
-                                  <th>Quality</th>
-                                  <td><div class="rating-box">
-                                      <div class="rating" style="width:100%;"></div>
-                                    </div></td>
-                                </tr>
                                 <tr>
-                                  <th>Price</th>
+                                  <th style="margin-right:10px; width:100%;">Time</th>
+                                <tr>
                                   <td><div class="rating-box">
-                                      <div class="rating" style="width:100%;"></div>
+                                      <div class="rating" style="width:100%;">
+                                      	2018/01/01${reviewItem.date}
+                                      </div>
                                     </div></td>
                                 </tr>
+                               
                               </tbody>
                             </table>
                             <div class="review">
-                              <h6><a href="#">Excellent</a></h6>
-                              <small>Review by <span>Leslie Prichard </span>on 1/3/2014 </small>
-                              <div class="review-txt"> I have purchased shirts from Minimalism a few times and am never disappointed. The quality is excellent and the shipping is amazing. It seems like it's at your front door the minute you get off your pc. I have received my purchases within two days - amazing.</div>
+                              <!-- <h6><a href="#">Excellent</a></h6> -->
+                              <small>Review by <span>holic${reviewItem.user_name} </span></small>
+                              <div class="review-txt" style="word-wrap:break-word;">${reviewItem.text}</div>
+                              
+                              <nobr class="indicator">useful <span>(${reviewItem.useful})  </span></nobr>
+                              <nobr class="indicator">  funny <span>(${reviewItem.funny})  </span></nobr>
+                              <nobr class="indicator">  cool <span>(${reviewItem.cool})  </span></nobr>
                             </div>
                           </li>
-                          <li class="even">
+                          
+                          <%-- </c:forEach> --%>
+                          <%-- <li class="even">
                             <table class="ratings-table">
                               <colgroup>
                               <col width="1">
@@ -906,7 +1008,7 @@
                               <small>Review by <span>Anthony  Lewis</span>on 1/3/2014 </small>
                               <div class="review-txt last"> Unbeatable service and selection. This store has the best business model I have seen on the net. They are true to their word, and go the extra mile for their customers. I felt like a purchasing partner more than a customer. You have a lifetime client in me. </div>
                             </div>
-                          </li>
+                          </li> --%>
                         </ul>
                       </div>
                       <div class="actions"> <a class="button view-all" id="revies-button" href="#"><span><span>View all</span></span></a> </div>
@@ -1574,7 +1676,8 @@
 var curShop;
 
 //初始化页面
-$().ready( function() {
+/* $().ready( function() {
+	
 	
  	$.ajax({
 	url: "../shop/initDetail",
@@ -1591,7 +1694,7 @@ $().ready( function() {
 		console.log("bbb");
 	}
 	}); 	
-} ); 
+} );  */
 
 
 </script>

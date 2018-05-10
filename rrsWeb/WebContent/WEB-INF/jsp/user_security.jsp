@@ -371,7 +371,7 @@ em{font-style:normal;}
             <div class="jtv-top-cart-box"> 
               <!-- Top Cart -->
               <div class="mini-cart">
-                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#"> <span class="cart_count">2</span><span class="price">My Bag / $259.00</span> </a> </div>
+                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#" style="display:none;"> <span class="cart_count">2</span><span class="price">My Bag / $259.00</span> </a> </div>
                 <div>
                   <div class="jtv-top-cart-content"> 
                     
@@ -418,12 +418,12 @@ em{font-style:normal;}
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
-            <div class="search-box">
+            <!-- <div class="search-box">
               <form action="cat" method="POST" id="search_mini_form" name="Categories">
                 <input type="text" placeholder="Search here..." maxlength="70" name="search" id="search">
                 <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
               </form>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

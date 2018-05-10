@@ -16,11 +16,43 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	float stars;
 	int review_count;
 	int is_open;
-	String hours;
+	
 	int reviewsRank = 0;
 	double distance;
+	int price_range = 1;
 	
-	String img = "http://47.95.10.11/FilteredPhoto/";
+	List<Review> reviewList;
+	List<String> category;
+	List<Hours> hours;
+	List<String> img;
+	List<Attribute> attribute;
+	
+	
+	
+	public List<String> getImg() {
+		return img;
+	}
+	public void setImg(List<String> img) {
+		this.img = img;
+	}
+	public List<Attribute> getAttribute() {
+		return attribute;
+	}
+	public void setAttribute(List<Attribute> attribute) {
+		this.attribute = attribute;
+	}
+	public List<Hours> getHours() {
+		return hours;
+	}
+	public void setHours(List<Hours> hours) {
+		this.hours = hours;
+	}
+	public List<String> getCategory() {
+		return category;
+	}
+	public void setCategory(List<String> category) {
+		this.category = category;
+	}
 	public String getId() {
 		return id;
 	}
@@ -87,19 +119,8 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	public void setIs_open(int is_open) {
 		this.is_open = is_open;
 	}
-	public String getHours() {
-		return hours;
-	}
-	public void setHours(String hours) {
-		this.hours = hours;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = this.img + img;
-		this.img = this.img + ".jpg";
-	}
+	
+
 	public int getReviewsRank() {
 		return reviewsRank;
 	}
@@ -114,6 +135,13 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
+	
+	public List<Review> getReviewList() {
+		return reviewList;
+	}
+	public void setReviewList(List<Review> reviewList) {
+		this.reviewList = reviewList;
+	}    
 	@Override  
     public boolean equals(Object obj) {  
         if (obj instanceof Restaurant) {  
@@ -143,7 +171,14 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	public int compareTo(Restaurant arg0) {
 		// TODO Auto-generated method stub
 		return 0;
-	}    
+	}
+	public int getPrice_range() {
+		return price_range;
+	}
+	public void setPrice_range(int price_range) {
+		this.price_range = price_range;
+	}
+	
 	
 }
 

@@ -12,7 +12,7 @@
     
 	<!-- 返回一些restaurant -->
     <select id="getRestaurant" parameterType="Integer" resultType="com.rrs.pojo.Restaurant">
-        select *,photo.id as img from business,photo where business.id=photo.business_id LIMIT #{0},#{1}
+        select * from business LIMIT #{0},#{1}
     </select>
     <!-- 返回restaurant By key -->
     <select id="getRestaurantSearch" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
@@ -25,8 +25,14 @@
     
      <!-- 返回single By name -->
     <select id="getRestaurantImg" parameterType="String" resultType="String">               
-        select photo.id as img from photo where photo.business_id=#{shop_id} LIMIT 0,1
+        select photo.id as img from photo where photo.business_id=#{shop_id}
     </select>
+    
+    <!-- 返回single By id -->
+    <select id="getRestaurantById" parameterType="String" resultType="Restaurant">               
+        select *,photo.id as img from business,photo where business.id=photo.business_id and business.id = #{0} limit 0,1
+    </select>
+    
    
     <!-- 获取当前类别的餐馆 -->
     <select id="selectBusinessByCate" parameterType="int" resultType="com.rrs.pojo.Restaurant">

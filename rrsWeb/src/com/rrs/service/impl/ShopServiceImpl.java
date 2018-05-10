@@ -25,6 +25,11 @@ public class ShopServiceImpl implements ShopService{
 	public List<Restaurant> getRestaurant(int start,int end) {
 		
 		List<Restaurant>list = shopDao.getRestaurant(start,end);
+		
+		for(int i=0; i < list.size(); i++){
+			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
+		}
+		
 		System.out.println("数据库取出"+list.size());
 		Collections.sort(list, new DescReviewComparator());
 		reviewsList = list;
@@ -52,9 +57,18 @@ public class ShopServiceImpl implements ShopService{
 	}
 	
 	@Override
-	public String getRestaurantImg(String shop_id) {
+	public List<String> getRestaurantImg(String shop_id) {
+		List<String> imgList = new ArrayList<String>();
+		imgList = shopDao.getRestaurantImg(shop_id);
+		if(imgList.size() == 0){
+			imgList.add("http://47.95.10.11/FilteredPhoto/null.jpg");
+		} else {
+			for(int i = 0 ; i < imgList.size(); i ++)
+				imgList.set(i, "http://47.95.10.11/FilteredPhoto/"+imgList.get(i)+".jpg");
+		}
 		
-		return shopDao.getRestaurantImg(shop_id);
+		
+		return imgList;
 	}
 	
 	
@@ -138,6 +152,13 @@ public class ShopServiceImpl implements ShopService{
         distance = distance * EARTH_RADIUS;
         distance = Math.round(distance)*1000;
         return distance;
+	}
+
+	//通过ID找商店
+	@Override
+	public Restaurant getRestaurantById(String business_id) {
+		// TODO Auto-generated method stub
+		return shopDao.getRestaurantById(business_id);
 	}
 	
 }

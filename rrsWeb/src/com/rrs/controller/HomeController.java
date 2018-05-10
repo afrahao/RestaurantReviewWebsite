@@ -4,21 +4,28 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.SysUser;
+import com.rrs.service.ShopService;
 import com.rrs.service.SysUserService;
 import com.rrs.util.CookieUtils;
+import com.rrs.util.JsonUtils;
 import com.rrs.util.ServiceException;
 
 
@@ -26,8 +33,14 @@ import com.rrs.util.ServiceException;
 public class HomeController {
 	@Autowired
 	private SysUserService sysUserService;
+	@Autowired
+	private ShopService shopService;
 	
-
+	ArrayList<ArrayList<Restaurant>> allList;
+	
+	//==============================首页===============================
+	
+	//1.跳转到首页
 	@RequestMapping(value = "/index", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -51,6 +64,85 @@ public class HomeController {
 		mav.setViewName("index");
 		return mav;
 	}
+	
+	//2.加载首页的分区shop
+	@RequestMapping(value = "/loadIndexGrid",method = {RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public String initDetail(HttpServletRequest request, HttpServletResponse response){
+
+		allList= new ArrayList<ArrayList<Restaurant>>();
+
+		ArrayList<Restaurant> hot = new ArrayList<Restaurant>();
+		
+		//获取hot商店列表
+		hot = (ArrayList<Restaurant>) shopService.getRestaurant(1, 8);
+		System.out.println("hot:"+hot.size());
+		
+		//获取food商店列表
+		ArrayList<Restaurant> food = new ArrayList<Restaurant>();
+		food = (ArrayList<Restaurant>) shopService.getRestaurant(5, 8);
+		System.out.println("food:"+food.size());
+		
+		//获取fashion商店列表
+		ArrayList<Restaurant> fashion = new ArrayList<Restaurant>();
+		fashion = (ArrayList<Restaurant>) shopService.getRestaurant(9, 8);
+		System.out.println("fashion:"+fashion.size());
+		
+		//获取health商店列表
+		ArrayList<Restaurant> health = new ArrayList<Restaurant>();
+		health = (ArrayList<Restaurant>) shopService.getRestaurant(13, 8);
+		System.out.println("health:"+health.size());
+		
+		//获取hotel商店列表
+		ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
+		hotel = (ArrayList<Restaurant>) shopService.getRestaurant(17, 8);
+		System.out.println("hotel:"+hotel.size());
+		
+		//获取near商店列表
+		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
+		near = (ArrayList<Restaurant>) shopService.getRestaurant(21, 8);
+		System.out.println("near:"+near.size());
+		
+		allList.add(hot);
+		allList.add(food);
+		allList.add(fashion);
+		allList.add(health);
+		allList.add(hotel);
+		allList.add(near);
+		
+		for(int i = 0; i < allList.size(); i ++)
+			System.out.println(allList.get(i).size());
+		
+		String str = JsonUtils.ObjectToJson(allList);
+		
+		//System.out.println(str);
+		
+		return str;
+		
+	}
+	
+	//3.跳转到详情页
+	@RequestMapping(value = "/indexToDetail", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView toDetail(String business_id,int list_num,HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+//		Restaurant curShop = new Restaurant();
+//		for(int i = 0; i < allList.get(list_num).size() ; i++){
+//			if(allList.get(list_num).get(i).getId().equals(business_id)){
+//				curShop = allList.get(list_num).get(i).clone();
+//				break;
+//			}
+//		}
+		
+		mav.addObject("current_user", user);
+		//mav.addObject("shopItem", curShop);
+		mav.setViewName("redirect:shop/goToDetail?business_id="+business_id);
+		return mav;
+	}
+	
+	
+	
+	//=============================有关账户===================================
 	
 	//退出
 	@RequestMapping(value = "/checkOut", method = { RequestMethod.GET, RequestMethod.POST })
@@ -294,5 +386,8 @@ public class HomeController {
 				out.print("success");      			//结果传到前端
 			}
 		}
+		
+		
+	
 		
 }
