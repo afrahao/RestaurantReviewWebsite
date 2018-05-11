@@ -42,7 +42,7 @@
         </form>
       </div>
     </li>
-    <li><a href="index.html">Home</a></li>
+    <li><a href="../index">Home</a></li>
     <li><a href="shop_grid.html">Shop Grid</a></li>
     <li> <a href="single_product.html">Single Product</a> </li>
     <li><a href="#">Love & Romance</a>
@@ -156,7 +156,7 @@
   </ul>
   <div class="jtv-top-link-mob">
     <ul class="links">
-      <li><a title="My Account" href="#">My Account</a> </li>
+      <!-- <li><a title="My Account" href="#">My Account</a> </li> -->
       <li><a title="Wishlist" href="#">Wishlist</a> </li>
       <li><a title="Checkout" href="#">Checkout</a> </li>
       <li><a title="Blog" href="#"><span>Blog</span></a> </li>
@@ -206,7 +206,7 @@
               <div class="jtv-top-links">
                 <div class="links">
                   <ul>
-                    <li> <a title="My Account" href="#"><span class="hidden-xs">My Account</span></a> </li>
+                    <!-- <li> <a title="My Account" href="#"><span class="hidden-xs">My Account</span></a> </li> -->
                     <li> <a title="Wishlist" href="#">Wishlist</a> </li>
                     <li> <a title="Checkout" href="#"><span class="hidden-xs">Checkout</span></a> </li>
                     <li>
@@ -221,7 +221,17 @@
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="#"><span class="hidden-xs">Log In</span></a> </li>
+                    
+                    
+                    <c:choose>
+                    	<c:when test="${empty current_user.name}">
+                    		<li> <a href="../login"><span class="hidden-xs" id="navigation-username">Log In</span></a> </li>
+                    	</c:when>
+                    	<c:otherwise>
+                    	  <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>	
+                    	</c:otherwise>
+                    </c:choose>    
+                    <!-- <li> <a href="../login"><span class="hidden-xs" id="navigation-username">Log In</span></a> </li> -->
                   </ul>
                 </div>
               </div>
@@ -279,7 +289,7 @@
           </div>
           <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
             <!-- Header Logo -->
-            <div class="logo"> <a title="eCommerce" href="index.html"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
+            <div class="logo"> <a title="eCommerce" href="../index"><img alt="eCommerce" src="../images/logo.png"> </a> </div>
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
@@ -306,8 +316,8 @@
       <div class="nav-inner"> 
         <!-- BEGIN NAV -->
         <ul id="nav" class="hidden-xs">
-          <li class="drop-menu"><a href="index.html" class="level-top active"><span>Home</span></a></li>
-          <li class="drop-menu"><a href="../grid"><span>Shop Grid</span></a></li>
+          <li class="drop-menu"><a href="../index" class="level-top active"><span>Home</span></a></li>
+          <li class="drop-menu"><a href="../shop/grid"><span>Shop Grid</span></a></li>
 		  <li class="drop-menu"><a href="single_product.html"><span>Single Product</span></a></li>
           <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Love & Romance</span></a>
             <div class="jtv-menu-block-wrapper">
@@ -577,7 +587,7 @@
       <div class="row">
         <div class="col-xs-12">
           <ul>
-            <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
+            <li class="home"> <a href="../index" title="Go to Home Page">Home</a> <span>/</span> </li>
             <li> <a href="shop_grid.html" title="">Clutches</a> <span>/ </span> </li>
             <li> <a href="shop_grid.html" title="">Bucket Bag</a> <span>/</span> </li>
             <li> <strong>${shopItem.name}</strong> </li>
@@ -603,7 +613,8 @@
 <%--                       <div class="product-full"> <img id="product-zoom" src="${shopItem.img}" data-zoom-image="${shopItem.img}" alt="product-image"> </div>
  --%>                      <div class="product-full"> <img class="product-img" src="${shopItem.img[0]}" data-zoom-image="${shopItem.img[0]}" alt="product-image" > </div>
                       
-                      <div class="more-views">
+                      <!-- 小图 待修改 -->
+                      <%-- <div class="more-views">
                         <div class="slider-items-products">
                           <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
                             <div class="slider-items slider-width-col4 block-content">
@@ -615,7 +626,9 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> --%>
+                      
+                      
                     </div>
                     <!-- end: more-images --> 
                   </div>
@@ -674,8 +687,8 @@
 						  <img src="http://47.95.10.11/FilteredPhoto/clock.jpg" height="30" width="30">
 						  <h style="font-size:15px;color:#; margin-left:15px;">Hours</h>
 						  <table class="hours-table">
-						    <tbody>
-						      <tr>
+						    <!--<tbody>
+						       <tr>
 						          <th class="hours-date" scope="row">Mon</th> 
 							      <td>
 							        <span>7:00</span> - <span>18:00</span>
@@ -704,9 +717,20 @@
 							      <td>
 							        <span>7:00</span> - <span>18:00</span>
 							      </td>
-						      </tr>
+						      </tr>  -->
+						     
 						      <!-- 待解锁哦 -->
-						      <c:forEach items="${shopItem.hours}" var="hourItem">
+						       
+						      <%-- <c:forEach var="i" begin="0" end="${shopItem.hours.size}" >
+						       <tr>
+						          <th scope="row">${shopItem.hours[i].date}</th> 
+							      <td>
+							        <span>${shopItem.hours[i].open}</span> - <span>${shopItem.hours[i].close}</span>
+							      </td>
+						       </tr>
+						      </c:forEach> --%>
+						      <p id="hour-str" style="display:none">${shopItem.hours}</p>
+						      <%-- <c:forEach items="${shopItem.hours}" var="hourItem">
 						       <tr>
 						          <th scope="row">${hourItem.date}</th> 
 							      <td>
@@ -714,12 +738,13 @@
 							      </td>
 						       </tr>
 						      </c:forEach>
-						    </tbody>
+						    </tbody> --%>
 						  </table>
 						</div>
 						
+						<!-- 商店features 待修改 -->
 						<div class="shop-creatures">
-	                    	features
+	                    	
 	                    </div>
                       
                       </div>
@@ -775,24 +800,29 @@
                 <li class="active"> <a href="#product_tabs_map" data-toggle="tab"> Map </a> </li>
                 <li><a href="#product_tabs_tags" data-toggle="tab"> Tags </a></li>
                 <li> <a href="#product_reviews_tabs" data-toggle="tab">Reviews</a> </li>
-                <li> <a href="#product_tabs_custom" data-toggle="tab">Custom Tab</a> </li>
-                <li> <a href="#product_tabs_custom1" data-toggle="tab">Custom Tab1</a> </li>
+                <!-- <li> <a href="#product_tabs_custom" data-toggle="tab">Custom Tab</a> </li>
+                <li> <a href="#product_tabs_custom1" data-toggle="tab">Custom Tab1</a> </li> -->
               </ul>
               <div id="productTabContent" class="tab-content">
+              
+              
+              <!-- 地图标签 -->
                 <div class="tab-pane fade in active" id="product_tabs_map">
                   <div class="std">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.</p>
                     <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
                   </div>
                 </div>
+                
+                <!-- 商店标签 -->
                 <div class="tab-pane fade" id="product_tabs_tags">
                 
                 	<div class="label-box">
-                		<%-- <c:forEach items="${shopItem.category}" var="cateItem"> --%>
+                		<c:forEach items="${shopItem.category}" var="cateItem">
                 			<span>
-                				<em>${cateItem}Health & Medical</em>
+                				<em>${cateItem}</em>
                 			</span>
-                		<%-- </c:forEach> --%>
+                		</c:forEach>
                 	
                 	</div>
                 
@@ -894,7 +924,7 @@
                       <div class="box visible">
                         <ul>
                         <!-- 动态生成reviewList -->
-                        <%-- <c:forEach items="${shopItem.reviewList}" var="reviewItem"> --%>
+                         <c:forEach items="${shopItem.reviewList}" var="reviewItem">
                           <li>
                             <table class="ratings-table">
                               <colgroup>
@@ -924,7 +954,7 @@
                                 <tr>
                                   <td><div class="rating-box">
                                       <div class="rating" style="width:100%;">
-                                      	2018/01/01${reviewItem.date}
+                                      	${reviewItem.date}
                                       </div>
                                     </div></td>
                                 </tr>
@@ -933,16 +963,22 @@
                             </table>
                             <div class="review">
                               <!-- <h6><a href="#">Excellent</a></h6> -->
-                              <small>Review by <span>holic${reviewItem.user_name} </span></small>
-                              <div class="review-txt" style="word-wrap:break-word;">${reviewItem.text}</div>
+                              <small>Review by <span style="font-weight:bold;color:#000;">${reviewItem.user_name} </span></small>
+                              <div class="review-txt" style="word-wrap:break-word;">${reviewItem.text}
+                              	<div style="margin-top:10px;">
+                              	  <nobr class="indicator">useful <span>(${reviewItem.useful})  </span></nobr>
+	                              <nobr class="indicator">  funny <span>(${reviewItem.funny})  </span></nobr>
+	                              <nobr class="indicator">  cool <span>(${reviewItem.cool})  </span></nobr>
+                              	</div>
+	                              
                               
-                              <nobr class="indicator">useful <span>(${reviewItem.useful})  </span></nobr>
-                              <nobr class="indicator">  funny <span>(${reviewItem.funny})  </span></nobr>
-                              <nobr class="indicator">  cool <span>(${reviewItem.cool})  </span></nobr>
+                              </div>
+                              
+                              
                             </div>
                           </li>
                           
-                          <%-- </c:forEach> --%>
+                          </c:forEach> 
                           <%-- <li class="even">
                             <table class="ratings-table">
                               <colgroup>
@@ -1016,7 +1052,7 @@
                     <div class="clear"></div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="product_tabs_custom">
+                <!-- <div class="tab-pane fade" id="product_tabs_custom">
                   <div class="product-tabs-content-inner clearfix">
                     <p><strong>Lorem Ipsum</strong><span>&nbsp;is
                       simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -1029,8 +1065,9 @@
                       publishing software like Aldus PageMaker including versions of Lorem 
                       Ipsum.</span></p>
                   </div>
-                </div>
-                <div class="tab-pane fade" id="product_tabs_custom1">
+                </div> -->
+                
+                <!-- <div class="tab-pane fade" id="product_tabs_custom1">
                   <div class="product-tabs-content-inner clearfix">
                     <p> <strong> Comfortable </strong><span>&nbsp;preshrunk shirts. Highest Quality Printing.  6.1 oz. 100% preshrunk heavyweight cotton Shoulder-to-shoulder taping Double-needle sleeves and bottom hem     
                       
@@ -1045,7 +1082,7 @@
                       publishing software like Aldus PageMaker including versions of Lorem 
                       Ipsum.</span></p>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -1622,7 +1659,7 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-          <div style="text-align:center"> <a href="index.html"><img src="../images/footer-logo.png" alt="logo"> </a> </div>
+          <div style="text-align:center"> <a href="../index"><img src="../images/footer-logo.png" alt="logo"> </a> </div>
           <address>
           <p> <i class="fa fa-map-marker"></i>Company, 12/34 - West 21st Street, New York, USA </p>
           <p><i class="fa fa-mobile"></i><span>+ (800) 0123 456 789</span> </p>
@@ -1675,27 +1712,68 @@
 <script>
 var curShop;
 
-//初始化页面
-/* $().ready( function() {
+function generateHours(){
+	var hour = document.getElementById("hour-str").innerHTML;
+	console.log(hour);
+	var hours = JSON.parse(hour);
 	
+	var hoursHtml="";
 	
- 	$.ajax({
-	url: "../shop/initDetail",
-	type: "POST",
-	data: {
-	},  
-	success: function(res){
-		curShop = JSON.parse(res);
-
-		console.log(curShop);
-	},
-	error: function(err){
-		console.error(err);
-		console.log("bbb");
+	hoursHtml += "<tbody>";
+	
+	if(hours.hasOwnProperty("Monday")){
+		hoursHtml += "<tr> <th scope=\"row\" style=\"margin-right:10px;\">Monday</th> ";
+		hoursHtml += "<td> <span>"+hours.Monday.open+"</span> - <span>"+hours.Monday.close+"</span> </td> </tr>";	
 	}
-	}); 	
-} );  */
+	
+	if(hours.hasOwnProperty("Tuesday")){
+		hoursHtml += "<tr> <th scope=\"row\">Tuesday</th> ";
+		hoursHtml += "<td> <span>"+hours.Tuesday.open+"</span> - <span>"+hours.Tuesday.close+"</span> </td> </tr>";
+		
+	}
+	if(hours.hasOwnProperty("Wednesday")){
+		hoursHtml += "<tr> <th scope=\"row\">Wednesday</th> ";
+		hoursHtml += "<td> <span>"+hours.Wednesday.open+"</span> - <span>"+hours.Wednesday.close+"</span> </td> </tr>";
+	}
+	
+	if(hours.hasOwnProperty("Thursday")){
+		hoursHtml += "<tr> <th scope=\"row\">Thursday</th> ";
+		hoursHtml += "<td> <span>"+hours.Thursday.open+"</span> - <span>"+hours.Thursday.close+"</span> </td> </tr>";
+	}
+	
+	if(hours.hasOwnProperty("Friday")){
+		hoursHtml += "<tr> <th scope=\"row\">Friday</th> ";
+		hoursHtml += "<td> <span>"+hours.Friday.open+"</span> - <span>"+hours.Friday.close+"</span> </td> </tr>";
+	}
+	
+	if(hours.hasOwnProperty("Saturday")){
+		hoursHtml += "<tr> <th scope=\"row\">Saturday</th> ";
+		hoursHtml += "<td> <span>"+hours.Saturday.open+"</span> - <span>"+hours.Saturday.close+"</span> </td> </tr>";
+	}
 
+	if(hours.hasOwnProperty("Sunday")){
+		hoursHtml += "<tr> <th scope=\"row\">Sunday</th> ";
+		hoursHtml += "<td> <span>"+hours.Sunday.open+"</span> - <span>"+hours.Sunday.close+"</span> </td> </tr>";
+	}
+	
+	
+	hoursHtml += "</tbody>";
+		
+	
+	$(".hours-table").append(hoursHtml); 
+}
+
+/* //初始化页面
+ $().ready( function() {
+
+ 	
+} );   */
+
+document.onreadystatechange = function() {
+	 if (document.readyState == "complete") {
+		 generateHours();
+	 }
+}
 
 </script>
 </body>

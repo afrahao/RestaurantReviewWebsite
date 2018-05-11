@@ -20,12 +20,15 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	int reviewsRank = 0;
 	double distance;
 	int price_range = 1;
+	String hours;
 	
 	List<Review> reviewList;
 	List<String> category;
-	List<Hours> hours;
+	
 	List<String> img;
 	List<Attribute> attribute;
+
+	
 	
 	
 	
@@ -41,10 +44,10 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	public void setAttribute(List<Attribute> attribute) {
 		this.attribute = attribute;
 	}
-	public List<Hours> getHours() {
+	public String getHours() {
 		return hours;
 	}
-	public void setHours(List<Hours> hours) {
+	public void setHours(String hours) {
 		this.hours = hours;
 	}
 	public List<String> getCategory() {

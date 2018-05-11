@@ -409,7 +409,7 @@ public class ShopController {
 //		String str = JsonUtils.ObjectToJson(curShop);
 //		System.out.println(str);
 		
-		
+		mav.addObject("current_user", user);
 		mav.addObject("shopItem",curShop);
 		System.out.println("!!!!!!!!!!name="+curShop.getName());
 		mav.setViewName("shop_info");

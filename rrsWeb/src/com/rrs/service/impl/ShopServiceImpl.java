@@ -9,8 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rrs.mapper.ShopDao;
+import com.rrs.pojo.Attribute;
+
 import com.rrs.pojo.Restaurant;
+import com.rrs.pojo.Review;
 import com.rrs.service.ShopService;
+import com.rrs.util.JsonUtils;
 
 
 @Service
@@ -153,12 +157,108 @@ public class ShopServiceImpl implements ShopService{
         distance = Math.round(distance)*1000;
         return distance;
 	}
+	
+	private List<Review> getReviewList(String id) {
+		// TODO Auto-generated method stub
+		List<Review> reviewList = new ArrayList<Review>();
+		reviewList = shopDao.getReviewList(id);
+		return reviewList;
+	}
+	
+	private String getHours(String id){
+		
+		String hoursString = shopDao.getHourList(id);
+		String hours = hoursString.replaceAll("u'", "'");
+		String hourStr = hours.replaceAll("\'", "\"");
+		
+		return hourStr;
+	}
+
+	/*private List<Hours> getHoursList(String id) {
+		// TODO Auto-generated method stub
+		List<Hours> hoursList = new ArrayList<Hours>();
+		Hours shopHours = new Hours();
+		String hoursString = shopDao.getHourList(id);
+		String hours = hoursString.replaceAll("u'", "'");
+		String hourStr = hours.replaceAll("\'", "\"");
+		System.out.println(hourStr);
+		
+		//hours = "['Monday': {'close': '17:00', 'open': '06:00'}, 'Tuesday': {'close': '17:00', 'open': '06:00'}, 'Friday': {'close': '17:00', 'open': '06:00'}, 'Wednesday': {'close': '17:00', 'open': '06:00'}, 'Thursday': {'close': '17:00', 'open': '06:00'}, 'Sunday': {'close': '15:00', 'open': '06:00'}, 'Saturday': {'close': '17:00', 'open': '06:00'}]";
+		shopHours = JsonUtils.jsonToPojo(hourStr,Hours.class);
+	
+		
+		Hours hour = new Hours();
+		hour.setDate("Monday");
+		hour.setOpen(hours.substring(44, 49));
+		hour.setClose(hours.substring(25, 30));
+		hoursList.add(hour); 
+		hour.setDate("Tuesday");
+		hour.setOpen(hours.substring(97, 102));
+		hour.setClose(hours.substring(78, 83));
+		hoursList.add(hour); 
+		hour.setDate("Friday");//28ge 
+		hour.setOpen(hours.substring(149, 154));
+		hour.setClose(hours.substring(130, 135));
+		hoursList.add(hour); 
+		hour.setDate("Wednesday");
+		hour.setOpen(hours.substring(204, 209));
+		hour.setClose(hours.substring(185, 190));
+		hoursList.add(hour); 
+		hour.setDate("Thursday");
+		hour.setOpen(hours.substring(258, 263));
+		hour.setClose(hours.substring(239, 244));
+		hoursList.add(hour); 
+		hour.setDate("Sunday");
+		hour.setOpen(hours.substring(310, 315));
+		hour.setClose(hours.substring(291, 296));
+		hoursList.add(hour); 
+		hour.setDate("Saturday");
+		hour.setOpen(hours.substring(364, 369));
+		hour.setClose(hours.substring(345, 350));
+		hoursList.add(hour); 
+		return hoursList;
+	}*/
+
+	private List<String> getCategoryList(String id) {
+		// TODO Auto-generated method stub
+		List<String> categoryList = new ArrayList<String>();
+		categoryList = shopDao.getCategoryList(id);
+		return categoryList;
+	}
+
+	private List<Attribute> getAttributeList(String id) {
+		// TODO Auto-generated method stub
+		List<Attribute> attributes= new ArrayList<Attribute>();
+		attributes = shopDao.getAttributes(id);
+		return attributes;
+	}
 
 	//通过ID找商店
 	@Override
-	public Restaurant getRestaurantById(String business_id) {
+	public Restaurant getRestaurantById(String id) {
 		// TODO Auto-generated method stub
-		return shopDao.getRestaurantById(business_id);
+		Restaurant restaurant = new Restaurant();
+		restaurant = shopDao.getRestaurantById(id);
+		
+		List<Attribute> attribute = new ArrayList<Attribute>();
+		List<String> category = new ArrayList<String>();
+		String hours = "";
+		List<String> img = new ArrayList<String>();
+		List<Review> reviewList = new ArrayList<Review>();
+		
+		attribute = getAttributeList(id);
+		category = getCategoryList(id);
+		//hours = getHoursList(id);
+		hours = getHours(id);
+		img = getRestaurantImg(id);
+		reviewList = getReviewList(id);
+		
+		restaurant.setAttribute(attribute);
+		restaurant.setCategory(category);
+		restaurant.setHours(hours);
+		restaurant.setImg(img);
+		restaurant.setReviewList(reviewList);
+		return restaurant;
 	}
 	
 }

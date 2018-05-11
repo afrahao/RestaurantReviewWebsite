@@ -243,8 +243,22 @@
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>
                     
+                    <c:choose>
+                    	<c:when test="${empty current_user.name}">
+                    		<li> <a href="login"><span class="hidden-xs" id="navigation-username">Log In</span></a> </li>
+                    	</c:when>
+                    	<c:otherwise>
+                    	  <li> <a href="user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>	
+                    	</c:otherwise>
+                    </c:choose>                    
+                    
+                    <%-- <c:if test="${not empty current_user.name}">
+                    	<li> <a href="user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>	
+                    </c:if>
+                    <c:if test="${empty current_user.name}">
+                   	    <li> <a href="login"><span class="hidden-xs" id="navigation-username">Log In</span></a> </li>
+                    </c:if> --%>
                   </ul>
                 </div>
               </div>

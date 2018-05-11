@@ -2,7 +2,9 @@ package com.rrs.mapper;
 
 import java.util.List;
 
+import com.rrs.pojo.Attribute;
 import com.rrs.pojo.Restaurant;
+import com.rrs.pojo.Review;
 
 public interface ShopDao {
 
@@ -16,4 +18,10 @@ public interface ShopDao {
 	public List<Restaurant> getRestaurantByDistance2(double lat,double lon,int distance1,int distance2);
 	public List<Restaurant> getRestaurantByDistance3(double lat,double lon,int distance);
 	public Restaurant getRestaurantById(String business_id);
+	
+
+	public List<Attribute> getAttributes(String id);
+	public List<String> getCategoryList(String id);
+	public String getHourList(String id);
+	public List<Review> getReviewList(String id);
 }

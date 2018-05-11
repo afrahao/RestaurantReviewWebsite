@@ -59,6 +59,12 @@ public class HomeController {
 		{
 			email = cookie.getValue();
 		}
+		
+		
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+
+		mav.addObject("current_user", user);
+		
 		//保存登陆状态的邮箱
 		mav.addObject("loginuser", email);
 		mav.setViewName("index");
@@ -233,7 +239,7 @@ public class HomeController {
 			
 			mav.addObject("loginuser", email);
 			//改了跳转到个人信息页面
-			mav.setViewName("redirect:/user/profile");
+			mav.setViewName("redirect:/index");
 		}
 		return mav;
 	}

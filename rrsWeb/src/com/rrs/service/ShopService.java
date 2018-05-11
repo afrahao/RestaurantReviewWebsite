@@ -26,4 +26,6 @@ public interface ShopService {
     void GetDistance(double lat, double lon,List<Restaurant> shopList);
 	List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList);
 	Restaurant getRestaurantById(String business_id);
+	
+	
 }

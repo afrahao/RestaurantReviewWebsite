@@ -76,7 +76,7 @@
 				</div>
 			</li>
 			<li><a href="index.html">Home</a></li>
-			<li><a href="shop_grid.html">Shop Grid</a></li>
+			<li><a href="grid">Shop Grid</a></li>
 			<li><a href="single_product.html">Single Product</a></li>
 			<li><a href="#">Love & Romance</a>
 				<ul>
@@ -288,7 +288,7 @@
 													</ul>
 												</div>
 											</li>
-											<li><a href="../user/profile"><span class="hidden-xs">${current_user.name}</span></a>
+											<li><a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a>
 											</li>
 										</ul>
 									</div>
@@ -431,7 +431,7 @@
 					<ul id="nav" class="hidden-xs">
 						<li class="drop-menu"><a href="../index"
 							class="level-top active"><span>Home</span></a></li>
-						<li class="drop-menu"><a href="shop_grid.html"><span>Shop
+						<li class="drop-menu"><a href="grid"><span>Shop
 									Grid</span></a></li>
 						<li class="drop-menu"><a href="single_product.html"><span>Single
 									Product</span></a></li>
@@ -870,9 +870,9 @@
 							<div class="toolbar">
 								<div class="row">
 								
-									<div id="search-div">
+									<div id="search-div" >
 									
-										 <div class="search-box">
+										 <div class="search-box" style="vertical-align:top">
 											<form action="cat" method="POST" id="search_mini_form"
 												name="Categories">
 												<input type="text" placeholder="Search here..." maxlength="70"
@@ -885,7 +885,7 @@
 									
 									 
 									</div>
-									<div id="sort-div">
+									<div id="sort-div" style="vertical-align:top">
 									
 										<span class="control-label" for="input-sort">Sort By:</span>
 									
