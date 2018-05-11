@@ -12,7 +12,7 @@
     
 	<!-- 返回一些restaurant -->
     <select id="getRestaurant" parameterType="Integer" resultType="com.rrs.pojo.Restaurant">
-        select *,photo.id as img from business,photo where business.id=photo.business_id LIMIT #{0},#{1}
+        select * from business LIMIT #{0},#{1}
     </select>
     <!-- 返回restaurant By key -->
     <select id="getRestaurantSearch" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
@@ -25,7 +25,33 @@
     
      <!-- 返回single By name -->
     <select id="getRestaurantImg" parameterType="String" resultType="String">               
-        select photo.id as img from photo where photo.business_id=#{shop_id} LIMIT 0,1
+        select photo.id as img from photo where photo.business_id=#{shop_id}
+    </select>
+    
+    <!-- 返回single By id -->
+    <select id="getRestaurantById" parameterType="String" resultType="Restaurant">               
+        select * from business where business.id = #{0}
+    </select>
+    
+    <!-- 返回某个饭店的所有attribute -->
+     <select id="getAttributes" parameterType="String" resultType="com.rrs.pojo.Attribute" >
+        select * from attribute where business_id = #{0} 
+    </select>
+    
+    <!-- 返回某个饭店的所有category -->
+     <select id="getCategoryList" parameterType="String" resultType="String" >
+        select category from category,business_cate where category.id = business_cate.category_id and business_id=#{0}
+    </select>
+   
+   <!-- 返回某个饭店的所有hour -->
+     <select id="getHourList" parameterType="String" resultType="String" >
+        select hours from hours where business_id=#{0}
+    </select>
+   
+   
+     <!-- 返回某个饭店的所有review -->
+     <select id="getReviewList" parameterType="String" resultType="com.rrs.pojo.Review" >
+        select user.name as user_name,review.* from review,user where business_id=#{0} and review.user_id=user.id
     </select>
    
     <!-- 获取当前类别的餐馆 -->

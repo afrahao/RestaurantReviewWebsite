@@ -353,7 +353,7 @@ em{font-style:normal;}
             <div class="jtv-top-cart-box"> 
               <!-- Top Cart -->
               <div class="mini-cart">
-                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#"> <span class="cart_count">2</span><span class="price">My Bag / $259.00</span> </a> </div>
+                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="#" style="display:none;"> <span class="cart_count">2</span><span class="price">My Bag / $259.00</span> </a> </div>
                 <div>
                   <div class="jtv-top-cart-content"> 
                     

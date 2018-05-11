@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.col-sm-push-3 {
+	left: 0%;
+	
+}
+
+.col-sm-9 {
+	width: 100%;
+}
+
+.main-container {
+	/* display:inline-block; */
+}
+
+#special-title{
+	margin-bottom: 20px;
+}

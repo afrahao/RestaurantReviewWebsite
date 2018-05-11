@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+
+ul.products-grid-hot {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	box-sizing: border-box;
+	visibility: inherit;
+	line-height: inherit;
+	font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: #333;
+    background: #fff;
+   
+}
+
+#jtv-bestsell-section {
+	margin-bottom:50px;
+}
+
+.content-page .category-product {
+    margin-bottom: 15px;
+    margin-top: 50px;
+}

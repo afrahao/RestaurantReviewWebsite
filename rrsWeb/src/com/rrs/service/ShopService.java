@@ -7,7 +7,7 @@ public interface ShopService {
 	
 	List<Restaurant> getRestaurant(int start,int end);
 	List<Restaurant> getRestaurantSearch(String key);
-    String getRestaurantImg(String shop_id);
+    List<String> getRestaurantImg(String shop_id);
 	
 	int getRestaurantNum();
 	
@@ -25,4 +25,7 @@ public interface ShopService {
 	//筛选距离定位点指定距离的饭店(按照韦嘉琦要求所改)
     void GetDistance(double lat, double lon,List<Restaurant> shopList);
 	List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList);
+	Restaurant getRestaurantById(String business_id);
+	
+	
 }

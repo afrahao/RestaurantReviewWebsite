@@ -3,3 +3,25 @@
     font-size: 14px;
     padding: 0px;
 }
+
+.search-box {
+	width:80%;
+}
+
+#search-history div,
+#search-hot div{
+	font-size: 14px;
+	weight:normal;
+	
+}
+
+#search-div,
+#sort-div{
+	 float:left;
+	 width:49%;
+	 padding: 15px;
+}
+.search-btn-bg{
+	position:static;
+
+}

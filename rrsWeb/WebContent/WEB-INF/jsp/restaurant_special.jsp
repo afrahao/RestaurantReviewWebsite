@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="../css/loader.css">
 <link rel="stylesheet" href="../css/shop-grid.css">
+<link rel="stylesheet" href="../css/shop-special.css">
 
 <!-- 页面加载 -->
    
@@ -48,10 +49,7 @@
 	src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
 
 <style type="text/css">
-#Container {
-	
-	height: 300px;
-}
+
 </style>
 <!-- 高德地图 -->
 
@@ -76,7 +74,7 @@
 				</div>
 			</li>
 			<li><a href="index.html">Home</a></li>
-			<li><a href="grid">Shop Grid</a></li>
+			<li><a href="shop_grid.html">Shop Grid</a></li>
 			<li><a href="single_product.html">Single Product</a></li>
 			<li><a href="#">Love & Romance</a>
 				<ul>
@@ -288,7 +286,7 @@
 													</ul>
 												</div>
 											</li>
-											<li><a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a>
+											<li><a href="../user/profile"><span class="hidden-xs">${current_user.name}</span></a>
 											</li>
 										</ul>
 									</div>
@@ -399,7 +397,7 @@
 							<!-- End Header Logo -->
 						</div>
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
-							<!-- <div class="search-box">
+							<div class="search-box">
 								<form action="cat" method="POST" id="search_mini_form"
 									name="Categories">
 									<input type="text" placeholder="Search here..." maxlength="70"
@@ -409,7 +407,7 @@
 										<span class="glyphicon glyphicon-search"></span>&nbsp;
 									</button>
 								</form>
-							</div> -->
+							</div>
 						</div>
 					</div>
 				</div>
@@ -431,7 +429,7 @@
 					<ul id="nav" class="hidden-xs">
 						<li class="drop-menu"><a href="../index"
 							class="level-top active"><span>Home</span></a></li>
-						<li class="drop-menu"><a href="grid"><span>Shop
+						<li class="drop-menu"><a href="shop_grid.html"><span>Shop
 									Grid</span></a></li>
 						<li class="drop-menu"><a href="single_product.html"><span>Single
 									Product</span></a></li>
@@ -810,7 +808,7 @@
 								title="Go to Home Page">Home</a> <span>/</span></li>
 							<!-- <li> <a href="shop_grid.html" title="">Occasion</a> <span>/ </span> </li>
             <li> <a href="shop_grid.html" title="">Corporate</a> <span>/</span> </li> -->
-							<li><strong>Search</strong></li>
+							<li><strong>Special</strong></li>
 						</ul>
 					</div>
 				</div>
@@ -821,114 +819,28 @@
 		<!-- Main Container -->
 		<section class="main-container col2-left-layout">
 			<div class="container">
-				<div class="row">
+				<!-- <div class="row"> -->
 					<div class="col-sm-9 col-xs-12 col-sm-push-3">
 
-						<!-- <div id='Container'></div>
-						<div id="tip"></div> -->
+						<div id='Container'></div>
+						<!-- <div id="tip"></div> -->
 						
-						<!-- 此处注释的是轮播图 -->
-						<!-- <div class="category-description std">
-            <div class="slider-items-products">
-              <div id="category-desc-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col1 owl-carousel owl-theme"> 
-                  
-                  Item
-                  <div class="item"> <a href="#"><img alt="" src="../images/category-img1.jpg"></a>
-                    <div class="cat-img-title cat-bg cat-box">
-                      <div class="small-tag">Flowers 2018</div>
-                      <h2 class="cat-heading">New special collection</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                  </div>
-                  End Item 
-                  
-                  Item
-                  <div class="item"> <a href="#"><img alt="" src="../images/category-img2.jpg"></a>
-                    <div class="cat-img-title cat-bg cat-box">
-                      <div class="small-tag">Big Sale</div>
-                      <h2 class="cat-heading">Birthday Flowers</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-                    </div>
-                    End Item 
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
 						<article class="col-main" id="col-main-grid">
-							<h2 class="page-heading">
-								<span class="page-heading-title">Shops</span>
+							<h2 class="page-heading" id="special-title">
+								<span class="page-heading-title" >Parking Free</span>
 							</h2>
-							
-							<div id='Container'></div>
-							<div id="tip"></div>
-							
-							
-							
-							<div class="toolbar">
+							<!-- <div class="toolbar">
 								<div class="row">
-								
-									<div id="search-div" >
-									
-										 <div class="search-box" style="vertical-align:top">
-											<form action="cat" method="POST" id="search_mini_form"
-												name="Categories">
-												<input type="text" placeholder="Search here..." maxlength="70"
-													name="search" id="search">
-												<button type="button" class="search-btn-bg" onclick="searchShop()" >
-													<span class="glyphicon glyphicon-search"></span>&nbsp;
-												</button>
-											</form>
-										</div>
-									
-									 
-									</div>
-									<div id="sort-div" style="vertical-align:top">
-									
-										<span class="control-label" for="input-sort">Sort By:</span>
-									
-									<span >
-										<select id="input-sort" class="form-control col-sm-3">
-											<option value="0" selected="selected">Default</option>
-											<option value="1">Review (Highest)</option>
-											<option value="2">Stars (Highest)</option>
-											<option value="3">Distance (&lt;=3km)</option>
-											<option value="4">Distance (3km-5km)</option>
-											<option value="5">Distance (&gt;=5km)</option>
-										</select>
-									</span>
-									</div>
-								
-								
-								
-								
-								
 									<div class="col-md-4 col-sm-5">
-									
-									<!-- <div class="search-box">
-										<form action="cat" method="POST" id="search_mini_form"
-											name="Categories">
-											<input type="text" placeholder="Search here..." maxlength="70"
-												name="search" id="search">
-											<button type="button" class="search-btn-bg"
-												onclick="searchShop()">
-												<span class="glyphicon glyphicon-search"></span>&nbsp;
-											</button>
-										</form>
-									</div> -->
-									
-										<!-- <div class="btn-group">
+										<div class="btn-group">
 											<div id="grid-view" class="btn btn-default active"
 												data-toggle="tooltip" title="Grid">
 												<a href="shop_grid.html"><i class="fa fa-th"></i></a>
 											</div>
 
-										</div> -->
+										</div>
 									</div>
-									<!--  !!!!!!-->
-									<!-- <div class="col-sm-2 text-right sort-by">
+									<div class="col-sm-2 text-right sort-by">
 										<label class="control-label" for="input-sort">Sort By:</label>
 									</div>
 									<div class="col-md-3 col-sm-2 text-right">
@@ -940,9 +852,8 @@
 											<option value="4">Distance (3km-5km)</option>
 											<option value="5">Distance (&gt;=5km)</option>
 										</select>
-									</div> -->
-									
-									<!-- <div class="col-sm-1 text-right show-limit">
+									</div>
+									<div class="col-sm-1 text-right show-limit">
 										<label class="control-label" for="input-limit">Show:</label>
 									</div>
 									<div class="col-sm-2 text-right">
@@ -953,20 +864,9 @@
 											<option value="">40</option>
 											<option value="">50</option>
 										</select>
-									</div> -->
-									
-								</div>
-								
-								<div id="search-tag" >
-									<div id="search-history" style="font-size: 14px;weight:normal;">
-										<b>History Search:</b>
-									</div>
-									<div id="search-hot" style="font-size: 14px;weight:normal;">
-										<b>Hot Search:</b>
 									</div>
 								</div>
-								
-							</div>
+							</div> -->
 							<div class="category-products">
 								<ul class="products-grid">
 
@@ -994,9 +894,9 @@
 						</article>
 						<!--	///*///======    End article  ========= //*/// -->
 					</div>
-					<div class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
-						<aside class="sidebar">
-							<div class="block block-layered-nav">
+					<!-- <div class="sidebar col-sm-3 col-xs-12 col-sm-pull-9"> -->
+						<!-- <aside class="sidebar"> -->
+							<!--<div class="block block-layered-nav">
 								<%--<div class="block-title">Personal Info</div>
                <div class="block-content">
               	<!-- -----------------用户信息-----------------  -->
@@ -1030,7 +930,7 @@
 
 
 							</div>
-							<div class="block product-price-range ">
+							<!-- <div class="block product-price-range ">
 								<div class="block-title">Price</div>
 								<div class="block-content">
 									<div class="slider-range">
@@ -1062,7 +962,7 @@
 										</ul>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<!-- <div class="block block-cart">
 								<div class="block-title ">My Cart</div>
 								<div class="block-content">
@@ -1132,7 +1032,7 @@
 								</div>
 							</div> -->
 
-							<div class="block block-tags">
+							<!-- <div class="block block-tags">
 								<div class="block-title">Popular Tags</div>
 								<div class="block-content">
 									<div class="tags-list">
@@ -1144,9 +1044,9 @@
 										<a href="#" class="view-all">View All Tags</a>
 									</div>
 								</div>
-							</div>
+							</div> 
 						</aside>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</section>
@@ -1438,99 +1338,7 @@
 	/***************************************
 	由于Chrome、IOS10等已不再支持非安全域的浏览器定位请求，为保证定位成功率和精度，请尽快升级您的站点到HTTPS。
 	***************************************/
-   var map, geolocation,lat,lng;
-	var isNull = 0;
-    //加载地图，调用浏览器定位服务
-    map = new AMap.Map('Container', {
-        resizeEnable: true
-    });
-    map.plugin('AMap.Geolocation', function() {
-        geolocation = new AMap.Geolocation({
-            enableHighAccuracy: true,//是否使用高精度定位，默认:true
-          showMarker: false,        //定位成功后在定位到的位置显示点标记，默认：true
-            showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
-            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
-            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-            zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-            buttonPosition:'RB',
-            lang:'zh_en',
-            zoom: 13
-        });
-        map.addControl(geolocation);
-        geolocation.getCurrentPosition();
-        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
-        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
-    });
-    
-    //定位点
-    var marker = new AMap.Marker({
-        draggable: true,
-        cursor: 'move',
-        raiseOnDrag: false
-    });
-    
-    //测试点击
-    map.on('click',function(e){
-        marker.setPosition(e.lnglat);
-        lng=e.lnglat.getLng();
-        lat=e.lnglat.getLat();
-        $.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/distance",
-			async:false,
-			type: "POST",
-			data: {
-				"lat":lat,
-				"lng":lng
-			},  
-			success: function(res){
-				alert("计算成功");
-			},
-			error: function(err){
-				console.error(err);
-				console.log("bbb");
-			}
-			}); 
-        alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
-    })
-    
-    
-    //解析定位结果
-    function onComplete(data) {
-        var str=['定位成功'];
-        lat=data.position.getLat();
-        lng=data.position.getLng();
-        str.push('经度：' + lng);
-        str.push('纬度：' + lat);
-        
-        marker.setPosition(new AMap.LngLat(data.position.getLng(),data.position.getLat()))
-        
-        if(data.accuracy){
-             str.push('精度：' + data.accuracy + ' 米');
-        }//如为IP精确定位结果则没有精度信息
-        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
-        document.getElementById('tip').innerHTML = str.join('<br>');
-        $.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/distance",
-			async:false,
-			type: "POST",
-			data: {
-				"lat":lat,
-				"lng":lng
-			},  
-			success: function(res){
-				alert("计算成功");
-			},
-			error: function(err){
-				console.error(err);
-				console.log("bbb");
-			}
-			}); 
-    }
-    //解析定位错误信息
-    function onError(data) {
-        document.getElementById('tip').innerHTML = '定位失败';
-    }
-    marker.setMap(map);
+   
 
 	var curGrid;
 	var curGridNum = 0;
@@ -1601,14 +1409,12 @@
 		for(var i =0; i<curGrid.length; i++){
 			
 		    var obj = curGrid[i];
-		    
+	
 		    htmlStr += "<li class=\"item col-lg-4 col-md-4 col-sm-4 col-xs-6\">";
 		    htmlStr += "<div class=\"item-inner\">"
 		    htmlStr += "<div class=\"item-img\">";
 		    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\" href=\"detail\" \>";
 		    htmlStr += "<img alt=\"Product Title Here\" onclick=\"goToDetail(\'"+obj.id+"\',\'"+obj.name+"\')\" title=\""+obj.name + "\" src=\"" +obj.img[0]+"\">";
-		    //htmlStr += "<img alt=\"Product Title Here\" href=\"detail?id=123\" title=\""+obj.name + "\" src=\"" +obj.img+"\">";
-		    
 		    htmlStr += "</a>";
 		    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
 		    htmlStr += "</div>";
@@ -1644,7 +1450,7 @@
 		$(".products-grid").append(htmlStr); 
 
 		
-		showShopMarkers(curGrid);
+		//showShopMarkers(curGrid);
 	}
 	
 	//重新画页码栏
@@ -1790,7 +1596,60 @@
 			curGrid = JSON.parse(res);
 			console.log("qqq");
 			showGrid(curGrid);
+			
+			/* var htmlStr = "";
+			var pageStr = "";
+			
+			/* for(var i = 0 ; i<curGrid.length/15 ; i++){
+				if(i == 0){
+			    	pageStr += "<li class=\"active\" href=\"#\"><span>1</span></li>"
+			    } else {
+			    	pageStr += "<li herf=\"#\"><span>"+(i+1)+"</span></li>"
+			    }
+			} */
+			
+			/*for(var i =0; i<curGrid.length; i++){
+				
+			    var obj = curGrid[i];
 		
+			    htmlStr += "<li class=\"item col-lg-4 col-md-4 col-sm-4 col-xs-6\">";
+			    htmlStr += "<div class=\"item-inner\">"
+			    htmlStr += "<div class=\"item-img\">";
+			    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\"  href=\"single_product.html\">";
+			    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\"" +obj.img+"\">";
+			    htmlStr += "</a>";
+			    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "<div>";
+			    htmlStr += " <div class=\"item-info\">";
+			    htmlStr += "<div class=\"info-inner\">";
+			    htmlStr += "<div class=\"item-title\"> <a  href=\"single_product.html\" title=\""+obj.name + "\">" + obj.name +"</a> </div>";
+			    htmlStr += "<div class=\"item-content\">";
+			    htmlStr += "<div class=\"rating\">";
+			    
+			    var s = Math.floor(obj.stars);
+			    for(var j = 0 ; j < s ; j++){
+			    	htmlStr += "<i class=\"fa fa-star\"></i>";
+			    }
+			    for(var j = s ; j < 5 ; j++){
+			    	htmlStr += "<i class=\"fa fa-star-o\"></i>";
+			    }    
+			    htmlStr += "</div>";
+			    htmlStr += "<div class=\"item-price\">";
+			    htmlStr += "<div class=\"price-box\"> <span class=\"regular-price\"> <span class=\"price\" >"+ obj.review_count +" reviews </span> </span> </div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</div>";
+			    htmlStr += "</li>";
+			  
+			};
+			
+			
+			pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
+			
+			$(".products-grid").append(htmlStr);  */
 			showShopMarkers(curGrid);
 		}
 		}); 
@@ -1814,11 +1673,10 @@ function goToDetail(id,name){
 	console.log(name);
 	
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/goToDetail?business_id="+business_id,
+		url: "../shop/detail",
 		type: "POST",
-		async:false,
 		data: {
-			
+			"business_id":business_id,
 		},  
 		success: function(res){
 			console.log("ggg");	
