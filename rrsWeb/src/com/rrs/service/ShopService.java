@@ -17,6 +17,10 @@ public interface ShopService {
 	List<Restaurant> getSortByReview(List<Restaurant> shopList);
 	List<Restaurant> getSortByStars(List<Restaurant> shopList);
 	List<Restaurant> getSortByDefault(List<Restaurant> shopList);
+	//根据用户喜好标签返回商家
+	List<Restaurant> getRestaurantByFavor(String id);
+	//根据指定种类返回商家
+	List<Restaurant> getRestaurantByCate();
 	
 	//筛选距离定位点指定距离的饭店
 	List<Restaurant> getRestaurantByDistanceA1(double lat,double lon,int distance);
@@ -27,7 +31,7 @@ public interface ShopService {
     void GetDistance(double lat, double lon,List<Restaurant> shopList);
 	List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList);
 	Restaurant getRestaurantById(String business_id);
-	public List<Restaurant> getRestaurantByCate();
+	
 	
 	
 }

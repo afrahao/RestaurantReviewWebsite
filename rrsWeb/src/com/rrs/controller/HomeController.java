@@ -11,8 +11,6 @@ import java.util.Random;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.SysUser;
+import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
 import com.rrs.service.SysUserService;
 import com.rrs.util.CookieUtils;
@@ -35,6 +34,9 @@ public class HomeController {
 	private SysUserService sysUserService;
 	@Autowired
 	private ShopService shopService;
+	@Autowired
+	private PreferenceService preferenceService;
+	
 	
 	ArrayList<ArrayList<Restaurant>> allList;
 	
@@ -61,30 +63,33 @@ public class HomeController {
 		}
 		
 		
-		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
-
-		mav.addObject("current_user", user);
-		
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
 		
 		allList= new ArrayList<ArrayList<Restaurant>>();
-		List<Restaurant> list = new ArrayList();
-		list = shopService.getRestaurant(1, 100);
-
+		List<Restaurant> list = new ArrayList<Restaurant>();
+		
+		
+		//各个种类的list
 		ArrayList<Restaurant> hot = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> food = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> fashion = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> health = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
+		
+		//根据用户喜好取出商家
+		list = (ArrayList<Restaurant>) shopService.getRestaurantByFavor(user.getId());
 		for(int i = 0;i < 8;i++)
 		{
 			hot.add(list.get(i));
 			near.add(list.get(i));
 		}
+		//清空列表
 		list.clear();
-			list = shopService.getRestaurantByCate();
+		//将指定种类的商家排序后取出
+		list = shopService.getRestaurantByCate();
 		
-		
+		//根据种类将商家加入相应的list,取前八位
 		for(int i = 0;i < list.size();i++)
 		{
 			if(list.get(i).getCategory_id() == 4 && food.size()<8)
@@ -96,9 +101,7 @@ public class HomeController {
 			else if(list.get(i).getCategory_id() == 49 && hotel.size()<8)
 				hotel.add(list.get(i));
 		}
-		
-		near = (ArrayList<Restaurant>) shopService.getRestaurant(1, 100);
-		
+		//将不同类的列表合并
 		allList.add(hot);
 		allList.add(food);
 		allList.add(fashion);
@@ -108,6 +111,7 @@ public class HomeController {
 		
 		//保存登陆状态的邮箱
 		mav.addObject("loginuser", email);
+		mav.addObject("current_user", user);
 		mav.setViewName("index");
 		return mav;
 	}

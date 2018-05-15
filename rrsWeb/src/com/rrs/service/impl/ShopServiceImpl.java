@@ -24,6 +24,9 @@ public class ShopServiceImpl implements ShopService{
 	
 	@Autowired
     private ShopDao shopDao;
+	@Autowired
+	private PreferenceService preferenceService;
+	
 	private List<Restaurant> reviewsList = new ArrayList<Restaurant>();
 	private static double EARTH_RADIUS = 6378.137;
 	@Override
@@ -44,32 +47,25 @@ public class ShopServiceImpl implements ShopService{
 		return list;
 	}
 	
-	public List<Restaurant> getRestaurantByCate() {
-		/*PreferenceService ps = new PreferenceServiceImpl();
-		StringBuffer condition = new StringBuffer();
-		condition.append("4,23,134,49");
-		if(id != "" && id!=null)
+	//根据喜好标签取出商家
+	public List<Restaurant> getRestaurantByFavor(String id) {
+		//获取用户喜好标签
+		List<Integer>  f = preferenceService.selectPreference(id);
+		int[] favor = new int[f.size()];
+		for(int i = 0;i < f.size();i++)
 		{
-			List<Integer>  favor = ps.selectPreference(id);
-			if(favor != null)
-			{
-				for(int i = 0;i < favor.size();i++)
-					condition.append("," + favor.get(i));
-			}
-		}*/
-				
-		List<Restaurant>list = shopDao.getRestaurantByCate();
-		
-		for(int i=0; i < list.size(); i++){
-			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
+			favor[i]=f.get(i);
 		}
-		
-		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
-		for(int i = 0 ; i < list.size() ; i ++)
-			list.get(i).setReviewsRank(i);
-		Collections.sort(list, new DescAllComparator());
-		return list;
+		//获取对应标签的商家列表
+		List<Restaurant>list = shopDao.getRestaurantByFavor(favor);
+		//综合排序
+		return getSortByDefault(list);
+	}
+	
+	//取出首页指定种类的商家列表
+	public List<Restaurant> getRestaurantByCate() {	
+		List<Restaurant>list = shopDao.getRestaurantByCate();
+		return getSortByDefault(list);
 	}
 	
 	@Override
@@ -129,11 +125,15 @@ public class ShopServiceImpl implements ShopService{
 		return sortList;
 	}
 	
+	//综合排序
 	public List<Restaurant> getSortByDefault(List<Restaurant> shopList) {
 		List<Restaurant> list = new ArrayList<Restaurant>(shopList.size());
 		
 		for(int i = 0 ; i < shopList.size(); i ++){ 
 			list.add(shopList.get(i).clone()); 
+		}
+		for(int i=0; i < list.size(); i++){
+			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
 		Collections.sort(list, new DescReviewComparator());
 		reviewsList = list;

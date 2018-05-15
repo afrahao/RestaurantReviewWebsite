@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.SysUserService;
+import com.rrs.service.impl.PreferenceServiceImpl;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -147,6 +149,10 @@ public class UserController {
 		System.out.println("-----r----" + user.getId());
 		String id = user.getId();
 		List<Integer> categoryIdList = preferenceService.selectPreference(id);
+		for(int i:categoryIdList)
+		{
+			System.out.println(i);
+		}
 		
 	    return categoryIdList;
 	}

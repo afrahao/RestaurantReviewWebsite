@@ -22,6 +22,17 @@
         </where>
     </select>
     
+    <!-- 根据用户喜好标签返回商家 -->
+    <select id="getRestaurantByFavor" resultType="com.rrs.pojo.Restaurant">
+        select * from  business,business_cate
+        <where>
+            business.id = business_cate.business_id and business_cate.category_id in 
+            <foreach item="item" index="index" collection="favor" open="(" separator="," close=")">
+            	#{item}
+         	</foreach>
+        </where>
+    </select>
+    
     <!-- 返回restaurant By key -->
     <select id="getRestaurantSearch" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
         select * from business where business.name like CONCAT('%',#{key},'%')      
