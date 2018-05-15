@@ -13,6 +13,7 @@ import com.rrs.pojo.Attribute;
 
 import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.Review;
+import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
 import com.rrs.util.JsonUtils;
 
@@ -35,6 +36,34 @@ public class ShopServiceImpl implements ShopService{
 		}
 		
 		System.out.println("数据库取出"+list.size());
+		Collections.sort(list, new DescReviewComparator());
+		reviewsList = list;
+		for(int i = 0 ; i < list.size() ; i ++)
+			list.get(i).setReviewsRank(i);
+		Collections.sort(list, new DescAllComparator());
+		return list;
+	}
+	
+	public List<Restaurant> getRestaurantByCate() {
+		/*PreferenceService ps = new PreferenceServiceImpl();
+		StringBuffer condition = new StringBuffer();
+		condition.append("4,23,134,49");
+		if(id != "" && id!=null)
+		{
+			List<Integer>  favor = ps.selectPreference(id);
+			if(favor != null)
+			{
+				for(int i = 0;i < favor.size();i++)
+					condition.append("," + favor.get(i));
+			}
+		}*/
+				
+		List<Restaurant>list = shopDao.getRestaurantByCate();
+		
+		for(int i=0; i < list.size(); i++){
+			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
+		}
+		
 		Collections.sort(list, new DescReviewComparator());
 		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
@@ -98,6 +127,20 @@ public class ShopServiceImpl implements ShopService{
 		}
 		Collections.sort(sortList, new DescStarsComparator());
 		return sortList;
+	}
+	
+	public List<Restaurant> getSortByDefault(List<Restaurant> shopList) {
+		List<Restaurant> list = new ArrayList<Restaurant>(shopList.size());
+		
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			list.add(shopList.get(i).clone()); 
+		}
+		Collections.sort(list, new DescReviewComparator());
+		reviewsList = list;
+		for(int i = 0 ; i < list.size() ; i ++)
+			list.get(i).setReviewsRank(i);
+		Collections.sort(list, new DescAllComparator());
+		return list;
 	}
 	
 	//筛选距离定位点指定距离的饭店
@@ -291,8 +334,8 @@ class DescAllComparator implements Comparator<Restaurant> {
 		int r1 = o1.getReviewsRank();
 		float s2 = o2.getStars();
 		int r2 = o2.getReviewsRank();
-		double all1 = (5-s1)*0.5 + r1*0.5;
-		double all2 = (5-s2)*0.5 + r2*0.5;
+		double all1 = (5-s1)*2 + r1*0.5;
+		double all2 = (5-s2)*2 + r2*0.5;
 		
 		if (all1 < all2) {
 			return -1;

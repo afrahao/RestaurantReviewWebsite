@@ -1,5 +1,6 @@
 package com.rrs.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ public class PreferenceServiceImpl implements PreferenceService{
 	@Override
 	public List<Integer> selectPreference(String userId) {
 		// TODO Auto-generated method stub
-		 return preferenceDao.selectById(userId);
+		List<Integer> list = new ArrayList<Integer>();
+		list = preferenceDao.selectById(userId);
+		return list;
 	}
 
 	@Override

@@ -65,6 +65,47 @@ public class HomeController {
 
 		mav.addObject("current_user", user);
 		
+		
+		allList= new ArrayList<ArrayList<Restaurant>>();
+		List<Restaurant> list = new ArrayList();
+		list = shopService.getRestaurant(1, 100);
+
+		ArrayList<Restaurant> hot = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> food = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> fashion = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> health = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
+		for(int i = 0;i < 8;i++)
+		{
+			hot.add(list.get(i));
+			near.add(list.get(i));
+		}
+		list.clear();
+			list = shopService.getRestaurantByCate();
+		
+		
+		for(int i = 0;i < list.size();i++)
+		{
+			if(list.get(i).getCategory_id() == 4 && food.size()<8)
+				food.add(list.get(i));
+			else if(list.get(i).getCategory_id() == 23 && fashion.size()<8)
+				fashion.add(list.get(i));
+			else if(list.get(i).getCategory_id() == 134 && health.size()<8)
+				health.add(list.get(i));
+			else if(list.get(i).getCategory_id() == 49 && hotel.size()<8)
+				hotel.add(list.get(i));
+		}
+		
+		near = (ArrayList<Restaurant>) shopService.getRestaurant(1, 100);
+		
+		allList.add(hot);
+		allList.add(food);
+		allList.add(fashion);
+		allList.add(health);
+		allList.add(hotel);
+		allList.add(near);
+		
 		//保存登陆状态的邮箱
 		mav.addObject("loginuser", email);
 		mav.setViewName("index");
@@ -76,45 +117,7 @@ public class HomeController {
 	@ResponseBody
 	public String initDetail(HttpServletRequest request, HttpServletResponse response){
 
-		allList= new ArrayList<ArrayList<Restaurant>>();
-
-		ArrayList<Restaurant> hot = new ArrayList<Restaurant>();
 		
-		//获取hot商店列表
-		hot = (ArrayList<Restaurant>) shopService.getRestaurant(1, 8);
-		System.out.println("hot:"+hot.size());
-		
-		//获取food商店列表
-		ArrayList<Restaurant> food = new ArrayList<Restaurant>();
-		food = (ArrayList<Restaurant>) shopService.getRestaurant(5, 8);
-		System.out.println("food:"+food.size());
-		
-		//获取fashion商店列表
-		ArrayList<Restaurant> fashion = new ArrayList<Restaurant>();
-		fashion = (ArrayList<Restaurant>) shopService.getRestaurant(9, 8);
-		System.out.println("fashion:"+fashion.size());
-		
-		//获取health商店列表
-		ArrayList<Restaurant> health = new ArrayList<Restaurant>();
-		health = (ArrayList<Restaurant>) shopService.getRestaurant(13, 8);
-		System.out.println("health:"+health.size());
-		
-		//获取hotel商店列表
-		ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
-		hotel = (ArrayList<Restaurant>) shopService.getRestaurant(17, 8);
-		System.out.println("hotel:"+hotel.size());
-		
-		//获取near商店列表
-		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
-		near = (ArrayList<Restaurant>) shopService.getRestaurant(21, 8);
-		System.out.println("near:"+near.size());
-		
-		allList.add(hot);
-		allList.add(food);
-		allList.add(fashion);
-		allList.add(health);
-		allList.add(hotel);
-		allList.add(near);
 		
 		for(int i = 0; i < allList.size(); i ++)
 			System.out.println(allList.get(i).size());

@@ -16,6 +16,7 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	float stars;
 	int review_count;
 	int is_open;
+	int category_id;
 	
 	int reviewsRank = 0;
 	double distance;
@@ -121,6 +122,12 @@ public class Restaurant implements Cloneable,Comparable<Restaurant>{
 	}
 	public void setIs_open(int is_open) {
 		this.is_open = is_open;
+	}
+	public int getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
 	}
 	
 

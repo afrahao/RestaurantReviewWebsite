@@ -122,6 +122,7 @@ public class ShopController {
 			} else {
 				
 				shopList = shopService.getRestaurantSearch(key);
+				shopList = shopService.getSortByDefault(shopList);
 				for(int i=0;i<shopList.size();i++){
 					String shop_id = shopList.get(i).getId();
 					List<String> img = shopService.getRestaurantImg(shop_id);
@@ -311,7 +312,7 @@ public class ShopController {
 				shopList.add(originShopList.get(i).clone()); 
 			}
 			
-			//shopList = originShopList;
+			shopList = shopService.getSortByDefault(shopList);
 		}
 		
 		return calPageNum(shopList,15);

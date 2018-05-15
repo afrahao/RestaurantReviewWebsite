@@ -1483,7 +1483,7 @@
 				"lng":lng
 			},  
 			success: function(res){
-				alert("计算成功");
+				
 			},
 			error: function(err){
 				console.error(err);

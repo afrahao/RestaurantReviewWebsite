@@ -14,6 +14,14 @@
     <select id="getRestaurant" parameterType="Integer" resultType="com.rrs.pojo.Restaurant">
         select * from business LIMIT #{0},#{1}
     </select>
+    
+    <select id="getRestaurantByCate" resultType="com.rrs.pojo.Restaurant">
+        select * from  business,business_cate
+        <where>
+            business.id = business_cate.business_id and business_cate.category_id in (4,23,134,49)
+        </where>
+    </select>
+    
     <!-- 返回restaurant By key -->
     <select id="getRestaurantSearch" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
         select * from business where business.name like CONCAT('%',#{key},'%')      
@@ -52,17 +60,6 @@
      <!-- 返回某个饭店的所有review -->
      <select id="getReviewList" parameterType="String" resultType="com.rrs.pojo.Review" >
         select user.name as user_name,review.* from review,user where business_id=#{0} and review.user_id=user.id
-    </select>
-   
-    <!-- 获取当前类别的餐馆 -->
-    <select id="selectBusinessByCate" parameterType="int" resultType="com.rrs.pojo.Restaurant">
-        select * from  business
-        <where>
-            id in select business_id from business_cate
-            <where>
-            	category_id = #{0}
-            </where>
-        </where>
     </select>
     
     <!-- 返回距离指定地点指定范围的restaurant -->
