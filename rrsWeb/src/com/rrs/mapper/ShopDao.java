@@ -24,4 +24,8 @@ public interface ShopDao {
 	public List<String> getCategoryList(String id);
 	public String getHourList(String id);
 	public List<Review> getReviewList(String id);
+	
+	public void insertTrack(String userId, String userId2);
+	public List<String> getTrackBusiness(String userId);
+	public void deleteTrack(String userId, String businessId);
 }

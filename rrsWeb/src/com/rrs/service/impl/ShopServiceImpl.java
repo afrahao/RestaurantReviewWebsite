@@ -261,6 +261,25 @@ public class ShopServiceImpl implements ShopService{
 		return restaurant;
 	}
 	
+	@Override
+	public void insertTrack(String userId, String businessId) {
+		// TODO Auto-generated method stub
+		shopDao.insertTrack(userId,businessId);
+	}
+
+	@Override
+	public List<String> getTrackBusiness(String userId) {
+		// TODO Auto-generated method stub
+		List<String> businessIdList = new ArrayList<String>();
+		businessIdList = shopDao.getTrackBusiness(userId);
+		return businessIdList;
+	}
+
+	@Override
+	public void deleteTrack(String userId, String businessId) {
+		// TODO Auto-generated method stub
+		shopDao.deleteTrack(userId,businessId);
+	}
 }
 
 

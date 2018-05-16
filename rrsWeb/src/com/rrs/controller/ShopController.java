@@ -79,7 +79,6 @@ public class ShopController {
 		//暂定每页15个
 		num = 15;
 		
-		
 		partList = pageControl(page,num);
 	
 		String str = JsonUtils.ObjectToJson(partList);
@@ -408,7 +407,8 @@ public class ShopController {
 //		
 //		String str = JsonUtils.ObjectToJson(curShop);
 //		System.out.println(str);
-		
+		shopService.deleteTrack(user.getId(),curShop.getId());
+		shopService.insertTrack(user.getId(),curShop.getId());
 		mav.addObject("current_user", user);
 		mav.addObject("shopItem",curShop);
 		System.out.println("!!!!!!!!!!name="+curShop.getName());

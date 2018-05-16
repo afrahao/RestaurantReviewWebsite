@@ -5,6 +5,21 @@
 <mapper namespace="com.rrs.mapper.ShopDao">
 
 
+    <delete parameterType="String" id="deleteTrack"> 
+		delete from track where user_id=#{0} and business_id = #{1}
+	</delete>
+
+	<!-- 插入足迹-->
+	<insert parameterType="String" id="insertTrack"> 
+		INSERT INTO track (user_id,business_id,visit_time) VALUES(#{0},#{1},now()) 
+	</insert>
+	
+	<!-- 返回指定用户的足迹ID -->	
+	<select parameterType="String" id="getTrackBusiness" resultType="String"> 
+		select business_id from track where user_id =#{0} order by visit_time desc 
+	</select>
+
+
 	<!-- 返回restaurant数量 -->
     <select id="getRestaurantNum" resultType="Integer">
         select count(*) from business

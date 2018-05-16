@@ -1406,10 +1406,8 @@
 		    }
 		} */
 		
-		for(var i =0; i<curGrid.length; i++){
-			
+		for(var i =0; i<curGrid.length; i++){		
 		    var obj = curGrid[i];
-	
 		    htmlStr += "<li class=\"item col-lg-4 col-md-4 col-sm-4 col-xs-6\">";
 		    htmlStr += "<div class=\"item-inner\">"
 		    htmlStr += "<div class=\"item-img\">";
@@ -1441,12 +1439,8 @@
 		    htmlStr += "</div>";
 		    htmlStr += "</div>";
 		    htmlStr += "</li>";
-		  
 		};
-		
-		
 		pageStr += "<li><a href=\"#\">&gt;</a></li> <li><a href=\"#\">&gt;|</a></li>";
-		
 		$(".products-grid").append(htmlStr); 
 
 		
