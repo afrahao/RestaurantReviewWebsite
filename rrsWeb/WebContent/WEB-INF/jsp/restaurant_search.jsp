@@ -290,6 +290,7 @@
 												</div>
 											</li>
 											<li><a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a>
+											<li id="user_id" style="display:none;">${current_user.id}</li>
 											</li>
 										</ul>
 									</div>
@@ -883,6 +884,15 @@
 												</button>
 											</form>
 										</div>
+										
+										<span class="search-choose">
+											<select id="input-search" class="form-control col-sm-3">
+												<option value="0" selected="selected">Name</option>
+												<option value="1">City</option>
+												<option value="2">Address</option>
+												<option value="3">Tag</option>
+											</select>
+										</span>
 									
 									 
 									</div>
@@ -961,16 +971,6 @@
 								<div id="search-tag" >
 									<div id="search-history" style="font-size: 14px;weight:normal;">
 										<b>History Search:</b>
-											<!-- <span id="tag_4 ">
-												<em class="con1-4">Pets</em>
-											</span>
-											<span id="tag_4 ">
-												<em class="con1-4">Hotel</em>
-											</span>
-											
-											<span id="tag_4 ">
-												<em class="con1-4">Thai</em>
-											</span> -->
 											
 										<c:forEach items="${historySearchList}" var="historySearchItem" varStatus="i"> 
 											<span id="tag_${i.index}" onclick="searchShopByClick('${historySearchItem}')">
@@ -1507,7 +1507,7 @@
 				"lng":lng
 			},  
 			success: function(res){
-				alert("计算成功");
+				
 			},
 			error: function(err){
 				console.error(err);
@@ -1597,7 +1597,8 @@
 			console.error(err);
 			console.log("bbb");
 		}
-		}); 	
+		}); 
+	 	getUserId();
 	} ); 
 	
 	//展示商店
@@ -1718,9 +1719,11 @@
 	//搜索商店
 	function searchShop(){
 		var key=document.getElementById("search").value;
+		var way=document.getElementById("input-search").value;
+		console.log("aaaaaaaaaaa"+way);
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"&way="+way,
 			async:false,
 			type: "POST",
 			data: {
@@ -1880,6 +1883,10 @@ function searchShopByClick(searchKey){
 	isNull = 0;	
 }
 
+function getUserId(){
+	var id = document.getElementById("user_id").innerText;
+	console.log(id);
+}
 
 </script>
 

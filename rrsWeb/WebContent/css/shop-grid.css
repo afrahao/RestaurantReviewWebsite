@@ -25,6 +25,15 @@
 	position:static;
 
 }
+
+.search-box{
+	display: inline-block;
+}
+
+.search-choose{
+	display: inline-block;
+}
+
 #search-history span,
 #search-hot span {
     display: inline-block;

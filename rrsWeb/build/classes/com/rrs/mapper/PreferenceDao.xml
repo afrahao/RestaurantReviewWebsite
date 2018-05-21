@@ -6,6 +6,7 @@
 
 	<!-- 查询喜好 -->
     <select id="selectById" parameterType="String" resultType="int">
+    <select id="selectById" parameterType="String" resultType="Integer">
         select category_id from  user_cate
         <where>
             user_id = #{0}

@@ -286,7 +286,8 @@
 													</ul>
 												</div>
 											</li>
-											<li><a href="../user/profile"><span class="hidden-xs">${current_user.name}</span></a>
+											<li><a href="../user/profile"><span class="hidden-xs" >${current_user.name}</span></a>
+											
 											</li>
 										</ul>
 									</div>
@@ -1381,7 +1382,9 @@
 			console.error(err);
 			console.log("bbb");
 		}
-		}); 	
+		});
+	 	
+	 	
 	} ); 
 	
 	
@@ -1681,6 +1684,7 @@ function goToDetail(id,name){
 		}
 	}); 
 }
+
 
 
 
