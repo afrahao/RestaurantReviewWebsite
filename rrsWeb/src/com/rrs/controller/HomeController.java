@@ -78,7 +78,14 @@ public class HomeController {
 		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
 		
 		//根据用户喜好取出商家
-		list = (ArrayList<Restaurant>) shopService.getRestaurantByFavor(user.getId());
+		if(user != null)
+		{
+			list = (ArrayList<Restaurant>) shopService.getRestaurantByFavor(user.getId());
+		}
+		else
+		{
+			list = shopService.getRestaurant(0, 200);
+		}
 		for(int i = 0;i < 8;i++)
 		{
 			hot.add(list.get(i));
