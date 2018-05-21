@@ -51,15 +51,19 @@ public class ShopServiceImpl implements ShopService{
 	public List<Restaurant> getRestaurantByFavor(String id) {
 		//获取用户喜好标签
 		List<Integer>  f = preferenceService.selectPreference(id);
-		int[] favor = new int[f.size()];
-		for(int i = 0;i < f.size();i++)
+		if(f.size()!=0)
 		{
-			favor[i]=f.get(i);
+			int[] favor = new int[f.size()];
+			for(int i = 0;i < f.size();i++)
+			{
+				favor[i]=f.get(i);
+			}
+			//获取对应标签的商家列表
+			List<Restaurant>list = shopDao.getRestaurantByFavor(favor);
+			//综合排序
+			return getSortByDefault(list);
 		}
-		//获取对应标签的商家列表
-		List<Restaurant>list = shopDao.getRestaurantByFavor(favor);
-		//综合排序
-		return getSortByDefault(list);
+		return getRestaurant(0, 200);
 	}
 	
 	//取出首页指定种类的商家列表
