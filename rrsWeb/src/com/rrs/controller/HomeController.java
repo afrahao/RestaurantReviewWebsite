@@ -77,6 +77,7 @@ public class HomeController {
 		ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
 		
+
 		//根据用户喜好取出商家
 		if(user != null)
 		{
@@ -108,6 +109,7 @@ public class HomeController {
 			else if(list.get(i).getCategory_id() == 49 && hotel.size()<8)
 				hotel.add(list.get(i));
 		}
+
 		//将不同类的列表合并
 		allList.add(hot);
 		allList.add(food);

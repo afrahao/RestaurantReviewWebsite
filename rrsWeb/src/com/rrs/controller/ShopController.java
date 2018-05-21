@@ -42,10 +42,12 @@ public class ShopController {
 	@RequestMapping(value = "/grid",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView shopGrid(HttpServletRequest request, HttpServletResponse response){
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		
 		ModelAndView mav = new ModelAndView();	
 		shopList = shopService.getRestaurant(61, 100);
 		
 		System.out.println("一共有"+shopList.size());
+		//System.out.println("用户是"+user.getName());
 		
 		if(shopList.size()%15 != 0){
 			for(int i = 0 ; i < shopList.size()%15 ; i ++){
@@ -59,9 +61,22 @@ public class ShopController {
 			originShopList.add(shopList.get(i).clone()); 
 		}
 
+		List<String> historySearchList= new ArrayList<String>();
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		
+		List<String> hotSearchList= new ArrayList<String>();
+		hotSearchList.add("hot");
+		hotSearchList.add("hot");
+		hotSearchList.add("thai");
 		
 		mav.addObject("pageNum",calPageNum(shopList,15));
 		mav.addObject("current_user", user);
+		mav.addObject("historySearchList", historySearchList);
+		mav.addObject("hotSearchList", hotSearchList);
 		mav.setViewName("restaurant_search");	
 		
 		System.out.println("一共有"+originShopList.size());
@@ -79,7 +94,6 @@ public class ShopController {
 		//暂定每页15个
 		num = 15;
 		
-		
 		partList = pageControl(page,num);
 	
 		String str = JsonUtils.ObjectToJson(partList);
@@ -90,7 +104,7 @@ public class ShopController {
 	//3.搜索商家
 	@RequestMapping(value = "/searchGrid",method = { RequestMethod.POST })
 	public @ResponseBody
-	int searchShop(@RequestParam(value="key") String key,HttpServletRequest request, HttpServletResponse response){ 
+	int searchShop(@RequestParam(value="key") String key,@RequestParam(value="way") String way,HttpServletRequest request, HttpServletResponse response){ 
 		
 		//把当前list改成搜索到的list
 		//=========搜索就修改这里就可以了=============
@@ -409,7 +423,8 @@ public class ShopController {
 //		
 //		String str = JsonUtils.ObjectToJson(curShop);
 //		System.out.println(str);
-		
+		shopService.deleteTrack(user.getId(),curShop.getId());
+		shopService.insertTrack(user.getId(),curShop.getId());
 		mav.addObject("current_user", user);
 		mav.addObject("shopItem",curShop);
 		System.out.println("!!!!!!!!!!name="+curShop.getName());
@@ -419,7 +434,7 @@ public class ShopController {
 	}
 	
 	//========================================================================
-	//修改个人信息
+	//特别餐厅
 	@RequestMapping(value = "/special",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView specialShopGrid(HttpServletRequest request, HttpServletResponse response){
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 

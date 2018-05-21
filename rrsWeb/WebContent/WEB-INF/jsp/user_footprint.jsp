@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +17,6 @@
 <head>
 <!-- Basic page needs -->
 <meta charset="utf-8">
-
 <!--[if IE]>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <![endif]-->
@@ -33,15 +33,7 @@
 <link rel="shortcut icon" type="../images/x-icon" href="../favicon.ico">
 
  <!-- CSS Style -->
-<link rel="stylesheet" type="text/css" href="../css/user-info.css" />
 <link rel="stylesheet" href="../style.css">
-
-
-
-
-<!-- dynamic table -->
-
-
 <style>
 em{font-style:normal;}
 
@@ -148,16 +140,7 @@ em{font-style:normal;}
 	border-radius:3px;
 	cursor:pointer;
 } 
-
-.box{
-	width: 20px;
-	height: 20px;
-	padding: 2px;
-	border:1px solid #ccc;
-	border-radius: 2px;
-}
 </style>
-
 
 </head>
 
@@ -291,7 +274,7 @@ em{font-style:normal;}
   </ul>
   <div class="jtv-top-link-mob">
     <ul class="links">
-      <li><a title="My Account" href="profile">${current_user.name}</a> </li>
+      <li><a title="My Account" href="profile" id="myaccountname">${current_user.name}</a> </li>
       <li><a title="Wishlist" href="#">Wishlist</a> </li>
       <li><a title="Checkout" href="#">Checkout</a> </li>
       <li><a title="Blog" href="#"><span>Blog</span></a> </li>
@@ -312,7 +295,7 @@ em{font-style:normal;}
           <div class="row"> 
             <!-- Header Language -->
             <div class="col-xs-12 col-sm-6">
-              <div class="welcome-msg hidden-xs">Welcome ${current_user.name} !</div>
+              <div class="welcome-msg hidden-xs">Welcome ${current_user.name} ! </div>
               <div class="dropdown jtv-language-box"> <a role="button" data-toggle="dropdown" data-target="#" class="block-language dropdown-toggle" href="#"> <img src="../images/flag-english.jpg" alt="language"> English <span class="caret"></span> </a>
                 <ul class="dropdown-menu" role="menu">
                   <li> <a class="selected" href="#"> <img src="../images/flag-english.jpg" alt="flag"> <span>English</span> </a> </li>
@@ -341,8 +324,8 @@ em{font-style:normal;}
               <div class="jtv-top-links">
                 <div class="links">
                   <ul>
-<%--                     <li> <a title="My Account" href="profile"><span class="hidden-xs">${current_user.name}</span></a> </li>
- --%>                    <li> <a title="Wishlist" href="#">Wishlist</a> </li>
+<!--                     <li> <a title="My Account" href="profile"  ><span class="hidden-xs" value=${current_user.name} id="username"></span></a> </li>
+ -->                    <li> <a title="Wishlist" href="#">Wishlist</a> </li>
                     <li> <a title="Checkout" href="#"><span class="hidden-xs">Checkout</span></a> </li>
                     <li>
                       <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> More <span class="caret"></span></a>
@@ -356,7 +339,7 @@ em{font-style:normal;}
                         </ul>
                       </div>
                     </li>
-                    <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>
+                    <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li> 
                   </ul>
                 </div>
               </div>
@@ -418,12 +401,12 @@ em{font-style:normal;}
             <!-- End Header Logo --> 
           </div>
           <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
-            <!-- <div class="search-box">
+            <div class="search-box">
               <form action="cat" method="POST" id="search_mini_form" name="Categories">
                 <input type="text" placeholder="Search here..." maxlength="70" name="search" id="search">
                 <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
               </form>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -712,44 +695,53 @@ em{font-style:normal;}
         <div class="col-sm-9 col-xs-12 col-sm-push-3">
          
           <article class="col-main">
-          	<div id="wrapper">   
-                       <div id="user-security-info" >
-                            <form> 
-                                <span id="page-header"> Modify Password </span> 
-                                <p> 
-                                    <label for="useremail" class="uname" >Your Email Address</label>
-                                    <input id="useremail" required="required" type="text" value= "${current_user.email}" disabled = "disabled"/>
-                                </p>
-                                <p >
-                                	
-                                	<button id="verification" onclick="validateCode()">Verification Code</button>
-                                	
-                                </p>
-                                <p> 
-                                    <label for="verification_code" class="youmail"  > Your Verification Code</label>
-                                    <input class="verification-code-input" id="verification_code" name="verification_code" required="required" type="text" placeholder="received 6-number code.  eg.123456"/> 
-                                    
-                                </p>
-                                <p> 
-                                    <label for="passwordsignup" class="youpasswd" >Your New password </label>
-                                    <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"/>
-                                </p>
-                                <p> 
-                                    <label for="passwordsignup_confirm" class="youpasswd" >Please Confirm Your Password </label>
-                                    <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"/>
-                                </p>
-                                <p>                         			
-                                    <input type="button" value="OK" onclick="modifypassword()"/> 
-                         		</p>
-                                
-                            </form>
-                            
-                        </div>
-						
-						
-                    </div>
-	          
-	          
+          
+          <!-- æ·»å favor -->
+            <h2 class="page-heading"> <span class="page-heading-title">My Footprint</span> </h2>
+	          	<div class="main"> 
+	    			<div class="category-products">
+						<ul class="products-grid">
+	
+							<!-- Fill with shop grid -->
+							<!-- show history footprint -->
+			    			<c:forEach items="${footprintList}" var="shopItem">
+				    			<li class="item col-lg-4 col-md-4 col-sm-4 col-xs-6">
+								  <div class="item-inner">
+								    <div class="item-img">
+								      <div class="item-img-info"> <a class="product-image" title="${shopItem.name}" href="../shop/detail" onclick="goToDetail('${shopItem.id}')"> <img alt="${shopItem.name}" src="${shopItem.img[0]}"> </a>
+								      </div>
+								    </div>
+								    <div class="item-info">
+								      <div class="info-inner">
+								        <div class="item-title"> <a title="${shopItem.name}" href="../shop/detail" onclick="goToDetail('${shopItem.id}')">${shopItem.name}</a> </div>
+								        <div class="item-content">
+								          <div class="rating"> 
+								          		<c:forEach var="i" begin="1" end="${shopItem.stars}">
+												   <i class="fa fa-star"></i> 
+												</c:forEach>
+												
+												<c:forEach var="i" begin="${shopItem.stars}" end="4">
+												   <i class="fa fa-star-o"></i> 
+												</c:forEach>
+								          </div>
+								          <div class="item-price">
+								            <div class="price-box"> <span class="regular-price"> <span class="price">${shopItem.review_count} Reviews</span> </span> </div>
+								          </div>
+								        </div>
+								      </div>
+								    </div>
+								  </div>
+								</li>
+			    			</c:forEach>
+	
+						</ul>
+					</div>
+			    			
+	    			
+				</div>
+				<script src="../js/jquery-1.10.2.min.js"></script>
+				<!-- <script src="../js/user-favor.js"></script> -->
+
           </article>
           <!--	///*///======    End article  ========= //*/// --> 
         </div>
@@ -758,14 +750,14 @@ em{font-style:normal;}
             <div class="block block-layered-nav">
               <div class="block-title">Personal Info</div>
               <div class="block-content">
-              	<!-- -----------------Ã§ÂÂ¨Ã¦ÂÂ·Ã¤Â¿Â¡Ã¦ÂÂ¯-----------------  -->
-              	<!-- Ã¥Â¤Â´Ã¥ÂÂ -->
+              	<!-- -----------------ç¨æ·ä¿¡æ¯-----------------  -->
+              	<!-- å¤´å -->
               	<div id="div-center">
               		<!-- <div class="avatar-round"></div> -->
               	</div>
               	
               	
-                <user-name-p id="user-title">${current_user.name}</user-name-p>
+                <p id="user-title">${current_user.name}</p>
                 <dl id="narrow-by-list">
                   <dt class="odd">Individual</dt>
                   <dd class="odd">
@@ -782,7 +774,6 @@ em{font-style:normal;}
                       <li> <a class="choose-tag" href="#">"Like" Restaurant</a></li>
                       <li> <a class="choose-tag" href="#">My Comments</a></li>
                       <li> <a class="choose-tag" href="#">My Coupons</a></li>
-                      
                     </ol>
                   </dd>
                   
@@ -799,67 +790,38 @@ em{font-style:normal;}
   
   </div>
   
+  
   <script>
-//发送验证码
-function validateCode(){
-	var email = document.getElementById("useremail");
-	alert(email.value);
-	$.ajax({
-        type: "get",
-        url: "sendValidateCode",
-        data: {"email": email.value},
-        success: function (data) {
-        	alert("Validate code has already been sent to your email.");
-        }
-    });
-}
-  
-function modifypassword(){
-	var email = document.getElementById("useremail");
-	var verification_code = document.getElementById("verification_code");
-	var passwordsignup = document.getElementById("passwordsignup");
-	var passwordsignup_confirm = document.getElementById("passwordsignup_confirm");
-	alert(passwordsignup.value);
-	if(passwordsignup.value != passwordsignup_confirm.value)
-		alert("Two passwords are not matched!");
-	else{
+
+	$(function(){
+	
+	    
+	});
+
+	//跳转到详情页
+	function goToDetail(id){
+		var business_id = "";
+		business_id = id;
+		console.log(business_id);
 		$.ajax({
-	        type: "get",
-	        url: "modifypassword",
-	        data: {
-	        	"email": email.value,
-	        	"verification_code":verification_code.value,
-	        	"passwordsignup":passwordsignup.value,
-	        	"passwordsignup_confirm":passwordsignup_confirm.value
-	        	   },
-	        success: function (data) {
-	        	if(data == "error")
-	        	    alert("Something wrong happened!");
-	        	else if(data =="success")
-	        		alert("The password has been modified succesfully!");
-	        	else if(data == "outdated")
-	        		alert("The verification code has been out dated");
-	        }
-	    });
-	}	
-}
-  
-  
-  
-  
+			url: "/rrsWeb/user/footprintToDetail",
+			type: "POST",
+			async:false,
+			data: {
+				"business_id":business_id,
+			},  
+			success: function(res){
+				console.log("ggg");	
+			},
+			error: function(err){
+				console.error(err);
+				console.log("bbb");
+			}
+		}); 
+	}
   </script>
-   <script src="../js/jquery.min.js"></script>
-   <script src="../js/bootstrap.min.js"></script> 
-        
-        
-    <!-- 全局js -->
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script> 
   
   
+</body>
   
-  </body>
-  
-  
-  
-  </html>
+</html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -289,6 +290,7 @@
 												</div>
 											</li>
 											<li><a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a>
+											<li id="user_id" style="display:none;">${current_user.id}</li>
 											</li>
 										</ul>
 									</div>
@@ -882,6 +884,15 @@
 												</button>
 											</form>
 										</div>
+										
+										<span class="search-choose">
+											<select id="input-search" class="form-control col-sm-3">
+												<option value="0" selected="selected">Name</option>
+												<option value="1">City</option>
+												<option value="2">Address</option>
+												<option value="3">Tag</option>
+											</select>
+										</span>
 									
 									 
 									</div>
@@ -960,9 +971,21 @@
 								<div id="search-tag" >
 									<div id="search-history" style="font-size: 14px;weight:normal;">
 										<b>History Search:</b>
+											
+										<c:forEach items="${historySearchList}" var="historySearchItem" varStatus="i"> 
+											<span id="tag_${i.index}" onclick="searchShopByClick('${historySearchItem}')">
+												<em class="con1-${i.index}">${historySearchItem}</em>
+											</span>
+										</c:forEach>
+										
 									</div>
 									<div id="search-hot" style="font-size: 14px;weight:normal;">
 										<b>Hot Search:</b>
+										<c:forEach items="${hotSearchList}" var="hotSearchItem" varStatus="i"> 
+												<span id="tag_${i.index}" onclick="searchShopByClick('${hotSearchItem}')">
+													<em class="con1-${i.index}">${hotSearchItem}</em>
+												</span>
+											</c:forEach>
 									</div>
 								</div>
 								
@@ -1440,6 +1463,7 @@
 	***************************************/
    var map, geolocation,lat,lng;
 	var isNull = 0;
+	
     //加载地图，调用浏览器定位服务
     map = new AMap.Map('Container', {
         resizeEnable: true
@@ -1482,7 +1506,7 @@
         lng=e.lnglat.getLng();
         lat=e.lnglat.getLat();
         $.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/distance",
+			url: "http://localhost:8080/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1517,7 +1541,7 @@
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         //document.getElementById('tip').innerHTML = str.join('<br>');
         $.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/distance",
+			url: "http://localhost:8080/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1563,7 +1587,7 @@
 	$().ready( function() {
 		var page = 1;
 	 	$.ajax({
-		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1580,11 +1604,9 @@
 			console.error(err);
 			console.log("bbb");
 		}
-		}); 	
+		}); 
+	 	getUserId();
 	} ); 
-	
-	
-	
 	
 	//展示商店
 	function showGrid(curGrid){
@@ -1680,7 +1702,7 @@
 	//用于搜索或排序后重载grid
 	function reloadGrid(){
 		$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+1,
+			url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
 			async:false,
 			type: "POST",
 			data: {
@@ -1704,9 +1726,12 @@
 	//搜索商店
 	function searchShop(){
 		var key=document.getElementById("search").value;
+		var way=document.getElementById("input-search").value;
+		console.log("aaaaaaaaaaa"+way);
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key,
+
+			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"&way="+way,
 			async:false,
 			type: "POST",
 			data: {
@@ -1744,7 +1769,7 @@
 		var sort=$("option:selected",this).val();
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
+			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
 			async:false,
 			type: "POST",
 			data: {
@@ -1773,11 +1798,6 @@
 			}
 		}); 
 		
-		/* if(isNull == 0){
-			reloadGrid();
-		}
-		isNull == 0; */
-		
 		reloadGrid();
 	
 	});
@@ -1788,7 +1808,7 @@
 		var page=num;
 		
 	 	$.ajax({
-		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1821,7 +1841,7 @@ function goToDetail(id,name){
 	console.log(name);
 	
 	$.ajax({
-		url: "http://localhost:8013/rrsWeb/shop/goToDetail?business_id="+business_id,
+		url: "http://localhost:8080/rrsWeb/shop/goToDetail?business_id="+business_id,
 		type: "POST",
 		async:false,
 		data: {
@@ -1837,7 +1857,44 @@ function goToDetail(id,name){
 	}); 
 }
 
+//搜索商店
+function searchShopByClick(searchKey){
+	var key=searchKey;
+	var pageNum = 0;
+	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		async:false,
+		type: "POST",
+		data: {
+			
+		},  
+		success: function(res){			
+			pageNum = res;
+			if(pageNum == 0){
+				alert("Found Noting");
+				isNull = 1;
+			} else {
+				reloadPageNum(pageNum);
+				isNull = 0;
+			}
 
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 	
+	if(isNull == 0){
+		reloadGrid();
+		document.getElementById("search").value = key;
+	}
+	isNull = 0;	
+}
+
+function getUserId(){
+	var id = document.getElementById("user_id").innerText;
+	console.log(id);
+}
 
 </script>
 

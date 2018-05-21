@@ -32,6 +32,10 @@ public interface ShopService {
 	List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList);
 	Restaurant getRestaurantById(String business_id);
 	
+	void insertTrack(String id, String id2);
+	List<String> getTrackBusiness(String id);
+	void deleteTrack(String id, String id2);
+	
 	
 	
 }

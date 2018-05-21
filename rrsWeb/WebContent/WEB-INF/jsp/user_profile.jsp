@@ -809,6 +809,7 @@ em{font-style:normal;}
                   <dt class="even">Routine</dt>
                   <dd class="even">
                     <ol>
+                      <li> <a class="choose-tag" href="footprint">Footprint</a></li>
                       <li> <a class="choose-tag" href="#">"Like" Restaurant</a></li>
                       <li> <a class="choose-tag" href="#">My Comments</a></li>
                       <li> <a class="choose-tag" href="#">My Coupons</a></li>
