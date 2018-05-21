@@ -104,7 +104,7 @@ public class ShopController {
 	//3.搜索商家
 	@RequestMapping(value = "/searchGrid",method = { RequestMethod.POST })
 	public @ResponseBody
-	int searchShop(@RequestParam(value="key") String key,HttpServletRequest request, HttpServletResponse response){ 
+	int searchShop(@RequestParam(value="key") String key,@RequestParam(value="way") String way,HttpServletRequest request, HttpServletResponse response){ 
 		
 		//把当前list改成搜索到的list
 		//=========搜索就修改这里就可以了=============

@@ -77,30 +77,30 @@ public class HomeController {
 		ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
 		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
 		
-		//根据用户喜好取出商家
-		list = (ArrayList<Restaurant>) shopService.getRestaurantByFavor(user.getId());
-		for(int i = 0;i < 8;i++)
-		{
-			hot.add(list.get(i));
-			near.add(list.get(i));
-		}
-		//清空列表
-		list.clear();
-		//将指定种类的商家排序后取出
-		list = shopService.getRestaurantByCate();
-		
-		//根据种类将商家加入相应的list,取前八位
-		for(int i = 0;i < list.size();i++)
-		{
-			if(list.get(i).getCategory_id() == 4 && food.size()<8)
-				food.add(list.get(i));
-			else if(list.get(i).getCategory_id() == 23 && fashion.size()<8)
-				fashion.add(list.get(i));
-			else if(list.get(i).getCategory_id() == 134 && health.size()<8)
-				health.add(list.get(i));
-			else if(list.get(i).getCategory_id() == 49 && hotel.size()<8)
-				hotel.add(list.get(i));
-		}
+//		//根据用户喜好取出商家
+//		list = (ArrayList<Restaurant>) shopService.getRestaurantByFavor(user.getId());
+//		for(int i = 0;i < 8;i++)
+//		{
+//			hot.add(list.get(i));
+//			near.add(list.get(i));
+//		}
+//		//清空列表
+//		list.clear();
+//		//将指定种类的商家排序后取出
+//		list = shopService.getRestaurantByCate();
+//		
+//		//根据种类将商家加入相应的list,取前八位
+//		for(int i = 0;i < list.size();i++)
+//		{
+//			if(list.get(i).getCategory_id() == 4 && food.size()<8)
+//				food.add(list.get(i));
+//			else if(list.get(i).getCategory_id() == 23 && fashion.size()<8)
+//				fashion.add(list.get(i));
+//			else if(list.get(i).getCategory_id() == 134 && health.size()<8)
+//				health.add(list.get(i));
+//			else if(list.get(i).getCategory_id() == 49 && hotel.size()<8)
+//				hotel.add(list.get(i));
+//		}
 		//将不同类的列表合并
 		allList.add(hot);
 		allList.add(food);
