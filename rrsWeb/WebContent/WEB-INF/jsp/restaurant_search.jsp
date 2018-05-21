@@ -10,6 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <![endif]-->
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
 <title></title>
 <meta name="description" content="">
 <meta name="keywords" content="">
@@ -44,8 +45,7 @@
 <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
 <script type="text/javascript"
 	src="http://webapi.amap.com/maps?v=1.3&key=9ec7df578b3d28f30ad9d6909ef6fbf6"></script>
-<script type="text/javascript"
-	src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+
 
 <style type="text/css">
 #Container {
@@ -1453,9 +1453,10 @@
             buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
             zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
             buttonPosition:'RB',
-            lang:'zh_en',
+            
             zoom: 13
         });
+        map.setLang("zh_en");
         map.addControl(geolocation);
         geolocation.getCurrentPosition();
         AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
@@ -1466,7 +1467,13 @@
     var marker = new AMap.Marker({
         draggable: true,
         cursor: 'move',
-        raiseOnDrag: false
+        raiseOnDrag: false,
+        offset: new AMap.Pixel(-14, -34),//相对于基点的位置
+        icon: new AMap.Icon({  //复杂图标
+            size: new AMap.Size(27, 36),//图标大小
+            image: "http://webapi.amap.com/images/custom_a_j.png", //大图地址
+            imageOffset: new AMap.Pixel(-28, 0)//相对于大图的取图位置
+        })
     });
     
     //测试点击
@@ -1475,7 +1482,7 @@
         lng=e.lnglat.getLng();
         lat=e.lnglat.getLat();
         $.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/distance",
+			url: "http://localhost:8013/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1490,7 +1497,7 @@
 				console.log("bbb");
 			}
 			}); 
-        alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
+        //alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
     })
     
     
@@ -1508,9 +1515,9 @@
              str.push('精度：' + data.accuracy + ' 米');
         }//如为IP精确定位结果则没有精度信息
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
-        document.getElementById('tip').innerHTML = str.join('<br>');
+        //document.getElementById('tip').innerHTML = str.join('<br>');
         $.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/distance",
+			url: "http://localhost:8013/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1518,7 +1525,7 @@
 				"lng":lng
 			},  
 			success: function(res){
-				alert("计算成功");
+				//alert("计算成功");
 			},
 			error: function(err){
 				console.error(err);
@@ -1556,7 +1563,7 @@
 	$().ready( function() {
 		var page = 1;
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1673,7 +1680,7 @@
 	//用于搜索或排序后重载grid
 	function reloadGrid(){
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
+			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+1,
 			async:false,
 			type: "POST",
 			data: {
@@ -1699,7 +1706,7 @@
 		var key=document.getElementById("search").value;
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+			url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key,
 			async:false,
 			type: "POST",
 			data: {
@@ -1737,7 +1744,7 @@
 		var sort=$("option:selected",this).val();
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
+			url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
 			async:false,
 			type: "POST",
 			data: {
@@ -1781,7 +1788,7 @@
 		var page=num;
 		
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1814,7 +1821,7 @@ function goToDetail(id,name){
 	console.log(name);
 	
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/goToDetail?business_id="+business_id,
+		url: "http://localhost:8013/rrsWeb/shop/goToDetail?business_id="+business_id,
 		type: "POST",
 		async:false,
 		data: {
