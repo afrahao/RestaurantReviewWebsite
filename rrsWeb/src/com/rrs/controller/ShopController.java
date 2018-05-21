@@ -42,10 +42,12 @@ public class ShopController {
 	@RequestMapping(value = "/grid",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView shopGrid(HttpServletRequest request, HttpServletResponse response){
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		
 		ModelAndView mav = new ModelAndView();	
 		shopList = shopService.getRestaurant(61, 100);
 		
 		System.out.println("一共有"+shopList.size());
+		//System.out.println("用户是"+user.getName());
 		
 		if(shopList.size()%15 != 0){
 			for(int i = 0 ; i < shopList.size()%15 ; i ++){
@@ -59,9 +61,22 @@ public class ShopController {
 			originShopList.add(shopList.get(i).clone()); 
 		}
 
+		List<String> historySearchList= new ArrayList<String>();
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		historySearchList.add("pets");
+		
+		List<String> hotSearchList= new ArrayList<String>();
+		hotSearchList.add("hot");
+		hotSearchList.add("hot");
+		hotSearchList.add("thai");
 		
 		mav.addObject("pageNum",calPageNum(shopList,15));
 		mav.addObject("current_user", user);
+		mav.addObject("historySearchList", historySearchList);
+		mav.addObject("hotSearchList", hotSearchList);
 		mav.setViewName("restaurant_search");	
 		
 		System.out.println("一共有"+originShopList.size());
@@ -418,7 +433,7 @@ public class ShopController {
 	}
 	
 	//========================================================================
-	//修改个人信息
+	//特别餐厅
 	@RequestMapping(value = "/special",method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView specialShopGrid(HttpServletRequest request, HttpServletResponse response){
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 

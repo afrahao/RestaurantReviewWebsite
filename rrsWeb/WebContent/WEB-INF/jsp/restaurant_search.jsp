@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -960,9 +961,31 @@
 								<div id="search-tag" >
 									<div id="search-history" style="font-size: 14px;weight:normal;">
 										<b>History Search:</b>
+											<!-- <span id="tag_4 ">
+												<em class="con1-4">Pets</em>
+											</span>
+											<span id="tag_4 ">
+												<em class="con1-4">Hotel</em>
+											</span>
+											
+											<span id="tag_4 ">
+												<em class="con1-4">Thai</em>
+											</span> -->
+											
+										<c:forEach items="${historySearchList}" var="historySearchItem" varStatus="i"> 
+											<span id="tag_${i.index}" onclick="searchShopByClick('${historySearchItem}')">
+												<em class="con1-${i.index}">${historySearchItem}</em>
+											</span>
+										</c:forEach>
+										
 									</div>
 									<div id="search-hot" style="font-size: 14px;weight:normal;">
 										<b>Hot Search:</b>
+										<c:forEach items="${hotSearchList}" var="hotSearchItem" varStatus="i"> 
+												<span id="tag_${i.index}" onclick="searchShopByClick('${hotSearchItem}')">
+													<em class="con1-${i.index}">${hotSearchItem}</em>
+												</span>
+											</c:forEach>
 									</div>
 								</div>
 								
@@ -1440,6 +1463,7 @@
 	***************************************/
    var map, geolocation,lat,lng;
 	var isNull = 0;
+	
     //加载地图，调用浏览器定位服务
     map = new AMap.Map('Container', {
         resizeEnable: true
@@ -1575,9 +1599,6 @@
 		}
 		}); 	
 	} ); 
-	
-	
-	
 	
 	//展示商店
 	function showGrid(curGrid){
@@ -1766,11 +1787,6 @@
 			}
 		}); 
 		
-		/* if(isNull == 0){
-			reloadGrid();
-		}
-		isNull == 0; */
-		
 		reloadGrid();
 	
 	});
@@ -1830,6 +1846,39 @@ function goToDetail(id,name){
 	}); 
 }
 
+//搜索商店
+function searchShopByClick(searchKey){
+	var key=searchKey;
+	var pageNum = 0;
+	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		async:false,
+		type: "POST",
+		data: {
+			
+		},  
+		success: function(res){			
+			pageNum = res;
+			if(pageNum == 0){
+				alert("Found Noting");
+				isNull = 1;
+			} else {
+				reloadPageNum(pageNum);
+				isNull = 0;
+			}
+
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 	
+	if(isNull == 0){
+		reloadGrid();
+		document.getElementById("search").value = key;
+	}
+	isNull = 0;	
+}
 
 
 </script>
