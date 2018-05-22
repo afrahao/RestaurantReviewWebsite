@@ -29,7 +29,6 @@ public class ShopServiceImpl implements ShopService{
 	@Autowired
 	private PreferenceService preferenceService;
 	
-	private List<Restaurant> reviewsList = new ArrayList<Restaurant>();
 	private static double EARTH_RADIUS = 6378.137;
 	@Override
 	public List<Restaurant> getRestaurant(int start,int end) {
@@ -39,10 +38,7 @@ public class ShopServiceImpl implements ShopService{
 		for(int i=0; i < list.size(); i++){
 			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
-		
-		System.out.println("数据库取出"+list.size());
 		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
 			list.get(i).setReviewsRank(i);
 		Collections.sort(list, new DescAllComparator());
@@ -71,6 +67,12 @@ public class ShopServiceImpl implements ShopService{
 	//取出首页指定种类的商家列表
 	public List<Restaurant> getRestaurantByCate() {	
 		List<Restaurant>list = shopDao.getRestaurantByCate();
+		return getSortByDefault(list);
+	}
+		
+	//取出首页指定种类的商家列表
+	public List<Restaurant> getRestaurantByKind(int cateId) {	
+		List<Restaurant>list = shopDao.getRestaurantByKind(cateId);
 		return getSortByDefault(list);
 	}
 	
@@ -147,7 +149,12 @@ public class ShopServiceImpl implements ShopService{
 			imgList.add("http://47.95.10.11/FilteredPhoto/null.jpg");
 		} else {
 			for(int i = 0 ; i < imgList.size(); i ++)
-				imgList.set(i, "http://47.95.10.11/FilteredPhoto/"+imgList.get(i)+".jpg");
+			{
+				String path = imgList.get(i);
+				String check = path.substring(path.length()-4,path.length());
+				if(!check.equals(".jpg"))
+					imgList.set(i, "http://47.95.10.11/FilteredPhoto/"+path+".jpg");
+			}
 		}
 		
 		
@@ -190,7 +197,6 @@ public class ShopServiceImpl implements ShopService{
 			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
 		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
 			list.get(i).setReviewsRank(i);
 		Collections.sort(list, new DescAllComparator());

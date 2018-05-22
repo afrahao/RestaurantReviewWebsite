@@ -15,6 +15,8 @@ public interface SysUserDao {
 	
 	//核对密码
 	SysUser checkPassword(String email, String password);
+	//获取用户
+	SysUser getUser(String email);
 	int checkLoginTime(String email);
 	//增加输入密码错误次数
 	void updateTimes(String email);

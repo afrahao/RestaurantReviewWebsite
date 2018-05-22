@@ -43,6 +43,14 @@
         </where>
     </select>
     
+    <!-- 判断用户用户名和密码是否匹配-->
+    <select id="getUser" parameterType="String" resultType="SysUser">
+        select * from  user
+        <where>
+            email = #{0}
+        </where>
+    </select>
+    
     <!-- 判断用户登录时时间差-->
     <select id="checkLoginTime" parameterType="String" resultType="int">
         select (UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(log_datetime)) from user

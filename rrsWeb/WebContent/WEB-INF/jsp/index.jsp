@@ -481,57 +481,60 @@
               </div>
             </div>
           </li>
-          <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Flowers</span></a>
+          <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Shops</span></a>
             <div class="jtv-menu-block-wrapper">
               <div class="jtv-menu-block-wrapper2">
                 <div class="nav-block jtv-nav-block-center">
                   <ul class="level0">
-                    <li class="parent item"> <a href="shop_grid.html"><span>Christmas Bouquets</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Edibles</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Funeral</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Get Well</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Lady Dior Mascara</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>GoodSkin Labs</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=4"><span>Food</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=45"><span>Sandwiches</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=38"><span>Pizza</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=68"><span>Fast Food</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=69"><span>Burgers</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=9"><span>Coffee & Tea</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=12"><span>Restaurants</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Birthday Flowers</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Fashion</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Popular Belief</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Window plants</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Bushes</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Trees</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=103"><span>Nail Salons</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=21"><span>Women's Clothing</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=42"><span>Hair Salons</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=14"><span>Shopping</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Anniversary Flowers</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Entertainment</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Aliquam congue</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Sit amet conse</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Sed do eiusmod</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Labore et dolore</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=17"><span>Nightlife</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=44"><span>Beauty & Spas</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=25"><span>Bars</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=31"><span>Arts & Entertainment</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=50"><span>Event Planning & Services</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Family flowers</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Life</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Herbarium</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Tulips</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Green roses</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Kinds of flowers</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=49"><span>Hotels & Travel</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=19"><span>Home Services</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=134"><span>Health & Medical</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=149"><span>Doctors</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=94"><span>Pets</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=2"><span>Automotive</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=34"><span>Auto Repair</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=72"><span>Home & Garden</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=20"><span>Real Estate</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=0"><span>Active Life</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Corporate</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Region</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Lily</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Orchids</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Asiatic Lily</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Modern roses</span></a> </li>
-                      </ul>
-                    </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Congratulation</span></a>
-                      <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Toaster Crossbody</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Piper Bag</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Leather Bag</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Canvas Bag</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=24"><span>Chinese</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=48"><span>Italian</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=144"><span>Mexican</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=40"><span>American(new)</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=10"><span>American (Traditional)</span></a> </li>
                       </ul>
                     </li>
                   </ul>
@@ -1829,7 +1832,6 @@ function goToDetail(id,num){
 	var business_id = "";
 	business_id = id;
 	console.log(business_id);
-
 	
 	$.ajax({
 		url: "/rrsWeb/indexToDetail",
@@ -1838,6 +1840,26 @@ function goToDetail(id,num){
 		data: {
 			"business_id":business_id,
 			"list_num":num,
+		},  
+		success: function(res){
+			console.log("ggg");	
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 
+}
+
+function goToKindGrid(id){
+	
+	alert("sss"+id);
+	$.ajax({
+		url: "/rrsWeb/indexToKindGrid",
+		type: "POST",
+		async:false,
+		data: {
+			"cateId":id,
 		},  
 		success: function(res){
 			console.log("ggg");	

@@ -37,6 +37,13 @@
         </where>
     </select>
     
+    <select id="getRestaurantByKind" parameterType="Integer" resultType="com.rrs.pojo.Restaurant">
+        select * from  business,business_cate
+        <where>
+            business.id = business_cate.business_id and business_cate.category_id=#{0}
+        </where>
+    </select>
+    
     <!-- 根据用户喜好标签返回商家 -->
     <select id="getRestaurantByFavor" resultType="com.rrs.pojo.Restaurant">
         select * from  business,business_cate

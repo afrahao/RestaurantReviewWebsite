@@ -52,19 +52,25 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
 		//获取cookie
 		Cookie[] cookies = (Cookie[])request.getCookies();
 		Cookie cookie = null;
 		String email = null;
+		//获取登陆状态
 		cookie = CookieUtils.getCookieFromCookies(cookies, "loginuser");
 		if(cookie != null)
 		{
 			email = cookie.getValue();
+			//获取用户
+			if(user==null)
+			{
+				user = sysUserService.getUser(email);
+			}
 		}
 		
-		
-		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
-		
+		if(allList==null)
+		{
 		allList= new ArrayList<ArrayList<Restaurant>>();
 		List<Restaurant> list = new ArrayList<Restaurant>();
 		
@@ -117,10 +123,11 @@ public class HomeController {
 		allList.add(health);
 		allList.add(hotel);
 		allList.add(near);
-		
+		}
 		//保存登陆状态的邮箱
 		mav.addObject("loginuser", email);
 		mav.addObject("current_user", user);
+		request.getSession().setAttribute("currentuser", user);
 		mav.setViewName("index");
 		return mav;
 	}
@@ -161,7 +168,6 @@ public class HomeController {
 		mav.setViewName("redirect:shop/goToDetail?business_id="+business_id);
 		return mav;
 	}
-	
 	
 	
 	//=============================有关账户===================================

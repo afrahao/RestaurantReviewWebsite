@@ -47,10 +47,46 @@ public class ShopController {
 		
 		ModelAndView mav = new ModelAndView();	
 		shopList = shopService.getRestaurant(61, 100);
+
+		if(shopList.size()%15 != 0){
+			for(int i = 0 ; i < shopList.size()%15 ; i ++){
+				Restaurant r = new Restaurant();
+			shopList.add(r);
+			}
+		}
+		originShopList = new ArrayList<Restaurant>(shopList.size());
 		
-		System.out.println("一共有"+shopList.size());
-		//System.out.println("用户是"+user.getName());
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			originShopList.add(shopList.get(i).clone()); 
+		}
+
+		//历史搜索记录
+		List<String> historySearchList= new ArrayList<String>();
+		historySearchList = shopService.getSearRec(user);
+	
+		//热门搜索记录
+		List<String> hotSearchList= new ArrayList<String>();		
+		hotSearchList = shopService.getSearHot();
 		
+		
+		mav.addObject("pageNum",calPageNum(shopList,15));
+		mav.addObject("current_user", user);
+		mav.addObject("historySearchList", historySearchList);
+		mav.addObject("hotSearchList", hotSearchList);
+		mav.setViewName("restaurant_search");	
+		
+		System.out.println("一共有"+originShopList.size());
+		return mav;
+	}
+	
+	@RequestMapping(value = "/kindGrid",method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView kindGrid(@RequestParam(value="cateId") int cateId,HttpServletRequest request, HttpServletResponse response){
+		
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		
+		ModelAndView mav = new ModelAndView();	
+		shopList = shopService.getRestaurantByKind(cateId);
+
 		if(shopList.size()%15 != 0){
 			for(int i = 0 ; i < shopList.size()%15 ; i ++){
 				Restaurant r = new Restaurant();
@@ -89,7 +125,7 @@ public class ShopController {
 	public String showGrid(@RequestParam(value="page") int page,int num,HttpServletRequest request, HttpServletResponse response){ 
 		
 		List<Restaurant> partList = new ArrayList<Restaurant>();
-		System.out.println(page);
+		
 		//暂定每页15个
 		num = 15;
 		

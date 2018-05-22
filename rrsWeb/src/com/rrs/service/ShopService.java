@@ -23,6 +23,7 @@ public interface ShopService {
 	List<Restaurant> getRestaurantByFavor(String id);
 	//根据指定种类返回商家
 	List<Restaurant> getRestaurantByCate();
+	List<Restaurant> getRestaurantByKind(int cateId);
 	
 	//筛选距离定位点指定距离的饭店
 	List<Restaurant> getRestaurantByDistanceA1(double lat,double lon,int distance);

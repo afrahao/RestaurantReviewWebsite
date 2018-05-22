@@ -27,6 +27,12 @@ public class SysUserServiceImpl implements SysUserService{
 		
 		return sysUserDao.TestUserByEmail(email);
 	}
+	
+	@Override
+	public SysUser getUser(String email) {
+		
+		return sysUserDao.getUser(email);
+	}
 
 	@Override
 	public void updateUserStatus(String email) {

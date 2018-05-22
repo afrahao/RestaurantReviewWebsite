@@ -13,6 +13,7 @@ public interface ShopDao {
 
 	public List<Restaurant> getRestaurant(int start,int end);
 	public List<Restaurant> getRestaurantByCate();
+	public List<Restaurant> getRestaurantByKind(int cateId);
 	public List<Restaurant> getRestaurantByFavor(@Param("favor")int[] favor);
 	public List<Restaurant> getRestaurantSearch(String key);
 	public List<String> getRestaurantImg(String shop_id);
