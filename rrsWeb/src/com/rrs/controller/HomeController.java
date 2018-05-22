@@ -39,6 +39,7 @@ public class HomeController {
 	
 	
 	ArrayList<ArrayList<Restaurant>> allList;
+	double Lat,Lng;
 	
 	//==============================首页===============================
 	
@@ -96,8 +97,16 @@ public class HomeController {
 		for(int i = 0;i < 8;i++)
 		{
 			hot.add(list.get(i));
+		}
+
+		//计算商店与定位点距离
+		shopService.GetDistance(Lat, Lng, list);
+		list = shopService.getRestaurantByDistanceB(list);
+		for(int i = 0;i < 8;i++)
+		{
 			near.add(list.get(i));
 		}
+		
 		//清空列表
 		list.clear();
 		//将指定种类的商家排序后取出
@@ -169,6 +178,16 @@ public class HomeController {
 		return mav;
 	}
 	
+
+	//4.获得定位的经纬度
+		@RequestMapping(value = "/distance",method = {RequestMethod.GET,RequestMethod.POST })
+		public String getDistance(double lat,double lng,HttpServletRequest request, HttpServletResponse response){
+			
+			Lat=lat;
+			Lng=lng;
+			System.out.println(lat+" "+lng);
+			return "ok";
+		}
 	
 	//=============================有关账户===================================
 	
