@@ -13,6 +13,8 @@ import com.rrs.pojo.Attribute;
 
 import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.Review;
+import com.rrs.pojo.SearHot;
+import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
 import com.rrs.util.JsonUtils;
@@ -24,6 +26,9 @@ public class ShopServiceImpl implements ShopService{
 	
 	@Autowired
     private ShopDao shopDao;
+	@Autowired
+	private PreferenceService preferenceService;
+	
 	private List<Restaurant> reviewsList = new ArrayList<Restaurant>();
 	private static double EARTH_RADIUS = 6378.137;
 	@Override
@@ -44,32 +49,29 @@ public class ShopServiceImpl implements ShopService{
 		return list;
 	}
 	
-	public List<Restaurant> getRestaurantByCate() {
-		/*PreferenceService ps = new PreferenceServiceImpl();
-		StringBuffer condition = new StringBuffer();
-		condition.append("4,23,134,49");
-		if(id != "" && id!=null)
+	//根据喜好标签取出商家
+	public List<Restaurant> getRestaurantByFavor(String id) {
+		//获取用户喜好标签
+		List<Integer>  f = preferenceService.selectPreference(id);
+		if(f.size()!=0)
 		{
-			List<Integer>  favor = ps.selectPreference(id);
-			if(favor != null)
+			int[] favor = new int[f.size()];
+			for(int i = 0;i < f.size();i++)
 			{
-				for(int i = 0;i < favor.size();i++)
-					condition.append("," + favor.get(i));
+				favor[i]=f.get(i);
 			}
-		}*/
-				
-		List<Restaurant>list = shopDao.getRestaurantByCate();
-		
-		for(int i=0; i < list.size(); i++){
-			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
+			//获取对应标签的商家列表
+			List<Restaurant>list = shopDao.getRestaurantByFavor(favor);
+			//综合排序
+			return getSortByDefault(list);
 		}
-		
-		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
-		for(int i = 0 ; i < list.size() ; i ++)
-			list.get(i).setReviewsRank(i);
-		Collections.sort(list, new DescAllComparator());
-		return list;
+		return getRestaurant(0, 200);
+	}
+	
+	//取出首页指定种类的商家列表
+	public List<Restaurant> getRestaurantByCate() {	
+		List<Restaurant>list = shopDao.getRestaurantByCate();
+		return getSortByDefault(list);
 	}
 	
 	@Override
@@ -78,16 +80,64 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
-	public int getRestaurantSearchNum(String key) {
+	public int getRestaurantSearchNum(String key, String way) {
 		
-		return shopDao.getRestaurantSearchNum(key);
+		int sum = 0;
+		
+		switch(way){
+		case "0":
+			//search by name
+			sum = shopDao.getSearchNumName(key);
+			break;
+		case "1":
+			//search by city
+			sum = shopDao.getSearchNumCity(key);
+			break;
+		case "2":
+			//search by address
+			sum = shopDao.getSearchNumAddr(key);
+			break;
+		case "3":
+			//search by tag
+			sum = shopDao.getSearchNumTag(key);
+			break;
+		default:
+			break;	
+		}
+		
+		return sum;
+		
 	}
 
 	@Override
-	public List<Restaurant> getRestaurantSearch(String key) {
+	public List<Restaurant> getRestaurantSearch(String key, String way) {
 		
-		return shopDao.getRestaurantSearch(key);
+		List<Restaurant> shopList = new ArrayList<Restaurant>();
+		
+		switch(way){
+		case "0":
+			//search by name
+			shopList = shopDao.getSearchName(key);
+			break;
+		case "1":
+			//search by city
+			shopList = shopDao.getSearchCity(key);
+			break;
+		case "2":
+			//search by address
+			shopList = shopDao.getSearchAddr(key);
+			break;
+		case "3":
+			//search by tag
+			shopList = shopDao.getSearchTag(key);
+			break;
+		default:
+			break;	
+		}
+		
+		return shopList;
 	}
+	
 	
 	@Override
 	public List<String> getRestaurantImg(String shop_id) {
@@ -129,11 +179,15 @@ public class ShopServiceImpl implements ShopService{
 		return sortList;
 	}
 	
+	//综合排序
 	public List<Restaurant> getSortByDefault(List<Restaurant> shopList) {
 		List<Restaurant> list = new ArrayList<Restaurant>(shopList.size());
 		
 		for(int i = 0 ; i < shopList.size(); i ++){ 
 			list.add(shopList.get(i).clone()); 
+		}
+		for(int i=0; i < list.size(); i++){
+			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
 		Collections.sort(list, new DescReviewComparator());
 		reviewsList = list;
@@ -216,52 +270,7 @@ public class ShopServiceImpl implements ShopService{
 		
 		return hourStr;
 	}
-
-	/*private List<Hours> getHoursList(String id) {
-		// TODO Auto-generated method stub
-		List<Hours> hoursList = new ArrayList<Hours>();
-		Hours shopHours = new Hours();
-		String hoursString = shopDao.getHourList(id);
-		String hours = hoursString.replaceAll("u'", "'");
-		String hourStr = hours.replaceAll("\'", "\"");
-		System.out.println(hourStr);
-		
-		//hours = "['Monday': {'close': '17:00', 'open': '06:00'}, 'Tuesday': {'close': '17:00', 'open': '06:00'}, 'Friday': {'close': '17:00', 'open': '06:00'}, 'Wednesday': {'close': '17:00', 'open': '06:00'}, 'Thursday': {'close': '17:00', 'open': '06:00'}, 'Sunday': {'close': '15:00', 'open': '06:00'}, 'Saturday': {'close': '17:00', 'open': '06:00'}]";
-		shopHours = JsonUtils.jsonToPojo(hourStr,Hours.class);
 	
-		
-		Hours hour = new Hours();
-		hour.setDate("Monday");
-		hour.setOpen(hours.substring(44, 49));
-		hour.setClose(hours.substring(25, 30));
-		hoursList.add(hour); 
-		hour.setDate("Tuesday");
-		hour.setOpen(hours.substring(97, 102));
-		hour.setClose(hours.substring(78, 83));
-		hoursList.add(hour); 
-		hour.setDate("Friday");//28ge 
-		hour.setOpen(hours.substring(149, 154));
-		hour.setClose(hours.substring(130, 135));
-		hoursList.add(hour); 
-		hour.setDate("Wednesday");
-		hour.setOpen(hours.substring(204, 209));
-		hour.setClose(hours.substring(185, 190));
-		hoursList.add(hour); 
-		hour.setDate("Thursday");
-		hour.setOpen(hours.substring(258, 263));
-		hour.setClose(hours.substring(239, 244));
-		hoursList.add(hour); 
-		hour.setDate("Sunday");
-		hour.setOpen(hours.substring(310, 315));
-		hour.setClose(hours.substring(291, 296));
-		hoursList.add(hour); 
-		hour.setDate("Saturday");
-		hour.setOpen(hours.substring(364, 369));
-		hour.setClose(hours.substring(345, 350));
-		hoursList.add(hour); 
-		return hoursList;
-	}*/
-
 	private List<String> getCategoryList(String id) {
 		// TODO Auto-generated method stub
 		List<String> categoryList = new ArrayList<String>();
@@ -302,6 +311,89 @@ public class ShopServiceImpl implements ShopService{
 		restaurant.setImg(img);
 		restaurant.setReviewList(reviewList);
 		return restaurant;
+	}
+	
+	@Override
+	public void insertTrack(String userId, String businessId) {
+		// TODO Auto-generated method stub
+		shopDao.insertTrack(userId,businessId);
+	}
+
+	@Override
+	public List<String> getTrackBusiness(String userId) {
+		// TODO Auto-generated method stub
+		List<String> businessIdList = new ArrayList<String>();
+		businessIdList = shopDao.getTrackBusiness(userId);
+		return businessIdList;
+	}
+
+	@Override
+	public void deleteTrack(String userId, String businessId) {
+		// TODO Auto-generated method stub
+		shopDao.deleteTrack(userId,businessId);
+	}
+	
+	
+	//获得用户历史搜索记录
+	public List<String> getSearRec(SysUser user) {
+		// TODO Auto-generated method stub
+		List<String> searRec = new ArrayList<String>();
+		searRec = shopDao.getSearchRec(user.getId());
+		
+		return searRec;
+	}
+	
+	//获得热门搜索记录
+	public List<String> getSearHot(){
+		List<String> searhot = new ArrayList<String>();
+		searhot = shopDao.getSearchHot();
+		
+		return searhot;
+	}
+
+	
+	//判断搜索记录是否存在于热门搜索表中
+	@Override
+	public int isInhot(String key) {
+		// TODO Auto-generated method stub
+		return shopDao.isInhot(key);
+	}
+
+	//更新热门搜索表
+	@Override
+	public void insertHot(String key) {
+		// TODO Auto-generated method stub
+		shopDao.insertHot(key);
+	}
+
+
+	//热门搜索表count++
+	@Override
+	public void modifyHot(String key) {
+		// TODO Auto-generated method stub
+		shopDao.modifyHot(key);
+	}
+
+	//用户搜索记录表插入数据
+	@Override
+	public void insertRec(String key, String userid) {
+		// TODO Auto-generated method stub
+		shopDao.insertRec(key, userid);
+	}
+
+	//判断用户搜索记录
+	@Override
+	public int searBefore(String key, String uid) {
+		// TODO Auto-generated method stub
+		return shopDao.searBefore(key, uid);
+	}
+
+
+	//在搜索记录表中更新纪录
+	@Override
+	public void modifyRec(String key, String uid) {
+		// TODO Auto-generated method stub
+		shopDao.modifyRec(key, uid);
 	}
 	
 }

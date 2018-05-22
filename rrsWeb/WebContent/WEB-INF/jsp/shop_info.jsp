@@ -24,6 +24,32 @@
 <!-- CSS Style -->
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="../css/shop-info.css">
+<!-- 高德地图 -->
+<link rel="stylesheet"
+	href="http://cache.amap.com/lbs/static/main1119.css" />
+<link rel="stylesheet"
+	href="http://cache.amap.com/lbs/static/main.css?v=1.0" />
+<script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+<script type="text/javascript"
+	src="http://webapi.amap.com/maps?v=1.3&key=9ec7df578b3d28f30ad9d6909ef6fbf6"></script>
+<script type="text/javascript"
+	src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+
+<style type="text/css">
+#Container {
+	
+	height: 300px;
+}
+ .amap-marker-label {
+        font-size: 13px;
+        border: 1px solid #b8b8b8;
+        background: #fff;
+        border-radius: 6px 6px 6px 0;
+        color: #777;
+        line-height: 130%;
+    }
+</style>
+<!-- 高德地图 -->
 </head>
 
 <body class="single-product-page">
@@ -280,7 +306,7 @@
                     
                     <!--actions-->
                     <div class="actions">
-                      <button class="btn-checkout" title="Checkout" type="button" onClick="#"><span>Checkout</span> </button>
+                      <button class="btn-checkout" title="Checkout" type="button" onClick=""><span>Checkout</span> </button>
                       <a href="#" class="view-cart"><span>View Cart</span></a> </div>
                   </div>
                 </div>
@@ -591,6 +617,9 @@
             <li> <a href="shop_grid.html" title="">Clutches</a> <span>/ </span> </li>
             <li> <a href="shop_grid.html" title="">Bucket Bag</a> <span>/</span> </li>
             <li> <strong>${shopItem.name}</strong> </li>
+            <input type="hidden" value="${shopItem.name}" class="validate-rating" id="shopItem_name">
+            <input type="hidden" value="${shopItem.latitude}" class="validate-rating" id="shopItem_latitude">
+            <input type="hidden" value="${shopItem.longitude}" class="validate-rating" id="shopItem_longitude">
           </ul>
         </div>
       </div>
@@ -808,9 +837,8 @@
               
               <!-- 地图标签 -->
                 <div class="tab-pane fade in active" id="product_tabs_map">
-                  <div class="std">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.</p>
-                    <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
+                  <div id="Container">
+                    
                   </div>
                 </div>
                 
@@ -1710,6 +1738,37 @@
 <script src="../js/cloud-zoom.js"></script>
 
 <script>
+
+//加载地图
+var shopItem_name = document.getElementById("shopItem_name").value;
+var shopItem_latitude = document.getElementById("shopItem_latitude").value;
+var shopItem_longitude = document.getElementById("shopItem_longitude").value;
+
+var map = new AMap.Map('Container', {
+    resizeEnable: true,
+    zoom:9,
+    center:[shopItem_longitude,shopItem_latitude]
+});
+map.setLang("zh_en");
+
+//定位点
+var marker = new AMap.Marker({
+  
+    position: [shopItem_longitude,shopItem_latitude],
+    offset: new AMap.Pixel(-14, -34),//相对于基点的位置
+    icon: new AMap.Icon({  //复杂图标
+        size: new AMap.Size(27, 36),//图标大小
+        image: "http://webapi.amap.com/images/custom_a_j.png", //大图地址
+        imageOffset: new AMap.Pixel(-28, 0)//相对于大图的取图位置
+    }),
+    label: {
+    content: shopItem_name,
+    offset: new AMap.Pixel(27, 25)
+    }
+});
+marker.setMap(map);
+
+
 var curShop;
 
 function generateHours(){

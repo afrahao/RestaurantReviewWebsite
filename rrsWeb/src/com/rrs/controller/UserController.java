@@ -2,10 +2,12 @@ package com.rrs.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
+import com.rrs.service.ShopService;
 import com.rrs.service.SysUserService;
+import com.rrs.service.impl.PreferenceServiceImpl;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -27,6 +32,9 @@ public class UserController {
 	
 	@Autowired
 	private PreferenceService preferenceService;
+	
+	@Autowired
+	private ShopService shopService;
 	
 	
 	
@@ -147,6 +155,10 @@ public class UserController {
 		System.out.println("-----r----" + user.getId());
 		String id = user.getId();
 		List<Integer> categoryIdList = preferenceService.selectPreference(id);
+		for(int i:categoryIdList)
+		{
+			System.out.println(i);
+		}
 		
 	    return categoryIdList;
 	}
@@ -167,6 +179,47 @@ public class UserController {
 			preferenceService.insertPreference(userId,curUserFavor[i]);
 		}
 		
+	}
+	
+	//---------------------------------我的足迹--------------------------------
+	@RequestMapping(value = "/footprint",method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView userFootprint(HttpServletRequest request, HttpServletResponse response){
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+//		SysUser currentuser = sysUserService.TestUserByEmail(user.getEmail());
+		//request.getSession().setAttribute("currentuser", currentuser);
+		
+		System.out.println("user:"+user.getName());
+//		System.out.println("currentuser:"+currentuser.getName());
+		
+		List<Restaurant> list = new ArrayList<Restaurant>();
+		
+		//留空
+		List<String> businessIdList = new ArrayList<String>();
+		businessIdList = shopService.getTrackBusiness(user.getId());
+		Restaurant restaurant = new Restaurant();
+		for(int i=0;i<businessIdList.size();i++){
+			restaurant = shopService.getRestaurantById(businessIdList.get(i));
+			list.add(restaurant);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("current_user", user);
+		mav.addObject("footprintList", list);
+		mav.setViewName("user_footprint");		
+		return mav;
+	}
+	
+	
+	//3.跳转到详情页
+	@RequestMapping(value = "/footprintToDetail", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView toDetail(String business_id,HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+
+		mav.addObject("current_user", user);
+
+		mav.setViewName("redirect:../shop/goToDetail?business_id="+business_id);
+		return mav;
 	}
 	
 	

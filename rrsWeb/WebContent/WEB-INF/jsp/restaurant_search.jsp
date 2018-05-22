@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -10,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <![endif]-->
 <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
 <title></title>
 <meta name="description" content="">
 <meta name="keywords" content="">
@@ -44,8 +46,7 @@
 <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
 <script type="text/javascript"
 	src="http://webapi.amap.com/maps?v=1.3&key=9ec7df578b3d28f30ad9d6909ef6fbf6"></script>
-<script type="text/javascript"
-	src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+
 
 <style type="text/css">
 #Container {
@@ -289,6 +290,7 @@
 												</div>
 											</li>
 											<li><a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a>
+											<li id="user_id" style="display:none;">${current_user.id}</li>
 											</li>
 										</ul>
 									</div>
@@ -882,6 +884,15 @@
 												</button>
 											</form>
 										</div>
+										
+										<span class="search-choose">
+											<select id="input-search" class="form-control col-sm-3">
+												<option value="0" selected="selected">Name</option>
+												<option value="1">City</option>
+												<option value="2">Address</option>
+												<option value="3">Tag</option>
+											</select>
+										</span>
 									
 									 
 									</div>
@@ -960,9 +971,21 @@
 								<div id="search-tag" >
 									<div id="search-history" style="font-size: 14px;weight:normal;">
 										<b>History Search:</b>
+											
+										<c:forEach items="${historySearchList}" var="historySearchItem" varStatus="i"> 
+											<span id="tag_${i.index}" onclick="searchShopByClick('${historySearchItem}')">
+												<em class="con1-${i.index}">${historySearchItem}</em>
+											</span>
+										</c:forEach>
+										
 									</div>
 									<div id="search-hot" style="font-size: 14px;weight:normal;">
 										<b>Hot Search:</b>
+										<c:forEach items="${hotSearchList}" var="hotSearchItem" varStatus="i"> 
+												<span id="tag_${i.index}" onclick="searchShopByClick('${hotSearchItem}')">
+													<em class="con1-${i.index}">${hotSearchItem}</em>
+												</span>
+											</c:forEach>
 									</div>
 								</div>
 								
@@ -1440,6 +1463,7 @@
 	***************************************/
    var map, geolocation,lat,lng;
 	var isNull = 0;
+	
     //加载地图，调用浏览器定位服务
     map = new AMap.Map('Container', {
         resizeEnable: true
@@ -1453,9 +1477,10 @@
             buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
             zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
             buttonPosition:'RB',
-            lang:'zh_en',
+            
             zoom: 13
         });
+        map.setLang("zh_en");
         map.addControl(geolocation);
         geolocation.getCurrentPosition();
         AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
@@ -1466,7 +1491,13 @@
     var marker = new AMap.Marker({
         draggable: true,
         cursor: 'move',
-        raiseOnDrag: false
+        raiseOnDrag: false,
+        offset: new AMap.Pixel(-14, -34),//相对于基点的位置
+        icon: new AMap.Icon({  //复杂图标
+            size: new AMap.Size(27, 36),//图标大小
+            image: "http://webapi.amap.com/images/custom_a_j.png", //大图地址
+            imageOffset: new AMap.Pixel(-28, 0)//相对于大图的取图位置
+        })
     });
     
     //测试点击
@@ -1490,7 +1521,7 @@
 				console.log("bbb");
 			}
 			}); 
-        alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
+        //alert('您在[ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ]的位置点击了地图');
     })
     
     
@@ -1508,7 +1539,7 @@
              str.push('精度：' + data.accuracy + ' 米');
         }//如为IP精确定位结果则没有精度信息
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
-        document.getElementById('tip').innerHTML = str.join('<br>');
+        //document.getElementById('tip').innerHTML = str.join('<br>');
         $.ajax({
 			url: "http://localhost:8080/rrsWeb/shop/distance",
 			async:false,
@@ -1518,7 +1549,7 @@
 				"lng":lng
 			},  
 			success: function(res){
-				alert("计算成功");
+				//alert("计算成功");
 			},
 			error: function(err){
 				console.error(err);
@@ -1573,11 +1604,9 @@
 			console.error(err);
 			console.log("bbb");
 		}
-		}); 	
+		}); 
+	 	getUserId();
 	} ); 
-	
-	
-	
 	
 	//展示商店
 	function showGrid(curGrid){
@@ -1697,9 +1726,12 @@
 	//搜索商店
 	function searchShop(){
 		var key=document.getElementById("search").value;
+		var way=document.getElementById("input-search").value;
+		console.log("aaaaaaaaaaa"+way);
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+
+			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"&way="+way,
 			async:false,
 			type: "POST",
 			data: {
@@ -1766,11 +1798,6 @@
 			}
 		}); 
 		
-		/* if(isNull == 0){
-			reloadGrid();
-		}
-		isNull == 0; */
-		
 		reloadGrid();
 	
 	});
@@ -1830,7 +1857,44 @@ function goToDetail(id,name){
 	}); 
 }
 
+//搜索商店
+function searchShopByClick(searchKey){
+	var key=searchKey;
+	var pageNum = 0;
+	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		async:false,
+		type: "POST",
+		data: {
+			
+		},  
+		success: function(res){			
+			pageNum = res;
+			if(pageNum == 0){
+				alert("Found Noting");
+				isNull = 1;
+			} else {
+				reloadPageNum(pageNum);
+				isNull = 0;
+			}
 
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 	
+	if(isNull == 0){
+		reloadGrid();
+		document.getElementById("search").value = key;
+	}
+	isNull = 0;	
+}
+
+function getUserId(){
+	var id = document.getElementById("user_id").innerText;
+	console.log(id);
+}
 
 </script>
 
