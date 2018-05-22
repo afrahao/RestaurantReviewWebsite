@@ -5,6 +5,21 @@
 <mapper namespace="com.rrs.mapper.ShopDao">
 
 
+    <delete parameterType="String" id="deleteTrack"> 
+		delete from track where user_id=#{0} and business_id = #{1}
+	</delete>
+
+	<!-- 插入足迹-->
+	<insert parameterType="String" id="insertTrack"> 
+		INSERT INTO track (user_id,business_id,visit_time) VALUES(#{0},#{1},now()) 
+	</insert>
+	
+	<!-- 返回指定用户的足迹ID -->	
+	<select parameterType="String" id="getTrackBusiness" resultType="String"> 
+		select business_id from track where user_id =#{0} order by visit_time desc 
+	</select>
+
+
 	<!-- 返回restaurant数量 -->
     <select id="getRestaurantNum" resultType="Integer">
         select count(*) from business
@@ -179,8 +194,85 @@
 	LIMIT 1,150
     </select> 
     
+    <!-- 返回历史搜索记录 By userid -->
+    <select id="getSearchRec" parameterType="String" resultType="String">               
+        select searkey from search_rec where uid=#{0} order by updatetime desc limit 0,10
+    </select>
+    
+    <!-- 返回热门搜索记录  -->
+    <select id="getSearchHot"  resultType="String">               
+        select hotkey from search_hot order by count desc limit 0,10
+    </select>
     
     
+     <!-- 按名字搜索数目 -->
+    <select id="getSearchNumName" parameterType="String" resultType="Integer" >
+        select count(*) from business where business.name like CONCAT('%',#{key},'%') 
+    </select>
     
-
+    <!--  按城市搜索数目-->
+    <select id="getSearchNumCity" parameterType="String" resultType="Integer" >
+        select count(*) from business where business.city like CONCAT('%',#{key},'%') 
+    </select>
+    
+    <!--  按地址搜索数目-->
+    <select id="getSearchNumAddr" parameterType="String" resultType="Integer" >
+        select count(*) from business where business.address like CONCAT('%',#{key},'%') 
+    </select>
+    
+    <!--  按标签搜索数目-->
+    <select id="getSearchNumTag" parameterType="String" resultType="Integer" >
+        select count(*) from business_cate where business_cate.category_id in (select id from category where category like CONCAT('%',#{key},'%') ) 
+    </select>
+    
+    <!-- 按名字搜索restaurant -->
+    <select id="getSearchName" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
+        select * from business where business.name like CONCAT('%',#{key},'%')      
+    </select>
+    
+    <!-- 按城市搜索restaurant -->
+    <select id="getSearchCity" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
+        select * from business where business.city like CONCAT('%',#{key},'%')      
+    </select>
+    
+    <!-- 按地址搜索restaurant -->
+    <select id="getSearchAddr" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
+        select * from business where business.address like CONCAT('%',#{key},'%')      
+    </select>
+    
+    <!-- 按标签搜索restaurant -->
+    <select id="getSearchTag" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
+        select * from business where business.id in (select business_id from business_cate where business_cate.category_id in (select id from category where category like CONCAT('%',#{key},'%') ) )    
+    </select>
+    
+    <!-- 判断搜索记录是否存在于热门搜索表中 -->
+    <select id="isInhot" parameterType="String" resultType="Integer">               
+        select count(*) from search_hot where search_hot.hotkey = #{key}
+    </select>
+    
+    <!-- 更新热门搜索表-->
+	<insert parameterType="String" id="insertHot"> 
+		INSERT INTO search_hot (hotkey) VALUES(#{0}) 
+	</insert>
+    
+	<!-- 热门搜索表count++-->
+	<update parameterType="String" id="modifyHot"> 
+		update search_hot set count = count+1 where hotkey = #{key}; 
+	</update>
+	
+	<!-- 用户搜索记录表插入数据-->
+	<insert parameterType="String" id="insertRec"> 
+		INSERT INTO search_rec (uid,searkey) VALUES(#{1},#{0}) 
+	</insert>
+	
+	<!-- 判断用户搜索记录 -->
+    <select id="searBefore" parameterType="String" resultType="Integer">               
+        select count(*) from search_rec where searkey = #{0} and uid = #{1}
+    </select>
+    
+    <!-- 在搜索记录表中更新纪录-->
+	<update parameterType="String" id="modifyRec"> 
+		update search_rec set count = count+1 where searkey = #{0} and uid = #{1} 
+	</update>
+	
 </mapper>

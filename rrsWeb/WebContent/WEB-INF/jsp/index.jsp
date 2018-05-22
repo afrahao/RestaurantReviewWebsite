@@ -35,8 +35,10 @@
 <link rel="stylesheet" href="css/index-style.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="css/loader.css">
-<link rel="stylesheet" href="css/index-style.css">
-
+<!-- 高德地图 -->
+<script type="text/javascript"
+	src="http://webapi.amap.com/maps?v=1.3&key=9ec7df578b3d28f30ad9d6909ef6fbf6"></script>
+<!-- 高德地图 -->
 <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-back"></div>
@@ -50,6 +52,7 @@
 <body class="cms-index-index cms-home-page">
 
 <!-- mobile menu -->
+
 <div id="jtv-mobile-menu">
   <ul>
     <li>
@@ -339,6 +342,7 @@
   <!-- Navigation -->
   
   <nav>
+  
     <div class="container">
       <div class="mm-toggle-wrap">
         <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">Menu</span> </div>
@@ -1587,6 +1591,7 @@
       </div>
     </div>
   </footer>
+  
 </div>
 
 <!-- End Footer --> 
@@ -1748,6 +1753,56 @@ CountBack_slider(gsecs1, "countbox_1", 1);
 </div>
             <!--End of Newsletter Popup-->
 <script>
+
+//加载地图，调用浏览器定位服务
+var map, geolocation,lat,lng;
+map = new AMap.Map('Container', {
+    resizeEnable: true
+});
+map.plugin('AMap.Geolocation', function() {
+    geolocation = new AMap.Geolocation({
+        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+        showMarker: false,        //定位成功后在定位到的位置显示点标记，默认：true
+        showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+        buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+        zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+        buttonPosition:'RB',
+
+    });
+    map.setLang("zh_en");
+    map.addControl(geolocation);
+    geolocation.getCurrentPosition();
+    AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+    AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+});
+
+//解析定位结果
+function onComplete(data) {
+    lat=data.position.getLat();
+    lng=data.position.getLng(); 
+    $.ajax({
+		url: "/rrsWeb/distance",
+		type: "POST",
+		data: {
+			"lat":lat,
+			"lng":lng
+		},  
+		success: function(res){
+			
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+		}); 
+  
+}
+//解析定位错误信息
+function onError(data) {
+    alert("failure");
+}
+
 var allList = new Array();
 var hotList = new Array();
 var foodList = new Array();
@@ -1763,6 +1818,7 @@ $().ready( function() {
 	url: "/rrsWeb/loadIndexGrid",
 	type: "POST",
 	data: {
+	
 	},  
 	success: function(res){
 		allList = JSON.parse(res);
@@ -1892,7 +1948,6 @@ function showGrid(list,num){
 	return htmlStr;
 	
 }
-
 
 
 
