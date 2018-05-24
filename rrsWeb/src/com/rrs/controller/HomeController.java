@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rrs.pojo.Restaurant;
+import com.rrs.pojo.Review;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
@@ -118,7 +119,14 @@ public class HomeController {
 		allList.add(hotel);
 		allList.add(near);
 		
+		//首页热门评论
+		List<Review> indexReviewList = new ArrayList<Review>();
+		//首页热门评论的商店图片
+		List<String> reviewImgList = new ArrayList<String>();
+		
 		//保存登陆状态的邮箱
+		mav.addObject("indexReviewList",indexReviewList);
+		mav.addObject("reviewImgList",reviewImgList);
 		mav.addObject("loginuser", email);
 		mav.addObject("current_user", user);
 		mav.setViewName("index");
@@ -145,7 +153,7 @@ public class HomeController {
 	
 	//3.跳转到详情页
 	@RequestMapping(value = "/indexToDetail", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView toDetail(String business_id,int list_num,HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView toDetail(String business_id,HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
 //		Restaurant curShop = new Restaurant();
@@ -162,6 +170,20 @@ public class HomeController {
 		return mav;
 	}
 	
+	
+	//4.加载首页的精选评论
+	@RequestMapping(value = "/loadIndexReview",method = {RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public String loadIndexReview(HttpServletRequest request, HttpServletResponse response){
+
+		List<Review> bestReview = new ArrayList<Review>();
+		
+		String str = JsonUtils.ObjectToJson(bestReview);
+
+		
+		return str;
+		
+	}
 	
 	
 	//=============================有关账户===================================

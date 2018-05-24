@@ -1,5 +1,6 @@
 package com.rrs.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,9 @@ public interface ShopDao {
 	public void insertTrack(String userId, String userId2);
 	public List<String> getTrackBusiness(String userId);
 	public void deleteTrack(String userId, String businessId);
+	public void insertReview(String id, String business_id, String user_id,int stars,String text);
+	
+	public void updateReview(String review_id, String type, int isPick);
+	public void insertUserReview(String user_id, String review_id, String updateType, int isPick);
+	public void updateUserReview(String user_id, String review_id, String updateType, int isPick);
 }

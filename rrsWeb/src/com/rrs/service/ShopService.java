@@ -2,6 +2,7 @@ package com.rrs.service;
 
 import java.util.List;
 import com.rrs.pojo.Restaurant;
+import com.rrs.pojo.Review;
 
 public interface ShopService {
 	
@@ -35,6 +36,12 @@ public interface ShopService {
 	void insertTrack(String id, String id2);
 	List<String> getTrackBusiness(String id);
 	void deleteTrack(String id, String id2);
+	List<Review> getReviewList(String user_id);
+	void addReview(Review review);
+	
+	void updateReview(String review_id, String type, int isPick);
+	void addUserReview(String user_id, String review_id, String updateType, int isPick) throws Exception;
+	void updateUserReview(String user_id, String review_id, String updateType, int isPick);
 	
 	
 	

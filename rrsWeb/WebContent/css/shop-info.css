@@ -6,12 +6,23 @@
     width: 80%;
 }
 
-.indicator {
+.indicator-box nobr{
 	font-size: 85%;
     font-weight: normal;
     text-transform: lowercase;
     color: #999999;
+    font-size:13px;
 }
+
+
+.indicator-box .pick{
+/* 	font-size: 85%;
+    font-weight: normal;
+    text-transform: lowercase; */
+    color: #e62263;
+    font-weight:bold;
+}
+
 .label-box {
     width: 732px;
     min-height: 200px;
@@ -76,5 +87,23 @@
 
 .product-img{
 	width:100%;
+}
+
+
+.submit-review span {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 12px;
+    background: #eee;
+    color: #696969;
+    text-align: center;
+    border-radius: 3px;
+    margin: 0 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submit-review em {
+    font-style: normal;
 }
 

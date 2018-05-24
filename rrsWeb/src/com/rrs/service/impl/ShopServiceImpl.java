@@ -3,6 +3,7 @@ package com.rrs.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +98,12 @@ public class ShopServiceImpl implements ShopService{
 			imgList.add("http://47.95.10.11/FilteredPhoto/null.jpg");
 		} else {
 			for(int i = 0 ; i < imgList.size(); i ++)
-				imgList.set(i, "http://47.95.10.11/FilteredPhoto/"+imgList.get(i)+".jpg");
+			{
+				String path = imgList.get(i);
+				String check = path.substring(path.length()-4,path.length());
+				if(!check.equals(".jpg"))
+					imgList.set(i, "http://47.95.10.11/FilteredPhoto/"+path+".jpg");
+			}
 		}
 		
 		
@@ -205,7 +211,7 @@ public class ShopServiceImpl implements ShopService{
         return distance;
 	}
 	
-	private List<Review> getReviewList(String id) {
+	public List<Review> getReviewList(String id) {
 		// TODO Auto-generated method stub
 		List<Review> reviewList = new ArrayList<Review>();
 		reviewList = shopDao.getReviewList(id);
@@ -221,50 +227,17 @@ public class ShopServiceImpl implements ShopService{
 		return hourStr;
 	}
 
-	/*private List<Hours> getHoursList(String id) {
+	@Override
+	public void addReview(Review review) {
 		// TODO Auto-generated method stub
-		List<Hours> hoursList = new ArrayList<Hours>();
-		Hours shopHours = new Hours();
-		String hoursString = shopDao.getHourList(id);
-		String hours = hoursString.replaceAll("u'", "'");
-		String hourStr = hours.replaceAll("\'", "\"");
-		System.out.println(hourStr);
-		
-		//hours = "['Monday': {'close': '17:00', 'open': '06:00'}, 'Tuesday': {'close': '17:00', 'open': '06:00'}, 'Friday': {'close': '17:00', 'open': '06:00'}, 'Wednesday': {'close': '17:00', 'open': '06:00'}, 'Thursday': {'close': '17:00', 'open': '06:00'}, 'Sunday': {'close': '15:00', 'open': '06:00'}, 'Saturday': {'close': '17:00', 'open': '06:00'}]";
-		shopHours = JsonUtils.jsonToPojo(hourStr,Hours.class);
+		String id = review.getId();
+		String business_id = review.getBusiness_id();
+		String user_id = review.getUser_id();
+		int stars = review.getStars();
+		String text = review.getText();
+		shopDao.insertReview(id,business_id,user_id,stars,text);
+	}
 	
-		
-		Hours hour = new Hours();
-		hour.setDate("Monday");
-		hour.setOpen(hours.substring(44, 49));
-		hour.setClose(hours.substring(25, 30));
-		hoursList.add(hour); 
-		hour.setDate("Tuesday");
-		hour.setOpen(hours.substring(97, 102));
-		hour.setClose(hours.substring(78, 83));
-		hoursList.add(hour); 
-		hour.setDate("Friday");//28ge 
-		hour.setOpen(hours.substring(149, 154));
-		hour.setClose(hours.substring(130, 135));
-		hoursList.add(hour); 
-		hour.setDate("Wednesday");
-		hour.setOpen(hours.substring(204, 209));
-		hour.setClose(hours.substring(185, 190));
-		hoursList.add(hour); 
-		hour.setDate("Thursday");
-		hour.setOpen(hours.substring(258, 263));
-		hour.setClose(hours.substring(239, 244));
-		hoursList.add(hour); 
-		hour.setDate("Sunday");
-		hour.setOpen(hours.substring(310, 315));
-		hour.setClose(hours.substring(291, 296));
-		hoursList.add(hour); 
-		hour.setDate("Saturday");
-		hour.setOpen(hours.substring(364, 369));
-		hour.setClose(hours.substring(345, 350));
-		hoursList.add(hour); 
-		return hoursList;
-	}*/
 
 	private List<String> getCategoryList(String id) {
 		// TODO Auto-generated method stub
@@ -326,6 +299,24 @@ public class ShopServiceImpl implements ShopService{
 	public void deleteTrack(String userId, String businessId) {
 		// TODO Auto-generated method stub
 		shopDao.deleteTrack(userId,businessId);
+	}
+	
+	@Override
+	public void updateReview(String review_id, String type, int isPick) {
+		// TODO Auto-generated method stub
+		shopDao.updateReview(review_id,type,isPick);
+	}
+
+	@Override
+	public void addUserReview(String user_id, String review_id, String updateType, int isPick)throws Exception {
+		// TODO Auto-generated method stub
+		shopDao.insertUserReview(user_id,review_id,updateType,isPick);
+	}
+
+	@Override
+	public void updateUserReview(String user_id, String review_id, String updateType, int isPick) {
+		// TODO Auto-generated method stub
+		shopDao.updateUserReview(user_id,review_id,updateType,isPick);
 	}
 }
 

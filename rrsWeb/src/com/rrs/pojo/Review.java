@@ -13,7 +13,28 @@ public class Review {
 	int useful;
 	int funny;
 	int cool;
-	
+	int useful_status;
+	int funny_status;
+	int cool_status;
+
+	public int getUseful_status() {
+		return useful_status;
+	}
+	public void setUseful_status(int useful_status) {
+		this.useful_status = useful_status;
+	}
+	public int getFunny_status() {
+		return funny_status;
+	}
+	public void setFunny_status(int funny_status) {
+		this.funny_status = funny_status;
+	}
+	public int getCool_status() {
+		return cool_status;
+	}
+	public void setCool_status(int cool_status) {
+		this.cool_status = cool_status;
+	}
 	public String getId() {
 		return id;
 	}
