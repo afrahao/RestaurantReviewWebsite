@@ -3,6 +3,7 @@ package com.rrs.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -262,22 +263,38 @@ public class ShopServiceImpl implements ShopService{
         return distance;
 	}
 	
-	private List<Review> getReviewList(String id) {
+	public List<Review> getReviewList(String id) {
 		// TODO Auto-generated method stub
 		List<Review> reviewList = new ArrayList<Review>();
 		reviewList = shopDao.getReviewList(id);
+		
+		
 		return reviewList;
 	}
 	
 	private String getHours(String id){
-		
+		System.out.println("99999999999999999999-"+id);
 		String hoursString = shopDao.getHourList(id);
 		String hours = hoursString.replaceAll("u'", "'");
 		String hourStr = hours.replaceAll("\'", "\"");
 		
 		return hourStr;
 	}
+
+
+	@Override
+	public void addReview(Review review) {
+		// TODO Auto-generated method stub
+		String id = review.getId();
+		String business_id = review.getBusiness_id();
+		String user_id = review.getUser_id();
+		int stars = review.getStars();
+		String text = review.getText();
+		shopDao.insertReview(id,business_id,user_id,stars,text);
+	}
 	
+
+
 	private List<String> getCategoryList(String id) {
 		// TODO Auto-generated method stub
 		List<String> categoryList = new ArrayList<String>();
@@ -288,7 +305,18 @@ public class ShopServiceImpl implements ShopService{
 	private List<Attribute> getAttributeList(String id) {
 		// TODO Auto-generated method stub
 		List<Attribute> attributes= new ArrayList<Attribute>();
+	
 		attributes = shopDao.getAttributes(id);
+		
+		for(int i = 0 ; i < attributes.size() ; i ++){
+			String str0 = attributes.get(i).getValue();
+			
+			String str1 = str0.replaceAll("u'", "'");
+			String finalStr = str1.replaceAll("\'", "\"");
+			attributes.get(i).setValue(finalStr);
+			
+		}
+		
 		return attributes;
 	}
 
@@ -340,6 +368,45 @@ public class ShopServiceImpl implements ShopService{
 		shopDao.deleteTrack(userId,businessId);
 	}
 	
+
+	@Override
+	public void updateReview(String review_id, String type, int isPick) {
+		// TODO Auto-generated method stub
+		if(type.equals("u")){
+			shopDao.updateUseful(review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.updateCool(review_id,isPick);
+		}else{
+			shopDao.updateFunny(review_id,isPick);
+		}
+		
+	}
+
+	@Override
+	public void addUserReview(String user_id, String review_id, String type, int isPick)throws Exception {
+		// TODO Auto-generated method stub
+		if(type.equals("u")){
+			shopDao.insertUserUseful(user_id,review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.insertUserCool(user_id,review_id,isPick);
+		}else{
+			shopDao.insertUserFunny(user_id,review_id,isPick);
+		}
+		
+	}
+
+	@Override
+	public void updateUserReview(String user_id, String review_id, String type, int isPick) {
+		// TODO Auto-generated method stub
+		if(type.equals("u")){
+			shopDao.updateUserUseful(user_id,review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.updateUserCool(user_id,review_id,isPick);
+		}else{
+			shopDao.updateUserFunny(user_id,review_id,isPick);
+		}
+		
+	}
 	
 	//获得用户历史搜索记录
 	public List<String> getSearRec(SysUser user) {
@@ -402,9 +469,7 @@ public class ShopServiceImpl implements ShopService{
 		// TODO Auto-generated method stub
 		shopDao.modifyRec(key, uid);
 	}
-	
 }
-
 
 //按星级降序
 class DescStarsComparator implements Comparator<Restaurant> {

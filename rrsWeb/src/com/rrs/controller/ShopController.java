@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rrs.pojo.Restaurant;
+
+import com.rrs.pojo.Review;
+
 import com.rrs.pojo.SearHot;
+
 import com.rrs.pojo.SysUser;
 import com.rrs.service.ShopService;
 import com.rrs.util.JsonUtils;
@@ -530,23 +535,85 @@ public class ShopController {
 	public ModelAndView initDetail(HttpServletRequest request, HttpServletResponse response){
 		
 		ModelAndView mav = new ModelAndView();
+		SysUser user = null;
 		
-		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
-		
-		
-//		Restaurant curShop = (Restaurant)request.getSession().getAttribute("current_shop");
-//		
-//		String str = JsonUtils.ObjectToJson(curShop);
-//		System.out.println(str);
-		shopService.deleteTrack(user.getId(),curShop.getId());
-		shopService.insertTrack(user.getId(),curShop.getId());
-		mav.addObject("current_user", user);
-		mav.addObject("shopItem",curShop);
-		System.out.println("!!!!!!!!!!name="+curShop.getName());
-		mav.setViewName("shop_info");
-		return mav;
-		
+		try{
+			
+		    user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		    shopService.deleteTrack(user.getId(),curShop.getId());
+			shopService.insertTrack(user.getId(),curShop.getId());
+			mav.addObject("current_user", user);
+			mav.addObject("shopItem",curShop);
+			String attributeStr = JsonUtils.ObjectToJson(curShop.getAttribute());
+			mav.addObject("shopAttr",attributeStr);
+			System.out.println("!!!!!!!!!!name="+curShop.getName());
+			mav.setViewName("shop_info");
+			return mav;
+		}catch(Exception e){
+			
+			String attributeStr = JsonUtils.ObjectToJson(curShop.getAttribute());
+			
+			mav.addObject("current_user", user);
+			mav.addObject("shopItem",curShop);
+			mav.addObject("shopAttr",attributeStr);
+			System.out.println("!!!!!!!!!!name="+curShop.getName());
+			mav.setViewName("shop_info");
+			return mav;
+		}	
 	}
+	
+	//3.添加评论
+	@RequestMapping(value = "/makeReview",method = {RequestMethod.GET ,RequestMethod.POST })
+	@ResponseBody
+	public List<Review> makeReview(@RequestParam(value="business_id") String business_id,
+							@RequestParam(value="user_id")String user_id,
+							@RequestParam(value="user_name")String user_name,
+							@RequestParam(value="stars") int stars,
+							@RequestParam(value="text") String text,
+							HttpServletRequest request, HttpServletResponse response){ 
+		
+		System.out.println("user是"+user_id);
+		
+		Review review = new Review();
+		review.setId(UUID.randomUUID().toString());
+		review.setBusiness_id(business_id);
+		review.setUser_id(user_id);
+		review.setStars(stars);
+		review.setText(text);
+		review.setUser_name(user_name);
+		
+		shopService.addReview(review);
+		List<Review> newReviewList = new ArrayList<Review>();
+		newReviewList = shopService.getReviewList(business_id);
+		
+	    return newReviewList;
+	}
+	
+	//4.给评论点赞
+	@RequestMapping(value = "/changeReviewClick",method = {RequestMethod.GET ,RequestMethod.POST })
+	@ResponseBody
+	public boolean changeReviewClick(String type,
+								 String user_id,
+								 String review_id,
+								 String business_id,
+								 int isPick,
+								 HttpServletRequest request, HttpServletResponse response){
+		
+		boolean curValue = true;
+			
+		shopService.updateReview(review_id,type,isPick);
+		
+		try{	
+			shopService.addUserReview(user_id,review_id,type,isPick);
+		}catch(Exception e){
+			shopService.updateUserReview(user_id,review_id,type,isPick);
+			
+		}
+
+	    return curValue;
+	}
+	
+	
 	
 	//========================================================================
 	//特别餐厅

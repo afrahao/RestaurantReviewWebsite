@@ -195,7 +195,7 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]--> 
   
-  <!-- Header -->
+    <!-- Header -->
   <header>
     <div class="header-container">
       <div class="header-top">
@@ -254,7 +254,8 @@
                     		<li> <a href="../login"><span class="hidden-xs" id="navigation-username">Log In</span></a> </li>
                     	</c:when>
                     	<c:otherwise>
-                    	  <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>	
+                    	  <li> <a href="../user/profile"><span class="hidden-xs" id="navigation-username">${current_user.name}</span></a> </li>
+                    	  <li id="user_id" style="display:none;">${current_user.id}</li>	
                     	</c:otherwise>
                     </c:choose>    
                     <!-- <li> <a href="../login"><span class="hidden-xs" id="navigation-username">Log In</span></a> </li> -->
@@ -283,6 +284,7 @@
                           <div class="product-details">
                             <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
                             <p class="product-name"><a href="#">${shopItem.name}</a> </p>
+                            
                             <strong>1</strong> x <span class="price">$79.99</span> </div>
                         </div>
                       </li>
@@ -330,7 +332,7 @@
       </div>
     </div>
   </header>
-  <!-- end header --> 
+  <!-- end header -->
   
   <!-- Navigation -->
   
@@ -665,6 +667,7 @@
                     <!-- <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a class="product-prev" href="#"><span></span></a> </div> -->
                     <div class="product-name">
                       <h1>${shopItem.name}</h1>
+                      <li id="business_id" style="display:none;">${shopItem.id}</li>
                     </div>
                     <div class="rating"> 
                     <c:forEach var="i" begin="1" end="${shopItem.stars}">
@@ -712,69 +715,23 @@
                     <div class="creatures-hours">
                    
                       	<div class="running-hours">
-						  
-						  <img src="http://47.95.10.11/FilteredPhoto/clock.jpg" height="30" width="30">
-						  <h style="font-size:15px;color:#; margin-left:15px;">Hours</h>
-						  <table class="hours-table">
-						    <!--<tbody>
-						       <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>  -->
-						     
-						      <!-- 待解锁哦 -->
-						       
-						      <%-- <c:forEach var="i" begin="0" end="${shopItem.hours.size}" >
-						       <tr>
-						          <th scope="row">${shopItem.hours[i].date}</th> 
-							      <td>
-							        <span>${shopItem.hours[i].open}</span> - <span>${shopItem.hours[i].close}</span>
-							      </td>
-						       </tr>
-						      </c:forEach> --%>
+												  
+						  <h style="font-size:18px;color:#; margin-left:15px; font-weight:bold; margin-bottom:10px;" > <i class="fa fa-clock-o fa-lg" > </i>   Hours</h>
+						  <table class="hours-table">					   
 						      <p id="hour-str" style="display:none">${shopItem.hours}</p>
-						      <%-- <c:forEach items="${shopItem.hours}" var="hourItem">
-						       <tr>
-						          <th scope="row">${hourItem.date}</th> 
-							      <td>
-							        <span>${hourItem.open}</span> - <span>${hourItem.close}</span>
-							      </td>
-						       </tr>
-						      </c:forEach>
-						    </tbody> --%>
 						  </table>
 						</div>
 						
 						<!-- 商店features 待修改 -->
 						<div class="shop-creatures">
-	                    	
+							<div id= "shop-attributes" style="display:none;">${shopAttr}</div>
+							
+							<h style="font-size:18px;color:#; margin-left:15px; font-weight:bold; margin-bottom:10px;"><i class="fa fa-hashtag fa-lg" ></i>   Attributes</h>
+							<table class="attr-table">			
+	                    	</table>
 	                    </div>
+	                    
+	                    
                       
                       </div>
                       <div class="clear"></div>
@@ -905,11 +862,11 @@
                               <tbody>
                                 <tr class="first odd">
                                   <th>Stars</th>
-                                  <td class="value"><input type="radio" class="radio" value="11" id="Price_1" name="ratings[3]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="12" id="Price_2" name="ratings[3]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="13" id="Price_3" name="ratings[3]"></td>
-                                  <td class="value"><input type="radio" class="radio" value="14" id="Price_4" name="ratings[3]"></td>
-                                  <td class="value last"><input type="radio" class="radio" value="15" id="Price_5" name="ratings[3]"></td>
+                                  <td class="value"><input type="radio" class="radio" value="1" id="Price_1" name="review-star"></td>
+                                  <td class="value"><input type="radio" class="radio" value="2" id="Price_2" name="review-star"></td>
+                                  <td class="value"><input type="radio" class="radio" value="3" id="Price_3" name="review-star"></td>
+                                  <td class="value"><input type="radio" class="radio" value="4" id="Price_4" name="review-star"></td>
+                                  <td class="value last"><input type="radio" class="radio" value="5" id="Price_5" name="review-star"></td>
                                 </tr>
                               
                               </tbody>
@@ -939,8 +896,9 @@
                                   </div>
                                 </li>
                               </ul>
-                              <div class="buttons-set">
-                                <button class="button submit" title="Submit Review" type="submit"><span>Submit Review</span></button>
+                              <div class="submit-review">
+                                
+                                <span href="#" onclick="makeReview()"><em>Submit Review</em></span>
                               </div>
                             </div>
                           </fieldset>
@@ -949,10 +907,10 @@
                     </div>
                     <div class="box-reviews2">
                       <h3>Customer Reviews</h3>
-                      <div class="box visible">
-                        <ul>
+                      <div class="box visible" >
+                        <ul class="review-box">
                         <!-- 动态生成reviewList -->
-                         <c:forEach items="${shopItem.reviewList}" var="reviewItem">
+                         <c:forEach items="${shopItem.reviewList}" var="reviewItem" varStatus="status">
                           <li>
                             <table class="ratings-table">
                               <colgroup>
@@ -991,12 +949,36 @@
                             </table>
                             <div class="review">
                               <!-- <h6><a href="#">Excellent</a></h6> -->
-                              <small>Review by <span style="font-weight:bold;color:#000;">${reviewItem.user_name} </span></small>
+                              <small style="font-size:14px;">Review by <span style="font-weight:bold;color:#000;font-size:14px;">${reviewItem.user_name} </span></small>
                               <div class="review-txt" style="word-wrap:break-word;">${reviewItem.text}
-                              	<div style="margin-top:10px;">
-                              	  <nobr class="indicator">useful <span>(${reviewItem.useful})  </span></nobr>
-	                              <nobr class="indicator">  funny <span>(${reviewItem.funny})  </span></nobr>
-	                              <nobr class="indicator">  cool <span>(${reviewItem.cool})  </span></nobr>
+                              	<div style="margin-top:10px;" class="indicator-box">
+                              		<c:choose>
+									   <c:when test="${reviewItem.useful_status ==1}">  
+									   		<nobr ><a href="JavaScript:void(0)" onclick="clickReview('useful-${status.index}','${reviewItem.id}')" id="useful-${status.index}" class="pick">useful ( <span id="useful-num" >${reviewItem.useful}  </span> )</a></nobr>
+									   </c:when>
+									   <c:otherwise> 
+									     	<nobr ><a href="JavaScript:void(0)" onclick="clickReview('useful-${status.index}','${reviewItem.id}')" id="useful-${status.index}">useful ( <span id="useful-num" >${reviewItem.useful}  </span> )</a></nobr>
+									   </c:otherwise>
+									</c:choose>
+									
+									<c:choose>
+									   <c:when test="${reviewItem.funny_status ==1}">  
+									   		<nobr ><a href="JavaScript:void(0)" onclick="clickReview('funny-${status.index}','${reviewItem.id}')" id="funny-${status.index}" class="pick">  funny ( <span id="funny-num">${reviewItem.funny}  </span> )</a></nobr>
+									   </c:when>
+									   <c:otherwise> 
+									     	<nobr ><a href="JavaScript:void(0)" onclick="clickReview('funny-${status.index}','${reviewItem.id}')" id="funny-${status.index}">  funny ( <span id="funny-num">${reviewItem.funny}  </span> )</a></nobr>
+									   </c:otherwise>
+									</c:choose>
+									
+									<c:choose>
+									   <c:when test="${reviewItem.cool_status ==1}">  
+									   		<nobr ><a href="JavaScript:void(0)" onclick="clickReview('cool-${status.index}','${reviewItem.id}')" id="cool-${status.index}" class="pick">  cool ( <span id="cool-num">${reviewItem.cool}  </span> )</a></nobr>
+									   </c:when>
+									   <c:otherwise> 
+									     	<nobr ><a href="JavaScript:void(0)" onclick="clickReview('cool-${status.index}','${reviewItem.id}')" id="cool-${status.index}">  cool ( <span id="cool-num">${reviewItem.cool}  </span> )</a></nobr>
+									   </c:otherwise>
+									</c:choose>
+    
                               	</div>
 	                              
                               
@@ -1769,8 +1751,68 @@ var marker = new AMap.Marker({
 marker.setMap(map);
 
 
-var curShop;
+//点赞
+function clickReview(itemId,review_id){
+	
+	var isPick = 1;
+	
+	if(document.getElementById(itemId).className=='pick'){
+		isPick = -1;
+	}
+	
+	storeClick(itemId,review_id,isPick);	
+}
 
+//点赞传给后端
+function storeClick(itemId,review_id,isPick){
+	
+	var curValue = 0;
+	var business_id = document.getElementById("business_id").innerText;
+	var user_id = document.getElementById("user_id").innerText;
+	var type = "";
+	var success;
+	
+	
+	//这里要给出type
+	type = itemId.substring(0,1);
+	console.log(type);
+	
+	
+	$.ajax({
+		url: "../shop/changeReviewClick",
+		async:false,
+		type: "POST",
+		data: {
+			"type":type,
+			"user_id":user_id,
+			"review_id":review_id,
+			"business_id":business_id,
+			"isPick":isPick
+		},  
+		success: function(res){			
+			
+			success = res;
+			
+			if(success){
+				curValue = document.getElementById(itemId).firstElementChild.innerHTML;
+				var i = parseInt(curValue);
+				if(isPick == 1){
+					document.getElementById(itemId).classList.add('pick');
+					document.getElementById(itemId).firstElementChild.innerHTML = i+1;
+				} else if(isPick == -1){
+					document.getElementById(itemId).classList.remove('pick');
+					document.getElementById(itemId).firstElementChild.innerHTML= i-1;
+				}		
+			}			
+		},
+		error: function(err){
+			console.error(err);
+		}
+	});  
+
+}
+
+//显示营业时间
 function generateHours(){
 	var hour = document.getElementById("hour-str").innerHTML;
 	console.log(hour);
@@ -1822,15 +1864,143 @@ function generateHours(){
 	$(".hours-table").append(hoursHtml); 
 }
 
-/* //初始化页面
- $().ready( function() {
+//加pick
+function freshPick(reviewList){
+	
+	for(var i =0; i<reviewList.length; i++){
+		var uobj = document.getElementById("useful-"+i);
+		var fobj = document.getElementById("funny-"+i);
+		var cobj = document.getElementById("cool-"+i);
+		if(reviewList[i].useful_status == 1){
+			uobj.classList.add('pick');
+		}
+		if(reviewList[i].funny_status == 1){
+			fobj.classList.add('pick');
+		}
+		if(reviewList[i].cool_status == 1){
+			cobj.classList.add('pick');
+		}
+	}
+}
 
- 	
-} );   */
+//刷新评论
+function freshReview(reviewList){
+	$(".review-box li").remove();
+	
+	var reviewHtml = "";
+	
+	for(var i =0; i<reviewList.length; i++){
+		
+		var review = reviewList[i];
+		
+		reviewHtml += "<li><table class=\"ratings-table\"><colgroup><col width=\"1\"><col></colgroup><tbody><tr><th style=\"margin-right:10px; width:100%;\">Stars</th></tr><tr><td><div class=\"rating-box\"><div class=\"rating\" style=\"width:100%;\">";
+
+		var s = Math.floor(review.stars);
+	    for(var j = 0 ; j < s ; j++){
+	    	reviewHtml += "<i class=\"fa fa-star\"></i>";
+	    }
+	    for(var j = s ; j < 5 ; j++){
+	    	reviewHtml += "<i class=\"fa fa-star-o\"></i>";
+	    }    
+	    
+	    
+	    var date = new Date( review.date*1000 ) ;
+	    
+		reviewHtml += "</div></div></td></tr><tr><tr><th style=\"margin-right:10px; width:100%;\">Time</th><tr><td><div class=\"rating-box\">";
+		reviewHtml += "<div class=\"rating\" style=\"width:100%;\">"+date+"</div></div></td></tr>";
+		reviewHtml += "</tbody></table><div class=\"review\">";
+		reviewHtml += "<small style=\"font-size:13px;\">Review by <span style=\"font-weight:bold;color:#000;font-size:13px;\">"+review.user_name+"</span></small>";
+		reviewHtml += "<div class=\"review-txt\" style=\"word-wrap:break-word;\">"+review.text;
+		reviewHtml += "<div style=\"margin-top:10px;\" class=\"indicator-box\">";
+		
+		if(review.useful_status == 1){
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('useful-"+i+"','"+review.id+"')\" id=\"useful-"+i+"\" class=\"pick\">useful ( <span id=\"useful-num\" >"+review.useful+"  </span> )</a></nobr>";
+		} else {
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('useful-"+i+"','"+review.id+"')\" id=\"useful-"+i+"\">useful ( <span id=\"useful-num\" >"+review.useful+"  </span> )</a></nobr>";
+		}
+		
+		if(review.funny_status == 1){
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('funny-"+i+"','"+review.id+"')\" id=\"funny-"+i+"\" class=\"pick\">  funny ( <span id=\"funny-num\">"+review.funny+"  </span> )</a></nobr>";
+		} else {
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('funny-"+i+"','"+review.id+"')\" id=\"funny-"+i+"\">  funny ( <span id=\"funny-num\">"+review.funny+"  </span> )</a></nobr>";
+		}
+			
+		if(review.cool_status == 1){
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('cool-"+i+"','"+review.id+"')\" id=\"cool-"+i+"\" class=\"pick\">  cool ( <span id=\"cool-num\">"+review.cool+"  </span> )</a></nobr>";
+		} else {
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('cool-"+i+"','"+review.id+"')\" id=\"cool-"+i+"\">  cool ( <span id=\"cool-num\">"+review.cool+"  </span> )</a></nobr>";
+		}
+
+	}
+	
+	$(".review-box").append(reviewHtml); 
+	
+}
+
+//评论
+function makeReview(){
+	var review = [];
+	var reviewList = [];
+	
+	if(document.getElementById('user_id').value == null){
+		alert("Please Log In to Do Some Review!");
+		return;
+	}
+	var user_id = document.getElementById('user_id').innerText;
+	var user_name = document.getElementById('navigation-username').innerText;
+	var stars = $("input[name='review-star']:checked").val();
+	var text = document.getElementById('review_field').value;
+	var business_id = document.getElementById('business_id').innerText;
+	
+	
+	console.log(review);
+
+	$.ajax({
+		url: "http://localhost:8080/rrsWeb/shop/makeReview?business_id="+business_id+"&user_id="+user_id+"&user_name="+user_name+"&stars="+stars+"&text="+text,
+		async:false,
+		type: "POST",
+		data: {
+			
+		},  
+		success: function(res){			
+			reviewList = res;
+			freshReview(reviewList);
+
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 
+	
+}
+
+//显示Attribute
+function generateAttribute(){
+	var attrList = document.getElementById('shop-attributes').innerText;
+	var attrs = JSON.parse(attrList);
+	console.log(attrs);
+	
+	attrHtml = "";
+	
+	for(var i = 0 ; i < attrs.length; i ++){
+		var obj = attrs[i];
+		
+		if(obj.name != "categories" && obj.name != "Parking" && obj.name != "Ambience" && obj.name != "Good For" && obj.name != "Music"){
+			attrHtml += "<tr>";
+			attrHtml += "<th class=\"hours-date\" scope=\"row\">"+attrs[i].name+"</th> ";
+			attrHtml += "<td><span class=\"attr-value\">"+attrs[i].value+"</span></td></tr>";
+		}		
+	}
+	
+	$(".attr-table").append(attrHtml); 
+	
+}
 
 document.onreadystatechange = function() {
 	 if (document.readyState == "complete") {
 		 generateHours();
+		 generateAttribute();
 	 }
 }
 

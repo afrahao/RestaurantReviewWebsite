@@ -90,9 +90,9 @@
     </select>
    
    
-     <!-- 返回某个饭店的所有review -->
+       <!-- 返回某个饭店的所有review -->
      <select id="getReviewList" parameterType="String" resultType="com.rrs.pojo.Review" >
-        select user.name as user_name,review.* from review,user where business_id=#{0} and review.user_id=user.id
+        select user.name as user_name,review.*,useful_status,funny_status,cool_status from (review left join user on review.user_id=user.id) left join user_review on review.id = user_review.review_id where business_id=#{0} order by date desc     
     </select>
     
     <!-- 返回距离指定地点指定范围的restaurant -->
@@ -206,11 +206,70 @@
         select searkey from search_rec where uid=#{0} order by updatetime desc limit 0,10
     </select>
     
+
+    <!-- 插入评论-->
+	<insert id="insertReview"> 
+		INSERT INTO review (id,business_id,user_id,stars,date,text) VALUES(#{0},#{1},#{2},#{3},now(),#{4}) 
+	</insert>
+
     <!-- 返回热门搜索记录  -->
     <select id="getSearchHot"  resultType="String">               
         select hotkey from search_hot order by count desc limit 0,10
     </select>
     
+       
+        <!-- 更新用户点赞与取消赞的表-->
+	<update id="updateUserUseful"> 
+		update user_review set useful_status=#{2}
+		where review_id = #{1} and user_id = #{0}; 
+	</update>
+	
+	 <!-- 更新用户点赞与取消赞的表-->
+	<update id="updateUserCool"> 
+		update user_review set cool_status=#{2}
+		where review_id = #{1} and user_id = #{0}; 
+	</update>
+	
+	 <!-- 更新用户点赞与取消赞的表-->
+	<update id="updateUserFunny"> 
+		update user_review set funny_status=#{2}
+		where review_id = #{1} and user_id = #{0}; 
+	</update>
+
+    <!-- 用户点赞与取消useful的插入-->
+	<insert id="insertUserUseful"> 
+		INSERT INTO user_review (user_id,review_id,useful_status) VALUES(#{0},#{1},#{2}) 
+	</insert>
+	
+	 <!-- 用户点赞与取消cool的插入-->
+	<insert id="insertUserCool"> 
+		INSERT INTO user_review (user_id,review_id,cool_status) VALUES(#{0},#{1},#{2}) 
+	</insert>
+	
+	 <!-- 用户点赞与取消funny的插入-->
+	<insert id="insertUserFunny"> 
+		INSERT INTO user_review (user_id,review_id,funny_status) VALUES(#{0},#{1},#{2}) 
+	</insert>
+	
+	
+      <!-- 点赞或取消useful-->
+	<update id="updateUseful"> 
+	update review set useful=useful+(#{1})
+	where id = #{0}; 
+	</update>
+	
+	     <!-- 点赞或取消funny-->
+	<update id="updateFunny"> 
+	update review set funny=funny+(#{1})
+	where id = #{0}; 
+	</update>
+	
+	     <!-- 点赞或取消cool-->
+	<update id="updateCool"> 
+	update review set cool=cool+(#{1})
+	where id = #{0}; 
+	</update>
+	
     
      <!-- 按名字搜索数目 -->
     <select id="getSearchNumName" parameterType="String" resultType="Integer" >
