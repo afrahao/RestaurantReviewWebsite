@@ -280,7 +280,7 @@ public class ShopServiceImpl implements ShopService{
 		
 		return hourStr;
 	}
-<<<<<<< HEAD
+
 
 	@Override
 	public void addReview(Review review) {
@@ -294,9 +294,7 @@ public class ShopServiceImpl implements ShopService{
 	}
 	
 
-=======
-	
->>>>>>> master
+
 	private List<String> getCategoryList(String id) {
 		// TODO Auto-generated method stub
 		List<String> categoryList = new ArrayList<String>();
@@ -370,7 +368,7 @@ public class ShopServiceImpl implements ShopService{
 		shopDao.deleteTrack(userId,businessId);
 	}
 	
-<<<<<<< HEAD
+
 	@Override
 	public void updateReview(String review_id, String type, int isPick) {
 		// TODO Auto-generated method stub
@@ -409,7 +407,6 @@ public class ShopServiceImpl implements ShopService{
 		}
 		
 	}
-=======
 	
 	//获得用户历史搜索记录
 	public List<String> getSearRec(SysUser user) {
@@ -472,10 +469,7 @@ public class ShopServiceImpl implements ShopService{
 		// TODO Auto-generated method stub
 		shopDao.modifyRec(key, uid);
 	}
-	
->>>>>>> master
 }
-
 
 //按星级降序
 class DescStarsComparator implements Comparator<Restaurant> {

@@ -206,17 +206,16 @@
         select searkey from search_rec where uid=#{0} order by updatetime desc limit 0,10
     </select>
     
-<<<<<<< HEAD
+
     <!-- 插入评论-->
 	<insert id="insertReview"> 
 		INSERT INTO review (id,business_id,user_id,stars,date,text) VALUES(#{0},#{1},#{2},#{3},now(),#{4}) 
 	</insert>
-=======
+
     <!-- 返回热门搜索记录  -->
     <select id="getSearchHot"  resultType="String">               
         select hotkey from search_hot order by count desc limit 0,10
     </select>
->>>>>>> master
     
        
         <!-- 更新用户点赞与取消赞的表-->

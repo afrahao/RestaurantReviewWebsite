@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rrs.pojo.Restaurant;
-<<<<<<< HEAD
+
 import com.rrs.pojo.Review;
-=======
+
 import com.rrs.pojo.SearHot;
->>>>>>> master
+
 import com.rrs.pojo.SysUser;
 import com.rrs.service.ShopService;
 import com.rrs.util.JsonUtils;

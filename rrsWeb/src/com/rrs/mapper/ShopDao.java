@@ -34,7 +34,7 @@ public interface ShopDao {
 	public void insertTrack(String userId, String userId2);
 	public List<String> getTrackBusiness(String userId);
 	public void deleteTrack(String userId, String businessId);
-<<<<<<< HEAD
+
 	public void insertReview(String id, String business_id, String user_id,int stars,String text);
 	
 	public void updateUseful(String review_id, int isPick);
@@ -52,7 +52,6 @@ public interface ShopDao {
 	public void updateUserCool(String user_id, String review_id, int isPick);
 	public void updateUserFunny(String user_id, String review_id, int isPick);
 	
-=======
 	
 	
 	//历史搜索
@@ -93,5 +92,5 @@ public interface ShopDao {
     //在搜索记录表中更新纪录
     public void modifyRec(String key, String uid);
     
->>>>>>> master
+
 }
