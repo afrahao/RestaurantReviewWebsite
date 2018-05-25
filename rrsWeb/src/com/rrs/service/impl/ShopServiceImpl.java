@@ -14,9 +14,12 @@ import com.rrs.pojo.Attribute;
 
 import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.Review;
+import com.rrs.pojo.SearHot;
+import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
 import com.rrs.util.JsonUtils;
+
 
 
 @Service
@@ -28,7 +31,6 @@ public class ShopServiceImpl implements ShopService{
 	@Autowired
 	private PreferenceService preferenceService;
 	
-	private List<Restaurant> reviewsList = new ArrayList<Restaurant>();
 	private static double EARTH_RADIUS = 6378.137;
 	@Override
 	public List<Restaurant> getRestaurant(int start,int end) {
@@ -38,10 +40,7 @@ public class ShopServiceImpl implements ShopService{
 		for(int i=0; i < list.size(); i++){
 			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
-		
-		System.out.println("数据库取出"+list.size());
 		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
 			list.get(i).setReviewsRank(i);
 		Collections.sort(list, new DescAllComparator());
@@ -72,6 +71,12 @@ public class ShopServiceImpl implements ShopService{
 		List<Restaurant>list = shopDao.getRestaurantByCate();
 		return getSortByDefault(list);
 	}
+		
+	//取出首页指定种类的商家列表
+	public List<Restaurant> getRestaurantByKind(int cateId) {	
+		List<Restaurant>list = shopDao.getRestaurantByKind(cateId);
+		return getSortByDefault(list);
+	}
 	
 	@Override
 	public int getRestaurantNum(){
@@ -79,16 +84,64 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
-	public int getRestaurantSearchNum(String key) {
+	public int getRestaurantSearchNum(String key, String way) {
 		
-		return shopDao.getRestaurantSearchNum(key);
+		int sum = 0;
+		
+		switch(way){
+		case "0":
+			//search by name
+			sum = shopDao.getSearchNumName(key);
+			break;
+		case "1":
+			//search by city
+			sum = shopDao.getSearchNumCity(key);
+			break;
+		case "2":
+			//search by address
+			sum = shopDao.getSearchNumAddr(key);
+			break;
+		case "3":
+			//search by tag
+			sum = shopDao.getSearchNumTag(key);
+			break;
+		default:
+			break;	
+		}
+		
+		return sum;
+		
 	}
 
 	@Override
-	public List<Restaurant> getRestaurantSearch(String key) {
+	public List<Restaurant> getRestaurantSearch(String key, String way) {
 		
-		return shopDao.getRestaurantSearch(key);
+		List<Restaurant> shopList = new ArrayList<Restaurant>();
+		
+		switch(way){
+		case "0":
+			//search by name
+			shopList = shopDao.getSearchName(key);
+			break;
+		case "1":
+			//search by city
+			shopList = shopDao.getSearchCity(key);
+			break;
+		case "2":
+			//search by address
+			shopList = shopDao.getSearchAddr(key);
+			break;
+		case "3":
+			//search by tag
+			shopList = shopDao.getSearchTag(key);
+			break;
+		default:
+			break;	
+		}
+		
+		return shopList;
 	}
+	
 	
 	@Override
 	public List<String> getRestaurantImg(String shop_id) {
@@ -146,7 +199,6 @@ public class ShopServiceImpl implements ShopService{
 			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
 		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
 			list.get(i).setReviewsRank(i);
 		Collections.sort(list, new DescAllComparator());
@@ -228,6 +280,7 @@ public class ShopServiceImpl implements ShopService{
 		
 		return hourStr;
 	}
+<<<<<<< HEAD
 
 	@Override
 	public void addReview(Review review) {
@@ -241,6 +294,9 @@ public class ShopServiceImpl implements ShopService{
 	}
 	
 
+=======
+	
+>>>>>>> master
 	private List<String> getCategoryList(String id) {
 		// TODO Auto-generated method stub
 		List<String> categoryList = new ArrayList<String>();
@@ -314,6 +370,7 @@ public class ShopServiceImpl implements ShopService{
 		shopDao.deleteTrack(userId,businessId);
 	}
 	
+<<<<<<< HEAD
 	@Override
 	public void updateReview(String review_id, String type, int isPick) {
 		// TODO Auto-generated method stub
@@ -352,6 +409,71 @@ public class ShopServiceImpl implements ShopService{
 		}
 		
 	}
+=======
+	
+	//获得用户历史搜索记录
+	public List<String> getSearRec(SysUser user) {
+		// TODO Auto-generated method stub
+		List<String> searRec = new ArrayList<String>();
+		searRec = shopDao.getSearchRec(user.getId());
+		
+		return searRec;
+	}
+	
+	//获得热门搜索记录
+	public List<String> getSearHot(){
+		List<String> searhot = new ArrayList<String>();
+		searhot = shopDao.getSearchHot();
+		
+		return searhot;
+	}
+
+	
+	//判断搜索记录是否存在于热门搜索表中
+	@Override
+	public int isInhot(String key) {
+		// TODO Auto-generated method stub
+		return shopDao.isInhot(key);
+	}
+
+	//更新热门搜索表
+	@Override
+	public void insertHot(String key) {
+		// TODO Auto-generated method stub
+		shopDao.insertHot(key);
+	}
+
+
+	//热门搜索表count++
+	@Override
+	public void modifyHot(String key) {
+		// TODO Auto-generated method stub
+		shopDao.modifyHot(key);
+	}
+
+	//用户搜索记录表插入数据
+	@Override
+	public void insertRec(String key, String userid) {
+		// TODO Auto-generated method stub
+		shopDao.insertRec(key, userid);
+	}
+
+	//判断用户搜索记录
+	@Override
+	public int searBefore(String key, String uid) {
+		// TODO Auto-generated method stub
+		return shopDao.searBefore(key, uid);
+	}
+
+
+	//在搜索记录表中更新纪录
+	@Override
+	public void modifyRec(String key, String uid) {
+		// TODO Auto-generated method stub
+		shopDao.modifyRec(key, uid);
+	}
+	
+>>>>>>> master
 }
 
 

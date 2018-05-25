@@ -40,6 +40,7 @@ public class HomeController {
 	
 	
 	ArrayList<ArrayList<Restaurant>> allList;
+	double Lat,Lng;
 	
 	//==============================首页===============================
 	
@@ -53,19 +54,25 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
 		//获取cookie
 		Cookie[] cookies = (Cookie[])request.getCookies();
 		Cookie cookie = null;
 		String email = null;
+		//获取登陆状态
 		cookie = CookieUtils.getCookieFromCookies(cookies, "loginuser");
 		if(cookie != null)
 		{
 			email = cookie.getValue();
+			//获取用户
+			if(user==null)
+			{
+				user = sysUserService.getUser(email);
+			}
 		}
 		
-		
-		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
-		
+		if(allList==null)
+		{
 		allList= new ArrayList<ArrayList<Restaurant>>();
 		List<Restaurant> list = new ArrayList<Restaurant>();
 		
@@ -91,8 +98,16 @@ public class HomeController {
 		for(int i = 0;i < 8;i++)
 		{
 			hot.add(list.get(i));
+		}
+
+		//计算商店与定位点距离
+		shopService.GetDistance(Lat, Lng, list);
+		list = shopService.getRestaurantByDistanceB(list);
+		for(int i = 0;i < 8;i++)
+		{
 			near.add(list.get(i));
 		}
+		
 		//清空列表
 		list.clear();
 		//将指定种类的商家排序后取出
@@ -118,17 +133,22 @@ public class HomeController {
 		allList.add(health);
 		allList.add(hotel);
 		allList.add(near);
+<<<<<<< HEAD
 		
 		//首页热门评论
 		List<Review> indexReviewList = new ArrayList<Review>();
 		//首页热门评论的商店图片
 		List<String> reviewImgList = new ArrayList<String>();
 		
+=======
+		}
+>>>>>>> master
 		//保存登陆状态的邮箱
 		mav.addObject("indexReviewList",indexReviewList);
 		mav.addObject("reviewImgList",reviewImgList);
 		mav.addObject("loginuser", email);
 		mav.addObject("current_user", user);
+		request.getSession().setAttribute("currentuser", user);
 		mav.setViewName("index");
 		return mav;
 	}
@@ -170,6 +190,7 @@ public class HomeController {
 		return mav;
 	}
 	
+<<<<<<< HEAD
 	
 	//4.加载首页的精选评论
 	@RequestMapping(value = "/loadIndexReview",method = {RequestMethod.GET,RequestMethod.POST })
@@ -185,6 +206,18 @@ public class HomeController {
 		
 	}
 	
+=======
+
+	//4.获得定位的经纬度
+		@RequestMapping(value = "/distance",method = {RequestMethod.GET,RequestMethod.POST })
+		public String getDistance(double lat,double lng,HttpServletRequest request, HttpServletResponse response){
+			
+			Lat=lat;
+			Lng=lng;
+			System.out.println(lat+" "+lng);
+			return "ok";
+		}
+>>>>>>> master
 	
 	//=============================有关账户===================================
 	

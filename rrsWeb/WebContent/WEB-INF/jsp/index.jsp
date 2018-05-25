@@ -35,8 +35,10 @@
 <link rel="stylesheet" href="css/index-style.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="css/loader.css">
-<link rel="stylesheet" href="css/index-style.css">
-
+<!-- 高德地图 -->
+<script type="text/javascript"
+	src="http://webapi.amap.com/maps?v=1.3&key=9ec7df578b3d28f30ad9d6909ef6fbf6"></script>
+<!-- 高德地图 -->
 <div id="loader-wrapper">
     <div id="loader"></div>
     <div class="loader-back"></div>
@@ -50,6 +52,7 @@
 <body class="cms-index-index cms-home-page">
 
 <!-- mobile menu -->
+
 <div id="jtv-mobile-menu">
   <ul>
     <li>
@@ -339,6 +342,7 @@
   <!-- Navigation -->
   
   <nav>
+  
     <div class="container">
       <div class="mm-toggle-wrap">
         <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">Menu</span> </div>
@@ -481,57 +485,60 @@
               </div>
             </div>
           </li>
-          <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Flowers</span></a>
+          <li class="mega-menu"> <a class="level-top" href="shop_grid.html"><span>Shops</span></a>
             <div class="jtv-menu-block-wrapper">
               <div class="jtv-menu-block-wrapper2">
                 <div class="nav-block jtv-nav-block-center">
                   <ul class="level0">
-                    <li class="parent item"> <a href="shop_grid.html"><span>Christmas Bouquets</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Edibles</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Funeral</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Get Well</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Lady Dior Mascara</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>GoodSkin Labs</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=4"><span>Food</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=45"><span>Sandwiches</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=38"><span>Pizza</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=68"><span>Fast Food</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=69"><span>Burgers</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=9"><span>Coffee & Tea</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=12"><span>Restaurants</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Birthday Flowers</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Fashion</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Popular Belief</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Window plants</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Bushes</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Trees</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=103"><span>Nail Salons</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=21"><span>Women's Clothing</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=42"><span>Hair Salons</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=14"><span>Shopping</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Anniversary Flowers</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Entertainment</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Aliquam congue</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Sit amet conse</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Sed do eiusmod</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Labore et dolore</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=17"><span>Nightlife</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=44"><span>Beauty & Spas</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=25"><span>Bars</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=31"><span>Arts & Entertainment</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=50"><span>Event Planning & Services</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Family flowers</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Life</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Herbarium</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Tulips</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Green roses</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Kinds of flowers</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=49"><span>Hotels & Travel</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=19"><span>Home Services</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=134"><span>Health & Medical</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=149"><span>Doctors</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=94"><span>Pets</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=2"><span>Automotive</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=34"><span>Auto Repair</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=72"><span>Home & Garden</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=20"><span>Real Estate</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=0"><span>Active Life</span></a> </li>
                       </ul>
                     </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Corporate</span></a>
+                    <li class="parent item"> <a href="shop_grid.html"><span>Region</span></a>
                       <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Lily</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Orchids</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Asiatic Lily</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Modern roses</span></a> </li>
-                      </ul>
-                    </li>
-                    <li class="parent item"> <a href="shop_grid.html"><span>Congratulation</span></a>
-                      <ul class="level1">
-                        <li> <a href="shop_grid.html"><span>Toaster Crossbody</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Piper Bag</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Leather Bag</span></a> </li>
-                        <li> <a href="shop_grid.html"><span>Canvas Bag</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=24"><span>Chinese</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=48"><span>Italian</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=144"><span>Mexican</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=40"><span>American(new)</span></a> </li>
+                        <li> <a href="shop/kindGrid?cateId=10"><span>American (Traditional)</span></a> </li>
                       </ul>
                     </li>
                   </ul>
@@ -1565,6 +1572,7 @@
       </div>
     </div>
   </footer>
+  
 </div>
 
 <!-- End Footer --> 
@@ -1726,6 +1734,56 @@ CountBack_slider(gsecs1, "countbox_1", 1);
 </div>
             <!--End of Newsletter Popup-->
 <script>
+
+//加载地图，调用浏览器定位服务
+var map, geolocation,lat,lng;
+map = new AMap.Map('Container', {
+    resizeEnable: true
+});
+map.plugin('AMap.Geolocation', function() {
+    geolocation = new AMap.Geolocation({
+        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+        showMarker: false,        //定位成功后在定位到的位置显示点标记，默认：true
+        showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+        buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+        zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+        buttonPosition:'RB',
+
+    });
+    map.setLang("zh_en");
+    map.addControl(geolocation);
+    geolocation.getCurrentPosition();
+    AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+    AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+});
+
+//解析定位结果
+function onComplete(data) {
+    lat=data.position.getLat();
+    lng=data.position.getLng(); 
+    $.ajax({
+		url: "/rrsWeb/distance",
+		type: "POST",
+		data: {
+			"lat":lat,
+			"lng":lng
+		},  
+		success: function(res){
+			
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+		}); 
+  
+}
+//解析定位错误信息
+function onError(data) {
+    alert("failure");
+}
+
 var allList = new Array();
 var hotList = new Array();
 var foodList = new Array();
@@ -1743,6 +1801,7 @@ $().ready( function() {
 	type: "POST",
 	async:false,
 	data: {
+	
 	},  
 	success: function(res){
 		allList = JSON.parse(res);
@@ -1802,7 +1861,6 @@ function goToDetail(id){
 	var business_id = "";
 	business_id = id;
 	console.log(business_id);
-
 	
 	$.ajax({
 		url: "/rrsWeb/indexToDetail",
@@ -1822,8 +1880,32 @@ function goToDetail(id){
 	}); 
 }
 
+<<<<<<< HEAD
 //首页展示分类shop
 function showGrid(list,tag,num){
+=======
+function goToKindGrid(id){
+	
+	alert("sss"+id);
+	$.ajax({
+		url: "/rrsWeb/indexToKindGrid",
+		type: "POST",
+		async:false,
+		data: {
+			"cateId":id,
+		},  
+		success: function(res){
+			console.log("ggg");	
+		},
+		error: function(err){
+			console.error(err);
+			console.log("bbb");
+		}
+	}); 
+}
+
+function showGrid(list,num){
+>>>>>>> master
 	
 	var htmlStr = "";
 	for(var i =0; i<list.length; i++){

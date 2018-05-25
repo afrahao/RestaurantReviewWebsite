@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rrs.pojo.Restaurant;
+<<<<<<< HEAD
 import com.rrs.pojo.Review;
+=======
+import com.rrs.pojo.SearHot;
+>>>>>>> master
 import com.rrs.pojo.SysUser;
 import com.rrs.service.ShopService;
 import com.rrs.util.JsonUtils;
@@ -47,10 +52,7 @@ public class ShopController {
 		
 		ModelAndView mav = new ModelAndView();	
 		shopList = shopService.getRestaurant(61, 100);
-		
-		System.out.println("一共有"+shopList.size());
-		//System.out.println("用户是"+user.getName());
-		
+
 		if(shopList.size()%15 != 0){
 			for(int i = 0 ; i < shopList.size()%15 ; i ++){
 				Restaurant r = new Restaurant();
@@ -63,17 +65,53 @@ public class ShopController {
 			originShopList.add(shopList.get(i).clone()); 
 		}
 
+		//历史搜索记录
 		List<String> historySearchList= new ArrayList<String>();
-		historySearchList.add("pets");
-		historySearchList.add("pets");
-		historySearchList.add("pets");
-		historySearchList.add("pets");
-		historySearchList.add("pets");
+		historySearchList = shopService.getSearRec(user);
+	
+		//热门搜索记录
+		List<String> hotSearchList= new ArrayList<String>();		
+		hotSearchList = shopService.getSearHot();
 		
-		List<String> hotSearchList= new ArrayList<String>();
-		hotSearchList.add("hot");
-		hotSearchList.add("hot");
-		hotSearchList.add("thai");
+		
+		mav.addObject("pageNum",calPageNum(shopList,15));
+		mav.addObject("current_user", user);
+		mav.addObject("historySearchList", historySearchList);
+		mav.addObject("hotSearchList", hotSearchList);
+		mav.setViewName("restaurant_search");	
+		
+		System.out.println("一共有"+originShopList.size());
+		return mav;
+	}
+	
+	@RequestMapping(value = "/kindGrid",method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView kindGrid(@RequestParam(value="cateId") int cateId,HttpServletRequest request, HttpServletResponse response){
+		
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+		
+		ModelAndView mav = new ModelAndView();	
+		shopList = shopService.getRestaurantByKind(cateId);
+
+		if(shopList.size()%15 != 0){
+			for(int i = 0 ; i < shopList.size()%15 ; i ++){
+				Restaurant r = new Restaurant();
+			shopList.add(r);
+			}
+		}
+		originShopList = new ArrayList<Restaurant>(shopList.size());
+		
+		for(int i = 0 ; i < shopList.size(); i ++){ 
+			originShopList.add(shopList.get(i).clone()); 
+		}
+
+		//历史搜索记录
+		List<String> historySearchList= new ArrayList<String>();
+		historySearchList = shopService.getSearRec(user);
+	
+		//热门搜索记录
+		List<String> hotSearchList= new ArrayList<String>();		
+		hotSearchList = shopService.getSearHot();
+		
 		
 		mav.addObject("pageNum",calPageNum(shopList,15));
 		mav.addObject("current_user", user);
@@ -92,7 +130,7 @@ public class ShopController {
 	public String showGrid(@RequestParam(value="page") int page,int num,HttpServletRequest request, HttpServletResponse response){ 
 		
 		List<Restaurant> partList = new ArrayList<Restaurant>();
-		System.out.println(page);
+		
 		//暂定每页15个
 		num = 15;
 		
@@ -107,6 +145,8 @@ public class ShopController {
 	@RequestMapping(value = "/searchGrid",method = { RequestMethod.POST })
 	public @ResponseBody
 	int searchShop(@RequestParam(value="key") String key,@RequestParam(value="way") String way,HttpServletRequest request, HttpServletResponse response){ 
+		
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
 		
 		//把当前list改成搜索到的list
 		//=========搜索就修改这里就可以了=============
@@ -132,35 +172,113 @@ public class ShopController {
 			
 		} else {
 			
-			int searchNum = shopService.getRestaurantSearchNum(key);
-			if(searchNum == 0){
-				return 0;
-			} else {
+			if(shopService.isInhot(key)==0){
+				//此时在热门搜索表中，没有这一条关键字的记录，因此要做插入操作。
 				
-				shopList = shopService.getRestaurantSearch(key);
-				shopList = shopService.getSortByDefault(shopList);
-				for(int i=0;i<shopList.size();i++){
-					String shop_id = shopList.get(i).getId();
-					List<String> img = shopService.getRestaurantImg(shop_id);
-					shopList.get(i).setImg(img);
-				}
-				//=========================================
-				
-				if(shopList.size()%15 != 0){
-					for(int i = 0 ; i < shopList.size()%15 ; i ++){
-						Restaurant r = new Restaurant();
-					shopList.add(r);
+				int searchNum = shopService.getRestaurantSearchNum(key,way);
+				if(searchNum == 0){
+					
+					//虽然查出来的记录是0，但是也是搜索记录啊
+					shopService.insertHot(key);//将新纪录插入热门搜索表中
+					shopService.insertRec(key, user.getId());//将新纪录插入用户历史搜索记录表中
+					return 0;
+				} else {
+					
+					//将新纪录插入热门搜索表中
+					shopService.insertHot(key);
+					//将新纪录插入用户历史搜索记录表中
+					shopService.insertRec(key, user.getId());
+					
+					shopList = shopService.getRestaurantSearch(key,way);
+					shopList = shopService.getSortByDefault(shopList);
+					for(int i=0;i<shopList.size();i++){
+						String shop_id = shopList.get(i).getId();
+						List<String> img = shopService.getRestaurantImg(shop_id);
+						shopList.get(i).setImg(img);
 					}
-				}
-				originShopList = new ArrayList<Restaurant>(shopList.size());
+					//=========================================
+					
+					if(shopList.size()%15 != 0){
+						for(int i = 0 ; i < shopList.size()%15 ; i ++){
+							Restaurant r = new Restaurant();
+						shopList.add(r);
+						}
+					}
+					originShopList = new ArrayList<Restaurant>(shopList.size());
+					
+					for(int i = 0 ; i < shopList.size(); i ++){ 
+						originShopList.add(shopList.get(i).clone()); 
+					}
+			
+				    return calPageNum(shopList,15);
+								
+				}	
 				
-				for(int i = 0 ; i < shopList.size(); i ++){ 
-					originShopList.add(shopList.get(i).clone()); 
-				}
-		
-			    return calPageNum(shopList,15);
-							
-			}				
+			}else{
+				//此时改关键字已经存在于热门表中了，只需要将该条记录的count++
+				int searchNum = shopService.getRestaurantSearchNum(key,way);
+				if(searchNum == 0){
+					
+					//将热门搜索中的count++
+					shopService.modifyHot(key);
+					
+					//判断在历史纪录表中，是否是当前用户搜索的
+					if(shopService.searBefore(key, user.getId())==0){
+						//当前用户没有搜索过这条记录
+						//在其中插入一条新纪录
+						shopService.insertRec(key, user.getId());
+						
+					}else{
+						//当前用户搜索过这条记录
+						shopService.modifyRec(key, user.getId());
+					}
+					
+					return 0;
+				} else {
+					
+					//将热门搜索中的count++
+					shopService.modifyHot(key);
+					//判断在历史纪录表中，是否是当前用户搜索的
+					if(shopService.searBefore(key, user.getId())==0){
+						//当前用户没有搜索过这条记录
+						//在其中插入一条新纪录
+						shopService.insertRec(key, user.getId());
+						
+					}else{
+						//当前用户搜索过这条记录
+						shopService.modifyRec(key, user.getId());
+					}
+					
+					shopList = shopService.getRestaurantSearch(key,way);
+					shopList = shopService.getSortByDefault(shopList);
+					for(int i=0;i<shopList.size();i++){
+						String shop_id = shopList.get(i).getId();
+						List<String> img = shopService.getRestaurantImg(shop_id);
+						shopList.get(i).setImg(img);
+					}
+					//=========================================
+					
+					if(shopList.size()%15 != 0){
+						for(int i = 0 ; i < shopList.size()%15 ; i ++){
+							Restaurant r = new Restaurant();
+						shopList.add(r);
+						}
+					}
+					originShopList = new ArrayList<Restaurant>(shopList.size());
+					
+					for(int i = 0 ; i < shopList.size(); i ++){ 
+						originShopList.add(shopList.get(i).clone()); 
+					}
+			
+				    return calPageNum(shopList,15);
+								
+				}	
+			}
+			
+			
+			
+			
+						
 		}
 	}
 	
