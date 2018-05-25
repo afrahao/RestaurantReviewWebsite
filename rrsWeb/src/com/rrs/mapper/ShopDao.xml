@@ -85,7 +85,7 @@
    
        <!-- 返回某个饭店的所有review -->
      <select id="getReviewList" parameterType="String" resultType="com.rrs.pojo.Review" >
-        select user.name as user_name,review.*,userful_status,funny_status,cool_status from (review left join user on review.user_id=user.id) left join user_review on review.id = user_review.review_id where business_id=#{0} order by date desc     
+        select user.name as user_name,review.*,useful_status,funny_status,cool_status from (review left join user on review.user_id=user.id) left join user_review on review.id = user_review.review_id where business_id=#{0} order by date desc     
     </select>
     
     <!-- 返回距离指定地点指定范围的restaurant -->
@@ -201,25 +201,55 @@
 	</insert>
     
        
-     <!-- 更新用户点赞与取消赞的表-->
-	<update id="updateUserReview"> 
-		update user_review set cool_status=(case when #{2}='cool_status' then #{3} else cool_status end)
-        ,funny_status=(case when #{2}='funny_status' then #{3} else funny_status end)
-        ,useful_status=(case when #{2}='useful_status' then #{3} else useful_status end)
+        <!-- 更新用户点赞与取消赞的表-->
+	<update id="updateUserUseful"> 
+		update user_review set useful_status=#{2}
+		where review_id = #{1} and user_id = #{0}; 
+	</update>
+	
+	 <!-- 更新用户点赞与取消赞的表-->
+	<update id="updateUserCool"> 
+		update user_review set cool_status=#{2}
+		where review_id = #{1} and user_id = #{0}; 
+	</update>
+	
+	 <!-- 更新用户点赞与取消赞的表-->
+	<update id="updateUserFunny"> 
+		update user_review set funny_status=#{2}
 		where review_id = #{1} and user_id = #{0}; 
 	</update>
 
-    <!-- 用户点赞与取消赞的插入-->
-	<insert id="insertUserReview"> 
-		INSERT INTO user_review (user_id,id,#{2}) VALUES(#{0},#{1},#{3}) 
+    <!-- 用户点赞与取消useful的插入-->
+	<insert id="insertUserUseful"> 
+		INSERT INTO user_review (user_id,review_id,useful_status) VALUES(#{0},#{1},#{2}) 
+	</insert>
+	
+	 <!-- 用户点赞与取消cool的插入-->
+	<insert id="insertUserCool"> 
+		INSERT INTO user_review (user_id,review_id,cool_status) VALUES(#{0},#{1},#{2}) 
+	</insert>
+	
+	 <!-- 用户点赞与取消funny的插入-->
+	<insert id="insertUserFunny"> 
+		INSERT INTO user_review (user_id,review_id,funny_status) VALUES(#{0},#{1},#{2}) 
 	</insert>
 	
 	
-      <!-- 点赞或取消赞-->
-	<update id="updateReview"> 
-	update review set cool=(case when #{1}='cool' then cool+(#{2}) else cool end)
-    ,funny=(case when #{1}='funny' then funny+(#{2}) else funny end)
-    ,useful=(case when #{1}='useful' then useful+(#{2}) else useful end)
+      <!-- 点赞或取消useful-->
+	<update id="updateUseful"> 
+	update review set useful=useful+(#{1})
+	where id = #{0}; 
+	</update>
+	
+	     <!-- 点赞或取消funny-->
+	<update id="updateFunny"> 
+	update review set funny=funny+(#{1})
+	where id = #{0}; 
+	</update>
+	
+	     <!-- 点赞或取消cool-->
+	<update id="updateCool"> 
+	update review set cool=cool+(#{1})
 	where id = #{0}; 
 	</update>
 	

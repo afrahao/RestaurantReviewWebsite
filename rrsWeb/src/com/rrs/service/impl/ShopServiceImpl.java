@@ -215,11 +215,13 @@ public class ShopServiceImpl implements ShopService{
 		// TODO Auto-generated method stub
 		List<Review> reviewList = new ArrayList<Review>();
 		reviewList = shopDao.getReviewList(id);
+		
+		
 		return reviewList;
 	}
 	
 	private String getHours(String id){
-		
+		System.out.println("99999999999999999999-"+id);
 		String hoursString = shopDao.getHourList(id);
 		String hours = hoursString.replaceAll("u'", "'");
 		String hourStr = hours.replaceAll("\'", "\"");
@@ -249,7 +251,18 @@ public class ShopServiceImpl implements ShopService{
 	private List<Attribute> getAttributeList(String id) {
 		// TODO Auto-generated method stub
 		List<Attribute> attributes= new ArrayList<Attribute>();
+	
 		attributes = shopDao.getAttributes(id);
+		
+		for(int i = 0 ; i < attributes.size() ; i ++){
+			String str0 = attributes.get(i).getValue();
+			
+			String str1 = str0.replaceAll("u'", "'");
+			String finalStr = str1.replaceAll("\'", "\"");
+			attributes.get(i).setValue(finalStr);
+			
+		}
+		
 		return attributes;
 	}
 
@@ -304,19 +317,40 @@ public class ShopServiceImpl implements ShopService{
 	@Override
 	public void updateReview(String review_id, String type, int isPick) {
 		// TODO Auto-generated method stub
-		shopDao.updateReview(review_id,type,isPick);
+		if(type.equals("u")){
+			shopDao.updateUseful(review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.updateCool(review_id,isPick);
+		}else{
+			shopDao.updateFunny(review_id,isPick);
+		}
+		
 	}
 
 	@Override
-	public void addUserReview(String user_id, String review_id, String updateType, int isPick)throws Exception {
+	public void addUserReview(String user_id, String review_id, String type, int isPick)throws Exception {
 		// TODO Auto-generated method stub
-		shopDao.insertUserReview(user_id,review_id,updateType,isPick);
+		if(type.equals("u")){
+			shopDao.insertUserUseful(user_id,review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.insertUserCool(user_id,review_id,isPick);
+		}else{
+			shopDao.insertUserFunny(user_id,review_id,isPick);
+		}
+		
 	}
 
 	@Override
-	public void updateUserReview(String user_id, String review_id, String updateType, int isPick) {
+	public void updateUserReview(String user_id, String review_id, String type, int isPick) {
 		// TODO Auto-generated method stub
-		shopDao.updateUserReview(user_id,review_id,updateType,isPick);
+		if(type.equals("u")){
+			shopDao.updateUserUseful(user_id,review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.updateUserCool(user_id,review_id,isPick);
+		}else{
+			shopDao.updateUserFunny(user_id,review_id,isPick);
+		}
+		
 	}
 }
 

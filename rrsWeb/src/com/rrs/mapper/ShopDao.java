@@ -34,7 +34,19 @@ public interface ShopDao {
 	public void deleteTrack(String userId, String businessId);
 	public void insertReview(String id, String business_id, String user_id,int stars,String text);
 	
-	public void updateReview(String review_id, String type, int isPick);
+	public void updateUseful(String review_id, int isPick);
+	public void updateCool(String review_id, int isPick);
+	public void updateFunny(String review_id, int isPick);
+	
 	public void insertUserReview(String user_id, String review_id, String updateType, int isPick);
+	public void insertUserUseful(String user_id, String review_id, int isPick);
+	public void insertUserCool(String user_id, String review_id, int isPick);
+	public void insertUserFunny(String user_id, String review_id, int isPick);
+	
+	
 	public void updateUserReview(String user_id, String review_id, String updateType, int isPick);
+	public void updateUserUseful(String user_id, String review_id, int isPick);
+	public void updateUserCool(String user_id, String review_id, int isPick);
+	public void updateUserFunny(String user_id, String review_id, int isPick);
+	
 }

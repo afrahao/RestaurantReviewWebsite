@@ -426,13 +426,18 @@ public class ShopController {
 			shopService.insertTrack(user.getId(),curShop.getId());
 			mav.addObject("current_user", user);
 			mav.addObject("shopItem",curShop);
+			String attributeStr = JsonUtils.ObjectToJson(curShop.getAttribute());
+			mav.addObject("shopAttr",attributeStr);
 			System.out.println("!!!!!!!!!!name="+curShop.getName());
 			mav.setViewName("shop_info");
 			return mav;
 		}catch(Exception e){
 			
+			String attributeStr = JsonUtils.ObjectToJson(curShop.getAttribute());
+			
 			mav.addObject("current_user", user);
 			mav.addObject("shopItem",curShop);
+			mav.addObject("shopAttr",attributeStr);
 			System.out.println("!!!!!!!!!!name="+curShop.getName());
 			mav.setViewName("shop_info");
 			return mav;
@@ -477,30 +482,13 @@ public class ShopController {
 								 HttpServletRequest request, HttpServletResponse response){
 		
 		boolean curValue = true;
-		String updateType = null;
-		if(type.equals("u"))
-			updateType = "useful";
-		else if(type.equals("c"))
-			updateType = "cool";
-		else if(type.equals("f"))
-			updateType = "funny";
-		else
-			return false;
 			
-		shopService.updateReview(review_id,updateType,isPick);
-		try{
-			if(type.equals("u"))
-				updateType = "userful_status";
-			else if(type.equals("c"))
-				updateType = "cool_status";
-			else if(type.equals("f"))
-				updateType = "funny_status";
-			else
-				return false;
-			
-			shopService.addUserReview(user_id,review_id,updateType,isPick);
+		shopService.updateReview(review_id,type,isPick);
+		
+		try{	
+			shopService.addUserReview(user_id,review_id,type,isPick);
 		}catch(Exception e){
-			shopService.updateUserReview(user_id,review_id,updateType,isPick);
+			shopService.updateUserReview(user_id,review_id,type,isPick);
 			
 		}
 

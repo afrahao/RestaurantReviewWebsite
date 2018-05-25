@@ -715,69 +715,23 @@
                     <div class="creatures-hours">
                    
                       	<div class="running-hours">
-						  
-						  <img src="http://47.95.10.11/FilteredPhoto/clock.jpg" height="30" width="30">
-						  <h style="font-size:15px;color:#; margin-left:15px;">Hours</h>
-						  <table class="hours-table">
-						    <!--<tbody>
-						       <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>
-						      <tr>
-						          <th class="hours-date" scope="row">Mon</th> 
-							      <td>
-							        <span>7:00</span> - <span>18:00</span>
-							      </td>
-						      </tr>  -->
-						     
-						      <!-- 待解锁哦 -->
-						       
-						      <%-- <c:forEach var="i" begin="0" end="${shopItem.hours.size}" >
-						       <tr>
-						          <th scope="row">${shopItem.hours[i].date}</th> 
-							      <td>
-							        <span>${shopItem.hours[i].open}</span> - <span>${shopItem.hours[i].close}</span>
-							      </td>
-						       </tr>
-						      </c:forEach> --%>
+												  
+						  <h style="font-size:18px;color:#; margin-left:15px; font-weight:bold; margin-bottom:10px;" > <i class="fa fa-clock-o fa-lg" > </i>   Hours</h>
+						  <table class="hours-table">					   
 						      <p id="hour-str" style="display:none">${shopItem.hours}</p>
-						      <%-- <c:forEach items="${shopItem.hours}" var="hourItem">
-						       <tr>
-						          <th scope="row">${hourItem.date}</th> 
-							      <td>
-							        <span>${hourItem.open}</span> - <span>${hourItem.close}</span>
-							      </td>
-						       </tr>
-						      </c:forEach>
-						    </tbody> --%>
 						  </table>
 						</div>
 						
 						<!-- 商店features 待修改 -->
 						<div class="shop-creatures">
-	                    	
+							<div id= "shop-attributes" style="display:none;">${shopAttr}</div>
+							
+							<h style="font-size:18px;color:#; margin-left:15px; font-weight:bold; margin-bottom:10px;"><i class="fa fa-hashtag fa-lg" ></i>   Attributes</h>
+							<table class="attr-table">			
+	                    	</table>
 	                    </div>
+	                    
+	                    
                       
                       </div>
                       <div class="clear"></div>
@@ -1800,14 +1754,16 @@ marker.setMap(map);
 //点赞
 function clickReview(itemId,review_id){
 	
-	var isPick = -1;
+	var isPick = 1;
 	
 	if(document.getElementById(itemId).className=='pick'){
-		isPick = 1;
+		isPick = -1;
 	}
+	
 	storeClick(itemId,review_id,isPick);	
 }
 
+//点赞传给后端
 function storeClick(itemId,review_id,isPick){
 	
 	var curValue = 0;
@@ -1838,14 +1794,12 @@ function storeClick(itemId,review_id,isPick){
 			success = res;
 			
 			if(success){
-				urValue = document.getElementById(itemId).firstElementChild.innerHTML;
+				curValue = document.getElementById(itemId).firstElementChild.innerHTML;
 				var i = parseInt(curValue);
-				if(isPick == false){
+				if(isPick == 1){
 					document.getElementById(itemId).classList.add('pick');
 					document.getElementById(itemId).firstElementChild.innerHTML = i+1;
-					
-					
-				} else {
+				} else if(isPick == -1){
 					document.getElementById(itemId).classList.remove('pick');
 					document.getElementById(itemId).firstElementChild.innerHTML= i-1;
 				}		
@@ -1910,6 +1864,25 @@ function generateHours(){
 	$(".hours-table").append(hoursHtml); 
 }
 
+//加pick
+function freshPick(reviewList){
+	
+	for(var i =0; i<reviewList.length; i++){
+		var uobj = document.getElementById("useful-"+i);
+		var fobj = document.getElementById("funny-"+i);
+		var cobj = document.getElementById("cool-"+i);
+		if(reviewList[i].useful_status == 1){
+			uobj.classList.add('pick');
+		}
+		if(reviewList[i].funny_status == 1){
+			fobj.classList.add('pick');
+		}
+		if(reviewList[i].cool_status == 1){
+			cobj.classList.add('pick');
+		}
+	}
+}
+
 //刷新评论
 function freshReview(reviewList){
 	$(".review-box li").remove();
@@ -1938,31 +1911,26 @@ function freshReview(reviewList){
 		reviewHtml += "</tbody></table><div class=\"review\">";
 		reviewHtml += "<small style=\"font-size:13px;\">Review by <span style=\"font-weight:bold;color:#000;font-size:13px;\">"+review.user_name+"</span></small>";
 		reviewHtml += "<div class=\"review-txt\" style=\"word-wrap:break-word;\">"+review.text;
-		reviewHtml += "<div style=\"margin-top:10px;\">";
+		reviewHtml += "<div style=\"margin-top:10px;\" class=\"indicator-box\">";
 		
 		if(review.useful_status == 1){
-			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('useful-"+i+"')\" id=\"useful-"+i+"\" class=\"pick\">useful ( <span id=\"useful-num\" >"+review.useful+"  </span> )</a></nobr>";
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('useful-"+i+"','"+review.id+"')\" id=\"useful-"+i+"\" class=\"pick\">useful ( <span id=\"useful-num\" >"+review.useful+"  </span> )</a></nobr>";
 		} else {
-			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('useful-"+i+"')\" id=\"useful-"+i+"\">useful ( <span id=\"useful-num\" >"+review.useful+"  </span> )</a></nobr>";
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('useful-"+i+"','"+review.id+"')\" id=\"useful-"+i+"\">useful ( <span id=\"useful-num\" >"+review.useful+"  </span> )</a></nobr>";
 		}
 		
 		if(review.funny_status == 1){
-			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('funny-"+i+"')\" id=\"funny-"+i+"\" class=\"pick\">  funny ( <span id=\"funny-num\">"+review.funny+"  </span> )</a></nobr>";
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('funny-"+i+"','"+review.id+"')\" id=\"funny-"+i+"\" class=\"pick\">  funny ( <span id=\"funny-num\">"+review.funny+"  </span> )</a></nobr>";
 		} else {
-			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('funny-"+i+"')\" id=\"funny-"+i+"\">  funny ( <span id=\"funny-num\">"+review.funny+"  </span> )</a></nobr>";
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('funny-"+i+"','"+review.id+"')\" id=\"funny-"+i+"\">  funny ( <span id=\"funny-num\">"+review.funny+"  </span> )</a></nobr>";
 		}
 			
 		if(review.cool_status == 1){
-			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('cool-"+i+"')\" id=\"cool-"+i+"\" class=\"pick\">  cool ( <span id=\"cool-num\">"+review.cool+"  </span> )</a></nobr>";
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('cool-"+i+"','"+review.id+"')\" id=\"cool-"+i+"\" class=\"pick\">  cool ( <span id=\"cool-num\">"+review.cool+"  </span> )</a></nobr>";
 		} else {
-			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('cool-"+i+"')\" id=\"cool-"+i+"\">  cool ( <span id=\"cool-num\">"+review.cool+"  </span> )</a></nobr>";
+			reviewHtml += "<nobr ><a href=\"JavaScript:void(0)\" onclick=\"clickReview('cool-"+i+"','"+review.id+"')\" id=\"cool-"+i+"\">  cool ( <span id=\"cool-num\">"+review.cool+"  </span> )</a></nobr>";
 		}
-          
-		/* reviewHtml += "<nobr class=\"indicator\" id=\"tag-useful\">useful <span>("+review.useful+")  </span></nobr>";
-		reviewHtml += "<nobr class=\"indicator\" id=\"tag-funny\">  funny <span>("+review.funny+")  </span></nobr>";
-		reviewHtml += "<nobr class=\"indicator\" id=\"tag-cool\">  cool <span>("+review.cool+")  </span></nobr>"; */
-		reviewHtml += "</div></div></div></li>";
-	
+
 	}
 	
 	$(".review-box").append(reviewHtml); 
@@ -2007,9 +1975,32 @@ function makeReview(){
 	
 }
 
+//显示Attribute
+function generateAttribute(){
+	var attrList = document.getElementById('shop-attributes').innerText;
+	var attrs = JSON.parse(attrList);
+	console.log(attrs);
+	
+	attrHtml = "";
+	
+	for(var i = 0 ; i < attrs.length; i ++){
+		var obj = attrs[i];
+		
+		if(obj.name != "categories" && obj.name != "Parking" && obj.name != "Ambience" && obj.name != "Good For" && obj.name != "Music"){
+			attrHtml += "<tr>";
+			attrHtml += "<th class=\"hours-date\" scope=\"row\">"+attrs[i].name+"</th> ";
+			attrHtml += "<td><span class=\"attr-value\">"+attrs[i].value+"</span></td></tr>";
+		}		
+	}
+	
+	$(".attr-table").append(attrHtml); 
+	
+}
+
 document.onreadystatechange = function() {
 	 if (document.readyState == "complete") {
 		 generateHours();
+		 generateAttribute();
 	 }
 }
 

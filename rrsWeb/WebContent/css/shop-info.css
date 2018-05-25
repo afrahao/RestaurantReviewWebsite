@@ -51,6 +51,16 @@
     padding-right: 18px;
 }
 
+.attr-name{
+	min-width: 50px;
+    padding-right: 18px;
+}
+
+.attr-value{
+	
+    
+}
+
 .running-hours{
 	
 	/* display:inline; */
@@ -64,6 +74,7 @@
 	margin: 5px 15px 15px 0;
 	border-left: 1px solid #DFDFDF;
 	padding-left: 2.5em;
+	width: 300px;
 }
 
 .product-view .short-description {
