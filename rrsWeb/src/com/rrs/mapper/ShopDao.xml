@@ -225,6 +225,11 @@
         select count(*) from business_cate where business_cate.category_id in (select id from category where category like CONCAT('%',#{key},'%') ) 
     </select>
     
+    <!--  按default搜索数目test-->
+    <select id="getSearchNumDefault" parameterType="String" resultType="Integer" >
+        select count(*) from business_cate where business_cate.category_id in (select id from category where category like CONCAT('%',#{key},'%') ) 
+    </select>
+    
     <!-- 按名字搜索restaurant -->
     <select id="getSearchName" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
         select * from business where business.name like CONCAT('%',#{key},'%')      
@@ -244,6 +249,13 @@
     <select id="getSearchTag" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
         select * from business where business.id in (select business_id from business_cate where business_cate.category_id in (select id from category where category like CONCAT('%',#{key},'%') ) )    
     </select>
+    
+    <!-- 无标签提示搜索restaurant -->
+    <select id="getSearchDefault" parameterType="String" resultType="com.rrs.pojo.Restaurant">               
+        select * from business where business.name like CONCAT('%',#{key},'%') or business.city like CONCAT('%',#{key},'%') or
+        business.address like CONCAT('%',#{key},'%') or   business.id in (select business_id from business_cate where business_cate.category_id in (select id from category where category like CONCAT('%',#{key},'%') ) )
+    </select>
+    
     
     <!-- 判断搜索记录是否存在于热门搜索表中 -->
     <select id="isInhot" parameterType="String" resultType="Integer">               

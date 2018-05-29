@@ -47,6 +47,11 @@ public interface ShopDao {
     public int getSearchNumAddr(String key);
     //按标签搜索数目
     public int getSearchNumTag(String key);
+    //按default搜索数目test
+    public int getSearchNumDefault(String key);
+    
+    
+    
     
     //按名字搜索
     public List<Restaurant> getSearchName(String key);
@@ -56,6 +61,10 @@ public interface ShopDao {
     public List<Restaurant> getSearchAddr(String key);
     //按标签搜索
     public List<Restaurant> getSearchTag(String key);
+    
+    //no label 搜索
+    public List<Restaurant> getSearchDefault(String Key);
+    
     
     //判断搜索记录是否存在于热门搜索表中
     public int isInhot(String key);

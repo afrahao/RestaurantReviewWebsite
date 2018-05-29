@@ -887,10 +887,11 @@
 										
 										<span class="search-choose">
 											<select id="input-search" class="form-control col-sm-3">
-												<option value="0" selected="selected">Name</option>
+											    <option value="4" selected="selected">Default</option>
+												<option value="0">Name</option>
 												<option value="1">City</option>
 												<option value="2">Address</option>
-												<option value="3">Tag</option>
+												<option value="3">Tag</option>												
 											</select>
 										</span>
 									
@@ -1862,7 +1863,7 @@ function searchShopByClick(searchKey){
 	var key=searchKey;
 	var pageNum = 0;
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"way=0",
 		async:false,
 		type: "POST",
 		data: {
