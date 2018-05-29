@@ -2,8 +2,12 @@ package com.rrs.service;
 
 import java.util.List;
 import com.rrs.pojo.Restaurant;
+
+import com.rrs.pojo.Review;
+
 import com.rrs.pojo.SearHot;
 import com.rrs.pojo.SysUser;
+
 
 public interface ShopService {
 	
@@ -30,7 +34,7 @@ public interface ShopService {
 	List<Restaurant> getRestaurantByDistanceA2(double lat,double lon,int distance1,int distance2);
 	List<Restaurant> getRestaurantByDistanceA3(double lat,double lon,int distance);
 	
-	//筛选距离定位点指定距离的饭店(按照韦嘉琦要求所改)
+	//筛选距离定位点指定距离的饭店
     void GetDistance(double lat, double lon,List<Restaurant> shopList);
 	List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList);
 	Restaurant getRestaurantById(String business_id);
@@ -38,6 +42,12 @@ public interface ShopService {
 	void insertTrack(String id, String id2);
 	List<String> getTrackBusiness(String id);
 	void deleteTrack(String id, String id2);
+	List<Review> getReviewList(String user_id);
+	void addReview(Review review);
+	
+	void updateReview(String review_id, String type, int isPick);
+	void addUserReview(String user_id, String review_id, String updateType, int isPick) throws Exception;
+	void updateUserReview(String user_id, String review_id, String updateType, int isPick);
 	
 	//历史搜索记录
 	List<String> getSearRec(SysUser user);
@@ -58,5 +68,8 @@ public interface ShopService {
     
     //在搜索记录表中更新纪录
     public void modifyRec(String key, String uid);
+    
+    //获得精选评论
+	List<Review> getReviews();
     
 }

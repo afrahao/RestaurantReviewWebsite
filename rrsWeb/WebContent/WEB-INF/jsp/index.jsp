@@ -1381,51 +1381,29 @@
     </div>
   </div>
    -->
-  <!-- Latest Review -->
+  <!-- Best Review -->
   <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="blog-outer-container">
           <div class="jtv-title">
-            <h2>Latest Review</h2>
+            <h2>Best Review</h2>
           </div>
           <div class="blog-inner">
-            <div class="col-sm-4">
-              <div class="entry-thumb"> <a href="blog_single_post.html"> <img alt="Blog" src="images/blog-img1.jpg"> </a> </div>
-              <div class="blog-preview_info">
-                <h4><a href="blog_single_post.html">Winter Morning Petunia</a></h4>
-                <ul class="post-meta">
-                  <li><i class="fa fa-user"></i><a href="#">admin</a> </li>
-                  <li><i class="fa fa-comments"></i><a href="#">12 comments</a> </li>
-                  <li><i class="fa fa-calendar"></i>2018-02-25</li>
-                </ul>
-                <div class="blog-preview_desc">Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor.</div>
-                <a class="blog-preview_btn" href="blog_single_post.html">Read More <i class="fa fa-long-arrow-right"></i></a> </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="entry-thumb"> <a href="blog_single_post.html"> <img alt="Blog" src="images/blog-img2.jpg"> </a> </div>
-              <div class="blog-preview_info">
-                <h4><a href="blog_single_post.html">Perfect for promoting</a></h4>
-                <ul class="post-meta">
-                  <li><i class="fa fa-user"></i><a href="#">admin</a> </li>
-                  <li><i class="fa fa-comments"></i><a href="#">45 comments</a> </li>
-                  <li><i class="fa fa-calendar"></i>2018-04-05</li>
-                </ul>
-                <div class="blog-preview_desc">Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor.</div>
-                <a class="blog-preview_btn" href="blog_single_post.html">Read More <i class="fa fa-long-arrow-right"></i></a> </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="entry-thumb"> <a href="blog_single_post.html"> <img alt="Blog" src="images/blog-img3.jpg"> </a> </div>
-              <div class="blog-preview_info">
-                <h4><a href="blog_single_post.html">Sed do eiusmod sit amet</a></h4>
-                <ul class="post-meta">
-                  <li><i class="fa fa-user"></i><a href="#">admin</a> </li>
-                  <li><i class="fa fa-comments"></i><a href="#">85 comments</a> </li>
-                  <li><i class="fa fa-calendar"></i>2018-05-05</li>
-                </ul>
-                <div class="blog-preview_desc">Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor.</div>
-                <a class="blog-preview_btn" href="blog_single_post.html">Read More <i class="fa fa-long-arrow-right"></i></a> </div>
-            </div>
+          	<c:forEach var="i" begin="1" end="4">
+	            <div class="col-sm-4">
+	              <div class="entry-thumb"> <a href="shop/detail" onclick="goToDetail('${indexReviewList[i].business_id}')"> <img alt="Blog" src="${reviewImgList[i]}"> </a> </div>
+	              <div class="blog-preview_info">
+	                <h4><a href="blog_single_post.html">${indexReviewList[i].user_name}</a></h4>
+	                <ul class="post-meta">
+	                  <li><i class="fa fa-thumbs-o-up"></i><a href="JavaScript:void(0)">${indexReviewList[i].useful}</a> </li>
+	                  <li><i class="fa fa-smile-o"></i><a href="JavaScript:void(0)">${indexReviewList[i].funny}</a> </li>
+	                  <li><i class="fa fa-hand-peace-o"></i>${indexReviewList[i].cool}</li>
+	                </ul>
+	                <div class="blog-preview_desc">${indexReviewList[i].text}</div>
+	                <a class="blog-preview_btn" href="shop/detail" onclick="goToDetail('${indexReviewList[i].business_id}')">Read More <i class="fa fa-long-arrow-right"></i></a> </div>
+	            </div>
+        	</c:forEach>
           </div>
         </div>
       </div>
@@ -1813,6 +1791,7 @@ var fashionList = new Array();
 var healthList = new Array();
 var hotelList = new Array();
 var nearList = new Array();
+var reviewList = new Array();
 
 //初始化页面
 $().ready( function() {
@@ -1820,6 +1799,7 @@ $().ready( function() {
  	$.ajax({
 	url: "/rrsWeb/loadIndexGrid",
 	type: "POST",
+	async:false,
 	data: {
 	
 	},  
@@ -1830,42 +1810,35 @@ $().ready( function() {
 		//console.log(allList[0]);
 		
 		hotList = allList[0];
-		$("#hot-grid").append(showGrid(hotList,0));
+		$("#hot-grid").append(showGrid(hotList,"hot",0));
 		
 		foodList = allList[1];
-		$("#food-grid").append(showGrid(foodList,1));
+		$("#food-grid").append(showGrid(foodList,"food",1));
 		
 		fashionList = allList[2];
-		$("#fashion-grid").append(showGrid(fashionList,2));
+		$("#fashion-grid").append(showGrid(fashionList,"fashion",2));
 		
 		healthList = allList[3];
-		$("#health-grid").append(showGrid(healthList,3));
+		$("#health-grid").append(showGrid(healthList,"health",3));
 		
 		hotelList = allList[4];
-		$("#hotel-grid").append(showGrid(hotelList,4));
+		$("#hotel-grid").append(showGrid(hotelList,"hotel",4));
 		
 		nearList = allList[5];
-		$("#near-grid").append(showGrid(nearList,5));
-		
-		
-		
+		$("#near-grid").append(showGrid(nearList,"near",5));
+			
 		//showHot();
 	},
 	error: function(err){
 		console.error(err);
 		console.log("bbb");
 	}
-	}); 	
+	}); 
+ 	
+ 	
+ 	
+ 	
 } ); 
-
-
-
-function jumpToSpecial(num){
-	
-	
-	
-}
-
 
 
 function clearDiv(id) 
@@ -1884,7 +1857,7 @@ function clearDiv(id)
 
 
 //跳转到详情页
-function goToDetail(id,num){
+function goToDetail(id){
 	var business_id = "";
 	business_id = id;
 	console.log(business_id);
@@ -1894,8 +1867,8 @@ function goToDetail(id,num){
 		type: "POST",
 		async:false,
 		data: {
-			"business_id":business_id,
-			"list_num":num,
+			"business_id":business_id
+
 		},  
 		success: function(res){
 			console.log("ggg");	
@@ -1907,6 +1880,7 @@ function goToDetail(id,num){
 	}); 
 }
 
+//首页展示分类shop
 function goToKindGrid(id){
 	
 	alert("sss"+id);
@@ -1939,7 +1913,7 @@ function showGrid(list,num){
 	    htmlStr += "<div class=\"item-img-info\"> <a class=\"product-image\" href=\"shop/detail\" onclick=\"goToDetail(\'"+obj.id+"\',\'"+num+"\')\" \>";
 	    htmlStr += "<img alt=\"Product Title Here\" title=\""+obj.name + "\" src=\""+obj.img[0]+"\">";
 	    htmlStr += "</a>";
-	    htmlStr += "<div class=\"new-label new-top-left\">hot</div>";
+	    htmlStr += "<div class=\"new-label new-top-left\">"+tag+"</div>";
 	    htmlStr += "</div>";
 	    htmlStr += "<div>";
 	    htmlStr += " <div class=\"item-info\">";
