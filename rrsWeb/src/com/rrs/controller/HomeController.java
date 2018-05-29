@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.rrs.pojo.Restaurant;
+import com.rrs.pojo.Review;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
@@ -53,85 +54,99 @@ public class HomeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
 		//获取cookie
 		Cookie[] cookies = (Cookie[])request.getCookies();
 		Cookie cookie = null;
 		String email = null;
+		//获取登陆状态
 		cookie = CookieUtils.getCookieFromCookies(cookies, "loginuser");
 		if(cookie != null)
 		{
 			email = cookie.getValue();
+			//获取用户
+			if(user==null)
+			{
+				user = sysUserService.getUser(email);
+			}
 		}
 		
+		if(allList==null){
+			allList= new ArrayList<ArrayList<Restaurant>>();
+			List<Restaurant> list = new ArrayList<Restaurant>();
+			
+			
+			//各个种类的list
+			ArrayList<Restaurant> hot = new ArrayList<Restaurant>();
+			ArrayList<Restaurant> food = new ArrayList<Restaurant>();
+			ArrayList<Restaurant> fashion = new ArrayList<Restaurant>();
+			ArrayList<Restaurant> health = new ArrayList<Restaurant>();
+			ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
+			ArrayList<Restaurant> near = new ArrayList<Restaurant>();
+			
+	
+			//根据用户喜好取出商家
+			if(user != null){
+				list = (ArrayList<Restaurant>) shopService.getRestaurantByFavor(user.getId());
+			} else {
+				list = shopService.getRestaurant(0, 200);
+			}
+			
+			for(int i = 0;i < 8;i++){
+				hot.add(list.get(i));
+			}
+	
+			//计算商店与定位点距离
+			shopService.GetDistance(Lat, Lng, list);
+			list = shopService.getRestaurantByDistanceB(list);
+			for(int i = 0;i < 8;i++){
+				near.add(list.get(i));
+			}
+			
+			//清空列表
+			list.clear();
+			//将指定种类的商家排序后取出
+			list = shopService.getRestaurantByCate();
+			
+			//根据种类将商家加入相应的list,取前八位
+			for(int i = 0;i < list.size();i++)
+			{
+				if(list.get(i).getCategory_id() == 4 && food.size()<8)
+					food.add(list.get(i));
+				else if(list.get(i).getCategory_id() == 23 && fashion.size()<8)
+					fashion.add(list.get(i));
+				else if(list.get(i).getCategory_id() == 134 && health.size()<8)
+					health.add(list.get(i));
+				else if(list.get(i).getCategory_id() == 49 && hotel.size()<8)
+					hotel.add(list.get(i));
+			}
+	
+			//将不同类的列表合并
+			allList.add(hot);
+			allList.add(food);
+			allList.add(fashion);
+			allList.add(health);
+			allList.add(hotel);
+			allList.add(near);
+	
+			
+			
+		}
 		
-		SysUser user= (SysUser)request.getSession().getAttribute("currentuser");
-		
-		allList= new ArrayList<ArrayList<Restaurant>>();
-		List<Restaurant> list = new ArrayList<Restaurant>();
-		
-		
-		//各个种类的list
-		ArrayList<Restaurant> hot = new ArrayList<Restaurant>();
-		ArrayList<Restaurant> food = new ArrayList<Restaurant>();
-		ArrayList<Restaurant> fashion = new ArrayList<Restaurant>();
-		ArrayList<Restaurant> health = new ArrayList<Restaurant>();
-		ArrayList<Restaurant> hotel = new ArrayList<Restaurant>();
-		ArrayList<Restaurant> near = new ArrayList<Restaurant>();
-		
+		//首页热门评论
+		List<Review> indexReviewList = new ArrayList<Review>();
+		//首页热门评论的商店图片
+		List<String> reviewImgList = new ArrayList<String>();
 
-		//根据用户喜好取出商家
-		if(user != null)
-		{
-			list = (ArrayList<Restaurant>) shopService.getRestaurantByFavor(user.getId());
-		}
-		else
-		{
-			list = shopService.getRestaurant(0, 200);
-		}
-		for(int i = 0;i < 8;i++)
-		{
-			hot.add(list.get(i));
-		}
-
-		//计算商店与定位点距离
-		shopService.GetDistance(Lat, Lng, list);
-		list = shopService.getRestaurantByDistanceB(list);
-		for(int i = 0;i < 8;i++)
-		{
-			near.add(list.get(i));
-		}
-		
-		//清空列表
-		list.clear();
-		//将指定种类的商家排序后取出
-		list = shopService.getRestaurantByCate();
-		
-		//根据种类将商家加入相应的list,取前八位
-		for(int i = 0;i < list.size();i++)
-		{
-			if(list.get(i).getCategory_id() == 4 && food.size()<8)
-				food.add(list.get(i));
-			else if(list.get(i).getCategory_id() == 23 && fashion.size()<8)
-				fashion.add(list.get(i));
-			else if(list.get(i).getCategory_id() == 134 && health.size()<8)
-				health.add(list.get(i));
-			else if(list.get(i).getCategory_id() == 49 && hotel.size()<8)
-				hotel.add(list.get(i));
-		}
-
-		//将不同类的列表合并
-		allList.add(hot);
-		allList.add(food);
-		allList.add(fashion);
-		allList.add(health);
-		allList.add(hotel);
-		allList.add(near);
-		
 		//保存登陆状态的邮箱
+		mav.addObject("indexReviewList",indexReviewList);
+		mav.addObject("reviewImgList",reviewImgList);
 		mav.addObject("loginuser", email);
 		mav.addObject("current_user", user);
+		request.getSession().setAttribute("currentuser", user);
 		mav.setViewName("index");
 		return mav;
+		
 	}
 	
 	//2.加载首页的分区shop
@@ -139,8 +154,6 @@ public class HomeController {
 	@ResponseBody
 	public String initDetail(HttpServletRequest request, HttpServletResponse response){
 
-		
-		
 		for(int i = 0; i < allList.size(); i ++)
 			System.out.println(allList.get(i).size());
 		
@@ -154,7 +167,7 @@ public class HomeController {
 	
 	//3.跳转到详情页
 	@RequestMapping(value = "/indexToDetail", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView toDetail(String business_id,int list_num,HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView toDetail(String business_id,HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
 //		Restaurant curShop = new Restaurant();
@@ -171,16 +184,34 @@ public class HomeController {
 		return mav;
 	}
 	
+
+	
+	//4.加载首页的精选评论
+	@RequestMapping(value = "/loadIndexReview",method = {RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
+	public String loadIndexReview(HttpServletRequest request, HttpServletResponse response){
+
+		List<Review> bestReview = new ArrayList<Review>();
+		
+		String str = JsonUtils.ObjectToJson(bestReview);
+
+		
+		return str;
+		
+	}
+	
+
+
 	//4.获得定位的经纬度
-		@RequestMapping(value = "/distance",method = {RequestMethod.GET,RequestMethod.POST })
-		@ResponseBody
-		public String getDistance(double lat,double lng,HttpServletRequest request, HttpServletResponse response){
-			
-			Lat=lat;
-			Lng=lng;
-			System.out.println(lat+" "+lng);
-			return "ok";
-		}
+	@RequestMapping(value = "/distance",method = {RequestMethod.GET,RequestMethod.POST })
+	public String getDistance(double lat,double lng,HttpServletRequest request, HttpServletResponse response){
+		
+		Lat=lat;
+		Lng=lng;
+		System.out.println(lat+" "+lng);
+		return "ok";
+	}
+
 	
 	//=============================有关账户===================================
 	
@@ -403,29 +434,29 @@ public class HomeController {
 	}
 	
 	//修改密码
-		@RequestMapping(value = "/modifypassword")
-		public void modifypassword(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	@RequestMapping(value = "/modifypassword")
+	public void modifypassword(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
-			String email = request.getParameter("email");
-			String verification_code = request.getParameter("verification_code");
-			String passwordsignup = request.getParameter("passwordsignup");
-			String passwordsignup_confirm = request.getParameter("passwordsignup_confirm");	
-			
-			
-			int msg = sysUserService.modifypassword(email,verification_code,passwordsignup, passwordsignup_confirm);
-					
-			if (msg == 0){				
-				PrintWriter out = response.getWriter();    //设定传参变量
-				out.print("error");      //结果传到前端
-			}else if (msg == 2){
-				PrintWriter out = response.getWriter();    //设定传参变量
-				out.print("outdated");     //结果传到前端
+		String email = request.getParameter("email");
+		String verification_code = request.getParameter("verification_code");
+		String passwordsignup = request.getParameter("passwordsignup");
+		String passwordsignup_confirm = request.getParameter("passwordsignup_confirm");	
+		
+		
+		int msg = sysUserService.modifypassword(email,verification_code,passwordsignup, passwordsignup_confirm);
 				
-			}else if (msg == 1){
-				PrintWriter out = response.getWriter();    //设定传参变量
-				out.print("success");      			//结果传到前端
-			}
+		if (msg == 0){				
+			PrintWriter out = response.getWriter();    //设定传参变量
+			out.print("error");      //结果传到前端
+		}else if (msg == 2){
+			PrintWriter out = response.getWriter();    //设定传参变量
+			out.print("outdated");     //结果传到前端
+			
+		}else if (msg == 1){
+			PrintWriter out = response.getWriter();    //设定传参变量
+			out.print("success");      			//结果传到前端
 		}
+	}
 		
 		
 	

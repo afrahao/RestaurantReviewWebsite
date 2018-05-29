@@ -1861,7 +1861,7 @@ function searchShopByClick(searchKey){
 	var key=searchKey;
 	var pageNum = 0;
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"&way=0",
 		async:false,
 		type: "POST",
 		data: {
