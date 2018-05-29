@@ -1505,7 +1505,7 @@
         lng=e.lnglat.getLng();
         lat=e.lnglat.getLat();
         $.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/distance",
+			url: "http://localhost:8013/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1540,7 +1540,7 @@
         str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
         //document.getElementById('tip').innerHTML = str.join('<br>');
         $.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/distance",
+			url: "http://localhost:8013/rrsWeb/shop/distance",
 			async:false,
 			type: "POST",
 			data: {
@@ -1586,7 +1586,7 @@
 	$().ready( function() {
 		var page = 1;
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1701,7 +1701,7 @@
 	//用于搜索或排序后重载grid
 	function reloadGrid(){
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
+			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+1,
 			async:false,
 			type: "POST",
 			data: {
@@ -1730,7 +1730,7 @@
 		var pageNum = 0;
 		$.ajax({
 
-			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"&way="+way,
+			url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key+"&way="+way,
 			async:false,
 			type: "POST",
 			data: {
@@ -1768,7 +1768,7 @@
 		var sort=$("option:selected",this).val();
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
+			url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
 			async:false,
 			type: "POST",
 			data: {
@@ -1807,7 +1807,7 @@
 		var page=num;
 		
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1840,7 +1840,7 @@ function goToDetail(id,name){
 	console.log(name);
 	
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/goToDetail?business_id="+business_id,
+		url: "http://localhost:8013/rrsWeb/shop/goToDetail?business_id="+business_id,
 		type: "POST",
 		async:false,
 		data: {
@@ -1861,7 +1861,7 @@ function searchShopByClick(searchKey){
 	var key=searchKey;
 	var pageNum = 0;
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"&way=0",
+		url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key+"&way=0",
 		async:false,
 		type: "POST",
 		data: {

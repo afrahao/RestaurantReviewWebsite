@@ -18,7 +18,6 @@ import com.rrs.pojo.SearHot;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
-import com.rrs.util.JsonUtils;
 
 
 
@@ -32,6 +31,43 @@ public class ShopServiceImpl implements ShopService{
 	private PreferenceService preferenceService;
 	
 	private static double EARTH_RADIUS = 6378.137;
+	
+	//得到精选评论的前三个
+	@Override
+	public List<Review> getReviews() {
+		List<Review> reviewList=shopDao.selectReview();
+		Collections.sort(reviewList, new DescReviewAllComparator());
+		List<Review> list = new ArrayList<Review>();
+		for(int i=0;i<3;i++)
+			list.add(reviewList.get(i));
+		return list;
+	}
+	
+	//综合排序
+	class DescReviewAllComparator implements Comparator<Review> {
+		
+		@Override
+		public int compare(Review o1, Review o2) {
+			int u1 = o1.getUseful();
+			int f1 = o1.getFunny();
+			int c1 = o1.getCool();
+			int u2 = o2.getUseful();
+			int f2 = o2.getFunny();
+			int c2 = o2.getCool();
+			double all1 = u1*0.4+f1*0.3+c1*0.3;
+			double all2 = u2*0.4+f2*0.3+c2*0.3;
+			
+			if (all1 < all2) {
+				return -1;
+			} else if (all1 > all2) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}	
+	}
+		
+		
 	@Override
 	public List<Restaurant> getRestaurant(int start,int end) {
 		

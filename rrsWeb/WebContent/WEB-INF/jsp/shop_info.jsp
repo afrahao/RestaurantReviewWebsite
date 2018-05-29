@@ -1956,7 +1956,7 @@ function makeReview(){
 	console.log(review);
 
 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/makeReview?business_id="+business_id+"&user_id="+user_id+"&user_name="+user_name+"&stars="+stars+"&text="+text,
+		url: "http://localhost:8013/rrsWeb/shop/makeReview?business_id="+business_id+"&user_id="+user_id+"&user_name="+user_name+"&stars="+stars+"&text="+text,
 		async:false,
 		type: "POST",
 		data: {

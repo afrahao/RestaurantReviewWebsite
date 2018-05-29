@@ -1365,7 +1365,7 @@
 	$().ready( function() {
 		var page = 1;
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1476,7 +1476,7 @@
 	//用于搜索或排序后重载grid
 	function reloadGrid(){
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+1,
+			url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+1,
 			async:false,
 			type: "POST",
 			data: {
@@ -1502,7 +1502,7 @@
 		var key=document.getElementById("search").value;
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key,
+			url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key,
 			async:false,
 			type: "POST",
 			data: {
@@ -1540,7 +1540,7 @@
 		var sort=$("option:selected",this).val();
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
+			url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
 			async:false,
 			type: "POST",
 			data: {
@@ -1584,7 +1584,7 @@
 		var page=num;
 		
 	 	$.ajax({
-		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,

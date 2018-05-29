@@ -1880,10 +1880,7 @@ function goToDetail(id){
 	}); 
 }
 
-<<<<<<< HEAD
 //首页展示分类shop
-function showGrid(list,tag,num){
-=======
 function goToKindGrid(id){
 	
 	alert("sss"+id);
@@ -1905,7 +1902,6 @@ function goToKindGrid(id){
 }
 
 function showGrid(list,num){
->>>>>>> master
 	
 	var htmlStr = "";
 	for(var i =0; i<list.length; i++){

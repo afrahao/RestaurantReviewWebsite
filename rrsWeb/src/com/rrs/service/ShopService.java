@@ -34,7 +34,7 @@ public interface ShopService {
 	List<Restaurant> getRestaurantByDistanceA2(double lat,double lon,int distance1,int distance2);
 	List<Restaurant> getRestaurantByDistanceA3(double lat,double lon,int distance);
 	
-	//筛选距离定位点指定距离的饭店(按照韦嘉琦要求所改)
+	//筛选距离定位点指定距离的饭店
     void GetDistance(double lat, double lon,List<Restaurant> shopList);
 	List<Restaurant> getRestaurantByDistanceB(List<Restaurant> shopList);
 	Restaurant getRestaurantById(String business_id);
@@ -68,5 +68,8 @@ public interface ShopService {
     
     //在搜索记录表中更新纪录
     public void modifyRec(String key, String uid);
+    
+    //获得精选评论
+	List<Review> getReviews();
     
 }
