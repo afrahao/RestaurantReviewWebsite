@@ -5,6 +5,11 @@
 <mapper namespace="com.rrs.mapper.ShopDao">
 
 
+    <!-- 查询精选评论 -->
+    <select id="selectReview"  resultType="com.rrs.pojo.Review">
+        select * from  review
+    </select>
+    
     <delete parameterType="String" id="deleteTrack"> 
 		delete from track where user_id=#{0} and business_id = #{1}
 	</delete>

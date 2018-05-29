@@ -37,7 +37,7 @@ public class HomeController {
 	private ShopService shopService;
 	@Autowired
 	private PreferenceService preferenceService;
-	
+
 	
 	ArrayList<ArrayList<Restaurant>> allList;
 	double Lat,Lng;
@@ -192,10 +192,8 @@ public class HomeController {
 	public String loadIndexReview(HttpServletRequest request, HttpServletResponse response){
 
 		List<Review> bestReview = new ArrayList<Review>();
-		
+		bestReview = shopService.getReviews(); 
 		String str = JsonUtils.ObjectToJson(bestReview);
-
-		
 		return str;
 		
 	}

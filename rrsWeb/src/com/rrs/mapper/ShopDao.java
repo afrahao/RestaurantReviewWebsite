@@ -92,5 +92,7 @@ public interface ShopDao {
     //在搜索记录表中更新纪录
     public void modifyRec(String key, String uid);
     
+    //获得精选评论
+    public List<Review> selectReview();
 
 }
