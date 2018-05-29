@@ -1,5 +1,6 @@
 package com.rrs.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -13,6 +14,7 @@ public interface ShopDao {
 
 	public List<Restaurant> getRestaurant(int start,int end);
 	public List<Restaurant> getRestaurantByCate();
+	public List<Restaurant> getRestaurantByKind(int cateId);
 	public List<Restaurant> getRestaurantByFavor(@Param("favor")int[] favor);
 	public List<Restaurant> getRestaurantSearch(String key);
 	public List<String> getRestaurantImg(String shop_id);
@@ -32,6 +34,24 @@ public interface ShopDao {
 	public void insertTrack(String userId, String userId2);
 	public List<String> getTrackBusiness(String userId);
 	public void deleteTrack(String userId, String businessId);
+
+	public void insertReview(String id, String business_id, String user_id,int stars,String text);
+	
+	public void updateUseful(String review_id, int isPick);
+	public void updateCool(String review_id, int isPick);
+	public void updateFunny(String review_id, int isPick);
+	
+	public void insertUserReview(String user_id, String review_id, String updateType, int isPick);
+	public void insertUserUseful(String user_id, String review_id, int isPick);
+	public void insertUserCool(String user_id, String review_id, int isPick);
+	public void insertUserFunny(String user_id, String review_id, int isPick);
+	
+	
+	public void updateUserReview(String user_id, String review_id, String updateType, int isPick);
+	public void updateUserUseful(String user_id, String review_id, int isPick);
+	public void updateUserCool(String user_id, String review_id, int isPick);
+	public void updateUserFunny(String user_id, String review_id, int isPick);
+	
 	
 	
 	//历史搜索
@@ -81,4 +101,7 @@ public interface ShopDao {
     //在搜索记录表中更新纪录
     public void modifyRec(String key, String uid);
     
+    //获得精选评论
+    public List<Review> selectReview();
+
 }

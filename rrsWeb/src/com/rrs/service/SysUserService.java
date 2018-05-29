@@ -9,6 +9,8 @@ import com.rrs.util.ServiceException;
 public interface SysUserService {
 	
 	 SysUser TestUserByEmail(String email);
+	 //获取用户
+	 SysUser getUser(String email);
      void updateUserStatus(String email);
      public void processregister(String name,String email,String password);
      public void processActivate(String email , String validateCode)throws ServiceException, ParseException;

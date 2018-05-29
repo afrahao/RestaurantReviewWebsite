@@ -3,7 +3,11 @@ package com.rrs.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+<<<<<<< HEAD
 import java.util.HashSet;
+=======
+import java.util.Date;
+>>>>>>> 27dd23fc151d215c4e25b3786d3524fc4c57d581
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +23,13 @@ import com.rrs.pojo.SearHot;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
+<<<<<<< HEAD
 import com.rrs.util.JsonUtils;
 import com.rrs.pojo.PorterStemmer;
+=======
+
+
+>>>>>>> 27dd23fc151d215c4e25b3786d3524fc4c57d581
 
 @Service
 public class ShopServiceImpl implements ShopService{
@@ -31,8 +40,44 @@ public class ShopServiceImpl implements ShopService{
 	@Autowired
 	private PreferenceService preferenceService;
 	
-	private List<Restaurant> reviewsList = new ArrayList<Restaurant>();
 	private static double EARTH_RADIUS = 6378.137;
+	
+	//得到精选评论的前三个
+	@Override
+	public List<Review> getReviews() {
+		List<Review> reviewList=shopDao.selectReview();
+		Collections.sort(reviewList, new DescReviewAllComparator());
+		List<Review> list = new ArrayList<Review>();
+		for(int i=0;i<3;i++)
+			list.add(reviewList.get(i));
+		return list;
+	}
+	
+	//综合排序
+	class DescReviewAllComparator implements Comparator<Review> {
+		
+		@Override
+		public int compare(Review o1, Review o2) {
+			int u1 = o1.getUseful();
+			int f1 = o1.getFunny();
+			int c1 = o1.getCool();
+			int u2 = o2.getUseful();
+			int f2 = o2.getFunny();
+			int c2 = o2.getCool();
+			double all1 = u1*0.4+f1*0.3+c1*0.3;
+			double all2 = u2*0.4+f2*0.3+c2*0.3;
+			
+			if (all1 < all2) {
+				return -1;
+			} else if (all1 > all2) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}	
+	}
+		
+		
 	@Override
 	public List<Restaurant> getRestaurant(int start,int end) {
 		
@@ -41,10 +86,7 @@ public class ShopServiceImpl implements ShopService{
 		for(int i=0; i < list.size(); i++){
 			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
-		
-		System.out.println("数据库取出"+list.size());
 		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
 			list.get(i).setReviewsRank(i);
 		Collections.sort(list, new DescAllComparator());
@@ -73,6 +115,12 @@ public class ShopServiceImpl implements ShopService{
 	//取出首页指定种类的商家列表
 	public List<Restaurant> getRestaurantByCate() {	
 		List<Restaurant>list = shopDao.getRestaurantByCate();
+		return getSortByDefault(list);
+	}
+		
+	//取出首页指定种类的商家列表
+	public List<Restaurant> getRestaurantByKind(int cateId) {	
+		List<Restaurant>list = shopDao.getRestaurantByKind(cateId);
 		return getSortByDefault(list);
 	}
 	
@@ -196,7 +244,12 @@ public class ShopServiceImpl implements ShopService{
 			imgList.add("http://47.95.10.11/FilteredPhoto/null.jpg");
 		} else {
 			for(int i = 0 ; i < imgList.size(); i ++)
-				imgList.set(i, "http://47.95.10.11/FilteredPhoto/"+imgList.get(i)+".jpg");
+			{
+				String path = imgList.get(i);
+				String check = path.substring(path.length()-4,path.length());
+				if(!check.equals(".jpg"))
+					imgList.set(i, "http://47.95.10.11/FilteredPhoto/"+path+".jpg");
+			}
 		}
 		
 		
@@ -239,7 +292,6 @@ public class ShopServiceImpl implements ShopService{
 			list.get(i).setImg(getRestaurantImg(list.get(i).getId()));
 		}
 		Collections.sort(list, new DescReviewComparator());
-		reviewsList = list;
 		for(int i = 0 ; i < list.size() ; i ++)
 			list.get(i).setReviewsRank(i);
 		Collections.sort(list, new DescAllComparator());
@@ -304,22 +356,38 @@ public class ShopServiceImpl implements ShopService{
         return distance;
 	}
 	
-	private List<Review> getReviewList(String id) {
+	public List<Review> getReviewList(String id) {
 		// TODO Auto-generated method stub
 		List<Review> reviewList = new ArrayList<Review>();
 		reviewList = shopDao.getReviewList(id);
+		
+		
 		return reviewList;
 	}
 	
 	private String getHours(String id){
-		
+		System.out.println("99999999999999999999-"+id);
 		String hoursString = shopDao.getHourList(id);
 		String hours = hoursString.replaceAll("u'", "'");
 		String hourStr = hours.replaceAll("\'", "\"");
 		
 		return hourStr;
 	}
+
+
+	@Override
+	public void addReview(Review review) {
+		// TODO Auto-generated method stub
+		String id = review.getId();
+		String business_id = review.getBusiness_id();
+		String user_id = review.getUser_id();
+		int stars = review.getStars();
+		String text = review.getText();
+		shopDao.insertReview(id,business_id,user_id,stars,text);
+	}
 	
+
+
 	private List<String> getCategoryList(String id) {
 		// TODO Auto-generated method stub
 		List<String> categoryList = new ArrayList<String>();
@@ -330,7 +398,18 @@ public class ShopServiceImpl implements ShopService{
 	private List<Attribute> getAttributeList(String id) {
 		// TODO Auto-generated method stub
 		List<Attribute> attributes= new ArrayList<Attribute>();
+	
 		attributes = shopDao.getAttributes(id);
+		
+		for(int i = 0 ; i < attributes.size() ; i ++){
+			String str0 = attributes.get(i).getValue();
+			
+			String str1 = str0.replaceAll("u'", "'");
+			String finalStr = str1.replaceAll("\'", "\"");
+			attributes.get(i).setValue(finalStr);
+			
+		}
+		
 		return attributes;
 	}
 
@@ -382,6 +461,45 @@ public class ShopServiceImpl implements ShopService{
 		shopDao.deleteTrack(userId,businessId);
 	}
 	
+
+	@Override
+	public void updateReview(String review_id, String type, int isPick) {
+		// TODO Auto-generated method stub
+		if(type.equals("u")){
+			shopDao.updateUseful(review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.updateCool(review_id,isPick);
+		}else{
+			shopDao.updateFunny(review_id,isPick);
+		}
+		
+	}
+
+	@Override
+	public void addUserReview(String user_id, String review_id, String type, int isPick)throws Exception {
+		// TODO Auto-generated method stub
+		if(type.equals("u")){
+			shopDao.insertUserUseful(user_id,review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.insertUserCool(user_id,review_id,isPick);
+		}else{
+			shopDao.insertUserFunny(user_id,review_id,isPick);
+		}
+		
+	}
+
+	@Override
+	public void updateUserReview(String user_id, String review_id, String type, int isPick) {
+		// TODO Auto-generated method stub
+		if(type.equals("u")){
+			shopDao.updateUserUseful(user_id,review_id,isPick);
+		}else if(type.equals("c")){
+			shopDao.updateUserCool(user_id,review_id,isPick);
+		}else{
+			shopDao.updateUserFunny(user_id,review_id,isPick);
+		}
+		
+	}
 	
 	//获得用户历史搜索记录
 	public List<String> getSearRec(SysUser user) {
@@ -444,9 +562,7 @@ public class ShopServiceImpl implements ShopService{
 		// TODO Auto-generated method stub
 		shopDao.modifyRec(key, uid);
 	}
-	
 }
-
 
 //按星级降序
 class DescStarsComparator implements Comparator<Restaurant> {
