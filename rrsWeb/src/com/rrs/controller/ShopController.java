@@ -250,7 +250,7 @@ public class ShopController {
 					}
 					
 					shopList = shopService.getRestaurantSearch(key,way);
-					//没有标签的  可以设置传入的参数是已经分次过的keys 写一个与上面相对应的函数
+					
 					shopList = shopService.getSortByDefault(shopList);
 					for(int i=0;i<shopList.size();i++){
 						String shop_id = shopList.get(i).getId();

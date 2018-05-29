@@ -3,11 +3,8 @@ package com.rrs.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-<<<<<<< HEAD
 import java.util.HashSet;
-=======
 import java.util.Date;
->>>>>>> 27dd23fc151d215c4e25b3786d3524fc4c57d581
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +20,9 @@ import com.rrs.pojo.SearHot;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
-<<<<<<< HEAD
 import com.rrs.util.JsonUtils;
 import com.rrs.pojo.PorterStemmer;
-=======
 
-
->>>>>>> 27dd23fc151d215c4e25b3786d3524fc4c57d581
 
 @Service
 public class ShopServiceImpl implements ShopService{
@@ -153,14 +146,31 @@ public class ShopServiceImpl implements ShopService{
 			break;
 		case "4":
 			//search default test
-			String [] keys = key.split("\\s+");
-			List<Restaurant> templist = new ArrayList<Restaurant>();
-			for(int i=0;i<keys.length;i++){
-				sum += shopDao.getSearchNumTag(keys[i]);	
-				sum += shopDao.getSearchNumAddr(keys[i]);
-				sum += shopDao.getSearchNumCity(keys[i]);
-				sum += shopDao.getSearchNumName(keys[i]);
-			}	
+			byte []bytes = key.getBytes();  
+			int i = bytes.length;//i为字节长度  
+			int j = key.length();//j为字符长度  
+			System.out.println(i);
+			System.out.println(j);
+			if(i!=j){
+				JiebaSegmenter segmenter = new JiebaSegmenter();
+			    List<String> keys = segmenter.sentenceProcess(key);
+			    for(int i1=0;i1<keys.size();i1++){
+					sum += shopDao.getSearchNumTag(keys.get(i1));	
+					sum += shopDao.getSearchNumAddr(keys.get(i1));
+					sum += shopDao.getSearchNumCity(keys.get(i1));
+					sum += shopDao.getSearchNumName(keys.get(i1));
+				}	
+			}else{
+				String [] keys = key.split("\\s+");
+				List<Restaurant> templist = new ArrayList<Restaurant>();
+				for(int i1=0;i1<keys.length;i1++){
+					sum += shopDao.getSearchNumTag(keys[i1]);	
+					sum += shopDao.getSearchNumAddr(keys[i1]);
+					sum += shopDao.getSearchNumCity(keys[i1]);
+					sum += shopDao.getSearchNumName(keys[i1]);
+				}	
+			}
+
 			System.out.println("sum:"+sum);
 			break;
 		default:

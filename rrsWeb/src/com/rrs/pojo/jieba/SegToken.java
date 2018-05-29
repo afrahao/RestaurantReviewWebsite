@@ -14,7 +14,6 @@ public class SegToken {
         this.endOffset = endOffset;
     }
 
-
     @Override
     public String toString() {
         return "[" + word + ", " + startOffset + ", " + endOffset + "]";
