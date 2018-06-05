@@ -3,12 +3,14 @@ package com.rrs.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rrs.pojo.jieba.JiebaSegmenter;
 import com.rrs.mapper.ShopDao;
 import com.rrs.pojo.Attribute;
 
@@ -18,8 +20,8 @@ import com.rrs.pojo.SearHot;
 import com.rrs.pojo.SysUser;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
-
-
+import com.rrs.util.JsonUtils;
+import com.rrs.pojo.PorterStemmer;
 
 @Service
 public class ShopServiceImpl implements ShopService{
@@ -141,6 +143,41 @@ public class ShopServiceImpl implements ShopService{
 			//search by tag
 			sum = shopDao.getSearchNumTag(key);
 			break;
+		case "4":
+			//search default test
+			String [] keys = key.split("\\s+");
+			for(int i=0;i<keys.length;i++){
+				sum += shopDao.getSearchNumTag(keys[i]);	
+				sum += shopDao.getSearchNumAddr(keys[i]);
+				sum += shopDao.getSearchNumCity(keys[i]);
+				sum += shopDao.getSearchNumName(keys[i]);
+			}	
+//			byte []bytes = key.getBytes();  
+//			int i = bytes.length;//i为字节长度  
+//			int j = key.length();//j为字符长度  
+//			System.out.println(i);
+//			System.out.println(j);
+//			if(i!=j){
+//				JiebaSegmenter segmenter = new JiebaSegmenter();
+//			    List<String> keys = segmenter.sentenceProcess(key);
+//			    for(int i1=0;i1<keys.size();i1++){
+//					sum += shopDao.getSearchNumTag(keys.get(i1));	
+//					sum += shopDao.getSearchNumAddr(keys.get(i1));
+//					sum += shopDao.getSearchNumCity(keys.get(i1));
+//					sum += shopDao.getSearchNumName(keys.get(i1));
+//				}	
+//			}else{
+				String [] keys1 = key.split("\\s+");
+				for(int i1=0;i1<keys1.length;i1++){
+					sum += shopDao.getSearchNumTag(keys1[i1]);	
+					sum += shopDao.getSearchNumAddr(keys1[i1]);
+					sum += shopDao.getSearchNumCity(keys1[i1]);
+					sum += shopDao.getSearchNumName(keys1[i1]);
+				}	
+//			}
+
+			System.out.println("sum:"+sum);
+			break;
 		default:
 			break;	
 		}
@@ -153,6 +190,8 @@ public class ShopServiceImpl implements ShopService{
 	public List<Restaurant> getRestaurantSearch(String key, String way) {
 		
 		List<Restaurant> shopList = new ArrayList<Restaurant>();
+		
+		
 		
 		switch(way){
 		case "0":
@@ -169,7 +208,40 @@ public class ShopServiceImpl implements ShopService{
 			break;
 		case "3":
 			//search by tag
+			
 			shopList = shopDao.getSearchTag(key);
+			break;
+		case "4":
+			//default, user don't select the labels
+		    
+			byte []bytes = key.getBytes();  
+			int i = bytes.length;//i为字节长度  
+			int j = key.length();//j为字符长度  
+			if(i!=j){//中文
+				 JiebaSegmenter segmenter = new JiebaSegmenter();
+				 List<String> keys = segmenter.sentenceProcess(key);
+				 HashSet<Restaurant> hashlist = new HashSet<Restaurant>();
+					List<Restaurant> templist = new ArrayList<Restaurant>();
+					for(int i1=0;i1<keys.size();i1++){
+						templist = shopDao.getSearchDefault(keys.get(i1));
+						shopList.addAll(templist);
+					}		
+					hashlist.addAll(shopList);
+					shopList.clear();
+					shopList.addAll(hashlist);
+			}else{
+				String[] keys = key.split("\\s+");
+				HashSet<Restaurant> hashlist = new HashSet<Restaurant>();
+				List<Restaurant> templist = new ArrayList<Restaurant>();
+				for(int i1=0;i1<keys.length;i1++){
+					templist = shopDao.getSearchDefault(keys[i1]);
+					shopList.addAll(templist);
+				}		
+				hashlist.addAll(shopList);
+				shopList.clear();
+				shopList.addAll(hashlist);
+			}			
+			
 			break;
 		default:
 			break;	
