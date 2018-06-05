@@ -146,13 +146,36 @@ public class ShopServiceImpl implements ShopService{
 		case "4":
 			//search default test
 			String [] keys = key.split("\\s+");
-			List<Restaurant> templist = new ArrayList<Restaurant>();
 			for(int i=0;i<keys.length;i++){
 				sum += shopDao.getSearchNumTag(keys[i]);	
 				sum += shopDao.getSearchNumAddr(keys[i]);
 				sum += shopDao.getSearchNumCity(keys[i]);
 				sum += shopDao.getSearchNumName(keys[i]);
 			}	
+//			byte []bytes = key.getBytes();  
+//			int i = bytes.length;//i为字节长度  
+//			int j = key.length();//j为字符长度  
+//			System.out.println(i);
+//			System.out.println(j);
+//			if(i!=j){
+//				JiebaSegmenter segmenter = new JiebaSegmenter();
+//			    List<String> keys = segmenter.sentenceProcess(key);
+//			    for(int i1=0;i1<keys.size();i1++){
+//					sum += shopDao.getSearchNumTag(keys.get(i1));	
+//					sum += shopDao.getSearchNumAddr(keys.get(i1));
+//					sum += shopDao.getSearchNumCity(keys.get(i1));
+//					sum += shopDao.getSearchNumName(keys.get(i1));
+//				}	
+//			}else{
+				String [] keys1 = key.split("\\s+");
+				for(int i1=0;i1<keys1.length;i1++){
+					sum += shopDao.getSearchNumTag(keys1[i1]);	
+					sum += shopDao.getSearchNumAddr(keys1[i1]);
+					sum += shopDao.getSearchNumCity(keys1[i1]);
+					sum += shopDao.getSearchNumName(keys1[i1]);
+				}	
+//			}
+
 			System.out.println("sum:"+sum);
 			break;
 		default:

@@ -1731,7 +1731,7 @@
 		var pageNum = 0;
 		$.ajax({
 
-			url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key+"&way="+way,
+			url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"&way="+way,
 			async:false,
 			type: "POST",
 			data: {
@@ -1769,7 +1769,7 @@
 		var sort=$("option:selected",this).val();
 		var pageNum = 0;
 		$.ajax({
-			url: "http://localhost:8013/rrsWeb/shop/sortShop?sort="+sort,
+			url: "http://localhost:8080/rrsWeb/shop/sortShop?sort="+sort,
 			async:false,
 			type: "POST",
 			data: {
@@ -1808,7 +1808,7 @@
 		var page=num;
 		
 	 	$.ajax({
-		url: "http://localhost:8013/rrsWeb/shop/showGrid?page="+page,
+		url: "http://localhost:8080/rrsWeb/shop/showGrid?page="+page,
 		type: "POST",
 		data: {
 			"num":15,
@@ -1841,7 +1841,7 @@ function goToDetail(id,name){
 	console.log(name);
 	
 	$.ajax({
-		url: "http://localhost:8013/rrsWeb/shop/goToDetail?business_id="+business_id,
+		url: "http://localhost:8080/rrsWeb/shop/goToDetail?business_id="+business_id,
 		type: "POST",
 		async:false,
 		data: {
@@ -1860,13 +1860,11 @@ function goToDetail(id,name){
 //搜索商店
 function searchShopByClick(searchKey){
 	var key=searchKey;
+	var way=document.getElementById("input-search").value;
+	
 	var pageNum = 0;
 	$.ajax({
-<<<<<<< HEAD
-		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"way=0",
-=======
-		url: "http://localhost:8013/rrsWeb/shop/searchGrid?key="+key+"&way=0",
->>>>>>> 27dd23fc151d215c4e25b3786d3524fc4c57d581
+		url: "http://localhost:8080/rrsWeb/shop/searchGrid?key="+key+"way="+way,
 		async:false,
 		type: "POST",
 		data: {
@@ -1913,3 +1911,6 @@ function getUserId(){
 
 </body>
 </html>
+
+
+
