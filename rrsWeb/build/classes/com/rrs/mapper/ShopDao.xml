@@ -7,7 +7,7 @@
 
     <!-- 查询精选评论 -->
     <select id="selectReview"  resultType="com.rrs.pojo.Review">
-        select * from  review
+        select * from  review limit 0,10
     </select>
     
     <delete parameterType="String" id="deleteTrack"> 

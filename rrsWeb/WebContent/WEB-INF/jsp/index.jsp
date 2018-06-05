@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,8 +33,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 <!-- CSS Style -->
-<link rel="stylesheet" href="css/index-style.css">
+
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/index-style.css">
 <link rel="stylesheet" href="css/loader.css">
 <!-- 高德地图 -->
 <script type="text/javascript"
@@ -1390,7 +1392,7 @@
             <h2>Best Review</h2>
           </div>
           <div class="blog-inner">
-          	<c:forEach var="i" begin="1" end="4">
+          	<c:forEach var="i" begin="0" end="2">
 	            <div class="col-sm-4">
 	              <div class="entry-thumb"> <a href="shop/detail" onclick="goToDetail('${indexReviewList[i].business_id}')"> <img alt="Blog" src="${reviewImgList[i]}"> </a> </div>
 	              <div class="blog-preview_info">
