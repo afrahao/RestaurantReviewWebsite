@@ -1901,7 +1901,7 @@ function goToKindGrid(id){
 	}); 
 }
 
-function showGrid(list,num){
+function showGrid(list,tag,num){
 	
 	var htmlStr = "";
 	for(var i =0; i<list.length; i++){
