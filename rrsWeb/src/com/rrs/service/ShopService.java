@@ -1,6 +1,8 @@
 package com.rrs.service;
 
 import java.util.List;
+
+import com.rrs.pojo.DataNode;
 import com.rrs.pojo.Restaurant;
 
 import com.rrs.pojo.Review;
@@ -29,10 +31,14 @@ public interface ShopService {
 	List<Restaurant> getRestaurantByCate();
 	List<Restaurant> getRestaurantByKind(int cateId);
 	
+	List<Restaurant> getGuessLike(String userId);
+	
 	//筛选距离定位点指定距离的饭店
 	List<Restaurant> getRestaurantByDistanceA1(double lat,double lon,int distance);
 	List<Restaurant> getRestaurantByDistanceA2(double lat,double lon,int distance1,int distance2);
 	List<Restaurant> getRestaurantByDistanceA3(double lat,double lon,int distance);
+	
+	List<Restaurant> getSameLike(DataNode me,DataNode same);
 	
 	//筛选距离定位点指定距离的饭店
     void GetDistance(double lat, double lon,List<Restaurant> shopList);

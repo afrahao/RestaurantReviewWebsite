@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.rrs.pojo.Attribute;
+import com.rrs.pojo.MyNode;
 import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.Review;
 import com.rrs.pojo.SearHot;
@@ -30,6 +31,8 @@ public interface ShopDao {
 	public List<String> getCategoryList(String id);
 	public String getHourList(String id);
 	public List<Review> getReviewList(String id);
+	
+	
 	
 	public void insertTrack(String userId, String userId2);
 	public List<String> getTrackBusiness(String userId);
@@ -103,5 +106,6 @@ public interface ShopDao {
     
     //获得精选评论
     public List<Review> selectReview();
+    public List<MyNode> getUserLike();
 
 }

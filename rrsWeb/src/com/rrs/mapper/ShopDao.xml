@@ -99,6 +99,11 @@
      <select id="getReviewList" parameterType="String" resultType="com.rrs.pojo.Review" >
         select user.name as user_name,review.*,useful_status,funny_status,cool_status from (review left join user on review.user_id=user.id) left join user_review on review.id = user_review.review_id where business_id=#{0} order by date desc     
     </select>
+   
+    <!-- 查询 -->
+    <select id="getUserLike"  resultType="com.rrs.pojo.MyNode">
+        select * from  user_cate
+    </select>
     
     <!-- 返回距离指定地点指定范围的restaurant -->
     <select id="getRestaurantByDistance1" resultType="com.rrs.pojo.Restaurant">

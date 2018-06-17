@@ -84,45 +84,87 @@ public class ShopController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/kindGrid",method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView kindGrid(@RequestParam(value="cateId") int cateId,HttpServletRequest request, HttpServletResponse response){
-		
-		SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
-		
-		ModelAndView mav = new ModelAndView();	
-		shopList = shopService.getRestaurantByKind(cateId);
+	//按种类搜索
+		@RequestMapping(value = "/kindGrid",method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView kindGrid(@RequestParam(value="cateId") int cateId,HttpServletRequest request, HttpServletResponse response){
+			
+			SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+			
+			ModelAndView mav = new ModelAndView();	
+			shopList = shopService.getRestaurantByKind(cateId);
 
-		if(shopList.size()%15 != 0){
-			for(int i = 0 ; i < shopList.size()%15 ; i ++){
-				Restaurant r = new Restaurant();
-			shopList.add(r);
+			if(shopList.size()%15 != 0){
+				for(int i = 0 ; i < shopList.size()%15 ; i ++){
+					Restaurant r = new Restaurant();
+				shopList.add(r);
+				}
 			}
-		}
-		originShopList = new ArrayList<Restaurant>(shopList.size());
-		
-		for(int i = 0 ; i < shopList.size(); i ++){ 
-			originShopList.add(shopList.get(i).clone()); 
-		}
+			originShopList = new ArrayList<Restaurant>(shopList.size());
+			
+			for(int i = 0 ; i < shopList.size(); i ++){ 
+				originShopList.add(shopList.get(i).clone()); 
+			}
 
-		//历史搜索记录
-		List<String> historySearchList= new ArrayList<String>();
-		historySearchList = shopService.getSearRec(user);
-	
-		//热门搜索记录
-		List<String> hotSearchList= new ArrayList<String>();		
-		hotSearchList = shopService.getSearHot();
+			//历史搜索记录
+			List<String> historySearchList= new ArrayList<String>();
+			historySearchList = shopService.getSearRec(user);
 		
+			//热门搜索记录
+			List<String> hotSearchList= new ArrayList<String>();		
+			hotSearchList = shopService.getSearHot();
+			
+			
+			mav.addObject("pageNum",calPageNum(shopList,15));
+			mav.addObject("current_user", user);
+			mav.addObject("historySearchList", historySearchList);
+			mav.addObject("hotSearchList", hotSearchList);
+			mav.setViewName("restaurant_search");	
+			
+			System.out.println("一共有"+originShopList.size());
+			return mav;
+			
+		}
 		
-		mav.addObject("pageNum",calPageNum(shopList,15));
-		mav.addObject("current_user", user);
-		mav.addObject("historySearchList", historySearchList);
-		mav.addObject("hotSearchList", hotSearchList);
-		mav.setViewName("restaurant_search");	
+		//按种类搜索
+		@RequestMapping(value = "/guessLike",method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView guessLike(HttpServletRequest request, HttpServletResponse response){
+			
+			SysUser user= (SysUser)request.getSession().getAttribute("currentuser"); 
+			
+			ModelAndView mav = new ModelAndView();	
+			
+			shopList = shopService.getGuessLike(user.getId());
+			if(shopList.size()%15 != 0){
+				for(int i = 0 ; i < shopList.size()%15 ; i ++){
+					Restaurant r = new Restaurant();
+				shopList.add(r);
+				}
+			}
+			originShopList = new ArrayList<Restaurant>(shopList.size());
+			
+			for(int i = 0 ; i < shopList.size(); i ++){ 
+				originShopList.add(shopList.get(i).clone()); 
+			}
+
+			//历史搜索记录
+			List<String> historySearchList= new ArrayList<String>();
+			historySearchList = shopService.getSearRec(user);
 		
-		System.out.println("一共有"+originShopList.size());
-		return mav;
-		
-	}
+			//热门搜索记录
+			List<String> hotSearchList= new ArrayList<String>();		
+			hotSearchList = shopService.getSearHot();
+			
+			
+			mav.addObject("pageNum",calPageNum(shopList,15));
+			mav.addObject("current_user", user);
+			mav.addObject("historySearchList", historySearchList);
+			mav.addObject("hotSearchList", hotSearchList);
+			mav.setViewName("restaurant_search");	
+			
+			System.out.println("一共有"+originShopList.size());
+			return mav;
+			
+		}
 	
 	//2.加载商家到页面上显示
 	@RequestMapping(value = "/showGrid",method = {RequestMethod.POST })

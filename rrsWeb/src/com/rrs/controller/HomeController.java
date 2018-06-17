@@ -40,6 +40,7 @@ public class HomeController {
 
 	
 	ArrayList<ArrayList<Restaurant>> allList;
+	ArrayList<Restaurant> cateList;
 	double Lat,Lng;
 	
 	//==============================首页===============================
@@ -141,6 +142,7 @@ public class HomeController {
 		//保存登陆状态的邮箱
 		mav.addObject("indexReviewList",indexReviewList);
 		mav.addObject("reviewImgList",reviewImgList);
+		*/
 		mav.addObject("loginuser", email);
 		mav.addObject("current_user", user);
 		request.getSession().setAttribute("currentuser", user);
@@ -154,9 +156,6 @@ public class HomeController {
 	@ResponseBody
 	public String initDetail(HttpServletRequest request, HttpServletResponse response){
 
-		for(int i = 0; i < allList.size(); i ++)
-			System.out.println(allList.get(i).size());
-		
 		String str = JsonUtils.ObjectToJson(allList);
 		
 		//System.out.println(str);

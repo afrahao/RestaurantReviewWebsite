@@ -589,7 +589,7 @@
               </div>
             </div>
           </li>
-          <li class="mega-menu"> <a class="level-top" href="#"><span>Blog</span></a> </li>
+          <li class="mega-menu"> <a href="shop/guessLike"><span>Guess You Like</span></a> </li>
           <li class="nav-custom-link mega-menu"> <a href="#" class="level-top"> <span>Specials</span> </a>
             <div class="jtv-menu-block-wrapper custom-menu">
               <div class="header-nav-dropdown-wrapper">

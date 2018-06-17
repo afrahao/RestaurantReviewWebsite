@@ -13,14 +13,16 @@ import org.springframework.stereotype.Service;
 import com.rrs.pojo.jieba.JiebaSegmenter;
 import com.rrs.mapper.ShopDao;
 import com.rrs.pojo.Attribute;
-
+import com.rrs.pojo.DataNode;
 import com.rrs.pojo.Restaurant;
 import com.rrs.pojo.Review;
 import com.rrs.pojo.SearHot;
 import com.rrs.pojo.SysUser;
+import com.rrs.pojo.MyNode;
 import com.rrs.service.PreferenceService;
 import com.rrs.service.ShopService;
 import com.rrs.util.JsonUtils;
+import com.rrs.util.Pearson;
 import com.rrs.pojo.PorterStemmer;
 
 @Service
@@ -104,6 +106,7 @@ public class ShopServiceImpl implements ShopService{
 		return getRestaurant(0, 200);
 	}
 	
+	
 	//取出首页指定种类的商家列表
 	public List<Restaurant> getRestaurantByCate() {	
 		List<Restaurant>list = shopDao.getRestaurantByCate();
@@ -114,6 +117,193 @@ public class ShopServiceImpl implements ShopService{
 	public List<Restaurant> getRestaurantByKind(int cateId) {	
 		List<Restaurant>list = shopDao.getRestaurantByKind(cateId);
 		return getSortByDefault(list);
+	}
+	//按照相似度取出
+	public List<Restaurant> getGuessLike(String userId) {	
+		List<MyNode>list = shopDao.getUserLike();
+		String name = null;
+		List<DataNode> datas = new ArrayList<DataNode>();
+		Double max = 0.0;
+		int indexNow = 0;
+		DataNode me = new DataNode();
+		Pearson score;
+		if(!list.isEmpty())
+		{
+			DataNode dn = new DataNode();
+			name = list.get(0).getuser_id();
+			dn.setUserId(name);
+			dn.setDatas(list.get(0).getcategory_id());
+			datas.add(dn);
+			if(name.equals(userId))
+			{
+				me = dn;
+			}
+		}
+		for(int i = 1;i < list.size();i++)
+		{
+			if(list.get(i).getuser_id().equals(name))
+			{
+				datas.get(indexNow).setDatas(list.get(i).getcategory_id());
+				if(name.equals(userId))
+				{
+					me = datas.get(indexNow);
+				}
+			}
+			else
+			{
+				if(name.equals(userId))
+				{
+					me = datas.get(indexNow);
+				}
+				DataNode dn = new DataNode();
+				name = list.get(i).getuser_id();
+				dn.setUserId(name);
+				dn.setDatas(list.get(i).getcategory_id());
+				datas.add(dn);
+				indexNow = indexNow + 1;
+			}
+		}
+		for(int i = 0;i < datas.size();i++)
+		{
+			DataNode dn = datas.get(i);
+			score = new Pearson(me, dn);
+			Double myScore = score.getPearsonCorrelationScore();
+			dn.setScore(myScore);
+		}
+		Collections.sort(datas, new DescRelateComparator());
+		
+		return getSameLike(me,datas.get(1));
+	}
+	
+	@Override
+	public List<Restaurant> getSameLike(DataNode me,DataNode same)
+	{
+		List<Integer> cate = new ArrayList();
+		List<Integer> mycate = new ArrayList();
+		int[] meCate = me.getDatas();
+		int[] sameCate = same.getDatas();
+		for(int i = 0;i < 31; i ++)
+		{
+			if(meCate[i] == 1)
+			{
+				cate.add(i);
+			}
+			if(meCate[i] == 2 && sameCate[i] == 1)
+			{
+				cate.add(i);
+			}
+		}
+		if(cate.size()!=0)
+		{
+			int[] favor = new int[cate.size()];
+			
+			for(int i = 0;i < cate.size();i++)
+			{
+				System.out.println(cate.get(i));
+			switch(cate.get(i))
+			{
+			case 0:
+				favor[i] = 0;
+				break;
+			case 1:
+				favor[i] = 2;
+				break;
+			case 2:
+				favor[i] = 4;
+				break;
+			case 3:
+				favor[i] = 9;
+				break;
+			case 4:
+				favor[i] = 10;
+				break;
+			case 5:
+				favor[i] = 12;
+				break;
+			case 6:
+				favor[i] = 14;
+				break;
+			case 7:
+				favor[i] = 17;
+				break;
+			case 8:
+				favor[i] = 19;
+				break;
+			case 9:
+				favor[i] = 20;
+				break;
+			case 10:
+				favor[i] = 21;
+				break;
+			case 11:
+				favor[i] = 24;
+				break;
+			case 12:
+				favor[i] = 25;
+				break;
+			case 13:
+				favor[i] = 31;
+				break;
+			case 14:
+				favor[i] = 34;
+				break;
+			case 15:
+				favor[i] = 38;
+				break;
+			case 16:
+				favor[i] = 40;
+				break;
+			case 17:
+				favor[i] = 42;
+				break;
+			case 18:
+				favor[i] = 44;
+				break;
+			case 19:
+				favor[i] = 45;
+				break;
+			case 20:
+				favor[i] = 48;
+				break;
+			case 21:
+				favor[i] = 49;
+				break;
+			case 22:
+				favor[i] = 50;
+				break;
+			case 23:
+				favor[i] = 68;
+				break;
+			case 24:
+				favor[i] = 69;
+				break;
+			case 25:
+				favor[i] = 72;
+				break;
+			case 26:
+				favor[i] = 94;
+				break;
+			case 27:
+				favor[i] = 103;
+				break;
+			case 28:
+				favor[i] = 134;
+				break;
+			case 29:
+				favor[i] = 144;
+				break;
+			case 30:
+				favor[i] = 149;
+				break;
+			
+			}
+		}
+		//获取对应标签的商家列表
+		List<Restaurant>list = shopDao.getRestaurantByFavor(favor);
+		//综合排序
+		return getSortByDefault(list);
+		}
+		return null;
 	}
 	
 	@Override
@@ -624,6 +814,18 @@ class DescReviewComparator implements Comparator<Restaurant> {
 	@Override
 	public int compare(Restaurant r1, Restaurant r2) {
 		return r2.getReview_count() - r1.getReview_count();
+	}
+}
+
+class DescRelateComparator implements Comparator<DataNode> {
+	@Override
+	public int compare(DataNode r1, DataNode r2) {
+		if(r2.getScore() > r1.getScore())
+			return 1;
+		else if(r2.getScore() < r1.getScore())
+			return -1;
+		else
+			return 0;
 	}
 }
 
