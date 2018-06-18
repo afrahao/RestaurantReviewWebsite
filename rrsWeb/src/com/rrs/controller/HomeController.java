@@ -136,13 +136,21 @@ public class HomeController {
 		
 		//首页热门评论
 		List<Review> indexReviewList = new ArrayList<Review>();
+//		indexReviewList = shopService.getReviewList("1hCnktHfIHOH3lfR2CZHBg");
+		
+//		List<Review> indexReviewList = new ArrayList<Review>();
+		indexReviewList = shopService.getReviews();
+		System.out.println("======================================"+indexReviewList.get(2));
+		
 		//首页热门评论的商店图片
 		List<String> reviewImgList = new ArrayList<String>();
+		for(int i=0;i<indexReviewList.size();i++)
+			reviewImgList.add(shopService.getRestaurantImg(indexReviewList.get(i).getBusiness_id()).get(0));
 
 		//保存登陆状态的邮箱
 		mav.addObject("indexReviewList",indexReviewList);
 		mav.addObject("reviewImgList",reviewImgList);
-		*/
+		
 		mav.addObject("loginuser", email);
 		mav.addObject("current_user", user);
 		request.getSession().setAttribute("currentuser", user);
@@ -201,6 +209,7 @@ public class HomeController {
 
 	//4.获得定位的经纬度
 	@RequestMapping(value = "/distance",method = {RequestMethod.GET,RequestMethod.POST })
+	@ResponseBody
 	public String getDistance(double lat,double lng,HttpServletRequest request, HttpServletResponse response){
 		
 		Lat=lat;
